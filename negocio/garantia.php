@@ -12,12 +12,12 @@
  * @author USUARIO
  */
 class garantia {
+
     private $descGarantia;
-    
+
     function __construct($descGarantia) {
         $this->descGarantia = $descGarantia;
     }
-    
 
     function getDescGarantia() {
         return $this->descGarantia;
@@ -26,6 +26,5 @@ class garantia {
     function setDescGarantia($descGarantia) {
         $this->descGarantia = $descGarantia;
     }
-
 
 }

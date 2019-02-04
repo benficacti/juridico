@@ -12,7 +12,7 @@
  * @author USUARIO
  */
 class contrato {
-    
+
     private $numeroContrato;
     private $idTipoContrato;
     private $contratanteContrato;
@@ -31,7 +31,7 @@ class contrato {
     private $idGarantia;
     private $idLogin;
     private $idObservacoesExigencias;
-    
+
     function __construct($numeroContrato, $idTipoContrato, $contratanteContrato, $contratadoContrato, $objetoContrato, $idFinalizacaoContrato, $valorContrato, $pagamentoParcelaContrato, $pagamentoValorContrato, $pagamentoDataContrato, $inicioVigenciaContrato, $finalVigenciaContrato, $vencimentoContrato, $idAdiantamentoContrato, $idStatusGarantia, $idGarantia, $idLogin, $idObservacoesExigencias) {
         $this->numeroContrato = $numeroContrato;
         $this->idTipoContrato = $idTipoContrato;
@@ -53,7 +53,6 @@ class contrato {
         $this->idObservacoesExigencias = $idObservacoesExigencias;
     }
 
-    
     function getNumeroContrato() {
         return $this->numeroContrato;
     }
@@ -128,9 +127,9 @@ class contrato {
 
     function setNumeroContrato($numeroContrato) {
         $tamanho = strlen($numeroContrato);
-       if($tamanho > 0){
-           $this->numeroContrato = $numeroContrato;
-       }
+        if ($tamanho > 0) {
+            $this->numeroContrato = $numeroContrato;
+        }
     }
 
     function setIdTipoContrato($idTipoContrato) {
@@ -200,6 +199,5 @@ class contrato {
     function setIdObservacoesExigencias($idObservacoesExigencias) {
         $this->idObservacoesExigencias = $idObservacoesExigencias;
     }
-
 
 }

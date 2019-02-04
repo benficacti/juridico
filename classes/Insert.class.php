@@ -1,4 +1,5 @@
 <?php
+
 include '../persistencia/Conexao.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,5 +14,4 @@ include '../persistencia/Conexao.php';
  */
 class Insert {
     //put your code here
-   
 }

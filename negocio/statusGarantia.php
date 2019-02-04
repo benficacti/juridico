@@ -12,13 +12,13 @@
  * @author USUARIO
  */
 class statusGarantia {
+
     private $descStatusGarantia;
-    
+
     function __construct($descStatusGarantia) {
         $this->descStatusGarantia = $descStatusGarantia;
     }
 
-    
     function getDescStatusGarantia() {
         return $this->descStatusGarantia;
     }
@@ -26,6 +26,5 @@ class statusGarantia {
     function setDescStatusGarantia($descStatusGarantia) {
         $this->descStatusGarantia = $descStatusGarantia;
     }
-
 
 }

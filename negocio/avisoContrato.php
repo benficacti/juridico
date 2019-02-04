@@ -12,12 +12,13 @@
  * @author USUARIO
  */
 class avisoContrato {
+
     private $descAviso;
     private $dataAviso;
     private $idContratoAviso;
     private $idTipoAviso;
     private $idStatusAviso;
-    
+
     function __construct($descAviso, $dataAviso, $idContratoAviso, $idTipoAviso, $idStatusAviso) {
         $this->descAviso = $descAviso;
         $this->dataAviso = $dataAviso;
@@ -25,7 +26,6 @@ class avisoContrato {
         $this->idTipoAviso = $idTipoAviso;
         $this->idStatusAviso = $idStatusAviso;
     }
-    
 
     function getDescAviso() {
         return $this->descAviso;
@@ -66,6 +66,5 @@ class avisoContrato {
     function setIdStatusAviso($idStatusAviso) {
         $this->idStatusAviso = $idStatusAviso;
     }
-
 
 }

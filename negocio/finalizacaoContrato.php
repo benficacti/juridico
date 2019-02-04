@@ -12,13 +12,13 @@
  * @author USUARIO
  */
 class finalizacaoContrato {
+
     private $descFinalizacaoContrato;
-    
+
     function __construct($descFinalizacaoContrato) {
         $this->descFinalizacaoContrato = $descFinalizacaoContrato;
     }
 
-    
     function getDescFinalizacaoContrato() {
         return $this->descFinalizacaoContrato;
     }
@@ -26,6 +26,5 @@ class finalizacaoContrato {
     function setDescFinalizacaoContrato($descFinalizacaoContrato) {
         $this->descFinalizacaoContrato = $descFinalizacaoContrato;
     }
-
 
 }

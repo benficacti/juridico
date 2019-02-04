@@ -12,12 +12,13 @@
  * @author USUARIO
  */
 class setor {
+
     private $descSetor;
-    
+
     function __construct($descSetor) {
         $this->descSetor = $descSetor;
     }
-    
+
     function getDescSetor() {
         return $this->descSetor;
     }
@@ -25,7 +26,5 @@ class setor {
     function setDescSetor($descSetor) {
         $this->descSetor = $descSetor;
     }
-
-
 
 }

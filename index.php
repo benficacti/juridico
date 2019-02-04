@@ -11,13 +11,12 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-         include './persistencia/Conexao.php';
-         include './classes/Search.class.php';
-         
-         $idLog = 1;
-        $desc =  Search::TiposLog($idLog);
-         echo $desc;
-            
+        include './persistencia/Conexao.php';
+        include './classes/Search.class.php';
+
+        $idLog = 1;
+        $desc = Search::TiposLog($idLog);
+        echo $desc;
         ?>
     </body>
 </html>

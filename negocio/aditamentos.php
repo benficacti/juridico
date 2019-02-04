@@ -12,17 +12,17 @@
  * @author USUARIO
  */
 class aditamentos {
+
     private $idAtualContratoAditamento;
     private $dataAditamento;
     private $numeroAditamento;
-    
+
     function __construct($idAtualContratoAditamento, $dataAditamento, $numeroAditamento) {
         $this->idAtualContratoAditamento = $idAtualContratoAditamento;
         $this->dataAditamento = $dataAditamento;
         $this->numeroAditamento = $numeroAditamento;
     }
 
-    
     function getIdAtualContratoAditamento() {
         return $this->idAtualContratoAditamento;
     }
@@ -46,6 +46,5 @@ class aditamentos {
     function setNumeroAditamento($numeroAditamento) {
         $this->numeroAditamento = $numeroAditamento;
     }
-
 
 }

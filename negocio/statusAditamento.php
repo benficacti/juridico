@@ -12,13 +12,13 @@
  * @author USUARIO
  */
 class statusAditamento {
-    private  $descStatusAditamento;
-    
+
+    private $descStatusAditamento;
+
     function __construct($descStatusAditamento) {
         $this->descStatusAditamento = $descStatusAditamento;
     }
 
-    
     function getDescStatusAditamento() {
         return $this->descStatusAditamento;
     }
@@ -26,6 +26,5 @@ class statusAditamento {
     function setDescStatusAditamento($descStatusAditamento) {
         $this->descStatusAditamento = $descStatusAditamento;
     }
-
 
 }

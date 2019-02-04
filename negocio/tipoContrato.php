@@ -12,13 +12,13 @@
  * @author USUARIO
  */
 class tipoContrato {
+
     private $descTipoContrato;
-    
+
     function __construct($descTipoContrato) {
         $this->descTipoContrato = $descTipoContrato;
     }
 
-    
     function getDescTipoContrato() {
         return $this->descTipoContrato;
     }
@@ -26,6 +26,5 @@ class tipoContrato {
     function setDescTipoContrato($descTipoContrato) {
         $this->descTipoContrato = $descTipoContrato;
     }
-
 
 }

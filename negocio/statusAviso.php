@@ -12,9 +12,9 @@
  * @author USUARIO
  */
 class statusAviso {
+
     private $statusAviso;
-    
-    
+
     function __construct($statusAviso) {
         $this->statusAviso = $statusAviso;
     }
@@ -26,7 +26,5 @@ class statusAviso {
     function setStatusAviso($statusAviso) {
         $this->statusAviso = $statusAviso;
     }
-
-
 
 }

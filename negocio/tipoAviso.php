@@ -12,14 +12,13 @@
  * @author USUARIO
  */
 class tipoAviso {
-    
+
     private $descTipoAviso;
-    
+
     function __construct($descTipoAviso) {
         $this->descTipoAviso = $descTipoAviso;
     }
 
-    
     function getDescTipoAviso() {
         return $this->descTipoAviso;
     }
@@ -27,6 +26,5 @@ class tipoAviso {
     function setDescTipoAviso($descTipoAviso) {
         $this->descTipoAviso = $descTipoAviso;
     }
-
 
 }

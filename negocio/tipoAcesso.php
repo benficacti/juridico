@@ -12,13 +12,13 @@
  * @author USUARIO
  */
 class tipoAcesso {
+
     private $descTipoAcesso;
-    
+
     function __construct($descTipoAcesso) {
         $this->descTipoAcesso = $descTipoAcesso;
     }
 
-    
     function getDescTipoAcesso() {
         return $this->descTipoAcesso;
     }
@@ -26,6 +26,5 @@ class tipoAcesso {
     function setDescTipoAcesso($descTipoAcesso) {
         $this->descTipoAcesso = $descTipoAcesso;
     }
-
 
 }

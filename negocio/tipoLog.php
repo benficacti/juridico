@@ -12,12 +12,13 @@
  * @author USUARIO
  */
 class tipoLog {
+
     private $descTipoLog;
-    
+
     function __construct($descTipoLog) {
         $this->descTipoLog = $descTipoLog;
     }
-    
+
     function getDescTipoLog() {
         return $this->descTipoLog;
     }
@@ -25,7 +26,5 @@ class tipoLog {
     function setDescTipoLog($descTipoLog) {
         $this->descTipoLog = $descTipoLog;
     }
-
-
 
 }

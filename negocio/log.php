@@ -12,70 +12,69 @@
  * @author USUARIO
  */
 class log {
-   private $idTipoLog;
-   private $dataLog;
-   private $horaLog;
-   private $idLoginLog;
-   private $ipLog;
-   private $macAddressLog;
-   
-   function __construct($idTipoLog, $dataLog, $horaLog, $idLoginLog, $ipLog, $macAddressLog) {
-       $this->idTipoLog = $idTipoLog;
-       $this->dataLog = $dataLog;
-       $this->horaLog = $horaLog;
-       $this->idLoginLog = $idLoginLog;
-       $this->ipLog = $ipLog;
-       $this->macAddressLog = $macAddressLog;
-   }
-   
-   function getIdTipoLog() {
-       return $this->idTipoLog;
-   }
 
-   function getDataLog() {
-       return $this->dataLog;
-   }
+    private $idTipoLog;
+    private $dataLog;
+    private $horaLog;
+    private $idLoginLog;
+    private $ipLog;
+    private $macAddressLog;
 
-   function getHoraLog() {
-       return $this->horaLog;
-   }
+    function __construct($idTipoLog, $dataLog, $horaLog, $idLoginLog, $ipLog, $macAddressLog) {
+        $this->idTipoLog = $idTipoLog;
+        $this->dataLog = $dataLog;
+        $this->horaLog = $horaLog;
+        $this->idLoginLog = $idLoginLog;
+        $this->ipLog = $ipLog;
+        $this->macAddressLog = $macAddressLog;
+    }
 
-   function getIdLoginLog() {
-       return $this->idLoginLog;
-   }
+    function getIdTipoLog() {
+        return $this->idTipoLog;
+    }
 
-   function getIpLog() {
-       return $this->ipLog;
-   }
+    function getDataLog() {
+        return $this->dataLog;
+    }
 
-   function getMacAddressLog() {
-       return $this->macAddressLog;
-   }
+    function getHoraLog() {
+        return $this->horaLog;
+    }
 
-   function setIdTipoLog($idTipoLog) {
-       $this->idTipoLog = $idTipoLog;
-   }
+    function getIdLoginLog() {
+        return $this->idLoginLog;
+    }
 
-   function setDataLog($dataLog) {
-       $this->dataLog = $dataLog;
-   }
+    function getIpLog() {
+        return $this->ipLog;
+    }
 
-   function setHoraLog($horaLog) {
-       $this->horaLog = $horaLog;
-   }
+    function getMacAddressLog() {
+        return $this->macAddressLog;
+    }
 
-   function setIdLoginLog($idLoginLog) {
-       $this->idLoginLog = $idLoginLog;
-   }
+    function setIdTipoLog($idTipoLog) {
+        $this->idTipoLog = $idTipoLog;
+    }
 
-   function setIpLog($ipLog) {
-       $this->ipLog = $ipLog;
-   }
+    function setDataLog($dataLog) {
+        $this->dataLog = $dataLog;
+    }
 
-   function setMacAddressLog($macAddressLog) {
-       $this->macAddressLog = $macAddressLog;
-   }
+    function setHoraLog($horaLog) {
+        $this->horaLog = $horaLog;
+    }
 
+    function setIdLoginLog($idLoginLog) {
+        $this->idLoginLog = $idLoginLog;
+    }
 
+    function setIpLog($ipLog) {
+        $this->ipLog = $ipLog;
+    }
+
+    function setMacAddressLog($macAddressLog) {
+        $this->macAddressLog = $macAddressLog;
+    }
 
 }

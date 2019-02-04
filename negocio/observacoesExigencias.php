@@ -12,13 +12,13 @@
  * @author USUARIO
  */
 class observacoesExigencias {
+
     private $descObserExig;
-    
+
     function __construct($descObserExig) {
         $this->descObserExig = $descObserExig;
     }
 
-    
     function getDescObserExig() {
         return $this->descObserExig;
     }
@@ -26,6 +26,5 @@ class observacoesExigencias {
     function setDescObserExig($descObserExig) {
         $this->descObserExig = $descObserExig;
     }
-
 
 }
