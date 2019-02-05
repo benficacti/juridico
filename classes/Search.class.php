@@ -21,10 +21,10 @@ class Search {
     public function TiposLog($idLog) {
         try {
 
-            $sql = 'SELECT DESC_TIPO_LOG FROM TIPO_LOG WHERE ID_TIPO_LOG = "' . $idLog . '"';
-            $sqll = Conexao::$instance->prepare($sql);
+            $sql = 'SELECT * FROM TIPO_LOG WHERE ID_TIPO_LOG = "' . $idLog . '"';
+            $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
-                $count = $sqll->rowCout();
+                $count = $sqll->rowCount();
                 if ($count > 0) {
                     foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
                         return $dados->DESC_TIPO_LOG;
