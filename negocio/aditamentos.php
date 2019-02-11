@@ -17,12 +17,7 @@ class aditamentos {
     private $dataAditamento;
     private $numeroAditamento;
 
-    function __construct($idAtualContratoAditamento, $dataAditamento, $numeroAditamento) {
-        $this->idAtualContratoAditamento = $idAtualContratoAditamento;
-        $this->dataAditamento = $dataAditamento;
-        $this->numeroAditamento = $numeroAditamento;
-    }
-
+   
     function getIdAtualContratoAditamento() {
         return $this->idAtualContratoAditamento;
     }

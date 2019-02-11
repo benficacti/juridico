@@ -14,17 +14,30 @@
 class garantia {
 
     private $descGarantia;
+    private $numeroContratoGarantia;
 
-    function __construct($descGarantia) {
+    function __construct($descGarantia, $numeroContratoGarantia) {
         $this->descGarantia = $descGarantia;
+        $this->numeroContratoGarantia = $numeroContratoGarantia;
     }
 
+    
     function getDescGarantia() {
         return $this->descGarantia;
+    }
+
+    function getNumeroContratoGarantia() {
+        return $this->numeroContratoGarantia;
     }
 
     function setDescGarantia($descGarantia) {
         $this->descGarantia = $descGarantia;
     }
 
+    function setNumeroContratoGarantia($numeroContratoGarantia) {
+        $this->numeroContratoGarantia = $numeroContratoGarantia;
+    }
+
+
+    
 }
