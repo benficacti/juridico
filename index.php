@@ -1,3 +1,4 @@
+<<<<<<< HEAD:index.php
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -16,3 +17,22 @@ and open the template in the editor.
 
     </body>
 </html>
+=======
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <?php
+        // RUBAO É LYON
+        ?>
+    </body>
+</html>
+>>>>>>> f3350f94f1fb39ca1dbf9daf2540bc60255557a7:apresentacao/index.php
