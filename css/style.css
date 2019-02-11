@@ -41,3 +41,19 @@ body{
         margin-top:2%;
     }
 }
+@media (min-width: 1440px) { 
+    
+    body{
+    background: url("../images/bg_1900.jpg") no-repeat fixed center; 
+    width:100%;
+}
+    #container{
+        width:90%;
+        border: 1px solid white;
+        height:64px;
+        float:left;
+        margin-left:5%;
+        margin-right: 5%;
+        margin-top:2%;
+    }
+}
