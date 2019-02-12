@@ -21,7 +21,7 @@
                     </li>
                     <li><a href="#">Pagina 2</a></li>
                     <li><a href="#">Pagina 3</a></li> 
-                  
+
 
 
                 </ul>  
@@ -30,7 +30,62 @@
         </header>
 
         <article id="article">
+            <nav id="option-left">
+                <div class="menu-home" id="pesquisar" style="margin-top:1%;">
+                    <div class="title-option">
+                        <input type="text" placeholder="Pesquisar Contrato" class="input-option" id="input_pesquisar">
+                    </div>
+                    <div class="icon-option">
+                        <figure class="figure-icon">
+                            <img src="images/lupa.png" class="img-icon" id="img-icon-lupa" alt="lupa-pesquisar">
+                        </figure>
 
+                    </div>
+                </div>
+                <div class="menu-home" id="cadastrar">
+                    <div class="title-option">
+                        <label class="desc-option"><b>CADASTRAR</b><span class="desc-option-span"> CONTRATO</span></label>
+                    </div>
+                    <div class="icon-option">
+                        <figure class="figure-icon">
+                            <img src="images/lupa.png" class="img-icon" id="img-icon-lupa" alt="lupa-pesquisar">
+                        </figure>
+                    </div>
+                </div>
+                <div class="menu-home" id="aditar">
+                    <div class="title-option">
+                        <label class="desc-option"><b>ADITAR</b><span class="desc-option-span"> CONTRATO</span></label>
+                    </div>
+                    <div class="icon-option">
+                        <figure class="figure-icon">
+                            <img src="images/lupa.png" class="img-icon" id="img-icon-lupa" alt="lupa-pesquisar">
+                        </figure>
+                    </div>
+                </div>
+                <div class="menu-home" id="alterar">
+                    <div class="title-option">
+                        <label class="desc-option"><b>ALTERAR</b><span class="desc-option-span"> CONTRATO</span></label>
+                    </div>
+                    <div class="icon-option">
+                        <figure class="figure-icon">
+                            <img src="images/editar_contrato.png" class="img-icon" id="img-icon-editar-contrato" alt="editar-contrato-pesquisar">
+                        </figure>
+                    </div>
+                </div>
+                <div class="menu-home" id="relatorio">
+                    <div class="title-option">
+                        <label class="desc-option"><b>RELATÓRIO</b></label>
+                    </div>
+                    <div class="icon-option">
+                        <figure class="figure-icon">
+                            <img src="images/lupa.png" class="img-icon" id="img-icon-lupa" alt="lupa-pesquisar">
+                        </figure>
+                    </div>
+                </div>
+            </nav>
+            <div id="list">
+
+            </div>
         </article>
         <footer id="footer">
 
