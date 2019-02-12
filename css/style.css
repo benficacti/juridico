@@ -42,18 +42,71 @@ body{
     }
 }
 @media (min-width: 1440px) { 
-    
+
     body{
-    background: url("../images/bg_1900.jpg") no-repeat fixed center; 
-    width:100%;
-}
+        background: url("../images/bg_1900.jpg") no-repeat fixed center; 
+        width:100%;
+    }
     #container{
         width:90%;
-        border: 1px solid white;
-        height:64px;
+        height:50px;
         float:left;
         margin-left:5%;
         margin-right: 5%;
         margin-top:2%;
     }
+    #nav{
+
+        width:100%;
+        border: 1px solid white;
+        height:50px;
+        float:left;
+        background-color: blue;
+    }
+
+
+
+
+    .menu{
+        list-style:none; 
+        border:1px solid #c0c0c0; 
+        float:left; 
+    }
+
+    .menu li{
+        position:relative; 
+        float:left; 
+        border-right:1px solid #c0c0c0; 
+    }
+
+
+    .menu li a{color:#fff; text-decoration:none; padding:15px 80px; display:block;}
+
+    .menu li a:hover{ /* efeito de seleção no submenu*/
+        background:#333; 
+        color:#fff; 
+        -moz-box-shadow:0 3px 10px 0 #CCC; 
+        -webkit-box-shadow:0 3px 10px 0 #ccc; 
+        text-shadow:0px 0px 5px #fff; /* efeito de sombra nas letras dos botões */
+    }
+
+    .menu li  ul{ /*efeito de esconder o submenu*/
+        position:absolute; /*alinha os botões do submenu*/
+        top:25px; 
+        left:0;
+        background-color:#6fbbd3; /* Cor de fundo do submenu*/
+        display:none /* oculta os botões*/
+    }   
+
+    .menu li:hover ul, .menu li.over ul{display:block;} /* efeito de aparecer o submenu*/
+
+    .menu li ul li{/* controla largura e bordas do submenu */
+        border:1px solid #c0c0c0; 
+        display:block; 
+        width:260px;
+    }
+
+    
+
+
 }
