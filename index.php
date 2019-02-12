@@ -9,7 +9,7 @@
     <body>
     <session id="container">
         <header id="header">
-            <nav id="nav">
+                 <nav id="nav">
                 <ul class="menu">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Meus Contratos</a>
@@ -19,13 +19,11 @@
                             <li><a href="#">Pagina 1-2</a></li>                    
                         </ul>
                     </li>
-                    <li><a href="#">Pagina 2</a></li>
-                    <li><a href="#">Pagina 3</a></li> 
-
-
-
+                    <li><a href="#">Administração</a></li>
                 </ul>  
-
+                     <ul class="sair">
+                         <li><a href="#" class="botao">Sair</a></li>
+                     </ul>
             </nav>
         </header>
 
