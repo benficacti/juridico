@@ -84,6 +84,86 @@
                 </div>
             </nav>
             <div id="list">
+                <div class="container-list">
+                    <div class="title-list">
+                        <label class="desc-title-list">Próximos vencimentos</label>
+                    </div>
+                    <div class="title-list-tb">
+
+                        <div class="div-icon"></div>
+                        <div class="div-desc">Descrição</div>
+                        <div class="div-contrato">Contrato</div>
+                        <div class="div-data">Data</div>
+                    </div>
+                    <div class="table-list">
+                        <table class="tb-list">
+                            <tr>
+                                <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+                                <td class="td-desc">Prefeitura Barueri aaaaaaaaaaa</td>
+                                <td class="td-contrato">Contrato</td>
+                                <td class="td-data">Data</td>
+                            </tr>
+                            <tr>
+                                <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+                                <td class="td-desc">Descrição</td>
+                                <td class="td-contrato">Contrato</td>
+                                <td class="td-data">Data</td>
+                            </tr>
+                            <tr>
+                                <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+                                <td class="td-desc">Descrição</td>
+                                <td class="td-contrato">Contrato</td>
+                                <td class="td-data">Data</td>
+                            </tr>
+                            <tr>
+                                <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+                                <td class="td-desc">Descrição</td>
+                                <td class="td-contrato">Contrato</td>
+                                <td class="td-data">Data</td>
+                            </tr>
+                            <tr>
+                                <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+                                <td class="td-desc">Descrição</td>
+                                <td class="td-contrato">Contrato</td>
+                                <td class="td-data">Data</td>
+                            </tr>
+                            <tr>
+                                <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+                                <td class="td-desc">Descrição</td>
+                                <td class="td-contrato">Contrato</td>
+                                <td class="td-data">Data</td>
+                            </tr>
+                            <tr>
+                                <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+                                <td class="td-desc">Descrição</td>
+                                <td class="td-contrato">Contrato</td>
+                                <td class="td-data">Data</td>
+                            </tr>
+                            <tr>
+                                <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+                                <td class="td-desc">Descrição</td>
+                                <td class="td-contrato">Contrato</td>
+                                <td class="td-data">Data</td>
+                            </tr>
+                            <tr>
+                                <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+                                <td class="td-desc">Descrição</td>
+                                <td class="td-contrato">Contrato</td>
+                                <td class="td-data">Data</td>
+                            </tr>
+                            <tr>
+                                <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+                                <td class="td-desc">Descrição</td>
+                                <td class="td-contrato">Contrato</td>
+                                <td class="td-data">Data</td>
+                            </tr>
+
+
+
+                        </table>
+
+                    </div>
+                </div>
 
             </div>
         </article>
