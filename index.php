@@ -10,20 +10,9 @@
     <session id="container">
         <header id="header">
                  <nav id="nav">
-                <ul class="menu">
-                    <li><a class="active" href="#">Home</a></li>
-                    <li><a href="#">Meus Contratos</a>
-                        <ul>
-                            <li><a href="#">Pagina 1</a></li>
-                            <li><a href="#">Pagina 1-1</a></li>
-                            <li><a href="#">Pagina 1-2</a></li>                    
-                        </ul>
-                    </li>
-                    <li><a href="#">Administração</a></li>
-                </ul>  
-                     <ul class="sair">
-                         <li><a href="#" class="botao">Sair</a></li>
-                     </ul>
+               <?php 
+               include './includes/menu.php';
+               ?>
             </nav>
         </header>
 
