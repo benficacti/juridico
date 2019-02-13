@@ -11,7 +11,7 @@
         <header id="header">
                  <nav id="nav">
                 <ul class="menu">
-                    <li><a href="#">Home</a></li>
+                    <li><a class="active" href="#">Home</a></li>
                     <li><a href="#">Meus Contratos</a>
                         <ul>
                             <li><a href="#">Pagina 1</a></li>
@@ -97,7 +97,7 @@
                         <table class="tb-list">
                             <tr>
                                 <td class="td-icon"><img src="images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                                <td class="td-desc">Prefeitura Barueri aaaaaaaaaaa</td>
+                                <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
                                 <td class="td-contrato">Contrato</td>
                                 <td class="td-data">Data</td>
                             </tr>
