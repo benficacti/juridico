@@ -23,13 +23,13 @@ and open the template in the editor.
     padding:0px;
 }
 body{
-  
+
     width:100%;
     overflow: hidden;
     zoom: 0.8;
 }
 .index-body{
-      background: url("../images/bg_1366.jpg") no-repeat fixed center; 
+    background: url("../images/bg_1366_gradient_white.jpg") no-repeat fixed center; 
 }
 @media (min-width: 576px) { 
 }
@@ -61,15 +61,15 @@ body{
     }
     .iframe{
         width:100%;
-         float:left;
-         border:0px;
+        float:left;
+        border:0px;
     }
     #footer{
         float:left;
         width:100%;
         min-height:40px;
         height:auto;
-        
+
     }
     .text-footer{
         line-height: 40px;
@@ -85,14 +85,19 @@ body{
     #nav{
 
         width:100%;
-        height:54px;
+        height:60px;
         float:left;
         background: #0399D4;
+        border-radius: 10px;
+        -webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
     }
     #option-left{
         width:43%;
         height: 480px;
         float:left;
+        margin-left:2px;
         margin-top:1.5%;
     }
     #list{
@@ -103,9 +108,9 @@ body{
         float:left;
         margin-top:2%;
         margin-left:1%;
-        -webkit-box-shadow: 6px 0px 19px -4px rgba(0,0,0,0.75);
-        -moz-box-shadow: 6px 0px 19px -4px rgba(0,0,0,0.75);
-        box-shadow: 6px 0px 19px -4px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
     }
     .menu-home{
         width:100%;
@@ -114,9 +119,9 @@ body{
         background-color:white;
         float:left;
         margin-top:4%;
-        -webkit-box-shadow: 6px 0px 19px -4px rgba(0,0,0,0.75);
-        -moz-box-shadow: 6px 0px 19px -4px rgba(0,0,0,0.75);
-        box-shadow: 6px 0px 19px -4px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
     }
     .title-option{
         width:80%;
@@ -303,7 +308,7 @@ body{
     /*end list*/
     /* end article */
 
-     .menu{
+    .menu{
         list-style:none;        
         float:left; 
     }
@@ -317,6 +322,7 @@ body{
     .menu li a{
         background: #0399D4;
         color:#fff; 
+        height:30px;
         text-decoration:none; 
         font-weight:bold;
         padding:15px 10px; 
@@ -326,16 +332,19 @@ body{
         transition-timing-function: linear;
         font-family: 'Gilroy';
         font-size: 1.1em;
+        letter-spacing: 1.5px;
+        line-height: 30px;
     }
 
     .menu li a.active{
         background-color: #66ccff;
         color:#fff;
+        margin-left:10px;
     }
-    
+
     .menu li a:hover{ /* efeito de seleção no submenu*/
-       background-color: #66ccff;
-        color:#fff;        
+        background-color: #66ccff;
+        color:#fff;  
     }
 
     .menu li  ul{ /*efeito de esconder o submenu*/
@@ -401,7 +410,7 @@ body{
         filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
         background-color:#dfdfdf;
     }
-   
+
 }
 @media (min-width: 1440px) { 
 
@@ -457,9 +466,9 @@ body{
         background-color: #66ccff;
         color:#fff;
     }
-    
+
     .menu li a:hover{ /* efeito de seleção no submenu*/
-       background-color: #66ccff;
+        background-color: #66ccff;
         color:#fff;        
     }
 
