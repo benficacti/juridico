@@ -1,7 +1,9 @@
 function resize() {
     var heights = window.innerHeight;
-
-    document.getElementById("iframe").style.height = heights + "px";
-
+    if (heights > 768) {
+        document.getElementById("iframe").style.height = heights - 80 + "px";
+    } else {
+        document.getElementById("iframe").style.height = heights + "px";
+    }
 }
 resize();

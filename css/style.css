@@ -44,6 +44,10 @@ body{
 
 /* Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) { 
+    .index-body{
+        background: url("../images/bg_1366.jpg") no-repeat fixed center; 
+    }
+
     #container{
         width:90%;      
         height:auto;
@@ -413,9 +417,12 @@ body{
 
 }
 @media (min-width: 1440px) { 
-
-    body{
+    .index-body{
         background: url("../images/bg_1900.jpg") no-repeat fixed center; 
+
+    }
+    body{
+        zoom:0.9;
         width:100%;
     }
     #container{
