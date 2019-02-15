@@ -418,7 +418,7 @@ body{
 }
 @media (min-width: 1440px) { 
     .index-body{
-        background: url("../images/bg_1900.jpg") no-repeat fixed center; 
+        background: url("../images/bg_1900_gradient_white.jpg") no-repeat fixed center; 
 
     }
     body{
@@ -436,7 +436,7 @@ body{
     #nav{
 
         width:100%;
-        height:54px;
+        height:60px;
         float:left;
         background: #0399D4;
     }
@@ -458,6 +458,7 @@ body{
     .menu li a{
         background: #0399D4;
         color:#fff; 
+        height:30px;
         text-decoration:none; 
         font-weight:bold;
         padding:15px 10px; 
@@ -467,16 +468,19 @@ body{
         transition-timing-function: linear;
         font-family: 'Gilroy';
         font-size: 1.1em;
+        letter-spacing: 1.5px;
+        line-height: 30px;
     }
 
     .menu li a.active{
         background-color: #66ccff;
         color:#fff;
+        margin-left:10px;
     }
 
     .menu li a:hover{ /* efeito de seleção no submenu*/
         background-color: #66ccff;
-        color:#fff;        
+        color:#fff;  
     }
 
     .menu li  ul{ /*efeito de esconder o submenu*/

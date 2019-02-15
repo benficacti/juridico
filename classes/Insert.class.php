@@ -1,7 +1,8 @@
 <?php
 
-include 'persistencia/Conexao.php';
-include 'negocio/aditamentos.php';
+include '../persistencia/Conexao.php';
+include 'Search.class.php';
+//include 'negocio/aditamentos.php';
 
 
 /*
@@ -39,7 +40,7 @@ class Insert {
         }
     }
 
-    public function CadastraContrato($contrato,$garantia,$idLogin,$descObservacaoExigencias) {
+    public function CadastraContrato($contrato) {
 
         try {
 
@@ -49,28 +50,42 @@ class Insert {
             $objetoContrato = $contrato->getObjetoContrato();
             $valorContrato = $contrato->getValorContrato();
             $pagamentoParcelaContrato = $contrato->getPagamentoParcelaContrato();
-            $pagamentoValorContrato = $contrato->getPagamentoValorContrato();
+            $pagamentoRealizadoValorContrato = $contrato->getPagamentoRealizadoValorContrato();
             $pagamentoDataContrato = $contrato->getPagamentoDataContrato();
             $inicioVigenciaContrato = $contrato->getInicioVigenciaContrato();
             $finalVigenciaContrato = $contrato->getFinalVigenciaContrato();
             $vencimentoContrato = $contrato->getVencimentoContrato();
+            
+            $GarantiaContrato = $contrato->getIdGarantiaContrato();
             /*$idGarantiaContrato = $contrato->getIdGarantiaContrato(); //No momento de realizar o 
              *Cadastrato do CONTRATO ainda não existe o id da Garantia.
              */
-            $idAditamentoContrato = $contrato->getIdAditamentoContrato();
-            $idLoginContrato = $contrato->getIdLoginContrato();
-            $idFinalizacaoContrato = $contrato->getIdFinalizacaoContrato(); // SIM ou NAO
+            
+            /*$idAditamentoContrato = $contrato->getIdAditamentoContrato(); // No momento de realizar o 
+             * Cadastro do CONTRATO ainda não existe um aditamento
+             */
+            
+            
+            $idLogin = 1;
+            $idFinalizacaoContrato = 1;
+             /* $idFinalizacaoContrato = $contrato->getIdFinalizacaoContrato(); // SIM ou NAO
+              */
             $idTipoContrato = $contrato->getIdTipoContrato(); // PUBLICO OU PRIVADO
-            $idStatusGarantiaContrato = $contrato->getIdStatusGarantiaContrato(); // SIM OU NAO
+            
+            $idStatusGarantiaContrato = 1;        
+            /*$idStatusGarantiaContrato = $contrato->getIdStatusGarantiaContrato(); // SIM OU NAO
+             */
+            
+            $ObservacoesExigenciasContrato = $contrato->getIdObservacoesExigenciasContrato();
             /*$idObservacoesExigenciasContrato = $contrato->getIdObservacoesExigenciasContrato(); //No momento de realizar o 
              *Cadastrato do CONTRATO ainda não existe o id da ObservacoesExigenciasContrato.
              */
             
-            $descGarantia = $garantia->getDescGarantia();
+            //$descGarantia = $garantia->getDescGarantia();
              
              $insGar = "INSERT INTO `GARANTIA`(`DESC_GARANTIA`,`NUMERO_CONTRATO_GARANTIA`)VALUES(:DESC_GARANTIA,:NUMERO_CONTRATO_GARANTIA)";        
              $insGarr = Conexao::getInstance()->prepare($insGar);
-             $insGarr->bindParam(":DESC_GARANTIA",$descGarantia);
+             $insGarr->bindParam(":DESC_GARANTIA",$GarantiaContrato);
              $insGarr->bindParam(":NUMERO_CONTRATO_GARANTIA",$numeroContrato);
              if ($insGarr->execute()) {
                  echo'Garantia cadastrada com sucesso!';
@@ -78,8 +93,8 @@ class Insert {
              
              $insDescObserExig = "INSERT INTO `OBSERVACOES_EXIGENCIAS`(`DESC_OBSER_EXIGEN`,`NUMERO_DESC_OBSER_EXIGEN`)VALUES(:DESC_OBSER_EXIGEN,:NUMERO_DESC_OBSER_EXIGEN)";
              $insDescObserExigg = Conexao::getInstance()->prepare($insDescObserExig);
-             $insDescObserExigg->bindParam(":DESC_OBSER_EXIGEN");
-             $insDescObserExigg->bindParam(":NUMERO_DESC_OBSER_EXIGEN");
+             $insDescObserExigg->bindParam(":DESC_OBSER_EXIGEN",$ObservacoesExigenciasContrato);
+             $insDescObserExigg->bindParam(":NUMERO_DESC_OBSER_EXIGEN",$numeroContrato);
              if ($insDescObserExigg->execute()) {
                  echo'Observações e Exigencias cadastrada com sucesso!';
                  
@@ -87,48 +102,74 @@ class Insert {
              
             
             $idGarantiaContrato = Search::buscaIdGarantia($numeroContrato);
-            //$idObservacoesExigencias = Search::;
+            $idObservacoesExigencias = Search::buscaIdObservacoesExigencias($numeroContrato);
             
      
             
-            $ins = "INSERT INTO `CONTRATO` (`NUMERO_CONTRATO`,`CONTRANTE_CONTRATO`,"
-                    . "`CONTRATADO_CONTRATO`,`OBJETO_CONTRATO`,`VALOR_CONTRATO`,"
-                    . "`PAGAMENTO_PARCELA_CONTRATO`,`PAGAMENTO_VALOR_CONTRATO`,`PAGAMENTO_DATA_CONTRATO`,"
-                    . "`INICIO_VIGENCIA_CONTRATO`,`FINAL_VIGENCIA_CONTRATO`,`VENCIMENTO_CONTRATO`,"
-                    . "`ID_GARANTIA_CONTRATO`,`ID_LOGIN_CONTRATO`,`ID_FINALIZACAO_CONTRATO`,"
-                    . "`ID_TIPO_CONTRATO`,`ID_STATUS_GARANTIA_CONTRATO`,`ID_OBSERVACOES_EXIGENCIAS_CONTRATO`)"
-                    . "VALUES("
-                    . ":NUMERO_CONTRATO,:CONTRANTE_CONTRATO,:CONTRATADO_CONTRATO,:OBJETO_CONTRATO,"
-                    . ":VALOR_CONTRATO,:PAGAMENTO_PARCELA_CONTRATO,:PAGAMENTO_VALOR_CONTRATO,:PAGAMENTO_DATA_CONTRATO,"
-                    . ":INICIO_VIGENCIA_CONTRATO,:FINAL_VIGENCIA_CONTRATO,:VENCIMENTO_CONTRATO,:ID_GARANTIA_CONTRATO,"
-                    . ":ID_LOGIN_CONTRATO,:ID_FINALIZACAO_CONTRATO,:ID_TIPO_CONTRATO,:ID_STATUS_GARANTIA_CONTRATO,"
-                    . ":ID_OBSERVACOES_EXIGENCIAS_CONTRATO)";
-
-            $inss = Conexao::getInstance()->prepare($ins);
-            $inss->bindParam(":NUMERO_CONTRATO",$numeroContrato );
-            $inss->bindParam(":CONTRANTE_CONTRATO",$contratanteContrato );
-            $inss->bindParam(":CONTRATADO_CONTRATO",$contratadoContrato );
-            $inss->bindParam(":OBJETO_CONTRATO" );
-            $inss->bindParam(":VALOR_CONTRATO",$valorContrato );
-            $inss->bindParam(":PAGAMENTO_PARCELA_CONTRATO",$pagamentoParcelaContrato );
-            $inss->bindParam(":PAGAMENTO_VALOR_CONTRATO",$pagamentoValorContrato );
-            $inss->bindParam(":PAGAMENTO_DATA_CONTRATO",$pagamentoDataContrato );
-            $inss->bindParam(":INICIO_VIGENCIA_CONTRATO",$inicioVigenciaContrato );
-            $inss->bindParam(":FINAL_VIGENCIA_CONTRATO",$finalVigenciaContrato );
-            $inss->bindParam(":VENCIMENTO_CONTRATO",$vencimentoContrato );
-            $inss->bindParam(":ID_GARANTIA_CONTRATO",$idGarantiaContrato );
-            $inss->bindParam(":ID_LOGIN_CONTRATO",$idLogin );
-            $inss->bindParam(":ID_FINALIZACAO_CONTRATO",$idFinalizacaoContrato );  
-            $inss->bindParam(":ID_TIPO_CONTRATO",$idTipoContrato ); 
-            $inss->bindParam(":ID_STATUS_GARANTIA_CONTRATO",$idStatusGarantiaContrato ); 
-            $inss->bindParam(":ID_OBSERVACOES_EXIGENCIAS_CONTRATO" ); 
             
-            if ($inss->execute()) {
-                echo 'Contrato cadastrado com sucesso!';
-            }
+             echo $numeroContrato.'<br>';
+             echo $contratanteContrato.'<br>';
+             echo $contratadoContrato.'<br>';
+             echo $objetoContrato.'<br>';
+             echo $valorContrato.'<br>';
+             echo $pagamentoParcelaContrato.'<br>';
+             echo $pagamentoRealizadoValorContrato.'<br>';
+             echo $pagamentoDataContrato.'<br>';
+             echo $inicioVigenciaContrato.'<br>';
+             echo $finalVigenciaContrato.'<br>';
+             echo $vencimentoContrato.'<br>';
+             echo $idGarantiaContrato.'<br>';
+             echo $idLogin.'<br>';
+             echo $idFinalizacaoContrato.'<br>';
+             echo $idTipoContrato.'<br>';
+             echo $idStatusGarantiaContrato.'<br>';
+             echo $idObservacoesExigencias.'<br>';
+            
+            
+            
+            $insCont = "INSERT INTO `CONTRATO`(`NUMERO_CONTRATO`,`CONTRATANTE_CONTRATO`,"
+                    . "`CONTRATADO_CONTRATO`,`OBJETO_CONTRATO`,`VALOR_CONTRATO`,"
+                    . "`PAGAMENTO_PARCELA_CONTRATO`,`PAGAMENTO_REALIZADO_VALOR_CONTRATO`,"
+                    . "`PAGAMENTO_DATA_CONTRATO`,`INICIO_VIGENCIA_CONTRATO`,`FINAL_VIGENCIA_CONTRATO`,"
+                    . "`VENCIMENTO_CONTRATO`,`ID_GARANTIA_CONTRATO`,"
+                    . "`ID_LOGIN_CONTRATO`,`ID_FINALIZACAO_CONTRATO`,`ID_TIPO_CONTRATO`,`ID_STATUS_GARANTIA_CONTRATO`,"
+                    . "`ID_OBSERVACOES_EXIGENCIAS_CONTRATO`)"
+                    . "VALUES("
+                    . ":NUMERO_CONTRATO,:CONTRATANTE_CONTRATO,:CONTRATADO_CONTRATO,:OBJETO_CONTRATO,:VALOR_CONTRATO,"
+                    . ":PAGAMENTO_PARCELA_CONTRATO,:PAGAMENTO_REALIZADO_VALOR_CONTRATO,:PAGAMENTO_DATA_CONTRATO,"
+                    . ":INICIO_VIGENCIA_CONTRATO,:FINAL_VIGENCIA_CONTRATO,:VENCIMENTO_CONTRATO,:ID_GARANTIA_CONTRATO,"
+                    . ":ID_LOGIN_CONTRATO,:ID_FINALIZACAO_CONTRATO,"
+                    . ":ID_TIPO_CONTRATO,:ID_STATUS_GARANTIA_CONTRATO,:ID_OBSERVACOES_EXIGENCIAS_CONTRATO)";
+             $insContS = Conexao::getInstance()->prepare($insCont);
+             $insContS->bindParam(":NUMERO_CONTRATO",$numeroContrato);
+              $insContS->bindParam(":CONTRATANTE_CONTRATO",$contratanteContrato);
+               $insContS->bindParam(":CONTRATADO_CONTRATO",$contratadoContrato);
+                $insContS->bindParam(":OBJETO_CONTRATO",$objetoContrato);
+                 $insContS->bindParam(":VALOR_CONTRATO",$valorContrato);
+                  $insContS->bindParam(":PAGAMENTO_PARCELA_CONTRATO",$pagamentoParcelaContrato);
+                   $insContS->bindParam(":PAGAMENTO_REALIZADO_VALOR_CONTRATO",$pagamentoRealizadoValorContrato);
+                    $insContS->bindParam(":PAGAMENTO_DATA_CONTRATO",$pagamentoDataContrato);
+                     $insContS->bindParam(":INICIO_VIGENCIA_CONTRATO",$inicioVigenciaContrato);
+                      $insContS->bindParam(":FINAL_VIGENCIA_CONTRATO",$finalVigenciaContrato);
+                       $insContS->bindParam(":VENCIMENTO_CONTRATO",$vencimentoContrato);
+                        $insContS->bindParam(":ID_GARANTIA_CONTRATO",$idGarantiaContrato);
+                          $insContS->bindParam(":ID_LOGIN_CONTRATO",$idLogin);
+                           $insContS->bindParam(":ID_FINALIZACAO_CONTRATO",$idFinalizacaoContrato);
+                            $insContS->bindParam(":ID_TIPO_CONTRATO",$idTipoContrato);
+                             $insContS->bindParam(":ID_STATUS_GARANTIA_CONTRATO",$idStatusGarantiaContrato);
+                              $insContS->bindParam(":ID_OBSERVACOES_EXIGENCIAS_CONTRATO",$idObservacoesExigencias);
+                              
+             if ($insContS->execute()) {
+                 echo'Contrato cadastrado com sucesso!';
+                 
+             }
+           
+            
             
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
+        } catch (Exception $exc){
+            echo $exc->getMessage();
         }
     }
 

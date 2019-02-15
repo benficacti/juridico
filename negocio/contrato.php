@@ -19,7 +19,7 @@ private $contratadoContrato;
 private $objetoContrato;
 private $valorContrato;
 private $pagamentoParcelaContrato;
-private $pagamentoValorContrato;
+private $pagamentoRealizadoValorContrato;
 private $pagamentoDataContrato;
 private $inicioVigenciaContrato;
 private $finalVigenciaContrato;
@@ -32,25 +32,25 @@ private $idTipoContrato;
 private $idStatusGarantiaContrato;
 private $idObservacoesExigenciasContrato;
 
-   
-function __construct($numeroContrato, $contratanteContrato, $contratadoContrato, $objetoContrato, $valorContrato, $pagamentoParcelaContrato, $pagamentoValorContrato, $pagamentoDataContrato, $inicioVigenciaContrato, $finalVigenciaContrato, $vencimentoContrato, $idGarantiaContrato, $idAditamentoContrato, $idLoginContrato, $idFinalizacaoContrato, $idTipoContrato, $idStatusGarantiaContrato, $idObservacoesExigenciasContrato) {
+
+function __construct($numeroContrato, $contratanteContrato, $contratadoContrato, $objetoContrato, $valorContrato, 
+        $pagamentoParcelaContrato, $pagamentoRealizadoValorContrato, $pagamentoDataContrato, $inicioVigenciaContrato,
+        $finalVigenciaContrato, $vencimentoContrato, $idGarantiaContrato, 
+       $idTipoContrato,$idObservacoesExigenciasContrato) {
+    
     $this->numeroContrato = $numeroContrato;
     $this->contratanteContrato = $contratanteContrato;
     $this->contratadoContrato = $contratadoContrato;
     $this->objetoContrato = $objetoContrato;
     $this->valorContrato = $valorContrato;
     $this->pagamentoParcelaContrato = $pagamentoParcelaContrato;
-    $this->pagamentoValorContrato = $pagamentoValorContrato;
+    $this->pagamentoRealizadoValorContrato = $pagamentoRealizadoValorContrato;
     $this->pagamentoDataContrato = $pagamentoDataContrato;
     $this->inicioVigenciaContrato = $inicioVigenciaContrato;
     $this->finalVigenciaContrato = $finalVigenciaContrato;
     $this->vencimentoContrato = $vencimentoContrato;
     $this->idGarantiaContrato = $idGarantiaContrato;
-    $this->idAditamentoContrato = $idAditamentoContrato;
-    $this->idLoginContrato = $idLoginContrato;
-    $this->idFinalizacaoContrato = $idFinalizacaoContrato;
     $this->idTipoContrato = $idTipoContrato;
-    $this->idStatusGarantiaContrato = $idStatusGarantiaContrato;
     $this->idObservacoesExigenciasContrato = $idObservacoesExigenciasContrato;
 }
 
@@ -78,8 +78,8 @@ function getPagamentoParcelaContrato() {
     return $this->pagamentoParcelaContrato;
 }
 
-function getPagamentoValorContrato() {
-    return $this->pagamentoValorContrato;
+function getPagamentoRealizadoValorContrato() {
+    return $this->pagamentoRealizadoValorContrato;
 }
 
 function getPagamentoDataContrato() {
@@ -150,8 +150,8 @@ function setPagamentoParcelaContrato($pagamentoParcelaContrato) {
     $this->pagamentoParcelaContrato = $pagamentoParcelaContrato;
 }
 
-function setPagamentoValorContrato($pagamentoValorContrato) {
-    $this->pagamentoValorContrato = $pagamentoValorContrato;
+function setPagamentoRealizadoValorContrato($pagamentoRealizadoValorContrato) {
+    $this->pagamentoRealizadoValorContrato = $pagamentoRealizadoValorContrato;
 }
 
 function setPagamentoDataContrato($pagamentoDataContrato) {
@@ -197,6 +197,7 @@ function setIdStatusGarantiaContrato($idStatusGarantiaContrato) {
 function setIdObservacoesExigenciasContrato($idObservacoesExigenciasContrato) {
     $this->idObservacoesExigenciasContrato = $idObservacoesExigenciasContrato;
 }
+
 
 
 }

@@ -20,13 +20,16 @@
         </header>
 
         <article id="article">
+            <!--
             <iframe src="includes/home.php" name="frame" id="iframe" class="iframe"></iframe>
+            -->
+            <iframe src="apresentacao/cadastraContrato.php" name="frame" id="iframe" class="iframe"></iframe>
 
         </article>
 
     </session>
     <footer id="footer">
-        <label class="text-footer">Copyright © 2019 BENFICA BBTT - CTI</label>
+        <label class="text-footer">Copyright © <?php echo $data = date('Y'); ?> BENFICA BBTT - CTI</label>
     </footer>
     <script type="text/javascript" src="js/script.js"></script>
 </body>

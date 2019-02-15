@@ -1,6 +1,6 @@
 <?php
 
-include 'persistencia/Conexao.php';
+//include '../persistencia/Conexao.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -77,13 +77,12 @@ class Search {
         }
     }
 
-    
     public function login($start_login) {
 
         $login = $start_login->getUsuarioLogin();
         $senhas = $start_login->getSenhaLogin();
         $cod = 1;
-        
+
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
         } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -107,7 +106,7 @@ class Search {
                     $idlogin = $dados->ID_LOGIN;
                     $login = $dados->USUARIO_LOGIN;
                     $tipo = $dados->ID_TIPO_ACESSO_LOGIN;
-                    
+
                     $_SESSION['idlogin'] = $idlogin;
                     if ($senha == $senhas) {
                         $_SESSION['login'] = $login;
@@ -138,19 +137,18 @@ class Search {
         }
     }
 
-    
     public function BuscaContrato($contrato) {
-        
+
         try {
             $numero = $contrato->getNumeroContrato();
-            
-            $sql = 'SELECT * FROM CONTRATO WHERE NUMERO_CONTRATO = '.$numero.' ';
+
+            $sql = 'SELECT * FROM CONTRATO WHERE NUMERO_CONTRATO = ' . $numero . ' ';
             //$sql = 'CALL buscaContrato('.$numero.')';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
-                if ($count>0) {
-                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados){
+                if ($count > 0) {
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
                         return $dados;
                     }
                 }
@@ -158,37 +156,65 @@ class Search {
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
-        }
-        
-        
-        public function buscaIdGarantia($numeroContrato) {
+    }
+
+    public function contratosProximoVencimento() {
+        try {
+          $mes = 2;
             
-            //$numero = $contrato->getNumeroContratoGarantia();
-            try {
-                $sql = 'SELECT ID_GARANTIA FROM GARANTIA WHERE NUMERO_CONTRATO_GARANTIA = '.$numero.' ';
-                $sqll = Conexao::getInstance()->prepare($sql);
-                if ($sqll->execute()) {
-                    $count = $sqll->rowCount();
-                    if ($count>0) {
-                        foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados){
-                            return $dados->ID_GARANTIA;
-                        }
-                    }
-                }
-            } catch (Exception $exc) {
-                echo $exc->getTraceAsString();
-            }
-                }
-                
-                public function buscaIdObservacoesExigencias($numeroContrato) {
-                    try {
-                        $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
-                                . 'OBSERVACOES_EXIGENCIAS WHERE NUMERO_DESC_OBSER_EXIGEN ='.$numeroContrato.' ';
-                        $sqll = Conexao::getInstance()->prepare($sql);
+            $sql = 'SELECT * FROM CONTRATO WHERE VENCIMENTO_CONTRATO BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL "'.$mes.'" MONTH) ';
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $vencimento = $dados->VENCIMENTO_CONTRATO;
+                        $numero = $dados->NUMERO_CONTRATO;
+                        echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
                         
-                    } catch (Exception $exc) {
-                        echo $exc->getTraceAsString();
                     }
-                                }
-    
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function buscaIdGarantia($numeroContrato) {
+
+        //$numero = $contrato->getNumeroContratoGarantia();
+        try {
+            $sql = 'SELECT ID_GARANTIA FROM GARANTIA WHERE NUMERO_CONTRATO_GARANTIA = ' . $numeroContrato . ' ';
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_GARANTIA;
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function buscaIdObservacoesExigencias($numeroContrato) {
+        try {
+            $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
+                    . 'OBSERVACOES_EXIGENCIAS WHERE NUMERO_DESC_OBSER_EXIGEN =' . $numeroContrato . ' ';
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_OBSERVACOES_EXIGENCIAS;
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
 }
