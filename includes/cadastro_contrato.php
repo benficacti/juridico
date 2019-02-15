@@ -35,8 +35,8 @@
             </div>
              <div class="line-contrato">
                 <div class="form-contrato">
-                    <label class="title-option-contrato">Nº Contrato:</label>
-                    <input type="text" class="input-contrato" id="numero_contrato" placeholder="Nº Contrato">
+                    <label class="title-option-contrato">Nome Contratante: </label>
+                    <input type="text" class="input-contrato" id="nome_contratante" placeholder="Nº Contrato">
                 </div>
                 <div class="form-contrato">
                    
