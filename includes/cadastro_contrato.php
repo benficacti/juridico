@@ -27,19 +27,23 @@
                         <label for="rd-publico" class="rd-label-contrato">Público</label>
                     </label>
                     <label class="input-radio-contrato">
-                       <input type="radio" id="rd-privado" name="radio-group">
+                        <input type="radio" id="rd-privado" name="radio-group">
                         <label for="rd-privado" class="rd-label-contrato">Privado</label>
 
                     </label>
                 </div>
             </div>
-             <div class="line-contrato">
-                <div class="form-contrato">
-                    <label class="title-option-contrato">Nome Contratante: </label>
-                    <input type="text" class="input-contrato" id="nome_contratante" placeholder="Nº Contrato">
+            <div class="line-contrato">
+                <div class="form-contrato contratante">
+                    <label class="title-option-contrato">Contratante: </label>
+                    <input type="text" class="input-contrato input-auto" id="nome_contratante"  placeholder="Nome Contratante">
+                </div>
+                <div class="form-contrato contratada">
+                    <label class="title-option-contrato">Contratada: </label>
+                    <input type="text" class="input-contrato input-auto" id="nome_contratante"  placeholder="Nome Contratada">
                 </div>
                 <div class="form-contrato">
-                   
+
                 </div>
             </div>
         </article>
