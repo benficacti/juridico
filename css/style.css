@@ -101,7 +101,7 @@ body{
         width:43%;
         height: 480px;
         float:left;
-        margin-left:2px;
+        margin-left:10px;
         margin-top:1.5%;
     }
     #list{
@@ -464,10 +464,10 @@ body{
     .line-contrato{
         width:96%;
         height: 48px;        
-        border-bottom:1px solid black;
         float:left;
         margin-left:2%;
         margin-right:2%;
+        margin-top:20px;
     }
     .form-contrato{
         width:auto;
@@ -484,7 +484,7 @@ body{
         float:left;
     }
     .input-contrato{
-        width:210px;
+        width:250px;
         height: 32px;
         border-radius: 10px;
         float:left;
@@ -564,16 +564,107 @@ body{
         -webkit-transform: scale(1);
         transform: scale(1);
     }
-    
+    .num_contrato{
+        width:48%;
+    }
+    .tipo_contrato{
+        width:48%;
+    }
     .contratante{
         width:48%;
     }
     .contratada{
-         width:48%;
+        width:48%;
+    }
+    .concorrencia{
+        width:48%;
     }
     .input-auto{
         width:75%;
         float:left;
+    }
+    .input-auto-num{
+        width:75%;
+        float:left;
+    }
+    .input-auto-concorrencia{
+        width:73%;
+        float:left;
+    }
+    .input-auto-vigencia{
+        width:32%;
+    }
+    .span-space{
+        float:left;
+        line-height: 54px;
+        margin-left:10px;
+        font-family: 'Gilroy-light';
+        font-size: 1.1em;
+        letter-spacing: 1.5px;
+    }
+    .datavigencia{
+        width:49%;
+        float:left;
+    }
+    .valorcontrato{
+        width:30%;
+    }
+    .parcela{
+        width:17.5%;
+    }
+    .valorparcela{
+        width:48%;
+    }
+    .input-auto-valor{
+        width:53%;
+    }
+    .input-auto-valorparcela{
+        width:72%;
+    }
+    .parcelasfinalizadas{
+        width:30%;
+    }
+    .input-auto-parcelasfinalizadas{
+        width:38%;
+    }
+    .totalfinalizado{
+        width:36%;
+    }
+    .input-auto-totalfinalizado{
+        width:60%;
+    }
+    .vencimentocontrato{
+        width:30%;
+    }
+    .input-auto-vencimento{
+        width:58%;
+    }
+    .cadastrar{
+        width:100%;        
+    }
+    .button-cadastro-contrato{
+        width:300px;
+        height:48px;
+        margin: 0 auto;
+        line-height: 48px;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        letter-spacing: 1.2px;
+        font-size:1.5em;
+        font-family: 'Gilroy';
+        text-align: center;
+        color:#fff;
+        border:0px;
+        background-color:#0399D4;
+
+
+    }
+    .button-cadastro-contrato:hover{
+        cursor:pointer;
+        background-color:#66ccff;
+  -webkit-transition: all 0.1s ease;
+        transition: all 0.1s ease;
     }
     /*END CADASTRO CONTRATO*/
 
