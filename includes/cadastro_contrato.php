@@ -11,7 +11,7 @@
         <script src="../js/jquery.min.js"></script>
     </head>
     <body>
-        <article class="article-contrato" data-aos="zoom-in">
+        <article class="article-contrato" data-aos="zoom-in" id="result">
             <header class="header-article-contrato">
                 <label class="title-contrato">CADASTRO CONTRATO</label>
             </header>
@@ -103,6 +103,24 @@
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();
+        </script>
+         <script  type="text/javascript">
+            $("#cadastrar_contrato").click(function () {
+                document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                callApi();               
+            });
+            
+            function callApi() {
+                $.ajax({
+                    url: "../api/result2.php",
+                    method: "post",
+                    data: {request: "contratos_home"},
+                    success: function (data)
+                    {
+                        document.getElementById("result").innerHTML = data;
+                    }
+                });
+            }
         </script>
     </body>
 </html>
