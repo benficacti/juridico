@@ -19,12 +19,8 @@ class avisoContrato {
     private $idTipoAviso;
     private $idStatusAviso;
 
-    function __construct($descAviso, $dataAviso, $idContratoAviso, $idTipoAviso, $idStatusAviso) {
+    function __construct($descAviso) {
         $this->descAviso = $descAviso;
-        $this->dataAviso = $dataAviso;
-        $this->idContratoAviso = $idContratoAviso;
-        $this->idTipoAviso = $idTipoAviso;
-        $this->idStatusAviso = $idStatusAviso;
     }
 
     function getDescAviso() {

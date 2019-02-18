@@ -160,7 +160,7 @@ class Search {
 
     public function contratosProximoVencimento() {
         try {
-          $mes = 2;
+          $mes = 1;
             
             $sql = 'SELECT * FROM CONTRATO WHERE VENCIMENTO_CONTRATO BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL "'.$mes.'" MONTH) ';
             $sqll = Conexao::getInstance()->prepare($sql);
