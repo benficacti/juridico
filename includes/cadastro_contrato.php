@@ -70,10 +70,17 @@
                 </div> 
             </div>
             <div class="line-contrato">
+                <div class="form-contrato datapagparc">
+                    <label class="title-option-contrato">Data de pagamento das parcelas: </label>
+                    <input type="text" class="input-contrato input-auto-dataparc" id="valor_contrato"  placeholder="Valor Contrato" autocomplete="off">
+                </div> 
                 <div class="form-contrato parcelasfinalizadas">
                     <label class="title-option-contrato">Parcelas Finalizadas: </label>
                     <input type="text" class="input-contrato input-auto-parcelasfinalizadas" id="parcelas_finalizadas"  placeholder="Parc. Finalizadas" autocomplete="off">
                 </div> 
+            </div>
+            <div class="line-contrato">
+
                 <div class="form-contrato totalfinalizado">
                     <label class="title-option-contrato">Total Finalizado: </label>
                     <input type="text" class="input-contrato input-auto-totalfinalizado" id="parcela"  placeholder="Total finalizado" autocomplete="off" readonly="readonly">
@@ -86,7 +93,7 @@
             <div class="line-contrato">
                 <div class="form-contrato cadastrar">
                     <center>  
-                        <input type="submit" value="Cadastrar Contrato" class="button-cadastro-contrato" id="cadastrar_contrato">
+                        <input type="submit" value="PROSSEGUIR" class="button-cadastro-contrato" id="cadastrar_contrato">
                     </center>
                 </div> 
 

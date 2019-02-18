@@ -615,6 +615,12 @@ body{
     .valorparcela{
         width:48%;
     }
+    .datapagparc{
+        width:48%;
+    }
+    .input-auto-dataparc{
+        width:37%;
+    }
     .input-auto-valor{
         width:53%;
     }
@@ -622,22 +628,22 @@ body{
         width:72%;
     }
     .parcelasfinalizadas{
-        width:30%;
+        width:50%;
     }
     .input-auto-parcelasfinalizadas{
-        width:38%;
+        width:57%;
     }
     .totalfinalizado{
-        width:36%;
+        width:48%;
     }
     .input-auto-totalfinalizado{
-        width:60%;
+        width:70%;
     }
     .vencimentocontrato{
-        width:30%;
+        width:50%;
     }
     .input-auto-vencimento{
-        width:58%;
+        width:72%;
     }
     .cadastrar{
         width:100%;        
