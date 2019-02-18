@@ -91,145 +91,9 @@
                     <div class="div-contrato">Contrato</div>
                     <div class="div-data">Data</div>
                 </div>
-                <div class="table-list">
-                    <table class="tb-list">
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                        <tr data-aos="fade-left"
-                            data-aos-anchor="#example-anchor"
-                            data-aos-offset="400"
-                            data-aos-duration="400">
-                            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                            <td class="td-desc"><div class="td-desc-list">Prefeitura Barueri aaaaaaaaaaa</div></td>
-                            <td class="td-contrato">332851</td>
-                            <td class="td-data">13/02/2019</td>
-                        </tr>
-                    </table>
-
+                <div class="table-list" id="result">
+                    <!--CONTEUDO-->
+                    
                 </div>
             </div>
 
@@ -244,6 +108,22 @@
             $("#cadastrar").click(function () {
                 location.href = 'cadastro_contrato.php';
             });
+            $(document).ready(function () {
+                document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                callApi();
+            });
+
+            function callApi() {
+                $.ajax({
+                    url: "../api/result.php",
+                    method: "post",
+                    data: {request: "contratos_home"},
+                    success: function (data)
+                    {
+                        document.getElementById("result").innerHTML = data;
+                    }
+                });
+            }
         </script>
     </body>
 </html>

@@ -669,8 +669,14 @@ body{
     .button-cadastro-contrato:hover{
         cursor:pointer;
         background-color:#66ccff;
-  -webkit-transition: all 0.1s ease;
+        -webkit-transition: all 0.1s ease;
         transition: all 0.1s ease;
+    }
+    .center-img{
+        width:40px;
+        margin:0 auto;
+        height: auto;
+        margin-top:100px;
     }
     /*END CADASTRO CONTRATO*/
 
