@@ -75,7 +75,7 @@
                 <div class="line-contrato">
                     <div class="form-contrato datapagparc">
                         <label class="title-option-contrato">Data de pagamento das parcelas: </label>
-                        <input type="text" class="input-contrato input-auto-dataparc" id="valor_contrato"  placeholder="Valor Contrato" autocomplete="off">
+                        <input type="text" class="input-contrato input-auto-dataparc" id="data_pag_parcela"  placeholder="Valor Contrato" autocomplete="off">
                     </div> 
                     <div class="form-contrato parcelasfinalizadas">
                         <label class="title-option-contrato">Parcelas Finalizadas: </label>
@@ -86,11 +86,11 @@
 
                     <div class="form-contrato totalfinalizado">
                         <label class="title-option-contrato">Total Finalizado: </label>
-                        <input type="text" class="input-contrato input-auto-totalfinalizado" id="parcela"  placeholder="Total finalizado" autocomplete="off" readonly="readonly">
+                        <input type="text" class="input-contrato input-auto-totalfinalizado" id="total_finalizado"  placeholder="Total finalizado" autocomplete="off" readonly="readonly">
                     </div> 
                     <div class="form-contrato vencimentocontrato">
                         <label class="title-option-contrato">Vencimento: </label>
-                        <input type="text" class="input-contrato input-auto-vencimento" id="valor_parcela"  placeholder="00/00/0000" autocomplete="off">
+                        <input type="text" class="input-contrato input-auto-vencimento" id="vencimento"  placeholder="00/00/0000" autocomplete="off">
                     </div> 
                 </div>
                 <div class="line-contrato">
@@ -109,13 +109,41 @@
             });
 
             function callApi() {
-                var = num_contrato = $("#numero_contrato").val();
+                var num_contrato = $("#numero_contrato").val();
+                var nome_contratante = $("#nome_contratante").val();
+                var nome_contratada = $("#nome_contratada").val();
+                var nome_concorrencia = $("#nome_concorrencia").val();
+                var inicio_vigencia = $("#inicio_vigencia").val();
+                var fim_vigencia = $("#fim_vigencia").val();
+                var valor_contrato = $("#valor_contrato").val();
+                var parcela = $("#parcela").val();
+                var valor_parcela = $("#valor_parcela").val();
+                var data_pag_parcela = $("#data_pag_parcela").val();
+                var parcelas_finalizadas = $("#parcelas_finalizadas").val();
+                var total_finalizado = $("#total_finalizado").val();
+                var vencimento = $("#vencimento").val();
+
+
 
                 document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
                 $.ajax({
                     url: "../api/result.php",
                     method: "post",
-                    data: {request: "contratos_home", numero:num_contrato},
+                    data: {request: "contratos_home",
+                        numero: num_contrato,
+                        nome_contratante: nome_contratante,
+                        nome_contratada: nome_contratada,
+                        nome_contratante: nome_contratante,
+                        nome_concorrencia: nome_concorrencia,
+                        inicio_vigencia: inicio_vigencia,
+                        fim_vigencia: fim_vigencia,
+                        valor_contrato: valor_contrato,
+                        parcela: parcela,
+                        valor_parcela: valor_parcela,
+                        data_pag_parcela: data_pag_parcela,
+                        total_finalizado: total_finalizado,
+                        vencimento: vencimento,
+                    },
                     success: function (data)
                     {
                         document.getElementById("result").innerHTML = data;
