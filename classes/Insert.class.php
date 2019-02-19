@@ -111,22 +111,22 @@ class Insert {
                     . ":VALOR_DAS_PARCELAS_CONTRATO,:DATA_PAGAMENTO_DAS_PARCELAS_CONTRATO,:QUANTIDADE_PARCELAS_PAGAS_CONTRATO,"
                     . ":VALOR_TOTAL_PAGO_CONTRATO,:VENCIMENTO_CONTRATO,:ID_LOGIN_CONTRATO)";
             $insContS = Conexao::getInstance()->prepare($insCont);
-            $insContS->bindParam(":NUMERO_CONTRATO",$numeroContrato);
-             $insContS->bindParam(":ID_TIPO_CONTRATO",$idTipoContrato);
-              $insContS->bindParam(":CONTRATANTE_CONTRATO",$contratanteContrato);
-               $insContS->bindParam(":CONTRATADO_CONTRATO",$contratadoContrato);
-                $insContS->bindParam(":CONCORRENCIA_CONTRATO",$concorrenciaContrato);
-                 $insContS->bindParam(":INICIO_VIGENCIA_CONTRATO",$inicioVigenciaContrato);
-                  $insContS->bindParam(":FINAL_VIGENCIA_CONTRATO",$finalVigenciaContrato);
-                   $insContS->bindParam(":VALOR_CONTRATO",$valorContrato);
-                    $insContS->bindParam(":QUANTIDADE_PARCELAS_CONTRATO",$quantidadeParcelasContrato);
-                     $insContS->bindParam(":VALOR_DAS_PARCELAS_CONTRATO",$valorDasParcelas);
-                      $insContS->bindParam(":DATA_PAGAMENTO_DAS_PARCELAS_CONTRATO",$dataPagamentoDasParcelas);
-                       $insContS->bindParam(":QUANTIDADE_PARCELAS_PAGAS_CONTRATO",$parcelasPagas);
-                        $insContS->bindParam(":VALOR_TOTAL_PAGO_CONTRATO",$ValortotalPago);
-                         $insContS->bindParam(":VENCIMENTO_CONTRATO",$vencimentoContrato);
-                          $insContS->bindParam(":ID_LOGIN_CONTRATO",$idLogin);
-                          
+            $insContS->bindParam(":NUMERO_CONTRATO", $numeroContrato);
+            $insContS->bindParam(":ID_TIPO_CONTRATO", $idTipoContrato);
+            $insContS->bindParam(":CONTRATANTE_CONTRATO", $contratanteContrato);
+            $insContS->bindParam(":CONTRATADO_CONTRATO", $contratadoContrato);
+            $insContS->bindParam(":CONCORRENCIA_CONTRATO", $concorrenciaContrato);
+            $insContS->bindParam(":INICIO_VIGENCIA_CONTRATO", $inicioVigenciaContrato);
+            $insContS->bindParam(":FINAL_VIGENCIA_CONTRATO", $finalVigenciaContrato);
+            $insContS->bindParam(":VALOR_CONTRATO", $valorContrato);
+            $insContS->bindParam(":QUANTIDADE_PARCELAS_CONTRATO", $quantidadeParcelasContrato);
+            $insContS->bindParam(":VALOR_DAS_PARCELAS_CONTRATO", $valorDasParcelas);
+            $insContS->bindParam(":DATA_PAGAMENTO_DAS_PARCELAS_CONTRATO", $dataPagamentoDasParcelas);
+            $insContS->bindParam(":QUANTIDADE_PARCELAS_PAGAS_CONTRATO", $parcelasPagas);
+            $insContS->bindParam(":VALOR_TOTAL_PAGO_CONTRATO", $ValortotalPago);
+            $insContS->bindParam(":VENCIMENTO_CONTRATO", $vencimentoContrato);
+            $insContS->bindParam(":ID_LOGIN_CONTRATO", $idLogin);
+
 
 
             if ($insContS->execute()) {

@@ -3,13 +3,13 @@
 include '../negocio/contrato.php';
 include '../classes/Insert.class.php';
 
-$request = (null !== (filter_input(INPUT_POST, 'numero'))) ? filter_input(INPUT_POST, 'numero') : 0;
+ $request = (null !== (filter_input(INPUT_GET, 'request'))) ? filter_input(INPUT_GET, 'request') : 0;
 
+    
+if (($request == "cadastro_contrato")&&($request !== 0)) {
+    //sleep(1);
 
-if (($request == 'cadastro_contrato') && ($request != 0)) {
-    sleep(1);
-    echo $numeroContrato = (null !== (filter_input(INPUT_POST, 'numero'))) ? filter_input(INPUT_POST, 'numero') : null;
-    /*
+  
       $numeroContrato = (null !== (filter_input(INPUT_POST, 'numero'))) ? filter_input(INPUT_POST, 'numero') : null;
       $contratanteContrato = (null !== (filter_input(INPUT_POST, 'cantrante'))) ? filter_input(INPUT_POST, 'cantrante') : null;
       $contratadoContrato = (null !== (filter_input(INPUT_POST, 'contrato'))) ? filter_input(INPUT_POST, 'contrato') : null;
@@ -29,7 +29,7 @@ if (($request == 'cadastro_contrato') && ($request != 0)) {
       if ($numeroContrato !== null) {
       $contrato = new contrato($numeroContrato, $contratanteContrato, $contratadoContrato, $objetoContrato, $valorContrato, $pagamentoParcelaContrato, $pagamentoRealizadoValorContrato, $pagamentoDataContrato, $inicioVigenciaContrato, $finalVigenciaContrato, $vencimentoContrato, $idGarantiaContrato, $idTipoContrato, $idObservacoesExigenciasContrato);
       Insert::CadastraContrato($contrato);
-      } */
+      } 
 }
 
 if (($request == 'update_cadastro') && ($request != 0)) {

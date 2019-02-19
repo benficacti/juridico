@@ -125,7 +125,7 @@
 
 
 
-                document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+               // document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
                 $.ajax({
                     url: "../api/api.php",
                     method: "post",
@@ -147,7 +147,8 @@
                     },
                     success: function (data)
                     {
-                        document.getElementById("result").innerHTML = data;
+                       // document.getElementById("result").innerHTML = data;
+                       alert(data);
                     }
                 });
 
