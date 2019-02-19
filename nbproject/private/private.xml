@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/GitHub_BB/juridico/index.php</file>
-            <file>file:/C:/xampp/htdocs/GitHub_BB/juridico/css/style.css</file>
+            <file>file:/C:/xampp/htdocs/GitHubBB/juridico/includes/cadastro_contrato.php</file>
+            <file>file:/C:/xampp/htdocs/GitHubBB/juridico/apresentacao/cadastraContrato.php</file>
+            <file>file:/C:/xampp/htdocs/GitHubBB/juridico/api/api.php</file>
+            <file>file:/C:/xampp/htdocs/GitHubBB/juridico/negocio/contrato.php</file>
+            <file>file:/C:/xampp/htdocs/GitHubBB/juridico/index.php</file>
+            <file>file:/C:/xampp/htdocs/GitHubBB/juridico/classes/Insert.class.php</file>
         </group>
     </open-files>
 </project-private>

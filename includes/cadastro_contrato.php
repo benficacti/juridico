@@ -36,7 +36,7 @@
             <div class="line-contrato">
                 <div class="form-contrato contratante">
                     <label class="title-option-contrato">Contratante: </label>
-                    <input type="text" class="input-contrato input-auto" id="nome_contratante"  placeholder="Nome Contratante" autocomplete="off">
+                    <input type="text" class="input-contrato input-auto" name="nome_contratante"  placeholder="Nome Contratante" autocomplete="off">
                 </div>
                 <div class="form-contrato contratada">
                     <label class="title-option-contrato">Contratada: </label>
@@ -104,22 +104,28 @@
         <script>
             AOS.init();
         </script>
-         <script  type="text/javascript">
+        <script  type="text/javascript">
             $("#cadastrar_contrato").click(function () {
                 document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
-                callApi();               
+                callApi();
             });
-            
+
             function callApi() {
-                $.ajax({
-                    url: "../api/result2.php",
+                alert($('nome_contratante').value);
+         
+                
+                $.ajax({  
+                    url: "../api/api.php",
                     method: "post",
-                    data: {request: "contratos_home"},
+                    data: {request: "cadastro_contrato",
+                        numero: "numero_contrato"
+                    },
                     success: function (data)
                     {
                         document.getElementById("result").innerHTML = data;
                     }
                 });
+                
             }
         </script>
     </body>
