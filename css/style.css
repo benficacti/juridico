@@ -271,6 +271,30 @@ body{
         font-family: 'Gilroy-Light';
         line-height: 32px;
     }
+    
+    
+    .tb-liste{
+        width:100%;
+         text-align: center;
+    }
+
+    .tb-liste tr{
+        width:100%;
+        height:36px;
+        text-align: center;
+    }
+
+    .tb-liste td{
+        font-size: 1em;
+        font-family: 'Gilroy-Light';
+        line-height: 32px;
+         text-align: center;
+    }
+    
+    
+    
+    
+    
     .div-desc{
         width:40%;
         float:left;

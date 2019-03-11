@@ -131,6 +131,7 @@ class Insert {
 
             if ($insContS->execute()) {
                 echo'Contrato cadastrado com sucesso!';
+                
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();

@@ -37,12 +37,17 @@ private $_idObservacoesExigenciasContrato;
 
 
 
-function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, $_objetoContrato, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, $_idGarantiaContrato, $_idAditamentoContrato, $_idLoginContrato, $_idFinalizacaoContrato, $_idTipoContrato, $_idStatusGarantiaContrato, $_idObservacoesExigenciasContrato) {
+
+function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContrato,
+        $_concorrenciaContrato, $_valorContrato, $_quantidadeParcelasContrato,
+        $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato,
+        $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato,
+        $_idTipoContrato) {
+    
     $this->_numeroContrato = $_numeroContrato;
     $this->_contratanteContrato = $_contratanteContrato;
     $this->_contratadoContrato = $_contratadoContrato;
     $this->_concorrenciaContrato = $_concorrenciaContrato;
-    $this->_objetoContrato = $_objetoContrato;
     $this->_valorContrato = $_valorContrato;
     $this->_quantidadeParcelasContrato = $_quantidadeParcelasContrato;
     $this->_valorDasParcelasContrato = $_valorDasParcelasContrato;
@@ -52,13 +57,9 @@ function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContra
     $this->_inicioVigenciaContrato = $_inicioVigenciaContrato;
     $this->_finalVigenciaContrato = $_finalVigenciaContrato;
     $this->_vencimentoContrato = $_vencimentoContrato;
-    $this->_idGarantiaContrato = $_idGarantiaContrato;
-    $this->_idAditamentoContrato = $_idAditamentoContrato;
-    $this->_idLoginContrato = $_idLoginContrato;
-    $this->_idFinalizacaoContrato = $_idFinalizacaoContrato;
     $this->_idTipoContrato = $_idTipoContrato;
-    $this->_idStatusGarantiaContrato = $_idStatusGarantiaContrato;
-    $this->_idObservacoesExigenciasContrato = $_idObservacoesExigenciasContrato;
+
+
 }
 
 function get_numeroContrato() {
