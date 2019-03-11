@@ -160,9 +160,9 @@ class Search {
 
     public function contratosProximoVencimento() {
         try {
-          $mes = 1;
-            
-            $sql = 'SELECT * FROM CONTRATO WHERE VENCIMENTO_CONTRATO BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL "'.$mes.'" MONTH) ';
+            $mes = 1;
+
+            $sql = 'SELECT * FROM CONTRATO WHERE VENCIMENTO_CONTRATO BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL "' . $mes . '" MONTH) ';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
@@ -170,9 +170,41 @@ class Search {
                     foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
                         $vencimento = $dados->VENCIMENTO_CONTRATO;
                         $numero = $dados->NUMERO_CONTRATO;
-                        echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
-                        
+                        $contratante = $dados->CONTRATANTE_CONTRATO;
+                        //  echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
+
+
+                        echo '<div class="listtb"  data-aos="fade-left"
+     data-aos-anchor="#example-anchor"
+     data-aos-offset="400"
+     data-aos-duration="400">
+    
+    <table class="tb-list" id="result">
+        <tr>
+            <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
+            <td class="td-desc"><div class="td-desc-list">' . $contratante . '</div></td>
+            <td class="td-contrato">' . $numero . '</td>
+            <td class="td-data">' . $vencimento . '</td>
+        </tr>
+    </table>
+</div>
+';
                     }
+                }else{
+                    
+                      echo '<div  data-aos="fade-left"
+     data-aos-anchor="#example-anchor"
+     data-aos-offset="400"
+     data-aos-duration="400">
+    
+    <table class="tb-liste">
+        <tr>
+            <td> NENHUM CONTRATO CONTRATO COM VENCIMENTOS PARA OS PROXIMOS 30 DIAS</td>
+        </tr>
+    </table>
+</div>
+';
+                    
                 }
             }
         } catch (Exception $exc) {

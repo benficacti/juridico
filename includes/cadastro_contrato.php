@@ -26,11 +26,11 @@
                     <div class="form-contrato tipo_contrato">
                         <label class="title-option-contrato"> Tipo Contrato:</label>
                         <label class="input-radio-contrato">
-                            <input type="radio" id="rd-publico" name="radio-group" checked>
+                            <input type="radio" id="rd_publico" name="radio-group" checked>
                             <label for="rd-publico" class="rd-label-contrato">Público</label>
                         </label>
                         <label class="input-radio-contrato">
-                            <input type="radio" id="rd-privado" name="radio-group">
+                            <input type="radio" id="rd_privado" name="radio-group">
                             <label for="rd-privado" class="rd-label-contrato">Privado</label>
 
                         </label>
@@ -53,9 +53,9 @@
                     </div>     
                     <div class="form-contrato datavigencia">
                         <label class="title-option-contrato">Data Vigência: </label>
-                        <input type="text" class="input-contrato input-auto-vigencia" id="inicio_vigencia"  placeholder="00/00/0000" autocomplete="off">
+                        <input type="date" class="input-contrato input-auto-vigencia" id="inicio_vigencia"  placeholder="00/00/0000" autocomplete="off">
                         <span class="span-space">á</span>
-                        <input type="text" class="input-contrato input-auto-vigencia" id="fim_vigencia"  placeholder="00/00/0000" autocomplete="off">
+                        <input type="date" class="input-contrato input-auto-vigencia" id="fim_vigencia"  placeholder="00/00/0000" autocomplete="off">
                     </div> 
                 </div>
                 <div class="line-contrato">
@@ -75,7 +75,7 @@
                 <div class="line-contrato">
                     <div class="form-contrato datapagparc">
                         <label class="title-option-contrato">Data de pagamento das parcelas: </label>
-                        <input type="text" class="input-contrato input-auto-dataparc" id="data_pag_parcela"  placeholder="Valor Contrato" autocomplete="off">
+                        <input type="date" class="input-contrato input-auto-dataparc" id="data_pag_parcela"  placeholder="Valor Contrato" autocomplete="off">
                     </div> 
                     <div class="form-contrato parcelasfinalizadas">
                         <label class="title-option-contrato">Parcelas Finalizadas: </label>
@@ -90,7 +90,7 @@
                     </div> 
                     <div class="form-contrato vencimentocontrato">
                         <label class="title-option-contrato">Vencimento: </label>
-                        <input type="text" class="input-contrato input-auto-vencimento" id="vencimento"  placeholder="00/00/0000" autocomplete="off">
+                        <input type="date" class="input-contrato input-auto-vencimento" id="vencimento"  placeholder="00/00/0000" autocomplete="off">
                     </div> 
                 </div>
                 <div class="line-contrato">
@@ -147,8 +147,10 @@
                     },
                     success: function (data)
                     {
+                         alert(data);
+                         //window.location.href = "home.php";//
                        // document.getElementById("result").innerHTML = data;
-                       alert(data);
+                       
                     }
                 });
 
