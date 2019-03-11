@@ -678,6 +678,16 @@ body{
         height: auto;
         margin-top:200px;
     }
+    .error-input{
+        border:1px solid red;
+        -webkit-transition: all 0.1s ease;
+        transition: all 0.1s ease;
+    }
+    .success-input{
+        border:1px solid green;
+        -webkit-transition: all 0.1s ease;
+        transition: all 0.1s ease;
+    }
     /*END CADASTRO CONTRATO*/
 
 }
