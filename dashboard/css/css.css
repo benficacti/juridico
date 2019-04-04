@@ -1,0 +1,715 @@
+/* IMPORT FONT FACE */
+/* montserrat-100 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../font/montserrat-v12-latin-100.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat Thin'), local('Montserrat-Thin'),
+        url('../font/montserrat-v12-latin-100.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../font/montserrat-v12-latin-100.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../font/montserrat-v12-latin-100.woff') format('woff'), /* Modern Browsers */
+        url('../font/montserrat-v12-latin-100.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../font/montserrat-v12-latin-100.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
+/* montserrat-200 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 200;
+    src: url('../font/montserrat-v12-latin-200.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat ExtraLight'), local('Montserrat-ExtraLight'),
+        url('../font/montserrat-v12-latin-200.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../font/montserrat-v12-latin-200.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../font/montserrat-v12-latin-200.woff') format('woff'), /* Modern Browsers */
+        url('../font/montserrat-v12-latin-200.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../font/montserrat-v12-latin-200.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
+/* montserrat-300 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../font/montserrat-v12-latin-300.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat Light'), local('Montserrat-Light'),
+        url('../font/montserrat-v12-latin-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../font/montserrat-v12-latin-300.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../font/montserrat-v12-latin-300.woff') format('woff'), /* Modern Browsers */
+        url('../font/montserrat-v12-latin-300.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../font/montserrat-v12-latin-300.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
+/* montserrat-regular - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../font/montserrat-v12-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat Regular'), local('Montserrat-Regular'),
+        url('../font/montserrat-v12-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../font/montserrat-v12-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../font/montserrat-v12-latin-regular.woff') format('woff'), /* Modern Browsers */
+        url('../font/montserrat-v12-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../font/montserrat-v12-latin-regular.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
+/* montserrat-500 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../font/montserrat-v12-latin-500.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat Medium'), local('Montserrat-Medium'),
+        url('../font/montserrat-v12-latin-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../font/montserrat-v12-latin-500.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../font/montserrat-v12-latin-500.woff') format('woff'), /* Modern Browsers */
+        url('../font/montserrat-v12-latin-500.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../font/montserrat-v12-latin-500.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
+/* montserrat-600 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../font/montserrat-v12-latin-600.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'),
+        url('../font/montserrat-v12-latin-600.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../font/montserrat-v12-latin-600.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../font/montserrat-v12-latin-600.woff') format('woff'), /* Modern Browsers */
+        url('../font/montserrat-v12-latin-600.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../font/montserrat-v12-latin-600.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
+/* montserrat-700 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../font/montserrat-v12-latin-700.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat Bold'), local('Montserrat-Bold'),
+        url('../font/montserrat-v12-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../font/montserrat-v12-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../font/montserrat-v12-latin-700.woff') format('woff'), /* Modern Browsers */
+        url('../font/montserrat-v12-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../font/montserrat-v12-latin-700.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
+/* montserrat-800 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    src: url('../font/montserrat-v12-latin-800.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'),
+        url('../font/montserrat-v12-latin-800.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../font/montserrat-v12-latin-800.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../font/montserrat-v12-latin-800.woff') format('woff'), /* Modern Browsers */
+        url('../font/montserrat-v12-latin-800.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../font/montserrat-v12-latin-800.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
+/* montserrat-900 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../font/montserrat-v12-latin-900.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat Black'), local('Montserrat-Black'),
+        url('../font/montserrat-v12-latin-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('../font/montserrat-v12-latin-900.woff2') format('woff2'), /* Super Modern Browsers */
+        url('../font/montserrat-v12-latin-900.woff') format('woff'), /* Modern Browsers */
+        url('../font/montserrat-v12-latin-900.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../font/montserrat-v12-latin-900.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
+/*gilroy exta bold*/
+@font-face {
+    font-family: "Gilroy";
+    src: url('../font/gilroy-extrabold.otf');
+}
+/*gilroy light*/
+@font-face {
+    font-family: "Gilroy-Light";
+    src: url('../font/gilroy-light.otf');
+}
+/* Avant bold */
+@font-face {
+    font-family: "Avant-bold";
+    src: url('../font/avant-garde-bold.ttf');
+}
+
+/*  ESTILOS GERAIS*/
+* {
+    margin: 0;
+    /*border: 1px solid #000;*/
+    /*box-shadow: inset 0px 0px 0px 1px #000;*/
+    box-sizing: border-box;
+}
+::-webkit-scrollbar{
+    width: 0.5vw;
+    border-radius: 1em;
+    background-color: #f6f7fa;
+
+}
+::-webkit-scrollbar-thumb{
+    background-color: #0e1a35;
+    outline: 1px solid slategrey;
+    border-radius: 10px;
+}
+body{
+    font-family: 'Montserrat';
+    overflow: hidden;
+    background-color: #0e1a35;
+}
+
+/* NAV TOP*/
+.top-nav{
+    width: 100%;
+    background: rgb(86,143,228);
+    background: linear-gradient(90deg, rgba(86,143,228,1) 0%, rgba(59,200,221,1) 100%);
+    height: 8vh;
+}
+.logo-nav{
+    float: left;
+    height: 100%;
+    width: 50%;
+}
+.logo-nav img{
+    width: 20%;
+    margin-top: 0.8%;
+    margin-left: 1%;
+}
+.dados-user-nav{
+    float: right;
+    height: 100%;
+    width: 50%;
+}
+.dados-user{
+    width: 30%;
+    float: right;
+    margin-top:10px;
+}
+.dados-user .img-user img{
+    width: 18%;   
+    float: left;
+    border-radius: 50%;
+}
+.dados-user .nome-user, .dados-user .conta-user{
+    width: 69%;
+    float: left;
+}
+.icon-nav{
+    float: right;
+}
+.barra-lateral{
+    margin: 0;
+    width: 15vw;
+    /*height: 92vh;*/
+    float: left;
+}
+.barra-lateral-nav{
+    width: 100%;
+    float: left
+}
+.barra-latera-item{
+    width: 100%;
+    float: left;
+    padding: 7% 5%;
+    text-align: center;
+    color: #aaa;
+    text-decoration: none;
+    cursor: pointer;
+}
+.barra-latera-item:hover{
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;    
+}
+/* CONTEUDO PAG*/
+.box-conteudo{
+    float: left;
+    background-color: #fff;
+    width: 85vw;
+    height: 92vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.box-visitas-antecipadas{
+    width: 90%;
+    margin: 1% auto;
+    height: 30vmax;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+/*TABELA HOME*/
+#list{
+    width:55vw;
+    height: 80vh;
+    border-radius: 10px;
+    background-color:white;
+    float:left;
+    margin-top:2%;
+    margin-left:1%;
+    -webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+}
+.container-list{
+    width:90%;
+    height: 100px;;
+    margin: 0 auto;
+
+}
+.title-list{
+    width:100%;
+    height:54px;
+    border-top-radius-left:10px;
+    border-top-radius-right:10px;
+    border-bottom:1px solid #333;
+    text-align: center;
+    float:left;
+}
+.title-list-tb{
+    width:100%;
+    height:24px;
+    text-align: center;
+    float:left;
+    margin-top:8px;
+    border-bottom:1px solid #333;
+}
+.table-list{
+    width:100%;
+    height:65vh;    
+    float:left;
+    overflow-x: hidden;
+    overflow-y:scroll;
+}
+.table-list::-webkit-scrollbar{
+    width: 15px;
+    border-radius: 1em;
+
+}
+.table-list::-webkit-scrollbar-thumb{
+    background-color: #555;
+    outline: 1px solid slategrey;
+    border-radius: 10px;
+}
+.div-desc{
+    width:40%;
+    float:left;
+    text-align: center;
+    font-size: 1em;
+    font-family: 'Gilroy';
+}
+.div-contrato{
+    width:20%;
+    float:left;
+    text-align: center;
+    font-size: 1em;
+    font-family: 'Gilroy';
+}
+.div-data{
+    width:40%;
+    float:left;
+    font-size: 1em;
+    font-family: 'Gilroy';
+
+}
+/*FINAL TABELA HOME*/
+
+/*CADASTRO CONTRATO*/
+.article-contrato{
+    width:80vw;
+    height: 80vh;
+    border-radius: 10px;
+    background-color: rgb(255,255,255,0.9);
+    float:left;
+    margin-top:2%;
+    margin-left:1%;
+    margin-right:1%;
+    -webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+}
+.header-article-contrato{
+    width:96%;
+    height: 48px;        
+    border-bottom:1px solid black;
+    float:left;
+    margin-left:2%;
+    margin-right:2%;
+}
+.title-contrato{
+    width:100%;
+    float:left;
+    text-align: center;
+    line-height: 48px;
+    letter-spacing: 1.2px;
+    font-size:1em;
+    font-family: 'Gilroy-Light';
+}
+.line-contrato{
+    width:96%;
+    min-height: 2vh;        
+    height:auto;
+    float:left;
+    margin-left:2%;
+    margin-right:2%;
+    margin-top:20px;
+}
+.form-contrato{
+    width:auto;
+    height: 6vh;        
+    float:left;
+    margin-left:10px;
+
+}
+.title-option-contrato{
+    line-height: 48px;
+    letter-spacing: 1.2px;
+    font-size:1em;
+    font-family: 'Gilroy-Light';
+    float:left;
+}
+.input-contrato{
+    width:250px;
+    height: 32px;
+    border-radius: 10px;
+    float:left;
+    margin-top:8px;
+    border:0px;
+    margin-left:10px;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    letter-spacing: 1.2px;
+    font-size:1em;
+    font-family: 'Gilroy-Light';
+    text-align: center;
+}
+
+.input-radio-contrato {
+    margin-left:15px;
+    float:left;
+    letter-spacing: 1.2px;
+    font-size:1.5em;
+    font-family: 'Gilroy-Light';
+    line-height: 48px;
+}
+.rd-label-contrato{
+    padding-left:5px;
+    margin-top:10px;
+}
+
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 30px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -5;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 19px;
+    height: 19px;
+    background: #0399D4;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.garantia{
+    float:left;
+    width:100%;
+    height:48vh;
+}
+.objeto{
+    float:left;
+    width:100%;
+    height:48vh;
+}
+.obs{
+    float:left;
+    width:100%;
+    height:48vh;
+}
+#garantia{
+    text-align: left;
+    min-height:45vh;
+    height:45vh;
+    max-height:45vh;
+    min-width: 75%;
+    width: 75%;
+    max-width: 75%;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-right: 15px;
+    font-family: 'Gilroy-Light';
+    font-size: 1em;
+    letter-spacing: 1.5px;
+}
+#objeto{
+    text-align: left;
+    min-height:45vh;
+    height:45vh;
+    max-height:45vh;
+    min-width: 75%;
+    width: 75%;
+    max-width: 75%;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-right: 15px;
+    font-family: 'Gilroy-Light';
+    font-size: 1em;
+    letter-spacing: 1.5px;
+}
+#obs{
+    text-align: left;
+    min-height:45vh;
+    height:45vh;
+    max-height:45vh;
+    min-width: 66vw;
+    width: 66vw;
+    max-width: 66vw;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-right: 15px;
+    font-family: 'Gilroy-Light';
+    font-size: 1em;
+    letter-spacing: 1.5px;
+}
+.num_contrato{
+    width:48%;
+}
+.tipo_contrato{
+    width:48%;
+}
+.contratante{
+    width:48%;
+}
+.contratada{
+    width:48%;
+}
+.concorrencia{
+    width:48%;
+}
+.input-auto{
+    width:75%;
+    float:left;
+}
+.input-auto-num{
+    width:75%;
+    float:left;
+}
+.input-auto-concorrencia{
+    width:73%;
+    float:left;
+}
+.input-auto-vigencia{
+    width:32%;
+}
+.span-space{
+    float:left;
+    line-height: 54px;
+    margin-left:10px;
+    font-family: 'Gilroy-light';
+    font-size: 1.1em;
+    letter-spacing: 1.5px;
+}
+.datavigencia{
+    width:49%;
+    float:left;
+}
+.valorcontrato{
+    width:30%;
+}
+.parcela{
+    width:17.5%;
+}
+.valorparcela{
+    width:48%;
+}
+.datapagparc{
+    width:48%;
+}
+.input-auto-dataparc{
+    width:37%;
+}
+.input-auto-valor{
+    width:53%;
+}
+.input-auto-valorparcela{
+    width:72%;
+}
+.parcelasfinalizadas{
+    width:50%;
+}
+.input-auto-parcelasfinalizadas{
+    width:57%;
+}
+.totalfinalizado{
+    width:48%;
+}
+.input-auto-totalfinalizado{
+    width:70%;
+}
+.vencimentocontrato{
+    width:50%;
+}
+.input-auto-vencimento{
+    width:72%;
+}
+.cadastrar{
+    width:100%;        
+}
+.button-cadastro-contrato{
+    width:20vw;
+    height:8vh;
+    margin: 0 auto;
+    line-height: 6vh;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    letter-spacing: 1.2px;
+    font-size:1.5em;
+    font-family: 'Gilroy';
+    text-align: center;
+    color:#fff;
+    border:0px;
+    background-color:#0399D4;
+
+
+}
+.button-cadastro-contrato:hover{
+    cursor:pointer;
+    background-color:#66ccff;
+    -webkit-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+.center-img{
+    width:40px;
+    margin:0 auto;
+    height: auto;
+    margin-top:200px;
+}
+.error-input{
+    border:1px solid red;
+    -webkit-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+.success-input{
+    border:1px solid green;
+    -webkit-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+/*END CADASTRO CONTRATO*/
+/*MEUS CONTRATOS*/
+#list-contract{
+    width:80vw;
+    height: 80vh;
+    border-radius: 10px;
+    background-color:white;
+    float:left;
+    margin-top:2%;
+    margin-left:1%;
+    -webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+}
+.div-desc-contract{
+    width:20vw;
+    float:left;
+    text-align: center;
+    font-family: 'Gilroy';
+}
+.div-contrato-contract{
+    width:20vw;
+    float:left;
+    text-align: center;
+    font-family: 'Gilroy';
+}
+.div-data-contract{
+    width:15vw;
+    float:left;
+    font-family: 'Gilroy';
+
+}
+.div-tipo-contract{
+    width:15vw;
+    float:left;
+    font-size: 1em;
+    font-family: 'Gilroy';
+}
+#vencimento_contrato{
+    font-size: 1em;
+    font-family: 'Gilroy';
+    border:0px;
+}
+#tipo_contrato{
+    font-size: 1em;
+    font-family: 'Gilroy';
+    border:0px;
+}
+.td-icon-contract{
+    width:5%;
+    text-align: center;
+}
+.td-desc-contract{
+    width:20vw;
+    float:left;        
+    margin-left:10px;
+    display:inline-block;
+}
+.td-desc-list-contract{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 18vw;
+    display: block;
+    overflow: hidden;    
+}
+.td-contrato-contract{
+    width:15vw;
+    text-align: center;
+}
+.td-tipo-contract{
+    width:28vw;
+    text-align: center;
+}
+.td-data-contract{
+    width:17vw;
+}
+
+.img-icon-list{
+    width:20px;
+    height:20px;
+}
+.tb-list tr{
+    border-top: 1px dashed black;
+}
