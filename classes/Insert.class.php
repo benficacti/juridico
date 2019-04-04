@@ -1,7 +1,6 @@
 <?php
 
 include '../persistencia/Conexao.php';
-include 'Search.class.php';
 //include 'negocio/aditamentos.php';
 
 
@@ -99,7 +98,7 @@ class Insert {
             $vencimentoContrato;
             $idLogin;
 
-            
+
             $insCont = "INSERT INTO `CONTRATO`(`NUMERO_CONTRATO`,`ID_TIPO_CONTRATO`,`CONTRATANTE_CONTRATO`,"
                     . "`CONTRATADO_CONTRATO`,`CONCORRENCIA_CONTRATO`,`INICIO_VIGENCIA_CONTRATO`,`FINAL_VIGENCIA_CONTRATO`,"
                     . "`VALOR_CONTRATO`,`QUANTIDADE_PARCELAS_CONTRATO`,`VALOR_DAS_PARCELAS_CONTRATO`,"
@@ -130,8 +129,8 @@ class Insert {
 
 
             if ($insContS->execute()) {
-                echo'Contrato cadastrado com sucesso!';
-                
+                $id = Search::BuscaContrato($numeroContrato);
+                echo '00;' . $id;
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -140,4 +139,60 @@ class Insert {
         }
     }
 
+    public function CadastraGarantia($garantia) {
+
+        try {
+            $idContratoGarantia = $garantia->getIdContratoGarantia();
+            $descGarantia = $garantia->getDescGarantia();
+
+
+            $ins = "INSERT INTO `garantia`(`DESC_GARANTIA`, `ID_CONTRATO_GARANTIA`) "
+                    . "VALUES (:DESC_GARANTIA, :ID_CONTRATO_GARANTIA)";
+            $i_ins = Conexao::getInstance()->prepare($ins);
+            $i_ins->bindParam(":DESC_GARANTIA", $descGarantia);
+            $i_ins->bindParam(":ID_CONTRATO_GARANTIA", $idContratoGarantia);
+            if ($i_ins->execute()) {
+                return Search::BuscaGarantia($idContratoGarantia);
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao cadastrar aditamento';
+        }
+    }
+
+    public function CadastraObjeto($objeto) {
+        try {
+            $idContratoObejto = $objeto->getIdContratoObejto();
+            $descObejto = $objeto->getDescObjeto();
+            $ins = "INSERT INTO `objeto`(`DESC_OBJETO`, `ID_CONTRATO_OBJETO`) "
+                    . "VALUES (:DESC_OBJETO, :ID_CONTRATO_OBJETO)";
+            $i_ins = Conexao::getInstance()->prepare($ins);
+            $i_ins->bindParam(":DESC_OBJETO", $descObejto);
+            $i_ins->bindParam(":ID_CONTRATO_OBJETO", $idContratoObejto);
+            if ($i_ins->execute()) {
+                return Search::BuscaObjeto($idContratoObejto);
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao cadastrar aditamento';
+        }
+    }
+
+    public function CadastraObs($obs) {
+        try {
+            $idContratoObs = $obs->getIdContratoObs();
+            $descObs = $obs->getDescObs();
+            $ins = "INSERT INTO `observacoes_exigencias`( `DESC_OBSER_EXIGEN`, `ID_CONTRATO_OBSERVACOES`)  "
+                    . "VALUES (:DESC_OBSER_EXIGEN, :ID_CONTRATO_OBSERVACOES)";
+            $i_ins = Conexao::getInstance()->prepare($ins);
+            $i_ins->bindParam(":DESC_OBSER_EXIGEN", $descObs);
+            $i_ins->bindParam(":ID_CONTRATO_OBSERVACOES", $idContratoObs);
+            if ($i_ins->execute()) {
+                return Search::BuscaObs($idContratoObs);
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao cadastrar aditamento';
+        }
+    }
 }

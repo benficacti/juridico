@@ -271,11 +271,11 @@ body{
         font-family: 'Gilroy-Light';
         line-height: 32px;
     }
-    
-    
+
+
     .tb-liste{
         width:100%;
-         text-align: center;
+        text-align: center;
     }
 
     .tb-liste tr{
@@ -288,13 +288,13 @@ body{
         font-size: 1em;
         font-family: 'Gilroy-Light';
         line-height: 32px;
-         text-align: center;
+        text-align: center;
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     .div-desc{
         width:40%;
         float:left;
@@ -487,7 +487,8 @@ body{
     }
     .line-contrato{
         width:96%;
-        height: 48px;        
+        min-height: 48px;        
+        height:auto;
         float:left;
         margin-left:2%;
         margin-right:2%;
@@ -587,6 +588,66 @@ body{
         opacity: 1;
         -webkit-transform: scale(1);
         transform: scale(1);
+    }
+    .garantia{
+        float:left;
+        width:100%;
+        height:350px;
+    }
+    .objeto{
+        float:left;
+        width:100%;
+        height:350px;
+    }
+    .obs{
+        float:left;
+        width:100%;
+        height:350px;
+    }
+    #garantia{
+        text-align: left;
+        min-height:320px;
+        height:320px;
+        max-height:320px;
+        min-width: 75%;
+        width: 75%;
+        max-width: 75%;
+        padding-left: 15px;
+        padding-top: 5px;
+        padding-right: 15px;
+        font-family: 'Gilroy-Light';
+        font-size: 1.2em;
+        letter-spacing: 1.5px;
+    }
+    #objeto{
+        text-align: left;
+        min-height:320px;
+        height:320px;
+        max-height:320px;
+        min-width: 75%;
+        width: 75%;
+        max-width: 75%;
+        padding-left: 15px;
+        padding-top: 5px;
+        padding-right: 15px;
+        font-family: 'Gilroy-Light';
+        font-size: 1.2em;
+        letter-spacing: 1.5px;
+    }
+    #obs{
+        text-align: left;
+        min-height:320px;
+        height:320px;
+        max-height:320px;
+        min-width: 80%;
+        width: 80%;
+        max-width: 80%;
+        padding-left: 15px;
+        padding-top: 5px;
+        padding-right: 15px;
+        font-family: 'Gilroy-Light';
+        font-size: 1.2em;
+        letter-spacing: 1.5px;
     }
     .num_contrato{
         width:48%;

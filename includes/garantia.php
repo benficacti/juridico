@@ -15,113 +15,79 @@
     <body>
         <article class="article-contrato" data-aos="zoom-in" id="result">
             <header class="header-article-contrato">
-                <label class="title-contrato">CADASTRO CONTRATO</label>
+                <label class="title-contrato">ADICIONAR GARANTIA</label>
             </header>
             <form action="" method="post" onsubmit="return false;">
+                <input type="hidden" id="idcontrato" value="<?php echo $_GET['idcontrato'] ?>">
+                <input type="hidden" id="status">
                 <div class="line-contrato">
-                    <div class="form-contrato num_contrato">
-                        <label class="title-option-contrato">Nº Contrato:</label>
-                        <input type="text" class="input-contrato input-auto-num error-input" id="numero_contrato" placeholder="Nº Contrato" autocomplete="off">
-                    </div>
                     <div class="form-contrato tipo_contrato">
-                        <label class="title-option-contrato"> Tipo Contrato:</label>
+                        <label class="title-option-contrato"> Possui garantia? </label>
                         <label class="input-radio-contrato">
-                            <input type="radio" id="rd-publico" name="radio-group" checked>
-                            <label for="rd-publico" class="rd-label-contrato">Público</label>
+                            <input type="radio" id="rd-sim" name="radio-group">
+                            <label for="rd-sim" class="rd-label-contrato">Sim</label>
                         </label>
                         <label class="input-radio-contrato">
-                            <input type="radio" id="rd-privado" name="radio-group">
-                            <label for="rd-privado" class="rd-label-contrato">Privado</label>
+                            <input type="radio" id="rd-nao" name="radio-group">
+                            <label for="rd-nao" class="rd-label-contrato">Não</label>
 
                         </label>
                     </div>
                 </div>
-                <div class="line-contrato">
-                    <div class="form-contrato contratante">
-                        <label class="title-option-contrato">Contratante: </label>
-                        <input type="text" class="input-contrato input-auto success-input" id="nome_contratante"  placeholder="Nome Contratante" autocomplete="off">
-                    </div>
-                    <div class="form-contrato contratada">
-                        <label class="title-option-contrato">Contratada: </label>
-                        <input type="text" class="input-contrato input-auto" id="nome_contratada"  placeholder="Nome Contratada" autocomplete="off">
-                    </div>
-                </div>
-                <div class="line-contrato">
-                    <div class="form-contrato concorrencia">
-                        <label class="title-option-contrato">Concorrência: </label>
-                        <input type="text" class="input-contrato input-auto-concorrencia" id="nome_concorrencia"  placeholder="Nome Concorrência" autocomplete="off">
-                    </div>     
-                    <div class="form-contrato datavigencia">
-                        <label class="title-option-contrato">Data Vigência: </label>
-                        <input type="text" class="input-contrato input-auto-vigencia" id="inicio_vigencia"  placeholder="00/00/0000" autocomplete="off">
-                        <span class="span-space">á</span>
-                        <input type="text" class="input-contrato input-auto-vigencia" id="fim_vigencia"  placeholder="00/00/0000" autocomplete="off">
-                    </div> 
-                </div>
-                <div class="line-contrato">
-                    <div class="form-contrato valorcontrato">
-                        <label class="title-option-contrato">Valor Contrato: </label>
-                        <input type="text" class="input-contrato input-auto-valor" id="valor_contrato"  placeholder="Valor Contrato" autocomplete="off">
-                    </div> 
-                    <div class="form-contrato parcela">
-                        <label class="title-option-contrato">Parcelas </label>
-                        <input type="text" class="input-contrato input-auto-valor" id="parcela"  placeholder="Parcelas" autocomplete="off">
-                    </div> 
-                    <div class="form-contrato valorparcela">
-                        <label class="title-option-contrato">Valor Parcela: </label>
-                        <input type="text" class="input-contrato input-auto-valorparcela" id="valor_parcela"  placeholder="Valor Parcela" autocomplete="off" readonly="readonly">
-                    </div> 
-                </div>
-                <div class="line-contrato">
-                    <div class="form-contrato datapagparc">
-                        <label class="title-option-contrato">Data de pagamento das parcelas: </label>
-                        <input type="text" class="input-contrato input-auto-dataparc" id="data_pag_parcela"  placeholder="Valor Contrato" autocomplete="off">
-                    </div> 
-                    <div class="form-contrato parcelasfinalizadas">
-                        <label class="title-option-contrato">Parcelas Finalizadas: </label>
-                        <input type="text" class="input-contrato input-auto-parcelasfinalizadas" id="parcelas_finalizadas"  placeholder="Parc. Finalizadas" autocomplete="off">
-                    </div> 
-                </div>
-                <div class="line-contrato">
-
-                    <div class="form-contrato totalfinalizado">
-                        <label class="title-option-contrato">Total Finalizado: </label>
-                        <input type="text" class="input-contrato input-auto-totalfinalizado" id="total_finalizado"  placeholder="Total finalizado" autocomplete="off" readonly="readonly">
-                    </div> 
-                    <div class="form-contrato vencimentocontrato">
-                        <label class="title-option-contrato">Vencimento: </label>
-                        <input type="text" class="input-contrato input-auto-vencimento" id="vencimento"  placeholder="00/00/0000" autocomplete="off">
-                    </div> 
-                </div>
-                <div class="line-contrato">
-                    <div class="form-contrato cadastrar">
-                        <center>  
-                            <input type="button" value="PROSSEGUIR" class="button-cadastro-contrato" id="cadastrar_contrato">
-                        </center>
-                    </div> 
-
-                </div>
+                <div id="div-garantia"></div>
+                <div id="div-btn"></div>
             </form>
         </article>
         <script  type="text/javascript">
-            $("#cadastrar_contrato").click(function () {
-                callApi();
+            $('#rd-sim').click(function () {
+                if ($('#rd-sim').is(':checked')) {
+                    document.getElementById('status').value = '1';
+                    document.getElementById('div-garantia').innerHTML = '<div class="line-contrato" data-aos="fade-left"' +
+                            'data-aos-offset="200"' +
+                            'data-aos-duration="200"' +
+                            'id="div-garantia">' +
+                            '<div class="form-contrato garantia">' +
+                            '<label class="title-option-contrato">Observação de garantia:</label>' +
+                            '<textarea maxlength="1400" type="text" class="input-contrato input-auto-num" id="garantia" placeholder="Descrição da garantia" autocomplete="off"></textarea>' +
+                            '</div>' +
+                            '</div>';
+                    document.getElementById('div-btn').innerHTML = '<div class="line-contrato">' +
+                            '<div class="form-contrato cadastrar">' +
+                            '<input type="button" value="PROSSEGUIR" class="button-cadastro-contrato" style="float:right; margin-right:30px;" id="adicionar_garantia">' +
+                            '</div>' +
+                            '</div>';
+                    $("#adicionar_garantia").click(function () {
+
+                        callApi();
+                    });
+                }
             });
 
+            $('#rd-nao').click(function () {
+                if ($('#rd-nao').is(':checked')) {
+                    document.getElementById('status').value = '2';
+                    document.getElementById('div-garantia').innerHTML = '';
+                    document.getElementById('div-btn').innerHTML = '<div class="line-contrato" data-aos="fade-left" data-aos-offset="100" data-aos-duration="500">' +
+                            '<div class="form-contrato cadastrar">' +
+                            '<input type="button" value="PROSSEGUIR" class="button-cadastro-contrato" id="adicionar_garantia">' +
+                            '</div>' +
+                            '</div>';
+                    $("#adicionar_garantia").click(function () {
+                        alert("teste");
+                        callApi();
+                    });
+                }
+            });
+
+
+
             function callApi() {
-                var num_contrato = $("#numero_contrato").val();
-                var nome_contratante = $("#nome_contratante").val();
-                var nome_contratada = $("#nome_contratada").val();
-                var nome_concorrencia = $("#nome_concorrencia").val();
-                var inicio_vigencia = $("#inicio_vigencia").val();
-                var fim_vigencia = $("#fim_vigencia").val();
-                var valor_contrato = $("#valor_contrato").val();
-                var parcela = $("#parcela").val();
-                var valor_parcela = $("#valor_parcela").val();
-                var data_pag_parcela = $("#data_pag_parcela").val();
-                var parcelas_finalizadas = $("#parcelas_finalizadas").val();
-                var total_finalizado = $("#total_finalizado").val();
-                var vencimento = $("#vencimento").val();
+                var idcontrato = $("#idcontrato").val();
+                var status_garantia = $("#status").val();
+                var garantia = '';
+                if (status_garantia === '1') {
+                    garantia = $("#garantia").val();
+                }
 
 
 
@@ -129,25 +95,20 @@
                 $.ajax({
                     url: "../api/api.php",
                     method: "post",
-                    data: {request: "cadastro_contrato",
-                        numero: num_contrato,
-                        nome_contratante: nome_contratante,
-                        nome_contratada: nome_contratada,
-                        nome_contratante: nome_contratante,
-                        nome_concorrencia: nome_concorrencia,
-                        inicio_vigencia: inicio_vigencia,
-                        fim_vigencia: fim_vigencia,
-                        valor_contrato: valor_contrato,
-                        parcela: parcela,
-                        valor_parcela: valor_parcela,
-                        data_pag_parcela: data_pag_parcela,
-                        total_finalizado: total_finalizado,
-                        vencimento: vencimento,
-                        parcelas_finalizadas: parcelas_finalizadas
+                    data: {request: "adicionar_garantia",
+                        status_garantia: status_garantia,
+                        garantia: garantia,
+                        idcontrato: idcontrato
                     },
                     success: function (data)
                     {
-                        document.getElementById("result").innerHTML = data;
+                        alert(data);
+                        var res = data.split(";");
+                        if (typeof res[0] !== "undefined" && res[0] == "00") {
+                            location.href = "objeto.php?idcontrato=" + res[1];
+                        } else {
+                            alert("erro de comunicação com servidor!")
+                        }
                     }
                 });
 

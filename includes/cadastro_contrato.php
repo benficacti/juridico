@@ -7,10 +7,11 @@
         <link rel="icon" href="favicon.png">
         <title></title>
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-        <script src="../js/jquery.min.js"></script>
-        <script type="text/javascript">
 
-        </script>
+        <script src="../js/jquery.min.js" type="text/javascript"></script>
+
+        <script src="../js/jquery.maskMoney.js"></script>
+
     </head>
     <body>
         <article class="article-contrato" data-aos="zoom-in" id="result">
@@ -103,11 +104,15 @@
                 </div>
             </form>
         </article>
-        <script  type="text/javascript">
-            $("#cadastrar_contrato").click(function () {
-                callApi();
-            });
 
+        <script  type="text/javascript">
+
+            $(function () {
+                $('#valor_contrato').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+                $('#valor_parcela').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+                $('#valor_parcela').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+                $('#valor_parcela').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+            })
             function callApi() {
                 var num_contrato = $("#numero_contrato").val();
                 var nome_contratante = $("#nome_contratante").val();
@@ -122,10 +127,7 @@
                 var parcelas_finalizadas = $("#parcelas_finalizadas").val();
                 var total_finalizado = $("#total_finalizado").val();
                 var vencimento = $("#vencimento").val();
-
-
-
-               // document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
                 $.ajax({
                     url: "../api/api.php",
                     method: "post",
@@ -147,14 +149,19 @@
                     },
                     success: function (data)
                     {
-                         alert(data);
-                         //window.location.href = "home.php";//
-                       // document.getElementById("result").innerHTML = data;
-                       
+                        alert(data);
+                        var res = data.split(";");
+                        if (typeof res[0] !== "undefined" && res[0] == "00") {
+                            location.href = "garantia.php?idcontrato=" + res[1];
+                        } else {
+                            alert("erro de comunicação com servidor!")
+                        }
+                        //window.location.href = "home.php";//
+                        // document.getElementById("result").innerHTML = data;
                     }
                 });
-
             }
+
         </script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
@@ -162,4 +169,5 @@
         </script>
 
     </body>
+
 </html>

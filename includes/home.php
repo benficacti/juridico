@@ -12,7 +12,7 @@
     </head>
     <body>
         <nav id="option-left">
-            <div class="menu-home" id="pesquisar" style="margin-top:1%;" data-aos="fade-left"
+            <div class="menu-home" style="display:none;" id="pesquisar" style="margin-top:1%;" data-aos="fade-left"
                  data-aos-anchor="#example-anchor"
                  data-aos-offset="500"
                  data-aos-duration="500">
@@ -39,7 +39,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="menu-home" id="aditar" data-aos="fade-left"
+            <div class="menu-home" style="display:none;" id="aditar" data-aos="fade-left"
                  data-aos-anchor="#example-anchor"
                  data-aos-offset="500"
                  data-aos-duration="500">
@@ -52,7 +52,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="menu-home" id="alterar" data-aos="fade-right"
+            <div class="menu-home" id="alterar" style="display:none;" data-aos="fade-right"
                  data-aos-anchor="#example-anchor"
                  data-aos-offset="500"
                  data-aos-duration="500">
@@ -65,7 +65,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="menu-home" id="relatorio" data-aos="fade-left"
+            <div class="menu-home" id="relatorio" style="display:none;" data-aos="fade-left"
                  data-aos-anchor="#example-anchor"
                  data-aos-offset="500"
                  data-aos-duration="500">

@@ -137,19 +137,18 @@ class Search {
         }
     }
 
-    public function BuscaContrato($contrato) {
+    public function BuscaContrato($numero) {
 
         try {
-            $numero = $contrato->getNumeroContrato();
 
-            $sql = 'SELECT * FROM CONTRATO WHERE NUMERO_CONTRATO = ' . $numero . ' ';
+            $sql = 'SELECT * FROM CONTRATO WHERE NUMERO_CONTRATO = ' . $numero;
             //$sql = 'CALL buscaContrato('.$numero.')';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
                 if ($count > 0) {
                     foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
-                        return $dados;
+                        return $dados->ID_CONTRATO;
                     }
                 }
             }
@@ -190,9 +189,9 @@ class Search {
 </div>
 ';
                     }
-                }else{
-                    
-                      echo '<div  data-aos="fade-left"
+                } else {
+
+                    echo '<div  data-aos="fade-left"
      data-aos-anchor="#example-anchor"
      data-aos-offset="400"
      data-aos-duration="400">
@@ -204,7 +203,6 @@ class Search {
     </table>
 </div>
 ';
-                    
                 }
             }
         } catch (Exception $exc) {
@@ -249,4 +247,57 @@ class Search {
         }
     }
 
+    public function BuscaGarantia($idcontrato) {
+        try {
+            $sql = 'SELECT ID_GARANTIA FROM '
+                    . 'GARANTIA WHERE ID_CONTRATO_GARANTIA =' . $idcontrato;
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_GARANTIA;
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function BuscaObjeto($idcontrato) {
+        try {
+            $sql = 'SELECT ID_OBJETO FROM '
+                    . 'OBJETO WHERE ID_CONTRATO_OBJETO =' . $idcontrato;
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_OBJETO;
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function BuscaObs($idcontrato) {
+        try {
+            $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
+                    . 'observacoes_exigencias WHERE ID_CONTRATO_OBSERVACOES =' . $idcontrato;
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_OBSERVACOES_EXIGENCIAS;
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
 }
