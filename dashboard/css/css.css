@@ -155,6 +155,149 @@ body{
     overflow: hidden;
     background-color: #0e1a35;
 }
+/*HOME LOGIN*/
+
+#container{
+    width: 100vw;
+    height:100vh;
+    float:left;
+}
+#article-left{
+    width: 50vw;
+    height:100vh;
+    float:left;
+    background-color:blue;
+    background: #f5e9da url(../img/back_login.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#article-right{
+    width: 50vw;
+    height:100vh;
+    float:left;
+    background-color:white;
+}
+.container-login{
+    width:35vw;
+    height:100vh;   
+    margin:0 auto;
+}
+.login{
+    width:35vw;
+    height:60vh;   
+    margin-top:20vh;
+}
+.header-login{
+    width:35vw;
+    height:10vh;   
+    float:left;
+}
+.title-header-login{
+    width:35vw;
+    text-align:center;
+}
+.title-form-login{
+    width:35vw;
+    text-align:center;
+}
+.article-login{
+    width:35vw;
+    height:50vh;   
+    float:left;
+}
+.line-login{
+    width:35vw;
+    height:12vh;   
+    float:left;
+    margin-top:2vh;
+}
+.title-login{
+    width:35vw;
+    height:5vh;   
+    float:left;
+    letter-spacing: 1.2px;
+    font-size:1.2em;
+    font-family: 'Gilroy';
+}
+.title-senha{
+    width:17vw;
+    height:5vh;   
+    float:left;
+    letter-spacing: 1.2px;
+    font-size:1.2em;
+    font-family: 'Gilroy';
+}
+.title-senha-right{
+    width:17vw;
+    height:5vh;   
+    float:right;
+    text-align:right;
+    font-family: 'Gilroy-Light';
+    flex-direction: column;
+    justify-content: center;
+    letter-spacing: 1.2px;
+    font-size:1em;
+}
+.title-senha-right:hover{
+    text-decoration: underline;
+    cursor:pointer;
+    opacity: 0.9;
+}
+.input-group-login{
+    width:35vw;
+    height:6vh;   
+    float:left;
+    border:1px solid  #ccc;
+    border-radius:10px;
+}
+.input-group-login-active{
+    transition-duration: 1s;
+    transform-style: linear;    
+    border:1px solid #555;
+}
+.input-group-login-error{
+    transition-duration: 1s;
+    transform-style: linear;    
+    border:1px solid red;
+}
+.input-login{
+    width:33vw;
+    height:5vh;   
+    float:left;
+    margin-left:1vh;
+    padding-left: 10px;
+    padding-top:1vh;
+    letter-spacing: 1.2px;
+    font-size:1em;
+    outline: none;
+    border:0px;
+    font-family: 'Gilroy-Light';
+    flex-direction: column;
+    justify-content: center
+}
+.btn-login{
+    width:20vw;
+
+    height:6vh;   
+    margin:0 auto;
+}
+.bt-login{
+    width:20vw;
+    height:6vh;  
+    border:0px;
+    background-color:#0399D4;
+    color:white;
+    font-family: 'Gilroy-Light';
+    letter-spacing: 1.2px;
+    font-size:1em;
+}
+.bt-login:hover{
+    cursor: pointer;
+    background-color:#555;
+    transition-duration: 0.5s;
+    transform-style: linear;    
+}
+/*END LOGIN*/
 
 /* NAV TOP*/
 .top-nav{
