@@ -16,6 +16,7 @@ session_start();
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.maskMoney.js"></script>
+          <script src="js/masked.js"></script>
     </head>
     <body>
         <!-- Conteúdo -->
@@ -50,33 +51,35 @@ session_start();
                 <div class="line-contract">
                     <div class="form-contract">
                         <label class="title-option-contract">Nº CONTRATO:</label>
-                        <div class="input-group-contract"  id="input-group-contract-contrato">
+                        <div class="input-group-contract input-group-login-active"  id="input-group-contract-numero">
                             <input type="text" class="input-contract" id="numero_contrato" placeholder="Nº Contrato" autocomplete="off" >     
                         </div>
                     </div>
                     <div class="form-contract">
+                        <input type="hidden" id="tipo_contrato">
                         <label class="title-option-contract"> TIPO CONTRATO:</label>
-                        <label class="input-radio-contract">
-                            <input type="radio" id="rd_publico" name="radio-group" value="1">
+                        <label class="input-radio-contract" id="input-group-contract-tipocontrato">
+                            <input type="radio" id="rd-publico" name="radio-group">
                             <label for="rd-publico" class="rd-label-contract">Público</label>
                         </label>
-                        <label class="input-radio-contract">
-                            <input type="radio" id="rd_privado" name="radio-group" value="2">
+                        <label class="input-radio-contract" id="input-group-contract-tipocontratoprivado">
+                            <input type="radio" id="rd-privado" name="radio-group">
                             <label for="rd-privado" class="rd-label-contract">Privado</label>
 
                         </label>
+
                     </div>
                 </div>
                 <div class="line-contract">
                     <div class="form-contract">
                         <label class="title-option-contract">CONTRATANTE:</label>
-                        <div class="input-group-contract group-contratante"  id="input-group-contract-contrato">
+                        <div class="input-group-contract group-contratante"  id="input-group-contract-contratante">
                             <input type="text" class="input-contract" id="nome_contratante" placeholder="Nome Contratante" autocomplete="nope" >     
                         </div>
                     </div>
                     <div class="form-contract">
                         <label class="title-option-contract">CONTRATADA:</label>
-                        <div class="input-group-contract group-contratante pright"  id="input-group-contract-contrato">
+                        <div class="input-group-contract group-contratante pright"  id="input-group-contract-contratada">
                             <input type="text" class="input-contract" id="nome_contratada" placeholder="Nome Contratada" autocomplete="nope" >     
                         </div>
                     </div>
@@ -84,65 +87,66 @@ session_start();
                 <div class="line-contract">
                     <div class="form-contract">
                         <label class="title-option-contract">CONCORRÊNCIA:</label>
-                        <div class="input-group-contract group-concorrencia"  id="input-group-contract-contrato">
+                        <div class="input-group-contract group-concorrencia"  id="input-group-contract-concorrencia">
                             <input type="text" class="input-contract" id="nome_concorrencia" placeholder="Nome Concorrência" autocomplete="nope" >     
                         </div>
                     </div>
                     <div class="form-contract">
                         <label class="title-option-contract">DATA VIGÊNCIA:</label>
-                        <div class="input-group-contract group-date"  id="input-group-contract-contrato">
+                        <div class="input-group-contract group-date"  id="input-group-contract-inivigencia">
                             <input type="text" class="input-contract input-date" id="inicio_vigencia" placeholder="00/00/0000" >     
                         </div>
                         <label class="title-option-contract">á</label>
-                        <div class="input-group-contract group-date pright"  id="input-group-contract-contrato">
-                            <input type="text" class="input-contract input-date" id="fim_vigencia" placeholder="00/00/0000" >     
+                        <div class="input-group-contract group-date pright"  id="input-group-contract-fimvigencia">
+                            <input type="text" class="input-contract input-date" id="fim_vigencia" placeholder="00/00/0000"  >     
                         </div>
                     </div>
                 </div>
                 <div class="line-contract">
                     <div class="form-contract form-contract-left">
                         <label class="title-option-contract">VALOR CONTRATO:</label>
-                        <div class="input-group-contract group-valor-contract"  id="input-group-contract-contrato">
-                            <input type="text" class="input-contract input-valor" id="valor_contrato" placeholder="Valor Contrato" autocomplete="off" >     
+                        <div class="input-group-contract group-valor-contract"  id="input-group-contract-valor">
+                            <input type="text" class="input-contract input-valor" id="valor_contrato" placeholder="Valor Contrato" autocomplete="off"  onkeyup="calcular();">     
                         </div>
                     </div>
                     <div class="form-contract form-contract-center">
                         <label class="title-option-contract mleft">PARCELAS:</label>
-                        <div class="input-group-contract group-parcelas"  id="input-group-contract-contrato">
-                            <input type="text" class="input-contract input-parcelas" id="parcela" placeholder="Parcelas" autocomplete="off" >     
+                        <div class="input-group-contract group-parcelas"  id="input-group-contract-parcelas">
+                            <input type="text" class="input-contract input-parcelas" id="parcela" placeholder="Parcelas" value="1" autocomplete="off" onkeyup="calcular();">     
                         </div>
                     </div>
                     <div class="form-contract form-contract-right">
                         <label class="title-option-contract mleft">VALOR PARCELA:</label>
-                        <div class="input-group-contract group-valor-contract pright"  id="input-group-contract-contrato">
-                            <input type="text" class="input-contract input-valor" id="valor_parcela" placeholder="Valor Parcela" autocomplete="off" >     
+                        <div class="input-group-contract group-valor-contract pright"  id="input-group-contract-valorparc">
+                            <input type="text" class="input-contract input-valor" id="valor_parcela" placeholder="Valor Parcela" autocomplete="off" readonly="readonly">     
                         </div>
                     </div>
                 </div>
                 <div class="line-contract">
                     <div class="form-contract">
                         <label class="title-option-contract">DATA DE PAGAMENTO DAS PARCELAS:</label>
-                        <div class="input-group-contract group-date-parc"  id="input-group-contract-contrato">
+                        <div class="input-group-contract group-date-parc"  id="input-group-contract-datapay">
                             <input type="text" class="input-contract input-date" id="data_pag_parcela" placeholder="00/00/0000" autocomplete="nope" >     
                         </div>
                     </div>
                     <div class="form-contract">
                         <label class="title-option-contract">PARCELAS FINALIZADAS:</label>
-                        <div class="input-group-contract group-parcelas-finalizadas pright"  id="input-group-contract-contrato">
-                            <input type="text" class="input-contract input-parcelas-finalizadas" id="parcelas_finalizadas" placeholder="Parcelas Finalizadas" autocomplete="nope" >     
+                        <div class="input-group-contract group-parcelas-finalizadas pright"  id="input-group-contract-parcfim">
+                            <input type="text" class="input-contract input-parcelas-finalizadas" id="parcelas_finalizadas" placeholder="Parcelas Finalizadas" autocomplete="nope" onkeyup="calcular();">     
                         </div>
                     </div>
                 </div>
+
                 <div class="line-contract">
                     <div class="form-contract">
                         <label class="title-option-contract">TOTAL FINALIZADO:</label>
-                        <div class="input-group-contract group-total-finalizado"  id="input-group-contract-contrato">
-                            <input type="text" class="input-contract input-total-finalizado" id="total_finalizado" placeholder="Total finalizado" autocomplete="nope" >     
+                        <div class="input-group-contract group-total-finalizado"  id="input-group-contract-totalfim">
+                            <input type="text" class="input-contract input-total-finalizado" id="total_finalizado" placeholder="Total finalizado" autocomplete="nope"readonly="readonly" >     
                         </div>
                     </div>
                     <div class="form-contract">
                         <label class="title-option-contract">VENCIMENTO:</label>
-                        <div class="input-group-contract group-vencimento pright"  id="input-group-contract-contrato">
+                        <div class="input-group-contract group-vencimento pright"  id="input-group-contract-vencimento">
                             <input type="text" class="input-contract input-vencimento" id="vencimento" placeholder="00/00/0000" autocomplete="nope" >     
                         </div>
                     </div>
@@ -151,7 +155,6 @@ session_start();
                     <div class="btn-login">
                         <input type="submit" value="PROSSEGUIR" class="bt-login" id="cadastrar_contrato">
                     </div>
-
                 </div>
 
             </article>
@@ -163,62 +166,277 @@ session_start();
         <!-- /Conteúdo -->
 
         <script  type="text/javascript">
+            $(document).ready(function () {
+                 $("#inicio_vigencia").mask("99/99/9999");
+                $('#result').on('click', function () {
+                    //NUMERO CONTRATO
+                    if ($("#numero_contrato").is(":focus")) {
+                        $("#input-group-contract-numero").addClass("input-group-contract-active");
+                        $("#input-group-contract-numero").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-numero").removeClass("input-group-contract-active");
+                    }
+                    //NOME CONTRATANTE
+                    if ($("#nome_contratante").is(":focus")) {
+                        $("#input-group-contract-contratante").addClass("input-group-contract-active");
+                        $("#input-group-contract-contratante").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-contratante").removeClass("input-group-contract-active");
+                    }
+                    //NOME CONTRATADA
+                    if ($("#nome_contratada").is(":focus")) {
+                        $("#input-group-contract-contratada").addClass("input-group-contract-active");
+                        $("#input-group-contract-contratada").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-contratada").removeClass("input-group-contract-active");
+                    }
+                    //NOME CONCORRENCIA
+                    if ($("#nome_concorrencia").is(":focus")) {
+                        $("#input-group-contract-concorrencia").addClass("input-group-contract-active");
+                        $("#input-group-contract-concorrencia").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-concorrencia").removeClass("input-group-contract-active");
+                    }
+                    //INICIO VIGENCIA
+                    if ($("#inicio_vigencia").is(":focus")) {
+                        $("#input-group-contract-inivigencia").addClass("input-group-contract-active");
+                        $("#input-group-contract-inivigencia").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-inivigencia").removeClass("input-group-contract-active");
+                    }
 
-            $(function () {
-                $('#valor_contrato').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
-                $('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
-            })
-            $("#cadastrar_contrato").click(function () {
-                callApi();
-            });
-            function callApi() {
-                var num_contrato = $("#numero_contrato").val();
-                var nome_contratante = $("#nome_contratante").val();
-                var nome_contratada = $("#nome_contratada").val();
-                var nome_concorrencia = $("#nome_concorrencia").val();
-                var inicio_vigencia = $("#inicio_vigencia").val();
-                var fim_vigencia = $("#fim_vigencia").val();
-                var valor_contrato = $("#valor_contrato").val();
-                var parcela = $("#parcela").val();
-                var valor_parcela = $("#valor_parcela").val();
-                var data_pag_parcela = $("#data_pag_parcela").val();
-                var parcelas_finalizadas = $("#parcelas_finalizadas").val();
-                var total_finalizado = $("#total_finalizado").val();
-                var vencimento = $("#vencimento").val();
-                document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
-                $.ajax({
-                    url: "api/api.php",
-                    method: "post",
-                    data: {request: "cadastro_contrato",
-                        numero: num_contrato,
-                        nome_contratante: nome_contratante,
-                        nome_contratada: nome_contratada,
-                        nome_contratante: nome_contratante,
-                        nome_concorrencia: nome_concorrencia,
-                        inicio_vigencia: inicio_vigencia,
-                        fim_vigencia: fim_vigencia,
-                        valor_contrato: valor_contrato,
-                        parcela: parcela,
-                        valor_parcela: valor_parcela,
-                        data_pag_parcela: data_pag_parcela,
-                        total_finalizado: total_finalizado,
-                        vencimento: vencimento,
-                        parcelas_finalizadas: parcelas_finalizadas
-                    },
-                    success: function (data)
-                    {
-                        alert(data);
-                        var res = data.split(";");
-                        if (typeof res[0] !== "undefined" && res[0] == "00") {
-                            location.href = "cadastro_garantia.php?idcontrato=" + res[1];
-                        } else {
-                            alert("erro de comunicação com servidor!")
-                        }
-                        //window.location.href = "home.php";//
-                        // document.getElementById("result").innerHTML = data;
+                    //FIM VIGENCIA
+                    if ($("#fim_vigencia").is(":focus")) {
+                        $("#input-group-contract-fimvigencia").addClass("input-group-contract-active");
+                        $("#input-group-contract-fimvigencia").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-fimvigencia").removeClass("input-group-contract-active");
+                    }
+                    //VALOR CONTRATO
+                    if ($("#valor_contrato").is(":focus")) {
+                        $("#input-group-contract-valor").addClass("input-group-contract-active");
+                        $("#input-group-contract-valor").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-valor").removeClass("input-group-contract-active");
+                    }
+                    // PARCELAS
+                    if ($("#parcela").is(":focus")) {
+                        $("#input-group-contract-parcelas").addClass("input-group-contract-active");
+                        $("#input-group-contract-parcelas").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-parcelas").removeClass("input-group-contract-active");
+                    }
+                    // VALOR PARCELAS
+                    if ($("#valor_parcela").is(":focus")) {
+                        $("#input-group-contract-valorparc").addClass("input-group-contract-active");
+                        $("#input-group-contract-valorparc").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-valorparc").removeClass("input-group-contract-active");
+                    }
+                    // DATA PAGAMENTO PARCELAS
+                    if ($("#data_pag_parcela").is(":focus")) {
+                        $("#input-group-contract-datapay").addClass("input-group-contract-active");
+                        $("#input-group-contract-datapay").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-datapay").removeClass("input-group-contract-active");
+                    }
+                    // PARCELAS FINALIZADAS
+                    if ($("#parcelas_finalizadas").is(":focus")) {
+                        $("#input-group-contract-parcfim").addClass("input-group-contract-active");
+                        $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-parcfim").removeClass("input-group-contract-active");
+                    }
+                    //TOTAL FINALIZADO
+                    if ($("#total_finalizado").is(":focus")) {
+                        $("#input-group-contract-totalfim").addClass("input-group-contract-active");
+                        $("#input-group-contract-totalfim").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-totalfim").removeClass("input-group-contract-active");
+                    }
+                    //VENCIMENTO
+                    if ($("#vencimento").is(":focus")) {
+                        $("#input-group-contract-vencimento").addClass("input-group-contract-active");
+                        $("#input-group-contract-vencimento").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-vencimento").removeClass("input-group-contract-active");
                     }
                 });
-            }
+
+                $(function () {
+                    $('#valor_contrato').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+                    //('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+                })
+                $("#cadastrar_contrato").click(function () {
+                    callApi();
+                });
+
+                $('#rd-publico').click(function () {
+                    if ($('#rd-publico').is(':checked')) {
+                        document.getElementById('tipo_contrato').value = 1;
+                        document.getElementById('nome_concorrencia').value = "";
+                         $('#nome_concorrencia').attr('readonly', false);
+                        $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
+                        $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
+                    }
+                });
+                $('#rd-privado').click(function () {
+                    if ($('#rd-privado').is(':checked')) {
+                        document.getElementById('tipo_contrato').value = 2;
+                        $('#nome_concorrencia').attr('readonly', true);
+                        document.getElementById('nome_concorrencia').value = "Contrato Privado BBTT";
+                        $("#input-group-contract-concorrencia").removeClass("input-group-contract-error");
+
+                        $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
+                        $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
+                    }
+                });
+                function callApi() {
+                    var num_contrato = $("#numero_contrato").val();
+                    var nome_contratante = $("#nome_contratante").val();
+                    var nome_contratada = $("#nome_contratada").val();
+                    var nome_concorrencia = $("#nome_concorrencia").val();
+                    var inicio_vigencia = $("#inicio_vigencia").val();
+                    var fim_vigencia = $("#fim_vigencia").val();
+                    var valor_contrato = $("#valor_contrato").val();
+                    var parcela = $("#parcela").val();
+                    var valor_parcela = $("#valor_parcela").val();
+                    var data_pag_parcela = $("#data_pag_parcela").val();
+                    var parcelas_finalizadas = $("#parcelas_finalizadas").val();
+                    var total_finalizado = $("#total_finalizado").val();
+                    var vencimento = $("#vencimento").val();
+                    var tipo_contrato = $("#tipo_contrato").val();
+                    //NUMERO CONTRATO
+                    if (num_contrato.length <= 0) {
+                        $("#input-group-contract-numero").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-numero").removeClass("input-group-contract-error");
+                    }
+                    //NOME CONTRATANTE
+                    if (nome_contratante.length <= 0) {
+                        $("#input-group-contract-contratante").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-contratante").removeClass("input-group-contract-error");
+                    }
+                    //NOME CONTRATADA
+                    if (nome_contratada.length <= 0) {
+                        $("#input-group-contract-contratada").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-contratada").removeClass("input-group-contract-error");
+                    }
+                    //NOME CONCORRÊNCIA
+                    if (nome_concorrencia.length <= 0) {
+                        $("#input-group-contract-concorrencia").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-concorrencia").removeClass("input-group-contract-error");
+                    }
+                    //INICIO VIGENCIA
+                    if (inicio_vigencia.length <= 0) {
+                        $("#input-group-contract-inivigencia").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-inivigencia").removeClass("input-group-contract-error");
+                    }
+                    //FIM VIGENCIA
+                    if (fim_vigencia.length <= 0) {
+                        $("#input-group-contract-fimvigencia").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-fimvigencia").removeClass("input-group-contract-error");
+                    }
+                    //VALOR CONTRATO
+                    if (valor_contrato.length <= 0) {
+                        $("#input-group-contract-valor").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-valor").removeClass("input-group-contract-error");
+                    }
+                    //PARCELAS
+                    if (parcela.length <= 0) {
+                        $("#input-group-contract-parcelas").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-parcelas").removeClass("input-group-contract-error");
+                    }
+                    //VALOR PARCELAS
+                    if (valor_parcela.length <= 0 || valor.parcela === "NaN") {
+                        $("#input-group-contract-valorparc").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-valorparc").removeClass("input-group-contract-error");
+                    }
+                    //DATA PAGAMENTO PARCELA
+                    if (data_pag_parcela.length <= 0) {
+                        $("#input-group-contract-datapay").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-datapay").removeClass("input-group-contract-error");
+                    }
+                    //PARCELAS FINALIZADAS
+                    if (parcelas_finalizadas.length <= 0) {
+                        $("#input-group-contract-parcfim").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
+                    }
+                    //TOTAL FINALIZADO
+                    if (total_finalizado.length <= 0 || total_finalizado.parcela === "NaN de NaN") {
+                        $("#input-group-contract-totalfim").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-totalfim").removeClass("input-group-contract-error");
+                    }
+                    //VENCIMENTO
+                    if (vencimento.length <= 0) {
+                        $("#input-group-contract-vencimento").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-vencimento").removeClass("input-group-contract-error");
+                    }
+                    //TIPO CONTRATO
+                    if (tipo_contrato.length <= 0) {
+                        $("#input-group-contract-tipocontrato").addClass("input-group-contract-error");
+                        $("#input-group-contract-tipocontratoprivado").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
+                        $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
+                    }
+                    if (num_contrato.length > 0 && nome_contratante > 0 && nome_contratada > 0
+                            && nome_concorrencia > 0 && inicio_vigencia > 0 && fim_vigencia > 0
+                            && valor_contrato > 0 && parcela > 0 && valor_parcela > 0
+                            && data_pag_parcela > 0 && parcelas_finalizadas > 0 && total_finalizado > 0
+                            && vencimento > 0) {
+                        document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                        $.ajax({
+                            url: "api/api.php",
+                            method: "post",
+                            data: {request: "cadastro_contrato",
+                                numero: num_contrato,
+                                nome_contratante: nome_contratante,
+                                nome_contratada: nome_contratada,
+                                nome_contratante: nome_contratante,
+                                nome_concorrencia: nome_concorrencia,
+                                inicio_vigencia: inicio_vigencia,
+                                fim_vigencia: fim_vigencia,
+                                valor_contrato: valor_contrato,
+                                parcela: parcela,
+                                valor_parcela: valor_parcela,
+                                data_pag_parcela: data_pag_parcela,
+                                total_finalizado: total_finalizado,
+                                vencimento: vencimento,
+                                parcelas_finalizadas: parcelas_finalizadas
+                            },
+                            success: function (data)
+                            {
+                                alert(data);
+                                var res = data.split(";");
+                                if (typeof res[0] !== "undefined" && res[0] == "00") {
+                                    location.href = "cadastro_garantia.php?idcontrato=" + res[1];
+                                } else {
+                                    alert("erro de comunicação com servidor!")
+                                }
+                                //window.location.href = "home.php";//
+                                // document.getElementById("result").innerHTML = data;
+                            }
+                        });
+                    } else {
+
+                    }
+                }
+
+            });
+
 
         </script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
