@@ -238,6 +238,13 @@ class Search {
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
                 if ($count > 0) {
+                    echo '<div class = "listtb" data-aos = "fade-left"
+                    data-aos-anchor = "#example-anchor"
+                    data-aos-offset = "400"
+                    data-aos-duration = "400">
+
+                    <table class = "tb-list">';
+
                     foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
                         $vencimento = $dados->VENCIMENTO_CONTRATO;
                         $numero = $dados->NUMERO_CONTRATO;
@@ -245,37 +252,28 @@ class Search {
                         //  echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
 
 
-                        echo '<div class="listtb"  data-aos="fade-left"
-      data-aos-anchor="#example-anchor"
-      data-aos-offset="400"
-      data-aos-duration="400">
 
-      <table class="tb-list" id="result">
-      <tr>
-      <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-      <td class="td-desc"><div class="td-desc-list">' . $contratante . '</div></td>
-      <td class="td-contrato">' . $numero . '</td>
-      <td class="td-data">' . $vencimento . '</td>
-      </tr>
-      </table>
-      </div>
-      ';
+
+                        echo '<tr>
+                    <td class = "td-icon-contract"><img src = "../images/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></th>
+                    <td class = "td-desc-contract"><div class = "td-desc-list">' . $contratante . '</div></td>
+                    <td class = "td-contrato-contract">' . $numero . '</td>
+                    <td class = "td-tipo-contract">' . $numero . '</td>
+                    <td class = "td-data-contract">' . $vencimento . '</td>
+                    </tr>
+               
+                    ';
                     }
                 } else {
 
-                    echo '<div  data-aos="fade-left"
-      data-aos-anchor="#example-anchor"
-      data-aos-offset="400"
-      data-aos-duration="400">
-
-      <table class="tb-liste">
-      <tr>
-      <td> NENHUM CONTRATO CONTRATO COM VENCIMENTOS PARA OS PROXIMOS 30 DIAS</td>
-      </tr>
-      </table>
-      </div>
-      ';
+                    echo '
+                    <tr>
+                    <td> NENHUM CONTRATO CONTRATO COM VENCIMENTOS PARA OS PROXIMOS 30 DIAS</td>
+                    </tr>
+                    ';
                 }
+                echo '     </table>
+                    </div>';
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -299,17 +297,17 @@ class Search {
       //  echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
 
 
-      echo '<div class="listtb"  data-aos="fade-left"
-      data-aos-anchor="#example-anchor"
-      data-aos-offset="400"
-      data-aos-duration="400">
+      echo '<div class = "listtb" data-aos = "fade-left"
+      data-aos-anchor = "#example-anchor"
+      data-aos-offset = "400"
+      data-aos-duration = "400">
 
-      <table class="tb-list" id="result">
+      <table class = "tb-list" id = "result">
       <tr>
-      <td class="td-icon"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-      <td class="td-desc"><div class="td-desc-list">' . $contratante . '</div></td>
-      <td class="td-contrato">' . $numero . '</td>
-      <td class="td-data">' . $vencimento . '</td>
+      <td class = "td-icon"><img src = "../images/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></th>
+      <td class = "td-desc"><div class = "td-desc-list">' . $contratante . '</div></td>
+      <td class = "td-contrato">' . $numero . '</td>
+      <td class = "td-data">' . $vencimento . '</td>
       </tr>
       </table>
       </div>
@@ -317,12 +315,12 @@ class Search {
       }
       } else {
 
-      echo '<div  data-aos="fade-left"
-      data-aos-anchor="#example-anchor"
-      data-aos-offset="400"
-      data-aos-duration="400">
+      echo '<div data-aos = "fade-left"
+      data-aos-anchor = "#example-anchor"
+      data-aos-offset = "400"
+      data-aos-duration = "400">
 
-      <table class="tb-liste">
+      <table class = "tb-liste">
       <tr>
       <td> NENHUM CONTRATO CONTRATO COM VENCIMENTOS PARA OS PROXIMOS 30 DIAS</td>
       </tr>
@@ -359,7 +357,7 @@ class Search {
     public function buscaIdObservacoesExigencias($numeroContrato) {
         try {
             $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
-                    . 'OBSERVACOES_EXIGENCIAS WHERE NUMERO_DESC_OBSER_EXIGEN =' . $numeroContrato . ' ';
+                    . 'OBSERVACOES_EXIGENCIAS WHERE NUMERO_DESC_OBSER_EXIGEN = ' . $numeroContrato . ' ';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
@@ -377,7 +375,7 @@ class Search {
     public function BuscaGarantia($idcontrato) {
         try {
             $sql = 'SELECT ID_GARANTIA FROM '
-                    . 'GARANTIA WHERE ID_CONTRATO_GARANTIA =' . $idcontrato;
+                    . 'GARANTIA WHERE ID_CONTRATO_GARANTIA = ' . $idcontrato;
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
@@ -395,7 +393,7 @@ class Search {
     public function BuscaObjeto($idcontrato) {
         try {
             $sql = 'SELECT ID_OBJETO FROM '
-                    . 'OBJETO WHERE ID_CONTRATO_OBJETO =' . $idcontrato;
+                    . 'OBJETO WHERE ID_CONTRATO_OBJETO = ' . $idcontrato;
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
@@ -413,7 +411,7 @@ class Search {
     public function BuscaObs($idcontrato) {
         try {
             $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
-                    . 'observacoes_exigencias WHERE ID_CONTRATO_OBSERVACOES =' . $idcontrato;
+                    . 'observacoes_exigencias WHERE ID_CONTRATO_OBSERVACOES = ' . $idcontrato;
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
