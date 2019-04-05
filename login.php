@@ -3,7 +3,7 @@
 session_start();
 
 
-include "persistencia/Conexao.php";
+include "./dashboard/persistencia/Conexao.php";
 
 
 $login = filter_input(INPUT_POST, 'tName');
@@ -19,7 +19,9 @@ if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 try {
     $login = str_replace("'", "", $login);
     $login = str_replace('"', "", $login);
-    $sqll = 'SELECT * FROM LOGIN WHERE USUARIO_LOGIN = "' . $login . '" ';
+    $sqll = 'SELECT ID_LOGIN, SENHA_LOGIN, ID_TIPO_ACESSO_LOGIN, ID_USUARIO_LOGIN, USUARIO.NOME_USUARIO FROM LOGIN 
+INNER JOIN USUARIO ON LOGIN.ID_USUARIO_LOGIN = USUARIO.ID_USUARIO 
+WHERE USUARIO_LOGIN = "'.$login.'" ';
     $p_sqll = Conexao::getInstance()->prepare($sqll);
     $p_sqll->execute();
     $count = $p_sqll->rowCount();
@@ -29,11 +31,13 @@ try {
             $idlogin = $dados->ID_LOGIN;
             $login = $dados->ID_USUARIO_LOGIN;
             $nivel = $dados->ID_TIPO_ACESSO_LOGIN;
+            echo $usuario = $dados->NOME_USUARIO;
             $_SESSION['idlogin'] = $idlogin;
+
             if ($senha == $senhas) {
                 $_SESSION['login'] = $login;
                 $_SESSION['nivel'] = $nivel;
-
+                $_SESSION['usuario'] = $usuario;
 
                 /*
                   $ins = "INSERT INTO `LOG`(`DATA_LOG`, `HORA_LOG`, `USUARIO_LOG`, `IP_LOG`, `ID_TIPO_LOG`)"
@@ -45,12 +49,11 @@ try {
                   if ( $i_ins->execute()) {
                   header('Location:index.php');
                   } */
-                header('Location:index.php');
+                header('Location:dashboard/painel.php');
             } else {
                 header('Location:login1.php');
             }
         }
-
     } else {
         header('Location:login1.php');
     }

@@ -41,6 +41,24 @@ class Search {
         }
     }
 
+    public function BuscaUsuario($idusuario) {
+        try {
+            $sql = 'SELECT * USUARIO WHERE ID_USUARIO = "' . $idusuario . '"';
+            $ssql = Conexao::getInstance()->prepare($sql);
+            if ($ssql->execute()) {
+                $count = $ssql->rowCount();
+                if ($count > 0) {
+                    foreach ($ssql->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->NOME_USUARIO;
+                    }
+                }
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo ' Falha ao obter Nome usuário';
+        }
+    }
+
     public function TipoAcesso($idTipoAcesso) {
         try {
             $sql = 'SELECT DESC_TIPO_ACESSO FROM TIPO_ACESSO WHERE ID_TIPO_ACESSO =' . $idTipoAcesso . ' ';
@@ -300,4 +318,5 @@ class Search {
             echo $exc->getTraceAsString();
         }
     }
+
 }

@@ -131,7 +131,7 @@
                         alert(data);
                         var res = data.split(";");
                         if (typeof res[0] !== "undefined" && res[0] == "00") {
-                            location.href = "objeto.php?idcontrato=" + res[1];
+                            location.href = "cadastro_objeto.php?idcontrato=" + res[1];
                         } else {
                             alert("erro de comunicação com servidor!")
                         }
