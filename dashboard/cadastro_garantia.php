@@ -21,7 +21,7 @@
                 </div>
                 <div class="dados-user-nav">
                     <div class="dados-user">
-                         <?php include 'includes/topbar.php'; ?>
+                        <?php include 'includes/topbar.php'; ?>
                     </div>
                 </div>
             </nav>
@@ -38,53 +38,61 @@
         <!-- BOX CONTEUDO DA PAG -->
 
         <div class="box-conteudo">
-           <article class="article-contrato" data-aos="zoom-in" id="result">
-            <header class="header-article-contrato">
-                <label class="title-contrato">ADICIONAR GARANTIA</label>
-            </header>
-            <form action="" method="post" onsubmit="return false;">
+            <article class="article-contrato" data-aos="zoom-in" id="result">
+                <header class="header-article-contrato">
+                    <label class="title-contrato">ADICIONAR GARANTIA</label>
+                </header>
                 <input type="hidden" id="idcontrato" value="<?php echo $_GET['idcontrato'] ?>">
                 <input type="hidden" id="status">
-                <div class="line-contrato">
-                    <div class="form-contrato tipo_contrato">
-                        <label class="title-option-contrato"> Possui garantia? </label>
-                        <label class="input-radio-contrato">
+                <div class="line-contract">
+                    <div class="form-contract tipo_contrato">
+                        <label class="title-option-contract"> ADICIONAR GARANTIA? </label>
+                        <label class="input-radio-contract">
                             <input type="radio" id="rd-sim" name="radio-group">
-                            <label for="rd-sim" class="rd-label-contrato">Sim</label>
+                            <label for="rd-sim" class="rd-label-contract">Sim</label>
                         </label>
-                        <label class="input-radio-contrato">
+                        <label class="input-radio-contract">
                             <input type="radio" id="rd-nao" name="radio-group">
-                            <label for="rd-nao" class="rd-label-contrato">Não</label>
+                            <label for="rd-nao" class="rd-label-contract">Não</label>
 
                         </label>
                     </div>
-                </div>
+                </div>      
                 <div id="div-garantia"></div>
                 <div id="div-btn"></div>
-            </form>
-        </article>
+            </article>
         </div>
         <script  type="text/javascript">
             $('#rd-sim').click(function () {
                 if ($('#rd-sim').is(':checked')) {
                     document.getElementById('status').value = '1';
-                    document.getElementById('div-garantia').innerHTML = '<div class="line-contrato" data-aos="fade-left"' +
+                    document.getElementById('div-garantia').innerHTML = '<div class="line-contract" data-aos="fade-left"' +
                             'data-aos-offset="200"' +
                             'data-aos-duration="200"' +
                             'id="div-garantia">' +
-                            '<div class="form-contrato garantia">' +
-                            '<label class="title-option-contrato">Observação de garantia:</label>' +
-                            '<textarea maxlength="1400" type="text" class="input-contrato input-auto-num" id="garantia" placeholder="Descrição da garantia" autocomplete="off"></textarea>' +
+                            '<div class="form-contract-full">' +
+                            '<label class="title-option-contract">OBSERVAÇÃO DE GARANTIA:</label>' +
+                            '<div class="input-group-contract group-garantia pright2"  id="input-group-contract-garantia">' +
+                            '<textarea maxlength="1400" type="text" class="input-contract" id="garantia" placeholder="Descreva a garantia" autocomplete="off"></textarea>' +
+                            '</div>' +
                             '</div>' +
                             '</div>';
-                    document.getElementById('div-btn').innerHTML = '<div class="line-contrato">' +
-                            '<div class="form-contrato cadastrar">' +
-                            '<input type="button" value="PROSSEGUIR" class="button-cadastro-contrato" style="float:right; margin-right:30px;" id="adicionar_garantia">' +
-                            '</div>' +
+                    document.getElementById('div-btn').innerHTML = '<div class="line-contract">' +
+                            '<input type="button" value="PROSSEGUIR" class="bt-login" style="float:right; margin-right:30px;" id="adicionar_garantia">' +
                             '</div>';
+                    document.getElementById('div-garantia').style.height = "70vh";
                     $("#adicionar_garantia").click(function () {
 
                         callApi();
+                    });
+                    $('#result').on('click', function () {
+                        //NUMERO CONTRATO
+                        if ($("#garantia").is(":focus")) {
+                            $("#input-group-contract-garantia").addClass("input-group-contract-active");
+                            $("#input-group-contract-garantia").removeClass("input-group-contract-error");
+                        } else {
+                            $("#input-group-contract-garantia").removeClass("input-group-contract-active");
+                        }
                     });
                 }
             });
@@ -95,12 +103,22 @@
                     document.getElementById('div-garantia').innerHTML = '';
                     document.getElementById('div-btn').innerHTML = '<div class="line-contrato" data-aos="fade-left" data-aos-offset="100" data-aos-duration="500">' +
                             '<div class="form-contrato cadastrar">' +
-                            '<input type="button" value="PROSSEGUIR" class="button-cadastro-contrato" id="adicionar_garantia">' +
+                            '<input type="button" value="PROSSEGUIR" class="bt-login" style="float:left;" id="adicionar_garantia">' +
                             '</div>' +
                             '</div>';
+                    document.getElementById('div-garantia').style.height = "0px";
                     $("#adicionar_garantia").click(function () {
-                        alert("teste");
                         callApi();
+                    });
+
+                    $('#result').on('click', function () {
+                        //NUMERO CONTRATO
+                        if ($("#garantia").is(":focus")) {
+                            $("#input-group-contract-garantia").addClass("input-group-contract-active");
+                            $("#input-group-contract-garantia").removeClass("input-group-contract-error");
+                        } else {
+                            $("#input-group-contract-garantia").removeClass("input-group-contract-active");
+                        }
                     });
                 }
             });
@@ -116,28 +134,35 @@
                 }
 
 
+                //OBS
+                if (garantia.length <= 0) {
+                    $("#input-group-contract-garantia").addClass("input-group-contract-error");
+                } else {
+                    $("#input-group-contract-garantia").removeClass("input-group-contract-error");
+                }
 
-                document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
-                $.ajax({
-                    url: "../api/api.php",
-                    method: "post",
-                    data: {request: "adicionar_garantia",
-                        status_garantia: status_garantia,
-                        garantia: garantia,
-                        idcontrato: idcontrato
-                    },
-                    success: function (data)
-                    {
-                        alert(data);
-                        var res = data.split(";");
-                        if (typeof res[0] !== "undefined" && res[0] == "00") {
-                            location.href = "cadastro_objeto.php?idcontrato=" + res[1];
-                        } else {
-                            alert("erro de comunicação com servidor!")
+                if (garantia.length > 0 || status_garantia !== '1') {
+                    document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                    $.ajax({
+                        url: "../api/api.php",
+                        method: "post",
+                        data: {request: "adicionar_garantia",
+                            status_garantia: status_garantia,
+                            garantia: garantia,
+                            idcontrato: idcontrato
+                        },
+                        success: function (data)
+                        {
+                            alert(data);
+                            var res = data.split(";");
+                            if (typeof res[0] !== "undefined" && res[0] == "00") {
+                                location.href = "cadastro_objeto.php?idcontrato=" + res[1];
+                            } else {
+                                alert("erro de comunicação com servidor!")
+                            }
                         }
-                    }
-                });
-
+                    });
+                }
             }
         </script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

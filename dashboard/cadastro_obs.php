@@ -42,104 +42,133 @@
                 <header class="header-article-contrato">
                     <label class="title-contrato">ADICIONAR OBSERVAÇÃO</label>
                 </header>
-                <form action="" method="post" onsubmit="return false;">
-                    <input type="hidden" id="idcontrato" value="<?php echo $_GET['idcontrato'] ?>">
-                    <input type="hidden" id="status">
-                    <div class="line-contrato">
-                        <div class="form-contrato tipo_contrato">
-                            <label class="title-option-contrato"> Adicionar observação? </label>
-                            <label class="input-radio-contrato">
-                                <input type="radio" id="rd-sim" name="radio-group">
-                                <label for="rd-sim" class="rd-label-contrato">Sim</label>
-                            </label>
-                            <label class="input-radio-contrato">
-                                <input type="radio" id="rd-nao" name="radio-group">
-                                <label for="rd-nao" class="rd-label-contrato">Não</label>
 
-                            </label>
-                        </div>
+                <input type="hidden" id="idcontrato" value="<?php echo $_GET['idcontrato'] ?>">
+                <input type="hidden" id="status">
+                <div class="line-contract">
+                    <div class="form-contract tipo_contrato">
+                        <label class="title-option-contract"> ADICIONAR OBSERVAÇÃO? </label>
+                        <label class="input-radio-contract">
+                            <input type="radio" id="rd-sim" name="radio-group">
+                            <label for="rd-sim" class="rd-label-contract">Sim</label>
+                        </label>
+                        <label class="input-radio-contract">
+                            <input type="radio" id="rd-nao" name="radio-group">
+                            <label for="rd-nao" class="rd-label-contract">Não</label>
+
+                        </label>
                     </div>
-                    <div id="div-garantia"></div>
-                    <div id="div-btn"></div>
-                </form>
+                </div>                   
+                <div id="div-garantia" style="float:left;"></div>
+                <div id="div-btn" style="float:left;"></div>
             </article>
         </div>
         <script  type="text/javascript">
-            $('#rd-sim').click(function () {
-                if ($('#rd-sim').is(':checked')) {
-                    document.getElementById('status').value = '1';
-                    document.getElementById('div-garantia').innerHTML = '<div class="line-contrato" data-aos="fade-left"' +
-                            'data-aos-offset="200"' +
-                            'data-aos-duration="200"' +
-                            'id="div-garantia">' +
-                            '<div class="form-contrato obs">' +
-                            '<label class="title-option-contrato">Observação:</label>' +
-                            '<textarea maxlength="1400" type="text" class="input-contrato input-auto-num" id="obs" placeholder="Observação" autocomplete="off"></textarea>' +
-                            '</div>' +
-                            '</div>';
-                    document.getElementById('div-btn').innerHTML = '<div class="line-contrato">' +
-                            '<div class="form-contrato cadastrar">' +
-                            '<input type="button" value="FINALIZAR" class="button-cadastro-contrato" style="float:right; margin-right:30px;" id="adicionar_obs">' +
-                            '</div>' +
-                            '</div>';
-                    $("#adicionar_obs").click(function () {
+            $(document).ready(function () {
 
-                        callApi();
-                    });
-                }
-            });
+                $('#rd-sim').click(function () {
+                    if ($('#rd-sim').is(':checked')) {
+                        document.getElementById('status').value = '1';
+                        document.getElementById('div-garantia').innerHTML = '<div class="line-contract" data-aos="fade-left"' +
+                                'data-aos-offset="200"' +
+                                'data-aos-duration="200"' +
+                                'id="div-garantia">' +
+                                '<div class="form-contract-full">' +
+                                '<label class="title-option-contract">OBSERVAÇÃO:</label>' +
+                                '<div class="input-group-contract group-obs pright2"  id="input-group-contract-obs">' +
+                                '<textarea maxlength="1400" type="text" class="input-contract" id="obs" placeholder="Descreva a objservação" autocomplete="off"></textarea>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                        document.getElementById('div-btn').innerHTML = '<div class="line-contract">' +
+                                '<input type="button" value="FINALIZAR" class="bt-login" style="float:right; margin-right:30px;" id="adicionar_obs">' +
+                                '</div>';
+                        document.getElementById('div-garantia').style.height = "55vh";
+                        $("#adicionar_obs").click(function () {
 
-            $('#rd-nao').click(function () {
-                if ($('#rd-nao').is(':checked')) {
-                    document.getElementById('status').value = '2';
-                    document.getElementById('div-garantia').innerHTML = '';
-                    document.getElementById('div-btn').innerHTML = '<div class="line-contrato" data-aos="fade-left" data-aos-offset="100" data-aos-duration="500">' +
-                            '<div class="form-contrato cadastrar">' +
-                            '<input type="button" value="FINALIZAR" class="button-cadastro-contrato" id="adicionar_obs">' +
-                            '</div>' +
-                            '</div>';
-                    $("#adicionar_obs").click(function () {
-                        alert("teste");
-                        callApi();
-                    });
-                }
-            });
+                            callApi();
+                        });
 
-
-
-            function callApi() {
-                var idcontrato = $("#idcontrato").val();
-                var status_obs = $("#status").val();
-                var obs = '';
-                if (status_obs === '1') {
-                    obs = $("#obs").val();
-                }
-
-
-
-                document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
-                $.ajax({
-                    url: "../api/api.php",
-                    method: "post",
-                    data: {request: "adicionar_obs",
-                        status_obs: status_obs,
-                        obs: obs,
-                        idcontrato: idcontrato
-                    },
-                    success: function (data)
-                    {
-                        alert(data);
-                        var res = data.split(";");
-                        if (typeof res[0] !== "undefined" && res[0] == "00") {
-                            location.href = "finalizacao_contrato.php?idcontrato=" + res[1];
-                        } else {
-                            alert("erro de comunicação com servidor!")
-                        }
-
+                        $('#result').on('click', function () {
+                            //NUMERO CONTRATO
+                            if ($("#obs").is(":focus")) {
+                                $("#input-group-contract-obs").addClass("input-group-contract-active");
+                                $("#input-group-contract-obs").removeClass("input-group-contract-error");
+                            } else {
+                                $("#input-group-contract-obs").removeClass("input-group-contract-active");
+                            }
+                        });
                     }
                 });
 
-            }
+                $('#rd-nao').click(function () {
+                    if ($('#rd-nao').is(':checked')) {
+                        document.getElementById('status').value = '2';
+                        document.getElementById('div-garantia').innerHTML = '';
+                        document.getElementById('div-btn').innerHTML = '<div class="line-contrato" data-aos="fade-left" data-aos-offset="100" data-aos-duration="500">' +
+                                '<div class="form-contrato cadastrar">' +
+                                '<input type="button" value="FINALIZAR" class="bt-login" id="adicionar_obs">' +
+                                '</div>' +
+                                '</div>';
+                        document.getElementById('div-garantia').style.height = "0px";
+                        $("#adicionar_obs").click(function () {
+                            callApi();
+                        });
+
+                        $('#result').on('click', function () {
+                            //NUMERO CONTRATO
+                            if ($("#obs").is(":focus")) {
+                                $("#input-group-contract-obs").addClass("input-group-contract-active");
+                                $("#input-group-contract-obs").removeClass("input-group-contract-error");
+                            } else {
+                                $("#input-group-contract-obs").removeClass("input-group-contract-active");
+                            }
+                        });
+                    }
+                });
+
+
+
+                function callApi() {
+                    var idcontrato = $("#idcontrato").val();
+                    var status_obs = $("#status").val();
+                    var obs = '';
+                    if (status_obs === '1') {
+                        obs = $("#obs").val();
+                    }
+                    //OBS
+                    if (obs.length <= 0) {
+                        $("#input-group-contract-obs").addClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-obs").removeClass("input-group-contract-error");
+                    }
+
+                    if (obs.length > 0 || status_obs !== '1') {
+                        document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                        $.ajax({
+                            url: "../api/api.php",
+                            method: "post",
+                            data: {request: "adicionar_obs",
+                                status_obs: status_obs,
+                                obs: obs,
+                                idcontrato: idcontrato
+                            },
+                            success: function (data)
+                            {
+                                alert(data);
+                                var res = data.split(";");
+                                if (typeof res[0] !== "undefined" && res[0] == "00") {
+                                    location.href = "finalizacao_contrato.php?idcontrato=" + res[1];
+                                } else {
+                                    alert("erro de comunicação com servidor!")
+                                }
+
+                            }
+                        });
+
+                    }
+                }
+            });
         </script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
