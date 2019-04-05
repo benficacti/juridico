@@ -7,7 +7,7 @@ include '../models/observacoesExigencias.php';
 include '../classes/Update.class.php';
 include '../classes/Insert.class.php';
 include '../classes/Search.class.php';
-echo $request = (null !== (filter_input(INPUT_POST, 'request'))) ? filter_input(INPUT_POST, 'request') : 0;
+$request = (null !== (filter_input(INPUT_POST, 'request'))) ? filter_input(INPUT_POST, 'request') : 0;
 
 
 if ($request == "cadastro_contrato") {
