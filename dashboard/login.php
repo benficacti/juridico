@@ -75,7 +75,52 @@
                 });
 
             });
-
+            $("#login").keydown(function () {
+                $("#input-group-login-user").removeClass("input-group-login-error");
+            });
+            $("#senha").keydown(function () {
+                $("#input-group-login-senha").removeClass("input-group-login-error");
+            });
+            $("#entrar").click(function () {
+                callApi();
+            });
+            function callApi() {
+                var login = $("#login").val();
+                var senha = $("#senha").val();
+                if (login.length <= 0) {
+                    $("#input-group-login-user").addClass("input-group-login-error");
+                } else {
+                    $("#input-group-login-user").removeClass("input-group-login-error");
+                }
+                if (senha.length <= 0) {
+                    $("#input-group-login-senha").addClass("input-group-login-error");
+                } else {
+                    $("#input-group-login-senha").removeClass("input-group-login-error");
+                }
+                if (login.length > 0 && senha.length > 0) {
+                    $.ajax({
+                        url: "api/api.php",
+                        method: "post",
+                        data: {request: "login",
+                            login: login,
+                            senha: senha
+                        },
+                        success: function (data)
+                        {
+                            alert(data);
+                            var res = data.split(";");
+                            if (typeof res[0] !== "undefined" && res[0] == "00") {
+                                location.href = "dashboard/painel.php";
+                            } else if (typeof res[0] !== "undefined" && res[0] == "01") {
+                                $("#input-group-login-user").addClass("input-group-login-error");
+                                $("#input-group-login-senha").addClass("input-group-login-error");
+                            } else {
+                                $("#input-group-login-senha").addClass("input-group-login-error");
+                            }
+                        }
+                    });
+                }
+            }
         </script>
     </body>
 </html>
