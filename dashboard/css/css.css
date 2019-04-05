@@ -287,9 +287,9 @@ body{
     border:0px;
     background-color:#0399D4;
     color:white;
-    font-family: 'Gilroy-Light';
+    font-family: 'Gilroy';
     letter-spacing: 1.2px;
-    font-size:1em;
+    font-size:1.3em;
 }
 .bt-login:hover{
     cursor: pointer;
@@ -466,6 +466,7 @@ body{
     -webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+
 }
 .header-article-contrato{
     width:96%;
@@ -855,4 +856,119 @@ body{
 }
 .tb-list tr{
     border-top: 1px dashed black;
+}
+/*NEW CADASTRO CONTRACT*/
+.line-contract{
+    width:80vw;
+    height:6vh;
+    float:left;
+    margin-top:2vh;
+}
+.title-option-contract{
+    line-height: 6vh;
+    float:left;
+    letter-spacing: 1.2px;
+    font-size:1em;
+    font-family: 'Gilroy';
+    margin-left:2vw;
+}
+.form-contract{
+    width:40vw;
+    height:6vh;
+    float:left;
+}
+.form-contract-left{
+    width:30vw;
+}
+.form-contract-center{
+    width:20vw;
+}
+.form-contract-right{
+    width:30vw;
+}
+.input-group-contract{
+    width:28vw;
+    height:6vh;   
+    margin-left:1vw;
+    border:1px solid  #ccc;
+    border-radius:10px;
+    float:right;
+}
+.group-contratante{
+    width:27vw; 
+}
+.group-concorrencia{
+    width:26.3vw;
+}
+.group-date{
+    width:11vw;
+    float:left;
+}
+.group-valor-contract{
+    width:15vw;
+}
+.group-date-parc{
+    width:12vw;
+}
+.group-parcelas{
+     width:11vw;
+}
+.group-parcelas-finalizadas{
+    width:20vw;
+}
+.group-total-finalizado{
+     width:24vw;
+}
+.group-vencimento{
+     width:27vw;
+}
+.input-contract{
+    width:25vw;
+    height:5vh;   
+    float:left;
+    margin-left:1vh;
+    padding-left: 10px;
+    padding-top:1vh;
+    letter-spacing: 1.2px;
+    font-size:1em;
+    outline: none;
+    border:0px;
+    font-family: 'Gilroy-Light';
+    flex-direction: column;
+    justify-content: center
+}
+.input-date{
+    width:10vw;
+}
+.input-valor{
+    width:13vw;
+}
+.input-parcelas{
+    width:10vw;
+}
+.input-parcelas-finalizadas{
+    width:18vw;
+}
+.input-total-finalizado{
+    width:22vw;
+}
+.input-vencimento{
+    width:20vw;
+}
+.input-radio-contract {
+    margin-left:15px;
+    float:left;
+    letter-spacing: 1.2px;
+    font-size:1.2em;
+    font-family: 'Gilroy-Light';
+    line-height: 6vh;
+}
+.rd-label-contract{
+    padding-left:5px;
+}
+.pright{
+    margin-right: 1vw;
+}
+.mleft{
+    margin-left:2.5vh;
 }
