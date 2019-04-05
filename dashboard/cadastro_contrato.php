@@ -1,6 +1,5 @@
-<?php 
+<?php
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
@@ -16,7 +15,7 @@ session_start();
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.maskMoney.js"></script>
-          <script src="js/masked.js"></script>
+        <script src="js/masked.js"></script>
     </head>
     <body>
         <!-- Conteúdo -->
@@ -167,7 +166,9 @@ session_start();
 
         <script  type="text/javascript">
             $(document).ready(function () {
-                 $("#inicio_vigencia").mask("99/99/9999");
+                $("#inicio_vigencia").mask("99/99/9999");
+                $("#fim_vigencia").mask("99/99/9999");
+                $("#data_pag_parcela").mask("99/99/9999");
                 $('#result').on('click', function () {
                     //NUMERO CONTRATO
                     if ($("#numero_contrato").is(":focus")) {
@@ -275,7 +276,7 @@ session_start();
                     if ($('#rd-publico').is(':checked')) {
                         document.getElementById('tipo_contrato').value = 1;
                         document.getElementById('nome_concorrencia').value = "";
-                         $('#nome_concorrencia').attr('readonly', false);
+                        $('#nome_concorrencia').attr('readonly', false);
                         $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
                     }
@@ -415,7 +416,8 @@ session_start();
                                 data_pag_parcela: data_pag_parcela,
                                 total_finalizado: total_finalizado,
                                 vencimento: vencimento,
-                                parcelas_finalizadas: parcelas_finalizadas
+                                parcelas_finalizadas: parcelas_finalizadas,
+                                tipo_contrato: tipo_contrato
                             },
                             success: function (data)
                             {
