@@ -11,6 +11,7 @@
         <script type="text/javascript" src="js/jquery-1.6.4.js"></script>        
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
         <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.maskMoney.js"></script>
     </head>
     <body>
         <!-- Conteúdo -->
@@ -21,7 +22,7 @@
                 </div>
                 <div class="dados-user-nav">
                     <div class="dados-user">
-                         <?php include 'includes/topbar.php'; ?>
+                        <?php include 'includes/topbar.php'; ?>
                     </div>
                 </div>
             </nav>
@@ -39,95 +40,117 @@
 
         <div class="box-conteudo">
             <article class="article-contrato" data-aos="zoom-in" id="result">
-            <header class="header-article-contrato">
-                <label class="title-contrato">CADASTRO CONTRATO</label>
-            </header>
-            <form action="" method="post" onsubmit="return false;">
-                <div class="line-contrato">
-                    <div class="form-contrato num_contrato">
-                        <label class="title-option-contrato">Nº Contrato:</label>
-                        <input type="text" class="input-contrato input-auto-num" id="numero_contrato" placeholder="Nº Contrato" autocomplete="off">
+                <header class="header-article-contrato">
+                    <label class="title-contrato">CADASTRO CONTRATO</label>
+                </header>
+                <div class="line-contract">
+                    <div class="form-contract">
+                        <label class="title-option-contract">Nº CONTRATO:</label>
+                        <div class="input-group-contract"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract" id="numero_contrato" placeholder="Nº Contrato" autocomplete="off" >     
+                        </div>
                     </div>
-                    <div class="form-contrato tipo_contrato">
-                        <label class="title-option-contrato"> Tipo Contrato:</label>
-                        <label class="input-radio-contrato">
+                    <div class="form-contract">
+                        <label class="title-option-contract"> TIPO CONTRATO:</label>
+                        <label class="input-radio-contract">
                             <input type="radio" id="rd_publico" name="radio-group" value="1">
-                            <label for="rd-publico" class="rd-label-contrato">Público</label>
+                            <label for="rd-publico" class="rd-label-contract">Público</label>
                         </label>
-                        <label class="input-radio-contrato">
+                        <label class="input-radio-contract">
                             <input type="radio" id="rd_privado" name="radio-group" value="2">
-                            <label for="rd-privado" class="rd-label-contrato">Privado</label>
+                            <label for="rd-privado" class="rd-label-contract">Privado</label>
 
                         </label>
                     </div>
                 </div>
-                <div class="line-contrato">
-                    <div class="form-contrato contratante">
-                        <label class="title-option-contrato">Contratante: </label>
-                        <input type="text" class="input-contrato input-auto" id="nome_contratante"  placeholder="Nome Contratante" autocomplete="off">
+                <div class="line-contract">
+                    <div class="form-contract">
+                        <label class="title-option-contract">CONTRATANTE:</label>
+                        <div class="input-group-contract group-contratante"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract" id="nome_contratante" placeholder="Nome Contratante" autocomplete="nope" >     
+                        </div>
                     </div>
-                    <div class="form-contrato contratada">
-                        <label class="title-option-contrato">Contratada: </label>
-                        <input type="text" class="input-contrato input-auto" id="nome_contratada"  placeholder="Nome Contratada" autocomplete="off">
+                    <div class="form-contract">
+                        <label class="title-option-contract">CONTRATADA:</label>
+                        <div class="input-group-contract group-contratante pright"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract" id="nome_contratada" placeholder="Nome Contratada" autocomplete="nope" >     
+                        </div>
                     </div>
                 </div>
-                <div class="line-contrato">
-                    <div class="form-contrato concorrencia">
-                        <label class="title-option-contrato">Concorrência: </label>
-                        <input type="text" class="input-contrato input-auto-concorrencia" id="nome_concorrencia"  placeholder="Nome Concorrência" autocomplete="off">
-                    </div>     
-                    <div class="form-contrato datavigencia">
-                        <label class="title-option-contrato">Data Vigência: </label>
-                        <input type="date" class="input-contrato input-auto-vigencia" id="inicio_vigencia"  placeholder="00/00/0000" autocomplete="off">
-                        <span class="span-space">á</span>
-                        <input type="date" class="input-contrato input-auto-vigencia" id="fim_vigencia"  placeholder="00/00/0000" autocomplete="off">
-                    </div> 
+                <div class="line-contract">
+                    <div class="form-contract">
+                        <label class="title-option-contract">CONCORRÊNCIA:</label>
+                        <div class="input-group-contract group-concorrencia"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract" id="nome_concorrencia" placeholder="Nome Concorrência" autocomplete="nope" >     
+                        </div>
+                    </div>
+                    <div class="form-contract">
+                        <label class="title-option-contract">DATA VIGÊNCIA:</label>
+                        <div class="input-group-contract group-date"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract input-date" id="inicio_vigencia" placeholder="00/00/0000" >     
+                        </div>
+                        <label class="title-option-contract">á</label>
+                        <div class="input-group-contract group-date pright"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract input-date" id="fim_vigencia" placeholder="00/00/0000" >     
+                        </div>
+                    </div>
                 </div>
-                <div class="line-contrato">
-                    <div class="form-contrato valorcontrato">
-                        <label class="title-option-contrato">Valor Contrato: </label>
-                        <input type="text" class="input-contrato input-auto-valor" id="valor_contrato"  placeholder="Valor Contrato" autocomplete="off" value=""   onkeyup="calcular();">
-                    </div> 
-                    <div class="form-contrato parcela">
-                        <label class="title-option-contrato">Parcelas </label>
-        <input type="text" class="input-contrato input-auto-valor" id="parcela"  placeholder="Parcelas" autocomplete="off" value="1"  onchange="calcular();">
-                    </div> 
-                    <div class="form-contrato valorparcela">
-                        <label class="title-option-contrato">Valor Parcela: </label>
-                        <input type="text" class="input-contrato input-auto-valorparcela" id="valor_parcela"  placeholder="Valor Parcela" autocomplete="off" readonly="readonly" value="">
-                    </div> 
+                <div class="line-contract">
+                    <div class="form-contract form-contract-left">
+                        <label class="title-option-contract">VALOR CONTRATO:</label>
+                        <div class="input-group-contract group-valor-contract"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract input-valor" id="valor_contrato" placeholder="Valor Contrato" autocomplete="off" >     
+                        </div>
+                    </div>
+                    <div class="form-contract form-contract-center">
+                        <label class="title-option-contract mleft">PARCELAS:</label>
+                        <div class="input-group-contract group-parcelas"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract input-parcelas" id="parcela" placeholder="Parcelas" autocomplete="off" >     
+                        </div>
+                    </div>
+                    <div class="form-contract form-contract-right">
+                        <label class="title-option-contract mleft">VALOR PARCELA:</label>
+                        <div class="input-group-contract group-valor-contract pright"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract input-valor" id="valor_parcela" placeholder="Valor Parcela" autocomplete="off" >     
+                        </div>
+                    </div>
                 </div>
-                <div class="line-contrato">
-                    <div class="form-contrato datapagparc">
-                        <label class="title-option-contrato">Data de pagamento das parcelas: </label>
-                        <input type="date" class="input-contrato input-auto-dataparc" id="data_pag_parcela"  placeholder="Valor Contrato" autocomplete="off">
-                    </div> 
-                    <div class="form-contrato parcelasfinalizadas">
-                        <label class="title-option-contrato">Parcelas Finalizadas: </label>
-                        <input type="text" class="input-contrato input-auto-parcelasfinalizadas" id="parcelas_finalizadas"  placeholder="Parc. Finalizadas" autocomplete="off" value="0"  onchange="calcular();">
-                    </div> 
+                <div class="line-contract">
+                    <div class="form-contract">
+                        <label class="title-option-contract">DATA DE PAGAMENTO DAS PARCELAS:</label>
+                        <div class="input-group-contract group-date-parc"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract input-date" id="data_pag_parcela" placeholder="00/00/0000" autocomplete="nope" >     
+                        </div>
+                    </div>
+                    <div class="form-contract">
+                        <label class="title-option-contract">PARCELAS FINALIZADAS:</label>
+                        <div class="input-group-contract group-parcelas-finalizadas pright"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract input-parcelas-finalizadas" id="parcelas_finalizadas" placeholder="Parcelas Finalizadas" autocomplete="nope" >     
+                        </div>
+                    </div>
                 </div>
-                <div class="line-contrato">
+                <div class="line-contract">
+                    <div class="form-contract">
+                        <label class="title-option-contract">TOTAL FINALIZADO:</label>
+                        <div class="input-group-contract group-total-finalizado"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract input-total-finalizado" id="total_finalizado" placeholder="Total finalizado" autocomplete="nope" >     
+                        </div>
+                    </div>
+                    <div class="form-contract">
+                        <label class="title-option-contract">VENCIMENTO:</label>
+                        <div class="input-group-contract group-vencimento pright"  id="input-group-contract-contrato">
+                            <input type="text" class="input-contract input-vencimento" id="vencimento" placeholder="00/00/0000" autocomplete="nope" >     
+                        </div>
+                    </div>
+                </div>
+                <div class="line-contract">
+                    <div class="btn-login">
+                        <input type="submit" value="PROSSEGUIR" class="bt-login" id="cadastrar_contrato">
+                    </div>
 
-                    <div class="form-contrato totalfinalizado">
-                        <label class="title-option-contrato">Total Finalizado: </label>
-                        <input type="text" class="input-contrato input-auto-totalfinalizado" id="total_finalizado"  placeholder="Total finalizado" autocomplete="off" readonly="readonly">
-                    </div> 
-                    <div class="form-contrato vencimentocontrato">
-                        <label class="title-option-contrato">Vencimento: </label>
-                        <input type="date" class="input-contrato input-auto-vencimento" id="vencimento"  placeholder="00/00/0000" autocomplete="off">
-                    </div> 
                 </div>
-                <div class="line-contrato">
-                    <div class="form-contrato cadastrar">
-                        <center>  
-                            <input type="button" value="PROSSEGUIR" class="button-cadastro-contrato" id="cadastrar_contrato">
-                        </center>
-                    </div> 
 
-                </div>
-            </form>
-        </article>
+            </article>
 
         </div>
 
@@ -140,9 +163,10 @@
             $(function () {
                 $('#valor_contrato').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
                 $('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
-                $('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
-                $('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
             })
+            $("#cadastrar_contrato").click(function () {
+                callApi();
+            });
             function callApi() {
                 var num_contrato = $("#numero_contrato").val();
                 var nome_contratante = $("#nome_contratante").val();
@@ -159,7 +183,7 @@
                 var vencimento = $("#vencimento").val();
                 document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
                 $.ajax({
-                    url: "../api/api.php",
+                    url: "api/api.php",
                     method: "post",
                     data: {request: "cadastro_contrato",
                         numero: num_contrato,
@@ -198,23 +222,23 @@
             AOS.init();
         </script>
         <script>
-             function calcular() {
+            function calcular() {
                 var valor_contrato = (document.getElementById('valor_contrato').value);
-                valor_contrato = valor_contrato.replace("R$ ","");
+                valor_contrato = valor_contrato.replace("R$ ", "");
                 valor_contrato = parseInt(valor_contrato);
                 var qtd_parcela = parseInt((document.getElementById('parcela').value).replace(",", "."));
                 var parcelas = valor_contrato / qtd_parcela;
                 document.getElementById('valor_parcela').value = ((parcelas)).toFixed(2);
-                
+
                 var valor_parcelas = (document.getElementById('valor_parcela').value);
                 valor_parcelas = parseFloat(valor_parcelas).toFixed(2);
                 var parcelas_finalizadas = (document.getElementById('parcelas_finalizadas').value);
                 parcelas_finalizadas = parseInt(parcelas_finalizadas);
                 var total_finalizado = valor_parcelas * parcelas_finalizadas;
-                var total_final = total_finalizado +" de "+valor_contrato;
+                var total_final = total_finalizado + " de " + valor_contrato;
                 document.getElementById('total_finalizado').value = (total_final);
-                
-                
+
+
             }
         </script>
 

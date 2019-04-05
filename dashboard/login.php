@@ -33,7 +33,6 @@
                                 <div class="input-group-login"  id="input-group-login-user">
                                     <input type="text" class="input-login" id="login" placeholder="Digite seu E-mail" autocomplete="off" >     
                                 </div>
-
                             </div>
                             <div class="line-login">
                                 <label class="title-login title-senha" for="senha">SENHA</label>
