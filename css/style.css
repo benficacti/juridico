@@ -116,7 +116,18 @@ body{
         -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
     }
-
+    #list-contract{
+        width:98%;
+        height: 600px;
+        border-radius: 10px;
+        background-color:white;
+        float:left;
+        margin-top:2%;
+        margin-left:1%;
+        -webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
+    }
     .menu-home{
         width:100%;
         height: 54px;
@@ -209,6 +220,7 @@ body{
         margin: 0 auto;
 
     }
+
     .title-list{
         width:100%;
         height:54px;
@@ -291,7 +303,43 @@ body{
         text-align: center;
     }
 
+    .div-desc-contract{
+        width:40%;
+        float:left;
+        text-align: center;
+        font-size: 1em;
+        font-family: 'Gilroy';
+    }
+    .div-contrato-contract{
+        width:20%;
+        float:left;
+        text-align: center;
+        font-size: 1em;
+        font-family: 'Gilroy';
+    }
+    .div-data-contract{
+        width:20%;
+        float:left;
+        font-size: 1em;
+        font-family: 'Gilroy';
 
+    }
+    #vencimento_contrato{
+          font-size: 1em;
+        font-family: 'Gilroy';
+        border:0px;
+    }
+    #tipo_contrato{
+        font-size: 1em;
+        font-family: 'Gilroy';
+        border:0px;
+    }
+    .div-tipo-contract{
+        width:20%;
+        float:left;
+        font-size: 1em;
+        font-family: 'Gilroy';
+    }
 
 
 
@@ -316,6 +364,39 @@ body{
         font-family: 'Gilroy';
 
     }
+
+    .td-icon-contract{
+        width:5%;
+        text-align: center;
+    }
+    .td-desc-contract{
+        width:100%;
+        float:left;        
+        margin-left:10px;
+        display:inline-block;
+
+
+    }
+    .td-desc-list-contract{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 75%;
+        display: block;
+        overflow: hidden;    
+    }
+    .td-contrato-contract{
+        width:20%;
+        text-align: center;
+    }
+    .td-tipo-contract{
+        width:20%;
+        text-align: center;
+    }
+    .td-data-contract{
+        width:20%;
+        text-align: center;
+    }
+
     .td-icon{
         width:5%;
         text-align: center;

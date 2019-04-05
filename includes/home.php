@@ -85,8 +85,6 @@
                     <label class="desc-title-list">Próximos vencimentos</label>
                 </div>
                 <div class="title-list-tb">
-
-                    <div class="div-icon"></div>
                     <div class="div-desc">Descrição</div>
                     <div class="div-contrato">Contrato</div>
                     <div class="div-data">Data</div>
