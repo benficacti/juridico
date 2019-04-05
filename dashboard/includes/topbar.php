@@ -1,8 +1,6 @@
 <?php
 include 'classes/Search.class.php';
 include 'persistencia/Conexao.php';
-session_start();
-
 
     $usuario = $_SESSION['usuario'] ;
    

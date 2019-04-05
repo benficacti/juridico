@@ -98,6 +98,7 @@
                     $("#input-group-login-senha").removeClass("input-group-login-error");
                 }
                 if (login.length > 0 && senha.length > 0) {
+                      alert('login:'+login+'\n'+'senha: '+ senha);
                     $.ajax({
                         url: "api/api.php",
                         method: "post",
@@ -110,7 +111,7 @@
                             alert(data);
                             var res = data.split(";");
                             if (typeof res[0] !== "undefined" && res[0] == "00") {
-                                location.href = "dashboard/painel.php";
+                                location.href = "painel.php";
                             } else if (typeof res[0] !== "undefined" && res[0] == "01") {
                                 $("#input-group-login-user").addClass("input-group-login-error");
                                 $("#input-group-login-senha").addClass("input-group-login-error");

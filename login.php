@@ -49,13 +49,13 @@ WHERE USUARIO_LOGIN = "'.$login.'" ';
                   if ( $i_ins->execute()) {
                   header('Location:index.php');
                   } */
-                header('Location:dashboard/painel.php');
+               return "00;";
             } else {
-                header('Location:login1.php');
+              return "02";
             }
         }
     } else {
-        header('Location:login1.php');
+        return "01";
     }
 } catch (Exception $ex) {
     echo 'Erro ao cadastrar';

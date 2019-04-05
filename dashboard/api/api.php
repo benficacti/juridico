@@ -7,7 +7,7 @@ include '../models/observacoesExigencias.php';
 include '../classes/Update.class.php';
 include '../classes/Insert.class.php';
 include '../classes/Search.class.php';
-$request = (null !== (filter_input(INPUT_GET, 'request'))) ? filter_input(INPUT_GET, 'request') : 0;
+$request = (null !== (filter_input(INPUT_POST, 'request'))) ? filter_input(INPUT_POST, 'request') : 0;
 
 
 if ($request == "cadastro_contrato") {
@@ -68,8 +68,10 @@ if ($request == 'adicionar_obs') {
     }
 }
 
-if (($request == 'update_cadastro') && ($request != 0)) {
-    
+if (($request == 'login') && ($request !== 0)) {
+    $login = (null !== (filter_input(INPUT_POST, 'login'))) ? filter_input(INPUT_POST, 'login') : 0;
+    $senha = (null !== (filter_input(INPUT_POST, 'senha'))) ? filter_input(INPUT_POST, 'senha') : 0;
+    echo Search::loginAuth($login, $senha); //00; = efetuado / 01; usuario incorreto /02; senha incorreta
 }
 
 
