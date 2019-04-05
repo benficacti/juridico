@@ -1,3 +1,14 @@
+<?php
+session_start();
+if ((!isset($_SESSION['usuario']) == true) and ( !isset($_SESSION['nivel']) == true) and (!isset($_SESSION['tipo_acesso'])== true)) {
+
+    unset($_SESSION['usuario']);
+    unset($_SESSION['nivel']);
+    header('Location: login.php');
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
     <head>    

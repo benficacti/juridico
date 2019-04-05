@@ -75,4 +75,6 @@ if (($request == 'login') && ($request !== 0)) {
 }
 
 
-
+if($request == 'meus_contratos'){
+   echo Search::contratosProximoVencimento();
+}

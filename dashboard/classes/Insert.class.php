@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include '../persistencia/Conexao.php';
 //include 'negocio/aditamentos.php';
 
@@ -57,7 +57,7 @@ class Insert {
             $parcelasPagas = $contrato->get_quantidadeParcelasPagasContrato();
             $ValortotalPago = $contrato->get_valorTotalPagoContrato();
             $vencimentoContrato = $contrato->get_vencimentoContrato();
-            $idLogin = 1;
+            $idLogin = $_SESSION['login'];
 
             /*
               $insGar = "INSERT INTO `GARANTIA`(`DESC_GARANTIA`,`NUMERO_CONTRATO_GARANTIA`)VALUES(:DESC_GARANTIA,:NUMERO_CONTRATO_GARANTIA)";

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
     <head>    
@@ -21,7 +24,7 @@
                 </div>
                 <div class="dados-user-nav">
                     <div class="dados-user">
-                         <?php include ('includes/topbar.php'); ?>
+<?php include('includes/topbar.php'); ?>
                     </div>
                 </div>
             </nav>
@@ -29,7 +32,7 @@
         <div class="barra-lateral">
             <nav>
                 <div class="barra-lateral-nav">
-                    <?php include('includes/menu.php'); ?>
+<?php include('includes/menu.php'); ?>
 
 
                 </div>

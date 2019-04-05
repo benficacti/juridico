@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br"> 
     <head>    
@@ -63,7 +67,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="table-list" id="result">
+                    <div class="table-list" >
                         <!--CONTEUDO-->
                         <div class="listtb"  data-aos="fade-left"
                              data-aos-anchor="#example-anchor"
@@ -71,20 +75,7 @@
                              data-aos-duration="400">
 
                             <table class="tb-list" id="result">
-                                <tr style="border:1px dashed black;">
-                                    <td class="td-icon-contract"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                                    <td class="td-desc-contract"><div class="td-desc-list-contract">BENFICA BARUERI TRANSPORTE E TURISMO </div></td>
-                                    <td class="td-contrato-contract">' . $numero . '</td>
-                                    <td class="td-tipo-contract">' . $numero . '</td>
-                                    <td class="td-data-contract">' . $vencimento . '</td>
-                                </tr>
-                                   <tr>
-                                    <td class="td-icon-contract"><img src="../images/editar_contrato.png" class="img-icon-list" alt="contrato-list"></th>
-                                    <td class="td-desc-contract"><div class="td-desc-list-contract">BENFICA BARUERI TRANSPORTE E TURISMO </div></td>
-                                    <td class="td-contrato-contract">' . $numero . '</td>
-                                    <td class="td-tipo-contract">' . $numero . '</td>
-                                    <td class="td-data-contract">' . $vencimento . '</td>
-                                </tr>
+                                
                             </table>
                         </div>
                        
@@ -96,6 +87,25 @@
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();
+        </script>
+        
+        <script>
+             $(document).ready(function () {
+                document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                callApi();
+            });
+
+            function callApi() {
+                $.ajax({
+                    url: "api/api.php",
+                    method: "post",
+                    data: {request: "meus_contratos"},
+                    success: function (data)
+                    {
+                        document.getElementById("result").innerHTML = data;
+                    }
+                });
+            }
         </script>
     </body>
 </html>

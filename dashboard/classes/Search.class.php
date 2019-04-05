@@ -47,8 +47,10 @@ class Search {
 
             $login = str_replace("'", "", $login);
             $login = str_replace('"', "", $login);
-            $sqll = 'SELECT ID_LOGIN, SENHA_LOGIN, ID_TIPO_ACESSO_LOGIN, ID_USUARIO_LOGIN, USUARIO.NOME_USUARIO FROM LOGIN 
-                     INNER JOIN USUARIO ON LOGIN.ID_USUARIO_LOGIN = USUARIO.ID_USUARIO 
+            $sqll = 'SELECT ID_LOGIN, SENHA_LOGIN, ID_TIPO_ACESSO_LOGIN, ID_USUARIO_LOGIN, USUARIO.NOME_USUARIO,
+                     TIPO_ACESSO.DESC_TIPO_ACESSO FROM LOGIN 
+                     INNER JOIN USUARIO ON LOGIN.ID_USUARIO_LOGIN = USUARIO.ID_USUARIO INNER JOIN TIPO_ACESSO ON
+                     LOGIN.ID_TIPO_ACESSO_LOGIN = TIPO_ACESSO.ID_TIPO_ACESSO
                      WHERE USUARIO_LOGIN = "' . $login . '" ';
             $p_sqll = Conexao::getInstance()->prepare($sqll);
             $p_sqll->execute();
@@ -60,12 +62,14 @@ class Search {
                     $login = $dados->ID_USUARIO_LOGIN;
                     $nivel = $dados->ID_TIPO_ACESSO_LOGIN;
                     $usuario = $dados->NOME_USUARIO;
+                    $tipo_acesso = $dados->DESC_TIPO_ACESSO;
                     $_SESSION['idlogin'] = $idlogin;
 
                     if ($senha == $senhas) {
                         $_SESSION['login'] = $login;
                         $_SESSION['nivel'] = $nivel;
                         $_SESSION['usuario'] = $usuario;
+                        $_SESSION['tipo_acesso'] = $tipo_acesso;
 
                         /*
                           $ins = "INSERT INTO `LOG`(`DATA_LOG`, `HORA_LOG`, `USUARIO_LOG`, `IP_LOG`, `ID_TIPO_LOG`)"
