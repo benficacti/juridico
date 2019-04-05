@@ -1,3 +1,22 @@
+
+<?php
+session_start();
+
+if ((!isset($_SESSION['login']) == true) and ( !isset($_SESSION['senha']) == true) and ( !isset($_SESSION['nivel']) == true)) {
+
+
+
+    unset($_SESSION['login']);
+    unset($_SESSION['senha']);
+    header('location:login1.php');
+}
+
+
+$logado = $_SESSION['login'];
+$nivel = $_SESSION['nivel'];
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>

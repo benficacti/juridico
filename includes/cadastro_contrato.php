@@ -27,11 +27,11 @@
                     <div class="form-contrato tipo_contrato">
                         <label class="title-option-contrato"> Tipo Contrato:</label>
                         <label class="input-radio-contrato">
-                            <input type="radio" id="rd_publico" name="radio-group" checked>
+                            <input type="radio" id="rd_publico" name="radio-group" value="1">
                             <label for="rd-publico" class="rd-label-contrato">Público</label>
                         </label>
                         <label class="input-radio-contrato">
-                            <input type="radio" id="rd_privado" name="radio-group">
+                            <input type="radio" id="rd_privado" name="radio-group" value="2">
                             <label for="rd-privado" class="rd-label-contrato">Privado</label>
 
                         </label>
@@ -62,15 +62,15 @@
                 <div class="line-contrato">
                     <div class="form-contrato valorcontrato">
                         <label class="title-option-contrato">Valor Contrato: </label>
-                        <input type="text" class="input-contrato input-auto-valor" id="valor_contrato"  placeholder="Valor Contrato" autocomplete="off">
+                        <input type="text" class="input-contrato input-auto-valor" id="valor_contrato"  placeholder="Valor Contrato" autocomplete="off" value=""   onkeyup="calcular();">
                     </div> 
                     <div class="form-contrato parcela">
                         <label class="title-option-contrato">Parcelas </label>
-                        <input type="text" class="input-contrato input-auto-valor" id="parcela"  placeholder="Parcelas" autocomplete="off">
+        <input type="text" class="input-contrato input-auto-valor" id="parcela"  placeholder="Parcelas" autocomplete="off" value="1"  onchange="calcular();">
                     </div> 
                     <div class="form-contrato valorparcela">
                         <label class="title-option-contrato">Valor Parcela: </label>
-                        <input type="text" class="input-contrato input-auto-valorparcela" id="valor_parcela"  placeholder="Valor Parcela" autocomplete="off" readonly="readonly">
+                        <input type="text" class="input-contrato input-auto-valorparcela" id="valor_parcela"  placeholder="Valor Parcela" autocomplete="off" readonly="readonly" value="">
                     </div> 
                 </div>
                 <div class="line-contrato">
@@ -80,7 +80,7 @@
                     </div> 
                     <div class="form-contrato parcelasfinalizadas">
                         <label class="title-option-contrato">Parcelas Finalizadas: </label>
-                        <input type="text" class="input-contrato input-auto-parcelasfinalizadas" id="parcelas_finalizadas"  placeholder="Parc. Finalizadas" autocomplete="off">
+                        <input type="text" class="input-contrato input-auto-parcelasfinalizadas" id="parcelas_finalizadas"  placeholder="Parc. Finalizadas" autocomplete="off" value="0"  onchange="calcular();">
                     </div> 
                 </div>
                 <div class="line-contrato">
@@ -108,10 +108,10 @@
         <script  type="text/javascript">
 
             $(function () {
-                $('#valor_contrato').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-                $('#valor_parcela').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-                $('#valor_parcela').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-                $('#valor_parcela').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+                $('#valor_contrato').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+                $('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+                $('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+                $('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
             })
             function callApi() {
                 var num_contrato = $("#numero_contrato").val();
@@ -166,6 +166,26 @@
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();
+        </script>
+        <script>
+             function calcular() {
+                var valor_contrato = (document.getElementById('valor_contrato').value);
+                valor_contrato = valor_contrato.replace("R$ ","");
+                valor_contrato = parseInt(valor_contrato);
+                var qtd_parcela = parseInt((document.getElementById('parcela').value).replace(",", "."));
+                var parcelas = valor_contrato / qtd_parcela;
+                document.getElementById('valor_parcela').value = ((parcelas)).toFixed(2);
+                
+                var valor_parcelas = (document.getElementById('valor_parcela').value);
+                valor_parcelas = parseFloat(valor_parcelas).toFixed(2);
+                var parcelas_finalizadas = (document.getElementById('parcelas_finalizadas').value);
+                parcelas_finalizadas = parseInt(parcelas_finalizadas);
+                var total_finalizado = valor_parcelas * parcelas_finalizadas;
+                var total_final = total_finalizado +" de "+valor_contrato;
+                document.getElementById('total_finalizado').value = (total_final);
+                
+                
+            }
         </script>
 
     </body>

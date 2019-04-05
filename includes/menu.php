@@ -4,5 +4,5 @@
     <li><a href="apresentacao/cadastraContrato.php" target="iframe" id="administracao">Administração</a></li>
 </ul>  
 <ul class="sair">
-    <li><a href="#" class="botao">Sair</a></li>
+    <li><a href="sair.php" class="botao">Sair</a></li>
 </ul>
