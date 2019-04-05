@@ -47,7 +47,7 @@ class Insert {
             $idTipoContrato = $contrato->get_idTipoContrato(); // PUBLICO OU PRIVADO
             $contratanteContrato = $contrato->get_contratanteContrato();
             $contratadoContrato = $contrato->get_contratadoContrato();
-            $concorrencia = $contrato->get_concorrenciaContrato();
+            $concorrenciaContrato = $contrato->get_concorrenciaContrato();
             $inicioVigenciaContrato = $contrato->get_inicioVigenciaContrato();
             $finalVigenciaContrato = $contrato->get_finalVigenciaContrato();
             $valorContrato = $contrato->get_valorContrato();

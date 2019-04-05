@@ -144,7 +144,7 @@
                 if (garantia.length > 0 || status_garantia !== '1') {
                     document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
                     $.ajax({
-                        url: "../api/api.php",
+                        url: "api/api.php",
                         method: "post",
                         data: {request: "adicionar_garantia",
                             status_garantia: status_garantia,
