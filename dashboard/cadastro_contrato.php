@@ -169,6 +169,7 @@ session_start();
                 $("#inicio_vigencia").mask("99/99/9999");
                 $("#fim_vigencia").mask("99/99/9999");
                 $("#data_pag_parcela").mask("99/99/9999");
+                   $("#vencimento").mask("99/99/9999");
                 $('#result').on('click', function () {
                     //NUMERO CONTRATO
                     if ($("#numero_contrato").is(":focus")) {
@@ -307,6 +308,7 @@ session_start();
                     var total_finalizado = $("#total_finalizado").val();
                     var vencimento = $("#vencimento").val();
                     var tipo_contrato = $("#tipo_contrato").val();
+                    
                     //NUMERO CONTRATO
                     if (num_contrato.length <= 0) {
                         $("#input-group-contract-numero").addClass("input-group-contract-error");
@@ -356,7 +358,7 @@ session_start();
                         $("#input-group-contract-parcelas").removeClass("input-group-contract-error");
                     }
                     //VALOR PARCELAS
-                    if (valor_parcela.length <= 0 || valor.parcela === "NaN") {
+                    if (valor_parcela.length <= 0 || valor_parcela === "NaN") {
                         $("#input-group-contract-valorparc").addClass("input-group-contract-error");
                     } else {
                         $("#input-group-contract-valorparc").removeClass("input-group-contract-error");
@@ -374,7 +376,7 @@ session_start();
                         $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
                     }
                     //TOTAL FINALIZADO
-                    if (total_finalizado.length <= 0 || total_finalizado.parcela === "NaN de NaN") {
+                    if (total_finalizado.length <= 0 || total_finalizado === "NaN de NaN") {
                         $("#input-group-contract-totalfim").addClass("input-group-contract-error");
                     } else {
                         $("#input-group-contract-totalfim").removeClass("input-group-contract-error");
@@ -393,11 +395,12 @@ session_start();
                         $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
                     }
-                    if (num_contrato.length > 0 && nome_contratante > 0 && nome_contratada > 0
-                            && nome_concorrencia > 0 && inicio_vigencia > 0 && fim_vigencia > 0
-                            && valor_contrato > 0 && parcela > 0 && valor_parcela > 0
-                            && data_pag_parcela > 0 && parcelas_finalizadas > 0 && total_finalizado > 0
-                            && vencimento > 0) {
+              
+                    if (num_contrato.length > 0 && nome_contratante.length > 0 && nome_contratada.length > 0
+                            && nome_concorrencia.length > 0 && inicio_vigencia.length > 0 && fim_vigencia.length > 0
+                            && valor_contrato.length > 0 && parcela.length > 0 && valor_parcela.length > 0
+                            && data_pag_parcela.length > 0 && parcelas_finalizadas.length > 0 && total_finalizado.length > 0
+                            && vencimento.length > 0) {
                         document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
                         $.ajax({
                             url: "api/api.php",
@@ -457,10 +460,15 @@ session_start();
                 var valor_parcelas = (document.getElementById('valor_parcela').value);
                 valor_parcelas = parseFloat(valor_parcelas).toFixed(2);
                 var parcelas_finalizadas = (document.getElementById('parcelas_finalizadas').value);
-                parcelas_finalizadas = parseInt(parcelas_finalizadas);
-                var total_finalizado = valor_parcelas * parcelas_finalizadas;
-                var total_final = total_finalizado + " de " + valor_contrato;
-                document.getElementById('total_finalizado').value = (total_final);
+                if (parcelas_finalizadas <= parcelas) {
+                    parcelas_finalizadas = parseInt(parcelas_finalizadas);
+                    var total_finalizado = valor_parcelas * parcelas_finalizadas;
+                    var total_final = total_finalizado + " de " + valor_contrato;
+                    document.getElementById('total_finalizado').value = (total_final);
+                } else {
+                    $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
+                }
+
 
 
             }

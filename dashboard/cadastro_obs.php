@@ -146,7 +146,7 @@
                     if (obs.length > 0 || status_obs !== '1') {
                         document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
                         $.ajax({
-                            url: "../api/api.php",
+                            url: "api/api.php",
                             method: "post",
                             data: {request: "adicionar_obs",
                                 status_obs: status_obs,

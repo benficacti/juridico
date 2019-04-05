@@ -66,17 +66,9 @@ session_start();
                             </select>
                         </div>
                     </div>
-                    <div class="table-list" >
+                    <div class="table-list" id="result" >
                         <!--CONTEUDO-->
-                        <div class="listtb"  data-aos="fade-left"
-                             data-aos-anchor="#example-anchor"
-                             data-aos-offset="400"
-                             data-aos-duration="400">
-
-                            <table class="tb-list" id="result">
-                                
-                            </table>
-                        </div>
+              
                        
                     </div>
                 </div>

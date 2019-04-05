@@ -141,7 +141,7 @@
                 if (objeto.length > 0 || status_objeto !== '1') {
                     document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
                     $.ajax({
-                        url: "../api/api.php",
+                        url: "api/api.php",
                         method: "post",
                         data: {request: "adicionar_objeto",
                             status_objeto: status_objeto,
