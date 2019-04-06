@@ -98,6 +98,7 @@
                 $("#input-group-login-senha").removeClass("input-group-login-error");
             }
             if (login.length > 0 && senha.length > 0) {
+                document.getElementById("entrar").value = "CONECTANDO...";
                 $.ajax({
                     url: "api/api.php",
                     method: "post",
@@ -113,11 +114,15 @@
                         } else if (typeof res[0] !== "undefined" && res[0] == "01") {
                             $("#input-group-login-user").addClass("input-group-login-error");
                             $("#input-group-login-senha").addClass("input-group-login-error");
+                            document.getElementById("entrar").value = "ENTRAR";
                         } else {
                             $("#input-group-login-senha").addClass("input-group-login-error");
+                            document.getElementById("entrar").value = "ENTRAR";
                         }
                     }
                 });
+            } else {
+                document.getElementById("entrar").value = "ENTRAR";
             }
         }
     </script>
