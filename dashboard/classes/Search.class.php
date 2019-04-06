@@ -42,6 +42,7 @@ class Search {
     }
 
     public function loginAuth($login, $senha) {
+        
         try {
 
 
