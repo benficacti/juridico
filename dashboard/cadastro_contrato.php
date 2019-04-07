@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION['login'])) {
+    header('Location: login.php');
+} else {
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
@@ -51,7 +56,7 @@ session_start();
                     <div class="form-contract">
                         <label class="title-option-contract">Nº CONTRATO:</label>
                         <div class="input-group-contract input-group-login-active"  id="input-group-contract-numero">
-                            <input type="text" class="input-contract" id="numero_contrato" placeholder="Nº Contrato" autocomplete="off" >     
+                            <input type="text" class="input-contract" id="numero_contrato" placeholder="Nº Contrato" autocomplete="nope" >     
                         </div>
                     </div>
                     <div class="form-contract">
@@ -73,13 +78,13 @@ session_start();
                     <div class="form-contract">
                         <label class="title-option-contract">CONTRATANTE:</label>
                         <div class="input-group-contract group-contratante"  id="input-group-contract-contratante">
-                            <input type="text" class="input-contract" id="nome_contratante" placeholder="Nome Contratante" autocomplete="nope" >     
+                            <input type="text" class="input-contract" id="nome_contratante" placeholder="Nome Contratante" autocomplete="nope" autocomplete="off"  >     
                         </div>
                     </div>
                     <div class="form-contract">
                         <label class="title-option-contract">CONTRATADA:</label>
                         <div class="input-group-contract group-contratante pright"  id="input-group-contract-contratada">
-                            <input type="text" class="input-contract" id="nome_contratada" placeholder="Nome Contratada" autocomplete="nope" >     
+                            <input type="text" class="input-contract" id="nome_contratada" placeholder="Nome Contratada" autocomplete="nope" autocomplete="off" >     
                         </div>
                     </div>
                 </div>
@@ -87,7 +92,7 @@ session_start();
                     <div class="form-contract">
                         <label class="title-option-contract">CONCORRÊNCIA:</label>
                         <div class="input-group-contract group-concorrencia"  id="input-group-contract-concorrencia">
-                            <input type="text" class="input-contract" id="nome_concorrencia" placeholder="Nome Concorrência" autocomplete="nope" >     
+                            <input type="text" class="input-contract" id="nome_concorrencia" placeholder="Nome Concorrência" autocomplete="nope"autocomplete="off"  >     
                         </div>
                     </div>
                     <div class="form-contract">
@@ -166,10 +171,11 @@ session_start();
 
         <script  type="text/javascript">
             $(document).ready(function () {
+                $('#item_cadastro_contrato').addClass('item-active');
                 $("#inicio_vigencia").mask("99/99/9999");
                 $("#fim_vigencia").mask("99/99/9999");
                 $("#data_pag_parcela").mask("99/99/9999");
-                   $("#vencimento").mask("99/99/9999");
+                $("#vencimento").mask("99/99/9999");
                 $('#result').on('click', function () {
                     //NUMERO CONTRATO
                     if ($("#numero_contrato").is(":focus")) {
@@ -308,7 +314,7 @@ session_start();
                     var total_finalizado = $("#total_finalizado").val();
                     var vencimento = $("#vencimento").val();
                     var tipo_contrato = $("#tipo_contrato").val();
-                    
+
                     //NUMERO CONTRATO
                     if (num_contrato.length <= 0) {
                         $("#input-group-contract-numero").addClass("input-group-contract-error");
@@ -395,13 +401,13 @@ session_start();
                         $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
                     }
-              
+
                     if (num_contrato.length > 0 && nome_contratante.length > 0 && nome_contratada.length > 0
                             && nome_concorrencia.length > 0 && inicio_vigencia.length > 0 && fim_vigencia.length > 0
                             && valor_contrato.length > 0 && parcela.length > 0 && valor_parcela.length > 0
                             && data_pag_parcela.length > 0 && parcelas_finalizadas.length > 0 && total_finalizado.length > 0
                             && vencimento.length > 0) {
-                        document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                        document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
                         $.ajax({
                             url: "api/api.php",
                             method: "post",
@@ -424,7 +430,7 @@ session_start();
                             },
                             success: function (data)
                             {
-                                alert(data);
+                                // alert(data);
                                 var res = data.split(";");
                                 if (typeof res[0] !== "undefined" && res[0] == "00") {
                                     location.href = "cadastro_garantia.php?idcontrato=" + res[1];
@@ -450,28 +456,51 @@ session_start();
         </script>
         <script>
             function calcular() {
-                var valor_contrato = (document.getElementById('valor_contrato').value);
-                valor_contrato = valor_contrato.replace("R$ ", "");
-                valor_contrato = parseInt(valor_contrato);
-                var qtd_parcela = parseInt((document.getElementById('parcela').value).replace(",", "."));
-                var parcelas = valor_contrato / qtd_parcela;
-                document.getElementById('valor_parcela').value = ((parcelas)).toFixed(2);
-
-                var valor_parcelas = (document.getElementById('valor_parcela').value);
-                valor_parcelas = parseFloat(valor_parcelas).toFixed(2);
-                var parcelas_finalizadas = (document.getElementById('parcelas_finalizadas').value);
-                if (parcelas_finalizadas <= parcelas) {
-                    parcelas_finalizadas = parseInt(parcelas_finalizadas);
-                    var total_finalizado = valor_parcelas * parcelas_finalizadas;
-                    var total_final = total_finalizado + " de " + valor_contrato;
-                    document.getElementById('total_finalizado').value = (total_final);
-                } else {
-                    $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
-                }
+                $(document).ready(function () {
 
 
+                    var valor_contrato = (document.getElementById('valor_contrato').value);
+                    valor_contrato = valor_contrato.replace("R$ ", "");
+                    var d = valor_contrato.toString();
+                    var nValor;
+                    if (d.length > 6) {
+                        valor_contrato = valor_contrato.replace(",", "");
+                        valor_contrato = valor_contrato.replace(".", "");
+                        nValor = valor_contrato.substring(0, valor_contrato.length - 2) + "." + valor_contrato.substring(valor_contrato.length - 2, valor_contrato.length);
+                        var qtd_parcela = parseInt((document.getElementById('parcela').value).replace(",", "."));
+                        var parcelas = nValor / qtd_parcela;
+                        document.getElementById('valor_parcela').value = ((parcelas)).toFixed(2);
+                        var valor_parcelas = (document.getElementById('valor_parcela').value);
+                        valor_parcelas = parseFloat(valor_parcelas).toFixed(2);
+                    } else {
+                        valor_contrato = valor_contrato.replace(",", ".");
+                        nValor = parseFloat(valor_contrato);
+                        var qtd_parcela = parseInt((document.getElementById('parcela').value).replace(",", "."));
+                        var parcelas = nValor / qtd_parcela;
+                        document.getElementById('valor_parcela').value = ((parcelas)).toFixed(2);
+                        var valor_parcelas = (document.getElementById('valor_parcela').value);
+                        valor_parcelas = parseFloat(valor_parcelas).toFixed(2);
+                    }
 
+                    var parcelas = (document.getElementById('parcelas_finalizadas').value);
+
+                    if (parcelas <= qtd_parcela) {
+                        parcelas = parseInt(parcelas);
+                        var total_finalizado = parseFloat(valor_parcelas) * parcelas;
+                        var total_final = total_finalizado + " de " + nValor;
+                        document.getElementById('total_finalizado').value = (total_final);
+                        $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
+                    } else {
+                        if (parcelas.length > 0) {
+                            $("#input-group-contract-parcfim").addClass("input-group-contract-error");
+                        } else {
+                            $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
+                        }
+
+                    }
+                });
             }
+
         </script>
 
     </body>

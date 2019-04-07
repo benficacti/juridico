@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['login'])){
+    header('Location: login.php');
+}else{
+ 
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
     <head>    
@@ -64,6 +72,7 @@
             </article>
         </div>
         <script  type="text/javascript">
+              $('#item_cadastro_contrato').addClass('item-active');
             $(document).ready(function () {
 
                 $('#rd-sim').click(function () {
@@ -144,7 +153,7 @@
                     }
 
                     if (obs.length > 0 || status_obs !== '1') {
-                        document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                        document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
                         $.ajax({
                             url: "api/api.php",
                             method: "post",
@@ -155,7 +164,7 @@
                             },
                             success: function (data)
                             {
-                                alert(data);
+                               // alert(data);
                                 var res = data.split(";");
                                 if (typeof res[0] !== "undefined" && res[0] == "00") {
                                     location.href = "finalizacao_contrato.php?idcontrato=" + res[1];

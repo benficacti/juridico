@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(isset($_SESSION['login'])){
+    header('Location: cadastro_contrato.php');
+}else{
+ 
+}
+
+?>
 
 <!DOCTYPE html
     <html lang="pt-br"> 
@@ -110,7 +119,7 @@
                     {
                         var res = data.split(";");
                         if (typeof res[0] !== "undefined" && res[0] == "00") {
-                            location.href = "painel.php";
+                            location.href = "cadastro_contrato.php";
                         } else if (typeof res[0] !== "undefined" && res[0] == "01") {
                             $("#input-group-login-user").addClass("input-group-login-error");
                             $("#input-group-login-senha").addClass("input-group-login-error");

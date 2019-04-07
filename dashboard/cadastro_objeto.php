@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['login'])){
+    header('Location: login.php');
+}else{
+ 
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
     <head>    
@@ -63,6 +71,7 @@
             </article>
         </div>
         <script  type="text/javascript">
+              $('#item_cadastro_contrato').addClass('item-active');
             $('#rd-sim').click(function () {
                 if ($('#rd-sim').is(':checked')) {
                     document.getElementById('status').value = '1';
@@ -139,7 +148,7 @@
                     $("#input-group-contract-objeto").removeClass("input-group-contract-error");
                 }
                 if (objeto.length > 0 || status_objeto !== '1') {
-                    document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                    document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
                     $.ajax({
                         url: "api/api.php",
                         method: "post",
@@ -150,7 +159,7 @@
                         },
                         success: function (data)
                         {
-                            alert(data);
+                           // alert(data);
                             var res = data.split(";");
                             if (typeof res[0] !== "undefined" && res[0] == "00") {
                                 location.href = "cadastro_obs.php?idcontrato=" + res[1];

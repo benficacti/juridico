@@ -1,5 +1,11 @@
-<?php 
+<?php
 session_start();
+if(!isset($_SESSION['login'])){
+    header('Location: login.php');
+}else{
+ 
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
@@ -82,6 +88,7 @@ session_start();
         
         <script>
              $(document).ready(function () {
+                $('#item_meus_contrato').addClass('item-active');
                 document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
                 callApi();
             });

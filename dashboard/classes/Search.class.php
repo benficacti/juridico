@@ -42,7 +42,7 @@ class Search {
     }
 
     public function loginAuth($login, $senha) {
-        
+
         try {
 
 
@@ -234,7 +234,9 @@ class Search {
         try {
             $mes = 1;
 
-            $sql = 'SELECT * FROM CONTRATO WHERE ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+            $sql = 'SELECT * FROM CONTRATO '
+                    . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                    . ' WHERE ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
@@ -250,17 +252,18 @@ class Search {
                         $vencimento = $dados->VENCIMENTO_CONTRATO;
                         $numero = $dados->NUMERO_CONTRATO;
                         $contratante = $dados->CONTRATANTE_CONTRATO;
+                        $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
                         //  echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
 
 
 
 
                         echo '<tr>
-                    <td class = "td-icon-contract"><img src = "../images/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></th>
-                    <td class = "td-desc-contract"><div class = "td-desc-list">' . $contratante . '</div></td>
+                    <td class = "td-icon-contract"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></th>
+                    <td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
                     <td class = "td-contrato-contract">' . $numero . '</td>
-                    <td class = "td-tipo-contract">' . $numero . '</td>
-                    <td class = "td-data-contract">' . $vencimento . '</td>
+                    <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
+                    <td class = "td-data-contract">' . Search::formateDateBR($vencimento) . '</td>
                     </tr>
                
                     ';
@@ -279,6 +282,10 @@ class Search {
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
+    }
+    public function formateDateBR($i){
+        $l = explode('-', $i);
+        return $l[2] . "/" . $l[1]."/".$l[0];
     }
 
     /*

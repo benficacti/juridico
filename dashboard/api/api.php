@@ -11,7 +11,7 @@ $request = (null !== (filter_input(INPUT_POST, 'request'))) ? filter_input(INPUT
 
 
 if ($request == "cadastro_contrato") {
-    sleep(rand(1));
+    sleep(rand(1, 3));
     $_numeroContrato = (null !== (filter_input(INPUT_POST, 'numero'))) ? filter_input(INPUT_POST, 'numero') : null;
     $_contratanteContrato = (null !== (filter_input(INPUT_POST, 'nome_contratante'))) ? filter_input(INPUT_POST, 'nome_contratante') : null;
     $_contratadoContrato = (null !== (filter_input(INPUT_POST, 'nome_contratada'))) ? filter_input(INPUT_POST, 'nome_contratada') : null;
@@ -33,7 +33,7 @@ if ($request == "cadastro_contrato") {
 }
 
 if ($request == 'adicionar_garantia') {
-    sleep(rand(1));
+    sleep(rand(1, 3));
     $_idContratoGarantia = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_statusGarantia = (null !== (filter_input(INPUT_POST, 'status_garantia'))) ? filter_input(INPUT_POST, 'status_garantia') : null;
     $_descGarantia = (null !== (filter_input(INPUT_POST, 'garantia'))) ? filter_input(INPUT_POST, 'garantia') : null;
@@ -45,7 +45,7 @@ if ($request == 'adicionar_garantia') {
 }
 
 if ($request == 'adicionar_objeto') {
-    sleep(rand(1));
+    sleep(rand(1, 3));
     $_idContratoObejto = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_status_objeto = (null !== (filter_input(INPUT_POST, 'status_objeto'))) ? filter_input(INPUT_POST, 'status_objeto') : null;
     $_descObejto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : null;
@@ -57,7 +57,7 @@ if ($request == 'adicionar_objeto') {
 }
 
 if ($request == 'adicionar_obs') {
-    sleep(rand(1));
+    sleep(rand(1, 3));
     $_idContratoObs = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_status_obs = (null !== (filter_input(INPUT_POST, 'status_obs'))) ? filter_input(INPUT_POST, 'status_obs') : null;
     $_descObs = (null !== (filter_input(INPUT_POST, 'obs'))) ? filter_input(INPUT_POST, 'obs') : null;
@@ -69,7 +69,6 @@ if ($request == 'adicionar_obs') {
 }
 
 if (($request == 'login') && ($request !== 0)) {
-    sleep(1);
     $login = (null !== (filter_input(INPUT_POST, 'login'))) ? filter_input(INPUT_POST, 'login') : 0;
     $senha = (null !== (filter_input(INPUT_POST, 'senha'))) ? filter_input(INPUT_POST, 'senha') : 0;
     echo Search::loginAuth($login, $senha); //00; = efetuado / 01; usuario incorreto /02; senha incorreta
