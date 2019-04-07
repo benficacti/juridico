@@ -270,7 +270,6 @@ if (!isset($_SESSION['login'])) {
                         $("#input-group-contract-vencimento").removeClass("input-group-contract-active");
                     }
                 });
-
                 $(function () {
                     $('#valor_contrato').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
                     //('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
@@ -278,7 +277,6 @@ if (!isset($_SESSION['login'])) {
                 $("#cadastrar_contrato").click(function () {
                     callApi();
                 });
-
                 $('#rd-publico').click(function () {
                     if ($('#rd-publico').is(':checked')) {
                         document.getElementById('tipo_contrato').value = 1;
@@ -294,7 +292,6 @@ if (!isset($_SESSION['login'])) {
                         $('#nome_concorrencia').attr('readonly', true);
                         document.getElementById('nome_concorrencia').value = "Contrato Privado BBTT";
                         $("#input-group-contract-concorrencia").removeClass("input-group-contract-error");
-
                         $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
                     }
@@ -314,7 +311,6 @@ if (!isset($_SESSION['login'])) {
                     var total_finalizado = $("#total_finalizado").val();
                     var vencimento = $("#vencimento").val();
                     var tipo_contrato = $("#tipo_contrato").val();
-
                     //NUMERO CONTRATO
                     if (num_contrato.length <= 0) {
                         $("#input-group-contract-numero").addClass("input-group-contract-error");
@@ -401,54 +397,56 @@ if (!isset($_SESSION['login'])) {
                         $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
                     }
-
-                    if (num_contrato.length > 0 && nome_contratante.length > 0 && nome_contratada.length > 0
-                            && nome_concorrencia.length > 0 && inicio_vigencia.length > 0 && fim_vigencia.length > 0
-                            && valor_contrato.length > 0 && parcela.length > 0 && valor_parcela.length > 0
-                            && data_pag_parcela.length > 0 && parcelas_finalizadas.length > 0 && total_finalizado.length > 0
-                            && vencimento.length > 0) {
-                        document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
-                        $.ajax({
-                            url: "api/api.php",
-                            method: "post",
-                            data: {request: "cadastro_contrato",
-                                numero: num_contrato,
-                                nome_contratante: nome_contratante,
-                                nome_contratada: nome_contratada,
-                                nome_contratante: nome_contratante,
-                                nome_concorrencia: nome_concorrencia,
-                                inicio_vigencia: inicio_vigencia,
-                                fim_vigencia: fim_vigencia,
-                                valor_contrato: valor_contrato,
-                                parcela: parcela,
-                                valor_parcela: valor_parcela,
-                                data_pag_parcela: data_pag_parcela,
-                                total_finalizado: total_finalizado,
-                                vencimento: vencimento,
-                                parcelas_finalizadas: parcelas_finalizadas,
-                                tipo_contrato: tipo_contrato
-                            },
-                            success: function (data)
-                            {
-                                // alert(data);
-                                var res = data.split(";");
-                                if (typeof res[0] !== "undefined" && res[0] == "00") {
-                                    location.href = "cadastro_garantia.php?idcontrato=" + res[1];
-                                } else {
-                                    alert("erro de comunicação com servidor!")
+                    if (parcelas_finalizadas <= parcela) {
+                        $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
+                        if (num_contrato.length > 0 && nome_contratante.length > 0 && nome_contratada.length > 0
+                                && nome_concorrencia.length > 0 && inicio_vigencia.length > 0 && fim_vigencia.length > 0
+                                && valor_contrato.length > 0 && parcela.length > 0 && valor_parcela.length > 0
+                                && data_pag_parcela.length > 0 && parcelas_finalizadas.length > 0 && total_finalizado.length > 0
+                                && vencimento.length > 0) {
+                            document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                            $.ajax({
+                                url: "api/api.php",
+                                method: "post",
+                                data: {request: "cadastro_contrato",
+                                    numero: num_contrato,
+                                    nome_contratante: nome_contratante,
+                                    nome_contratada: nome_contratada,
+                                    nome_contratante: nome_contratante,
+                                    nome_concorrencia: nome_concorrencia,
+                                    inicio_vigencia: inicio_vigencia,
+                                    fim_vigencia: fim_vigencia,
+                                    valor_contrato: valor_contrato,
+                                    parcela: parcela,
+                                    valor_parcela: valor_parcela,
+                                    data_pag_parcela: data_pag_parcela,
+                                    total_finalizado: total_finalizado,
+                                    vencimento: vencimento,
+                                    parcelas_finalizadas: parcelas_finalizadas,
+                                    tipo_contrato: tipo_contrato
+                                },
+                                success: function (data)
+                                {
+                                    // alert(data);
+                                    var res = data.split(";");
+                                    if (typeof res[0] !== "undefined" && res[0] == "00") {
+                                        location.href = "cadastro_garantia.php?idcontrato=" + res[1];
+                                    } else {
+                                        alert("erro de comunicação com servidor!")
+                                    }
+                                    //window.location.href = "home.php";//
+                                    // document.getElementById("result").innerHTML = data;
                                 }
-                                //window.location.href = "home.php";//
-                                // document.getElementById("result").innerHTML = data;
-                            }
-                        });
-                    } else {
+                            });
+                        } else {
 
+                        }
+                    } else {
+                        $("#input-group-contract-parcfim").addClass("input-group-contract-error");
                     }
                 }
 
             });
-
-
         </script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
@@ -483,7 +481,6 @@ if (!isset($_SESSION['login'])) {
                     }
 
                     var parcelas = (document.getElementById('parcelas_finalizadas').value);
-
                     if (parcelas <= qtd_parcela) {
                         parcelas = parseInt(parcelas);
                         var total_finalizado = parseFloat(valor_parcelas) * parcelas;

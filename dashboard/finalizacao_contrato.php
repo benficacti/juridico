@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['login'])) {
+    header('Location: login.php');
+} else {
+    
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
     <head>    
@@ -38,13 +46,40 @@
         <!-- BOX CONTEUDO DA PAG -->
 
         <div class="box-conteudo">
-            CONTRATO FINALIZADO
+            <input type="hidden" id="idcontrato" value="<?php echo $_GET['idcontrato'] ?>">
+            <article class="article-contract-fim" data-aos="zoom-in" id="result">
+
+            </article>
+
         </div>
-     
+
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();
         </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#item_cadastro_contrato').addClass('item-active');
 
+                callApi();
+
+                function callApi() {
+                    $.ajax({
+                        url: "api/api.php",
+                        method: "post",
+                        data: {request: "info_contrato",
+                            contrato: $("#idcontrato").val(),
+                        },
+                        success: function (data)
+                        {
+                            document.getElementById("result").innerHTML = data;
+
+
+                        }
+                    });
+                }
+            });
+
+        </script>
     </body>
 </html>

@@ -283,9 +283,177 @@ class Search {
             echo $exc->getTraceAsString();
         }
     }
-    public function formateDateBR($i){
+
+    public function infoContrato($contrato) {
+        try {
+            $mes = 1;
+
+            $sql = 'SELECT * FROM CONTRATO '
+                    . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                     . ' INNER JOIN OBJETO ON contrato.ID_OBJETO_CONTRATO = objeto.ID_OBJETO'
+                     . ' INNER JOIN GARANTIA ON contrato.ID_GARANTIA_CONTRATO = garantia.ID_GARANTIA'
+                     . ' INNER JOIN OBSERVACOES_EXIGENCIAS ON contrato.ID_OBSERVACOES_EXIGENCIAS_CONTRATO = OBSERVACOES_EXIGENCIAS.ID_OBSERVACOES_EXIGENCIAS'
+                    . ' WHERE ID_LOGIN_CONTRATO = ' . $_SESSION['login'] . ' AND ID_CONTRATO = ' . $contrato;
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $vencimento = $dados->VENCIMENTO_CONTRATO;
+                        $numero = $dados->NUMERO_CONTRATO;
+                        $contratante = $dados->CONTRATANTE_CONTRATO;
+                        $contratada = $dados->CONTRATADO_CONTRATO;
+                        $concorrencia = $dados->CONCORRENCIA_CONTRATO;
+                        $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
+                        $valorContrato = $dados->VALOR_CONTRATO;
+                        $quantidadeParcelaContrato = $dados->QUANTIDADE_PARCELAS_CONTRATO;
+                        $quantidadeParcelasPagasContrato = $dados->QUANTIDADE_PARCELAS_PAGAS_CONTRATO;
+                        $valorParcelasContrato = $dados->VALOR_DAS_PARCELAS_CONTRATO;
+                        $inicioVigencia = $dados->INICIO_VIGENCIA_CONTRATO;
+                        $fimVigencia = $dados->FINAL_VIGENCIA_CONTRATO;
+                        $dataPagamentoParcela = $dados->DATA_PAGAMENTO_DAS_PARCELAS_CONTRATO;
+                        $descObjeto = $dados->DESC_OBJETO;
+                        $descGarantia = $dados->DESC_GARANTIA;
+                        $descObservacao = $dados->DESC_OBSER_EXIGEN;
+                        echo ' <header class="header-contract-fim">
+                    <label class="title-contract-fim">CONTRATO FINALIZADO</label>
+                </header>
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            NÚMERO CONTRATO:
+                            <span>' . $numero . '</span>
+                        </label>
+                    </div>
+
+                    <div class="form-contract-fim fright pright">
+                        <label class="title-info-contract">
+                            VENCIMENTO:
+                            <span>' . Search::formateDateBR($vencimento) . '</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            CONTRATANTE:
+                            <span>' . $contratante . '</span>
+                        </label>
+                    </div>
+
+                    <div class="form-contract-fim fright pright">
+                        <label class="title-info-contract">
+                            CONTRATADA:
+                            <span>' . $contratada . '</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            TIPO CONTRATO:
+                            <span>' . $descTipoContrato . '</span>
+                        </label>
+                    </div>
+
+                    <div class="form-contract-fim fright pright">
+                        <label class="title-info-contract">
+                            CONCORRÊNCIA:
+                            <span>'.$concorrencia.'</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            VALOR CONTRATO:
+                            <span>R$ '.$valorContrato.'</span>
+                        </label>
+                    </div>
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            QUANTIDADE DE PARCELAS:
+                            <span>'.$quantidadeParcelaContrato.'</span>
+                        </label>
+                    </div>
+                    <div class="form-contract-fim fright pright">
+                        <label class="title-info-contract">
+                            VALOR DAS PARCELAS:
+                            <span>R$ '.$valorParcelasContrato.'</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            QUANTIDADE DE PARCELAS PAGAS:
+                            <span>'.$quantidadeParcelasPagasContrato.'</span>
+                        </label>
+                    </div>
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            DATA PRIMEIRO PAGAMENTO:
+                            <span>'.Search::formateDateBR($dataPagamentoParcela).'</span>
+                        </label>
+                    </div>
+                    <div class="form-contract-fim fright pright">
+                        <label class="title-info-contract">
+                            ADITAMENTO:
+                            <span>NÃO</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            INICIO VIGÊNCIA:
+                            <span>'.Search::formateDateBR($inicioVigencia).'</span>
+                        </label>
+                    </div>
+                    <div class="form-contract-fim fright pright">
+                        <label class="title-info-contract">
+                            FIM VIGÊNCIA:
+                            <span>'.Search::formateDateBR($fimVigencia).'</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <p class="title-info-contract">
+                            GARANTIA:
+                            <span>'.$descGarantia.'</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            OBJETO:
+                            <span>'.$descObjeto.'</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            OBSERVAÇÃO:
+                            <span>'.$descObservacao.'</span>
+                        </label>
+                    </div>
+                </div>';
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function formateDateBR($i) {
         $l = explode('-', $i);
-        return $l[2] . "/" . $l[1]."/".$l[0];
+        return $l[2] . "/" . $l[1] . "/" . $l[0];
     }
 
     /*

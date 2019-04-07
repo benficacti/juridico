@@ -79,6 +79,12 @@ if ($request == 'meus_contratos') {
     echo Search::contratosProximoVencimento();
 }
 
+if ($request == 'info_contrato') {
+   $contrato = (null !== (filter_input(INPUT_POST, 'contrato'))) ? filter_input(INPUT_POST, 'contrato') : 0;
+    echo Search::infoContrato($contrato);
+}
+
+
 function formateDate($i) {
     $l = explode("/", $i);
     return $l[2] . '-' . $l[1] . '-' . $l[0];
