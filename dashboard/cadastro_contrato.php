@@ -484,6 +484,7 @@ if (!isset($_SESSION['login'])) {
                     if (parcelas <= qtd_parcela) {
                         parcelas = parseInt(parcelas);
                         var total_finalizado = parseFloat(valor_parcelas) * parcelas;
+                        ((total_finalizado)).toFixed(2);
                         var total_final = total_finalizado + " de " + nValor;
                         document.getElementById('total_finalizado').value = (total_final);
                         $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
