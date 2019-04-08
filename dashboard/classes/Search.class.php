@@ -274,7 +274,7 @@ class Search {
                         <div class="info-contract-panel">
                             <div class="title-info-contract-panel">
                                 <label class="lbl-info-line-panel">
-                                    <a href="ver_contrato.php?c=' . $idContrato . '"> VER CONTRATO </a>
+                                    <a href="ver_contrato.php?c=' . $idContrato . '&d=2"> VER CONTRATO </a>
                                 </label>
                             </div>
                         </div>
@@ -320,6 +320,7 @@ class Search {
                     <table class = "tb-list">';
 
                     foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $id_contrato = $dados->ID_CONTRATO;
                         $vencimento = $dados->VENCIMENTO_CONTRATO;
                         $numero = $dados->NUMERO_CONTRATO;
                         $contratante = $dados->CONTRATANTE_CONTRATO;
@@ -330,7 +331,7 @@ class Search {
 
 
                         echo '<tr>
-                    <td class = "td-icon-contract"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></th>
+                    <td class = "td-icon-contract"><a href="ver_contrato.php?c='.$id_contrato.'&d=1"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></a></th>
                     <td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
                     <td class = "td-contrato-contract">' . $numero . '</td>
                     <td class = "td-tipo-contract">' . $descTipoContrato . '</td>

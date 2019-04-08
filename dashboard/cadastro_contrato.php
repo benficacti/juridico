@@ -398,7 +398,7 @@ if (!isset($_SESSION['login'])) {
                         $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
                     }
-                    if (parcelas_finalizadas <= parcela) {
+                    if (parseInt(parcelas_finalizadas) <= parseInt(parcela)) {
                         $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
                         if (num_contrato.length > 0 && nome_contratante.length > 0 && nome_contratada.length > 0
                                 && nome_concorrencia.length > 0 && inicio_vigencia.length > 0 && fim_vigencia.length > 0

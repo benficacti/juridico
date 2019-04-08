@@ -47,7 +47,18 @@ if (!isset($_SESSION['login'])) {
             <input type="hidden" id="idcontrato" value="<?php echo $_GET['c'] ?>">
             <article class="article-contract-fim" data-aos="zoom-in" >
                 <header class="header-contract-fim">
-                    <label class="title-contract-fim"><a href="painel.php">Voltar ao Painel</a></label>
+                    <?php
+                    switch ($_GET['d']) {
+                        case 1:
+                            echo ' <label class="title-contract-fim"><a href="meus_contratos.php">Voltar ao Meus contratos</a></label>';
+                            break;
+                        case 2:
+                            echo'<label class="title-contract-fim"><a href="painel.php">Voltar ao Painel</a></label>';
+                            break;
+                        default:
+                            break;
+                    }
+                    ?>
                 </header>
                 <div id="result">
 
