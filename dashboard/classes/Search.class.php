@@ -230,7 +230,78 @@ class Search {
         }
     }
 
-    public function contratosProximoVencimento() {
+    public function proximosVencimentos() {
+        try {
+            $mes = 1;
+
+            $sql = 'SELECT * FROM CONTRATO '
+                    . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                    . ' WHERE ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $idContrato = $dados->ID_CONTRATO;
+                        $vencimento = $dados->VENCIMENTO_CONTRATO;
+                        $numero = $dados->NUMERO_CONTRATO;
+                        $contratante = $dados->CONTRATANTE_CONTRATO;
+                        $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
+
+                        echo ' <div class="line-contract-panel">
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . $numero . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <div class = "desc-contratante-panel"> ' . $contratante . '</div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . Search::formateDateBR($vencimento) . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <a href="ver_contrato.php?c=' . $idContrato . '"> VER CONTRATO </a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>';
+                    }
+                } else {
+
+                    echo '
+                    <div class="line-contract-panel">
+                        <div class="info-contract-panel merge-panel">
+                            <div class="title-info-contract-panel merge-panel" >
+                                <label class="lbl-info-line-panel merge-panel">
+                                    VOCÊ NÃO TEM CONTRATOS PROXIMOS DE VENCIMENTO
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    ';
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function meusContratos() {
         try {
             $mes = 1;
 
@@ -290,9 +361,9 @@ class Search {
 
             $sql = 'SELECT * FROM CONTRATO '
                     . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
-                     . ' INNER JOIN OBJETO ON contrato.ID_OBJETO_CONTRATO = objeto.ID_OBJETO'
-                     . ' INNER JOIN GARANTIA ON contrato.ID_GARANTIA_CONTRATO = garantia.ID_GARANTIA'
-                     . ' INNER JOIN OBSERVACOES_EXIGENCIAS ON contrato.ID_OBSERVACOES_EXIGENCIAS_CONTRATO = OBSERVACOES_EXIGENCIAS.ID_OBSERVACOES_EXIGENCIAS'
+                    . ' INNER JOIN OBJETO ON contrato.ID_OBJETO_CONTRATO = objeto.ID_OBJETO'
+                    . ' INNER JOIN GARANTIA ON contrato.ID_GARANTIA_CONTRATO = garantia.ID_GARANTIA'
+                    . ' INNER JOIN OBSERVACOES_EXIGENCIAS ON contrato.ID_OBSERVACOES_EXIGENCIAS_CONTRATO = OBSERVACOES_EXIGENCIAS.ID_OBSERVACOES_EXIGENCIAS'
                     . ' WHERE ID_LOGIN_CONTRATO = ' . $_SESSION['login'] . ' AND ID_CONTRATO = ' . $contrato;
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
@@ -315,9 +386,7 @@ class Search {
                         $descObjeto = $dados->DESC_OBJETO;
                         $descGarantia = $dados->DESC_GARANTIA;
                         $descObservacao = $dados->DESC_OBSER_EXIGEN;
-                        echo ' <header class="header-contract-fim">
-                    <label class="title-contract-fim">CONTRATO FINALIZADO</label>
-                </header>
+                        echo ' 
                 <div class="line-finally-contract">
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
@@ -359,7 +428,7 @@ class Search {
                     <div class="form-contract-fim fright pright">
                         <label class="title-info-contract">
                             CONCORRÊNCIA:
-                            <span>'.$concorrencia.'</span>
+                            <span>' . $concorrencia . '</span>
                         </label>
                     </div>
                 </div>
@@ -367,19 +436,19 @@ class Search {
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             VALOR CONTRATO:
-                            <span>R$ '.$valorContrato.'</span>
+                            <span>R$ ' . $valorContrato . '</span>
                         </label>
                     </div>
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             QUANTIDADE DE PARCELAS:
-                            <span>'.$quantidadeParcelaContrato.'</span>
+                            <span>' . $quantidadeParcelaContrato . '</span>
                         </label>
                     </div>
                     <div class="form-contract-fim fright pright">
                         <label class="title-info-contract">
                             VALOR DAS PARCELAS:
-                            <span>R$ '.$valorParcelasContrato.'</span>
+                            <span>R$ ' . $valorParcelasContrato . '</span>
                         </label>
                     </div>
                 </div>
@@ -388,13 +457,13 @@ class Search {
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             QUANTIDADE DE PARCELAS PAGAS:
-                            <span>'.$quantidadeParcelasPagasContrato.'</span>
+                            <span>' . $quantidadeParcelasPagasContrato . '</span>
                         </label>
                     </div>
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             DATA PRIMEIRO PAGAMENTO:
-                            <span>'.Search::formateDateBR($dataPagamentoParcela).'</span>
+                            <span>' . Search::formateDateBR($dataPagamentoParcela) . '</span>
                         </label>
                     </div>
                     <div class="form-contract-fim fright pright">
@@ -409,13 +478,13 @@ class Search {
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             INICIO VIGÊNCIA:
-                            <span>'.Search::formateDateBR($inicioVigencia).'</span>
+                            <span>' . Search::formateDateBR($inicioVigencia) . '</span>
                         </label>
                     </div>
                     <div class="form-contract-fim fright pright">
                         <label class="title-info-contract">
                             FIM VIGÊNCIA:
-                            <span>'.Search::formateDateBR($fimVigencia).'</span>
+                            <span>' . Search::formateDateBR($fimVigencia) . '</span>
                         </label>
                     </div>
                 </div>
@@ -423,7 +492,7 @@ class Search {
                     <div class="form-contract-fim">
                         <p class="title-info-contract">
                             GARANTIA:
-                            <span>'.$descGarantia.'</span>
+                            <span>' . $descGarantia . '</span>
                         </p>
                     </div>
                 </div>
@@ -431,7 +500,7 @@ class Search {
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             OBJETO:
-                            <span>'.$descObjeto.'</span>
+                            <span>' . $descObjeto . '</span>
                         </label>
                     </div>
                 </div>
@@ -439,7 +508,7 @@ class Search {
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             OBSERVAÇÃO:
-                            <span>'.$descObservacao.'</span>
+                            <span>' . $descObservacao . '</span>
                         </label>
                     </div>
                 </div>';

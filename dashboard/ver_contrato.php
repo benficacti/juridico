@@ -44,10 +44,10 @@ if (!isset($_SESSION['login'])) {
         <!-- BOX CONTEUDO DA PAG -->
 
         <div class="box-conteudo">
-            <input type="hidden" id="idcontrato" value="<?php echo $_GET['idcontrato'] ?>">
+            <input type="hidden" id="idcontrato" value="<?php echo $_GET['c'] ?>">
             <article class="article-contract-fim" data-aos="zoom-in" >
                 <header class="header-contract-fim">
-                    <label class="title-contract-fim">CONTRATO FINALIZADO</label>
+                    <label class="title-contract-fim"><a href="painel.php">Voltar ao Painel</a></label>
                 </header>
                 <div id="result">
 
@@ -62,7 +62,7 @@ if (!isset($_SESSION['login'])) {
         </script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $('#item_cadastro_contrato').addClass('item-active');
+                $('#item_painel_contrato').addClass('item-active');
 
                 callApi();
 

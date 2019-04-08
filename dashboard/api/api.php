@@ -23,7 +23,7 @@ if ($request == "cadastro_contrato") {
     $_valorDasParcelasContrato = (null !== (filter_input(INPUT_POST, 'valor_parcela'))) ? filter_input(INPUT_POST, 'valor_parcela') : null;
     $_dataPagamentoDasParcelasContrato = formateDate((null !== (filter_input(INPUT_POST, 'data_pag_parcela'))) ? filter_input(INPUT_POST, 'data_pag_parcela') : null);
     $_valorTotalPagoContrato = (null !== (filter_input(INPUT_POST, 'total_finalizado'))) ? filter_input(INPUT_POST, 'total_finalizado') : null;
-    $_vencimentoContrato =  formateDate((null !== (filter_input(INPUT_POST, 'vencimento'))) ? filter_input(INPUT_POST, 'vencimento') : null);
+    $_vencimentoContrato = formateDate((null !== (filter_input(INPUT_POST, 'vencimento'))) ? filter_input(INPUT_POST, 'vencimento') : null);
     $_quantidadeParcelasPagasContrato = (null !== (filter_input(INPUT_POST, 'parcelas_finalizadas'))) ? filter_input(INPUT_POST, 'parcelas_finalizadas') : null;
     $_idTipoContrato = (null !== (filter_input(INPUT_POST, 'tipo_contrato'))) ? filter_input(INPUT_POST, 'tipo_contrato') : null;
     if ($_numeroContrato !== null) {
@@ -76,14 +76,16 @@ if (($request == 'login') && ($request !== 0)) {
 
 
 if ($request == 'meus_contratos') {
-    echo Search::contratosProximoVencimento();
+    echo Search::meusContratos();
 }
 
 if ($request == 'info_contrato') {
-   $contrato = (null !== (filter_input(INPUT_POST, 'contrato'))) ? filter_input(INPUT_POST, 'contrato') : 0;
+    $contrato = (null !== (filter_input(INPUT_POST, 'contrato'))) ? filter_input(INPUT_POST, 'contrato') : 0;
     echo Search::infoContrato($contrato);
 }
-
+if ($request == 'proximos_vencimentos') {
+     Search::proximosVencimentos();
+}
 
 function formateDate($i) {
     $l = explode("/", $i);

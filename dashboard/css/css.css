@@ -1034,7 +1034,6 @@ body{
     width:80vw;
     height: 5vh;   
     border-bottom:1px solid black;
-
     float:left;
 }
 .title-contract-fim{
@@ -1056,7 +1055,7 @@ body{
     resize: both;
     overflow: hidden;
     border-bottom:1px dashed black;
-    
+
 }
 .form-contract-fim{
     height: 5vh;
@@ -1081,4 +1080,126 @@ body{
 }
 .fright{
     float:right;
+}
+/*PAINEL*/
+.article-contract-panel{
+    width:80vw;
+    height: 80vh;
+    border-radius: 10px;
+    background-color: rgb(255,255,255,0.9);
+    margin: 0 auto;
+
+}
+.panels{
+    width:60vw;
+    height: 80vh;
+    margin: 0 auto;
+}
+.options{
+    width:30vw !important; 
+
+}
+.options2{
+    width:30vw !important; 
+    height: 6vh !important;
+
+}
+.vencimentos-panel{
+    width:80vw!important; 
+}
+.line-contract-panel{
+    width:60vw;
+    height: 5vh;
+    float:left;
+    border-bottom:1px dashed black;
+}
+.merge-panel{
+    width:60vw !important;
+    text-align:center;
+}
+.title-contract-panel{
+    width:60vw;
+    height:5vh;
+    text-align:center;
+    float:left;
+}
+.lbl-title-panel{
+    text-aling:center;
+    line-height: 5vh;
+    font-size:1em;
+    font-family: 'Gilroy';
+}
+.info-option-contract-panel{
+    width:30vw;
+    height: 5vh;
+    float:left;
+    border: 1px solid black;
+}
+.info-contract-panel{
+    width:15vw;
+    height: 5vh;
+    float:left;
+}
+.title-info-contract-panel{
+    width:15vw;
+    height:5vh;
+    text-align:center;
+    float:left;  
+}
+.lbl-info-title-panel{
+    text-aling:center;
+    line-height: 5vh;
+    font-size:1em;
+    font-family: 'Gilroy';
+    outline:none;
+    margin-top:1vh;
+
+}
+.lbl-info-title-panel option{
+    outline: none;
+    border:0px;
+}
+.lbl-info-line-panel{
+    text-aling:center;
+    line-height: 5vh;
+    font-size:0.9em;
+    font-family: 'Gilroy-Light';
+}
+.desc-contratante-panel{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 15vw;
+    display: block;
+    overflow: hidden;    
+}
+.title-option-panel{
+    line-height: 6vh;
+    float:left;
+    letter-spacing: 1.2px;
+    font-size:0.9em;
+    font-family: 'Gilroy';
+}
+.input-group-option-panel{
+    width:18vw;
+    height:5vh;   
+    margin-left:1vw;
+    border:1px solid  #ccc;
+    border-radius:10px;
+    float:right;
+    margin-top:0.5vh;
+}
+.input-panel{
+    width:16vw;
+    height:4vh;   
+    float:left;
+    margin-left:1vh;
+    padding-left: 10px;
+    padding-top:1vh;
+    letter-spacing: 1.2px;
+    font-size:0.9em;
+    outline: none;
+    border:0px;
+    font-family: 'Gilroy-Light';
+    flex-direction: column;
+    justify-content: center
 }
