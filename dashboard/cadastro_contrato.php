@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['login'])) {
     header('Location: login.php');
 } else {
-    
+    $_SESSION['contrato'] = 0;
 }
 ?>
 <!DOCTYPE html>
@@ -148,10 +148,11 @@ if (!isset($_SESSION['login'])) {
                             <input type="text" class="input-contract input-total-finalizado" id="total_finalizado" placeholder="Total finalizado" autocomplete="nope"readonly="readonly" >     
                         </div>
                     </div>
-                    <div class="form-contract">
+                    <div class="form-contract" >
                         <label class="title-option-contract">VENCIMENTO:</label>
-                        <div class="input-group-contract group-vencimento pright"  id="input-group-contract-vencimento">
-                            <input type="text" class="input-contract input-vencimento" id="vencimento" placeholder="00/00/0000" autocomplete="nope" >     
+                        <!--<div class="pright">*</div>-->
+                        <div class="input-group-contract group-vencimento pright"  id="input-group-contract-vencimento" >
+                            <input type="text" class="input-contract input-vencimento" id="vencimento" placeholder="00/00/0000" autocomplete="nope" >
                         </div>
                     </div>
                 </div>
@@ -404,7 +405,9 @@ if (!isset($_SESSION['login'])) {
                                 && valor_contrato.length > 0 && parcela.length > 0 && valor_parcela.length > 0
                                 && data_pag_parcela.length > 0 && parcelas_finalizadas.length > 0 && total_finalizado.length > 0
                                 && vencimento.length > 0) {
-                            document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                            document.getElementById("cadastrar_contrato").value = "CADASTRANDO...";
+                            $('#cadastrar_contrato').attr('disabled', true);
+                            //document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
                             $.ajax({
                                 url: "api/api.php",
                                 method: "post",
@@ -430,19 +433,26 @@ if (!isset($_SESSION['login'])) {
                                     // alert(data);
                                     var res = data.split(";");
                                     if (typeof res[0] !== "undefined" && res[0] == "00") {
-                                        location.href = "cadastro_garantia.php?idcontrato=" + res[1];
+                                        location.href = "cadastro_garantia.php";
+                                    } else if (typeof res[0] !== "undefined" && res[0] == "01") {
+                                        alert('Contrato ja existente');
+                                        $("#input-group-contract-numero").addClass("input-group-contract-error");
+                                        document.getElementById("cadastrar_contrato").value = "CADASTRAR";
+                                        $('#cadastrar_contrato').attr('disabled', false);
                                     } else {
                                         alert("erro de comunicação com servidor!")
+                                        document.getElementById("cadastrar_contrato").value = "TENTAR NOVAMENTE";
+                                        $('#cadastrar_contrato').attr('disabled', false);
                                     }
                                     //window.location.href = "home.php";//
                                     // document.getElementById("result").innerHTML = data;
                                 }
                             });
-                        } else {
-
                         }
                     } else {
                         $("#input-group-contract-parcfim").addClass("input-group-contract-error");
+                        document.getElementById("cadastrar_contrato").value = "CADASTRAR";
+                        $('#cadastrar_contrato').attr('disabled', false);
                     }
                 }
 

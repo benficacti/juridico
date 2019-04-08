@@ -29,6 +29,7 @@ if ($request == "cadastro_contrato") {
     if ($_numeroContrato !== null) {
         $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, $_idTipoContrato);
         Insert::CadastraContrato($contrato);
+        echo $_SESSION['contrato'];
     }
 }
 
@@ -69,6 +70,7 @@ if ($request == 'adicionar_obs') {
 }
 
 if (($request == 'login') && ($request !== 0)) {
+     sleep(rand(1, 3));
     $login = (null !== (filter_input(INPUT_POST, 'login'))) ? filter_input(INPUT_POST, 'login') : 0;
     $senha = (null !== (filter_input(INPUT_POST, 'senha'))) ? filter_input(INPUT_POST, 'senha') : 0;
     echo Search::loginAuth($login, $senha); //00; = efetuado / 01; usuario incorreto /02; senha incorreta

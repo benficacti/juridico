@@ -1,9 +1,9 @@
 <?php
 session_start();
-if(!isset($_SESSION['login'])){
+if (!isset($_SESSION['login'])) {
     header('Location: login.php');
-}else{
- 
+} else {
+  // echo $_SESSION['contrato'] . "br"; 
 }
 ?>
 <!DOCTYPE html>
@@ -50,7 +50,7 @@ if(!isset($_SESSION['login'])){
                 <header class="header-article-contrato">
                     <label class="title-contrato">ADICIONAR GARANTIA</label>
                 </header>
-                <input type="hidden" id="idcontrato" value="<?php echo $_GET['idcontrato'] ?>">
+                <input type="hidden" id="idcontrato" value="<?php echo $_SESSION['contrato'] ?>">
                 <input type="hidden" id="status">
                 <div class="line-contract">
                     <div class="form-contract tipo_contrato">
@@ -71,9 +71,9 @@ if(!isset($_SESSION['login'])){
             </article>
         </div>
         <script  type="text/javascript">
-              $('#item_cadastro_contrato').addClass('item-active');
+            $('#item_cadastro_contrato').addClass('item-active');
             $('#rd-sim').click(function () {
-               
+
                 if ($('#rd-sim').is(':checked')) {
                     document.getElementById('status').value = '1';
                     document.getElementById('div-garantia').innerHTML = '<div class="line-contract" data-aos="fade-left"' +
@@ -151,8 +151,10 @@ if(!isset($_SESSION['login'])){
                     $("#input-group-contract-garantia").removeClass("input-group-contract-error");
                 }
 
-                if (garantia.length > 0 || status_garantia !== '1') {
-                    document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                if ((garantia.length > 0 || status_garantia !== '1') && idcontrato !== "0") {
+                    //document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                    document.getElementById("adicionar_garantia").value = "ADICIONANDO...";
+                    $('#adicionar_garantia').attr('disabled', true);
                     $.ajax({
                         url: "api/api.php",
                         method: "post",
@@ -163,15 +165,20 @@ if(!isset($_SESSION['login'])){
                         },
                         success: function (data)
                         {
-                         //   alert(data);
+                            //   alert(data);
                             var res = data.split(";");
                             if (typeof res[0] !== "undefined" && res[0] == "00") {
-                                location.href = "cadastro_objeto.php?idcontrato=" + res[1];
+                                location.href = "cadastro_objeto.php";
                             } else {
-                                alert("erro de comunicação com servidor!")
+                                alert("erro de comunicação com servidor!");
+                                document.getElementById("adicionar_garantia").value = "TENTAR NOVAMENTE";
+                                $('#adicionar_garantia').attr('disabled', false);
                             }
                         }
                     });
+                } else {
+                    document.getElementById("adicionar_garantia").value = "PROSSEGUIR";
+                    $('#adicionar_garantia').attr('disabled', false);
                 }
             }
         </script>

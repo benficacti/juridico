@@ -44,7 +44,7 @@ if (!isset($_SESSION['login'])) {
         <!-- BOX CONTEUDO DA PAG -->
 
         <div class="box-conteudo">
-            <input type="hidden" id="idcontrato" value="<?php echo $_GET['idcontrato'] ?>">
+            <input type="hidden" id="idcontrato" value="<?php echo  $_SESSION['contrato']  ?>">
             <article class="article-contract-fim" data-aos="zoom-in" >
                 <header class="header-contract-fim">
                     <label class="title-contract-fim">CONTRATO FINALIZADO</label>
