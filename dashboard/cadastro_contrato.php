@@ -62,7 +62,7 @@ if (!isset($_SESSION['login'])) {
                     <div class="form-contract">
                         <input type="hidden" id="tipo_contrato">
                         <label class="title-option-contract"> TIPO CONTRATO:</label>
-                        <label class="input-radio-contract" id="input-group-contract-tipocontrato">
+                        <label class="input-radio-contract mleft2" id="input-group-contract-tipocontrato">
                             <input type="radio" id="rd-publico" name="radio-group">
                             <label for="rd-publico" class="rd-label-contract">Público</label>
                         </label>
@@ -100,62 +100,40 @@ if (!isset($_SESSION['login'])) {
                         <div class="input-group-contract group-date"  id="input-group-contract-inivigencia">
                             <input type="text" class="input-contract input-date" id="inicio_vigencia" placeholder="00/00/0000" >     
                         </div>
-                        <label class="title-option-contract">á</label>
-                        <div class="input-group-contract group-date pright"  id="input-group-contract-fimvigencia">
+                        <label class="title-option-contract" style="margin-left:1vw !important">á</label>
+                        <div class="input-group-contract group-date pright" style="margin-left:1vw !important"  id="input-group-contract-fimvigencia">
                             <input type="text" class="input-contract input-date" id="fim_vigencia" placeholder="00/00/0000"  >     
-                        </div>
-                    </div>
-                </div>
-                <div class="line-contract">
-                    <div class="form-contract form-contract-left">
-                        <label class="title-option-contract">VALOR CONTRATO:</label>
-                        <div class="input-group-contract group-valor-contract"  id="input-group-contract-valor">
-                            <input type="text" class="input-contract input-valor" id="valor_contrato" placeholder="Valor Contrato" autocomplete="off"  onkeyup="calcular();">     
-                        </div>
-                    </div>
-                    <div class="form-contract form-contract-center">
-                        <label class="title-option-contract mleft">PARCELAS:</label>
-                        <div class="input-group-contract group-parcelas"  id="input-group-contract-parcelas">
-                            <input type="text" class="input-contract input-parcelas" id="parcela" placeholder="Parcelas" value="1" autocomplete="off" onkeyup="calcular();">     
-                        </div>
-                    </div>
-                    <div class="form-contract form-contract-right">
-                        <label class="title-option-contract mleft">VALOR PARCELA:</label>
-                        <div class="input-group-contract group-valor-contract pright"  id="input-group-contract-valorparc">
-                            <input type="text" class="input-contract input-valor" id="valor_parcela" placeholder="Valor Parcela" autocomplete="off" readonly="readonly">     
-                        </div>
-                    </div>
-                </div>
-                <div class="line-contract">
-                    <div class="form-contract">
-                        <label class="title-option-contract">DATA DE PAGAMENTO DAS PARCELAS:</label>
-                        <div class="input-group-contract group-date-parc"  id="input-group-contract-datapay">
-                            <input type="text" class="input-contract input-date" id="data_pag_parcela" placeholder="00/00/0000" autocomplete="nope" >     
-                        </div>
-                    </div>
-                    <div class="form-contract">
-                        <label class="title-option-contract">PARCELAS FINALIZADAS:</label>
-                        <div class="input-group-contract group-parcelas-finalizadas pright"  id="input-group-contract-parcfim">
-                            <input type="text" class="input-contract input-parcelas-finalizadas" id="parcelas_finalizadas" placeholder="Parcelas Finalizadas" autocomplete="nope" onkeyup="calcular();">     
                         </div>
                     </div>
                 </div>
 
                 <div class="line-contract">
                     <div class="form-contract">
-                        <label class="title-option-contract">TOTAL FINALIZADO:</label>
-                        <div class="input-group-contract group-total-finalizado"  id="input-group-contract-totalfim">
-                            <input type="text" class="input-contract input-total-finalizado" id="total_finalizado" placeholder="Total finalizado" autocomplete="nope"readonly="readonly" >     
+                        <label class="title-option-contract">VALOR CONTRATO:</label>
+                        <div class="input-group-contract group-valor-contract"  id="input-group-contract-valor">
+                            <input type="text" class="input-contract input-valor" id="valor_contrato" placeholder="Valor Contrato" autocomplete="off"  onkeyup="calcular();">     
                         </div>
                     </div>
-                    <div class="form-contract" >
-                        <label class="title-option-contract">VENCIMENTO:</label>
-                        <!--<div class="pright">*</div>-->
-                        <div class="input-group-contract group-vencimento pright"  id="input-group-contract-vencimento" >
-                            <input type="text" class="input-contract input-vencimento" id="vencimento" placeholder="00/00/0000" autocomplete="nope" >
-                        </div>
+                    <div class="form-contract">
+                        <input type="hidden" id="tipo_contrato">
+                        <label class="title-option-contract"> POSSUI PARCELAS:</label>
+                        <label class="input-radio-contract mleft3" id="input-group-contract-tipocontrato">
+                            <input type="radio" id="rd-sim" name="radio-group">
+                            <label for="rd-sim" class="rd-label-contract">SIM</label>
+                        </label>
+                        <label class="input-radio-contract" id="input-group-contract-tipocontratoprivado">
+                            <input type="radio" id="rd-nao" name="radio-group">
+                            <label for="rd-nao" class="rd-label-contract">NÃO</label>
+
+                        </label>
+
                     </div>
                 </div>
+                <input type="hidden" id="possui_parcela" value="0">
+                <div id="div-parcelas">
+
+                </div>
+
                 <div class="line-contract">
                     <div class="btn-login">
                         <input type="submit" value="PROSSEGUIR" class="bt-login" id="cadastrar_contrato">
@@ -273,7 +251,8 @@ if (!isset($_SESSION['login'])) {
                 });
                 $(function () {
                     $('#valor_contrato').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
-                    //('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+                    $('#valor_parcela').maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+                    $('#valor_parcela').attr('readonly', true);
                 })
                 $("#cadastrar_contrato").click(function () {
                     callApi();
@@ -295,6 +274,24 @@ if (!isset($_SESSION['login'])) {
                         $("#input-group-contract-concorrencia").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
+                    }
+                });
+
+                $('#rd-sim').click(function () {
+                    if ($('#rd-sim').is(':checked')) {
+                        document.getElementById('possui_parcela').value = 1;
+                        $("#div-parcelas").load("includes/implement_cadastro_contrato.html");
+                        $("#line1").removeClass("unview");
+                        $("#line2").removeClass("unview");
+                        $("#line3").removeClass("unview");
+                    }
+                });
+                $('#rd-nao').click(function () {
+                    if ($('#rd-nao').is(':checked')) {
+                        document.getElementById('possui_parcela').value = 2;
+                        $("#line1").addClass("unview");
+                        $("#line2").addClass("unview");
+                        $("#line3").addClass("unview");
                     }
                 });
                 function callApi() {

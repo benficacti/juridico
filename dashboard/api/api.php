@@ -92,7 +92,14 @@ if ($request == 'info_contrato') {
     echo Search::infoContrato($contrato);
 }
 if ($request == 'proximos_vencimentos') {
-     Search::proximosVencimentos();
+    Search::proximosVencimentos();
+}
+if ($request == 'anexo') {
+    if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
+         $file = $_FILES["image_contract"]["tmp_name"];
+        $newName = "../uploads/".sha1(date("Y-m-d h:i:s", time()));
+        move_uploaded_file($file, $newName . ".pdf");
+    }
 }
 
 function formateDate($i) {

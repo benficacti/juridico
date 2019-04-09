@@ -465,11 +465,10 @@ body{
 
 /*CADASTRO CONTRATO*/
 .article-contrato{
-    width:80vw;
+    width:85vw;
     height: 80vh;
     border-radius: 10px;
     background-color: rgb(255,255,255,0.9);
-
     margin: 0 auto;
     /*-webkit-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
  -moz-box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.75);
@@ -824,7 +823,7 @@ body{
 }
 /*NEW CADASTRO CONTRACT*/
 .line-contract{
-    width:80vw;
+    width:85vw;
     height:6vh;
     float:left;
     margin-top:2vh;
@@ -838,26 +837,26 @@ body{
     margin-left:2vw;
 }
 .form-contract{
-    width:40vw;
+    width:42vw;
     height:6vh;
     float:left;
 }
 .form-contract-full{
-    width:80vw;
+    width:85vw;
     height:40vh;
     float:left;
 }
 .form-contract-left{
-    width:30vw;
+    width:31vw;
 }
 .form-contract-center{
-    width:20vw;
+    width:21vw;
 }
 .form-contract-right{
-    width:30vw;
+    width:32vw;
 }
 .input-group-contract{
-    width:28vw;
+    width:25vw;
     height:6vh;   
     margin-left:1vw;
     border:1px solid  #ccc;
@@ -875,32 +874,33 @@ body{
     border:1px solid red !important;
 }
 .group-contratante{
-    width:27vw; 
+    width:25vw; 
 }
 .group-concorrencia{
-    width:26.3vw;
+    width:25vw;
 }
 .group-date{
     width:11vw;
+    margin-left:4vw;
     float:left;
 }
 .group-valor-contract{
-    width:15vw;
+    width:25vw;
 }
 .group-date-parc{
     width:12vw;
 }
 .group-parcelas{
-    width:11vw;
+    width:25vw;
 }
 .group-parcelas-finalizadas{
-    width:20vw;
+    width:21vw;
 }
 .group-total-finalizado{
-    width:24vw;
+    width:25vw;
 }
 .group-vencimento{
-    width:27vw;
+    width:25vw;
 }
 .group-obs{
     width: 65vw;
@@ -969,7 +969,7 @@ body{
     letter-spacing: 1.5px;
 }
 .input-contract{
-    width:25vw;
+    width:24vw;
     height:5vh;   
     float:left;
     margin-left:1vh;
@@ -987,16 +987,16 @@ body{
     width:10vw;
 }
 .input-valor{
-    width:13vw;
+    width:24vw;
 }
 .input-parcelas{
-    width:10vw;
+    width:24vw;
 }
 .input-parcelas-finalizadas{
     width:18vw;
 }
 .input-total-finalizado{
-    width:22vw;
+    width:24vw;
 }
 .input-vencimento{
     width:20vw;
@@ -1020,6 +1020,12 @@ body{
 }
 .mleft{
     margin-left:2.5vh;
+}
+.mleft2{
+    margin-left:3.5vw;
+}
+.mleft3{
+    margin-left:2.5vw;
 }
 /*FINALIZACAO CONTRATO */
 .article-contract-fim{
@@ -1202,4 +1208,38 @@ body{
     font-family: 'Gilroy-Light';
     flex-direction: column;
     justify-content: center
+}
+.title-upload{
+    line-height: 6vh;
+    float:left;
+    letter-spacing: 1.2px;
+    font-size:1em;
+    font-family: 'Gilroy';
+    margin-left:1vw;
+    color: #0399D4;
+    cursor:pointer;
+}
+.group-digitalizacao{
+    width: 54vw;
+    height: 25vw;
+    float:left;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+#img_contrato{
+    display:none;
+    float:left;
+}
+#image_contract{
+    width: 54vw;
+    min-height: 25vw;
+    border-radius:10px;
+    overflow: hidden;
+    
+}
+.unview{
+    display:none;
+}
+.view{
+    display:block !important;
 }
