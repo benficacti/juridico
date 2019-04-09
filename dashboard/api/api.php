@@ -70,7 +70,7 @@ if ($request == 'adicionar_obs') {
 }
 
 if (($request == 'login') && ($request !== 0)) {
-     sleep(rand(1, 3));
+    sleep(rand(1, 3));
     $login = (null !== (filter_input(INPUT_POST, 'login'))) ? filter_input(INPUT_POST, 'login') : 0;
     $senha = (null !== (filter_input(INPUT_POST, 'senha'))) ? filter_input(INPUT_POST, 'senha') : 0;
     echo Search::loginAuth($login, $senha); //00; = efetuado / 01; usuario incorreto /02; senha incorreta
@@ -79,6 +79,12 @@ if (($request == 'login') && ($request !== 0)) {
 
 if ($request == 'meus_contratos') {
     echo Search::meusContratos();
+}
+
+if ($request == 'filtro_meus_contratos') {
+    $tipos = (null !== (filter_input(INPUT_POST, 'tipos'))) ? filter_input(INPUT_POST, 'tipos') : 0;
+    $status_vencimento = (null !== (filter_input(INPUT_POST, 'status_vencimento'))) ? filter_input(INPUT_POST, 'status_vencimento') : 0;
+    echo Search::filtroMeusContratos($tipos, $status_vencimento);
 }
 
 if ($request == 'info_contrato') {
