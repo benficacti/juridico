@@ -165,7 +165,7 @@ if (!isset($_SESSION['login'])) {
                                 // alert(data);
                                 var res = data.split(";");
                                 if (typeof res[0] !== "undefined" && res[0] == "00") {
-                                    location.href = "finalizacao_contrato.php";
+                                    location.href = "cadastro_anexo.php";
                                 } else {
                                     alert("erro de comunicação com servidor!")
 

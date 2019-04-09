@@ -167,6 +167,16 @@ if (!isset($_SESSION['login'])) {
                     contentType: false,
                     type: 'POST',
                     success: function (data) {
+                         var res = data.split(";");
+                                if (typeof res[0] !== "undefined" && res[0] == "00") {
+                                    location.href = "finalizacao_contrato.php";
+                                } else {
+                                    alert("erro de comunicação com servidor!")
+
+                                    document.getElementById("adicionar_obs").value = "TENTAR NOVAMENTE";
+                                    $('#adicionar_obs').attr('disabled', false);
+
+                                }
                     }
                 });
 

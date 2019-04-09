@@ -294,13 +294,25 @@ if (!isset($_SESSION['login'])) {
 
                         $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
+
                     }
                 });
                 $('#rd-privado').click(function () {
                     if ($('#rd-privado').is(':checked')) {
                         document.getElementById('tipo_contrato').value = 2;
                         $('#nome_concorrencia').attr('readonly', true);
-                        document.getElementById('nome_concorrencia').value = "Contrato Privado BBTT";
+                        var empresa_contrato = $("#empresa_contrato").val();
+                        if (empresa_contrato !== "0") {
+                            if (empresa_contrato === "1") {
+                                document.getElementById('nome_concorrencia').value = "Contrato Privado BENFICA BBTT";
+                            } else {
+                                document.getElementById('nome_concorrencia').value = "Contrato Privado RALIP TRANSPORTE";
+                            }
+                        } else {
+                            document.getElementById('nome_concorrencia').value = "AGUARDANDO EMPRESA";
+                            $("#empresa_contrato").addClass("input-group-contract-error");
+                        }
+
                         $("#input-group-contract-concorrencia").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
@@ -329,6 +341,20 @@ if (!isset($_SESSION['login'])) {
                         $("#line3").addClass("unview");
                         $("#input-group-contract-possuiparc").removeClass("input-group-contract-error");
                         $("#input-group-contract-possuiparcnao").removeClass("input-group-contract-error");
+                    }
+                });
+                $("#empresa_contrato").change(function () {
+                    $("#empresa_contrato").removeClass("input-group-contract-error");
+                    if ($('#rd-privado').is(':checked')) {
+                        var empresa_contrato = $("#empresa_contrato").val();
+                        if (empresa_contrato === "1") {
+                            document.getElementById('nome_concorrencia').value = "Contrato Privado BENFICA BBTT";
+                        } else if (empresa_contrato === "2") {
+                            document.getElementById('nome_concorrencia').value = "Contrato Privado RALIP TRANSPORTE";
+                        } else {
+                            document.getElementById('nome_concorrencia').value = "AGUARDANDO EMPRESA";
+                            $("#empresa_contrato").addClass("input-group-contract-error");
+                        }
                     }
                 });
                 function callApi() {
@@ -444,8 +470,10 @@ if (!isset($_SESSION['login'])) {
                         $("#input-group-contract-tipocontrato").removeClass("input-group-contract-error");
                         $("#input-group-contract-tipocontratoprivado").removeClass("input-group-contract-error");
                     }
-                    if(empresa_contrato === "0"){
-                        
+                    if (empresa_contrato === "0") {
+                        $("#empresa_contrato").addClass("input-group-contract-error");
+                    } else {
+                        $("#empresa_contrato").removeClass("input-group-contract-error");
                     }
                     if (possui_parcela == "1") {
                         if (parseInt(parcelas_finalizadas) <= parseInt(parcela)) {
@@ -454,7 +482,7 @@ if (!isset($_SESSION['login'])) {
                                     && nome_concorrencia.length > 0 && inicio_vigencia.length > 0 && fim_vigencia.length > 0
                                     && valor_contrato.length > 0 && parcela.length > 0 && valor_parcela.length > 0
                                     && data_pag_parcela.length > 0 && parcelas_finalizadas.length > 0 && total_finalizado.length > 0
-                                    && vencimento.length > 0) {
+                                    && vencimento.length > 0 && empresa_contrato !== "0") {
                                 document.getElementById("cadastrar_contrato").value = "CADASTRANDO...";
                                 $('#cadastrar_contrato').attr('disabled', true);
                                 //document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
@@ -509,7 +537,7 @@ if (!isset($_SESSION['login'])) {
                     } else if (possui_parcela == "2") {
                         if (num_contrato.length > 0 && nome_contratante.length > 0 && nome_contratada.length > 0
                                 && nome_concorrencia.length > 0 && inicio_vigencia.length > 0 && fim_vigencia.length > 0
-                                && valor_contrato.length > 0 && vencimento.length > 0) {
+                                && valor_contrato.length > 0 && vencimento.length > 0 && empresa_contrato !== "0") {
                             document.getElementById("cadastrar_contrato").value = "CADASTRANDO...";
                             $('#cadastrar_contrato').attr('disabled', true);
                             //document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
@@ -525,6 +553,7 @@ if (!isset($_SESSION['login'])) {
                                     inicio_vigencia: inicio_vigencia,
                                     fim_vigencia: fim_vigencia,
                                     valor_contrato: valor_contrato,
+                                    vencimento: vencimento,
                                     tipo_contrato: tipo_contrato,
                                     possui_parcela: possui_parcela,
                                     empresa_contrato: empresa_contrato

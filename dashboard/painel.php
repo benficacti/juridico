@@ -3,7 +3,6 @@ session_start();
 if (!isset($_SESSION['login'])) {
     header('Location: login.php');
 } else {
-    $_SESSION['contrato'] = 0;
 }
 ?>
 <!DOCTYPE html>

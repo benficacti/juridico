@@ -47,7 +47,7 @@ if (!isset($_SESSION['login'])) {
             <input type="hidden" id="idcontrato" value="<?php echo  $_SESSION['contrato']  ?>">
             <article class="article-contract-fim" data-aos="zoom-in" >
                 <header class="header-contract-fim">
-                    <label class="title-contract-fim">CONTRATO FINALIZADO</label>
+                    <label class="title-contract-fim">CONTRATO CADASTRADO COM SUCESSO</label>
                 </header>
                 <div id="result">
 

@@ -58,4 +58,21 @@ class Update {
         }
     }
 
+    public function adicionarAnexo($nomeUrl) {
+        try {
+            $id = $_SESSION['contrato'];
+            $sql = 'UPDATE `contrato` SET `URL_IMAGEM_CONTRATO`= "' . $nomeUrl . '" WHERE ID_CONTRATO = ' . $id;
+            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                echo "00;";
+            } else {
+                echo "01";
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            echo 'Falha ao obter Log';
+        }
+    }
+
 }
