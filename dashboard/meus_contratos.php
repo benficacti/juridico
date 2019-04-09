@@ -2,7 +2,8 @@
 session_start();
 if (!isset($_SESSION['login'])) {
     header('Location: login.php');
-}else{
+} else {
+    
 }
 ?>
 <!DOCTYPE html>
@@ -69,6 +70,7 @@ if (!isset($_SESSION['login'])) {
                                 <option value="2">Vencido</option>
                             </select>
                         </div>
+                        <div class="div-visu-contract"> Visualizar / Editar</div>
                     </div>
                     <div class="table-list" id="result" >
                         <!--CONTEUDO-->
@@ -98,8 +100,8 @@ if (!isset($_SESSION['login'])) {
                     url: "api/api.php",
                     method: "post",
                     data: {request: "filtro_meus_contratos",
-                           tipos: tipos,
-                           status_vencimento: status_vencimento
+                        tipos: tipos,
+                        status_vencimento: status_vencimento
                     },
                     success: function (data)
                     {

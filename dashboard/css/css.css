@@ -758,18 +758,24 @@ body{
     font-family: 'Gilroy';
 }
 .div-contrato-contract{
-    width:20vw;
+    width:15vw;
     float:left;
     text-align: center;
     font-family: 'Gilroy';
 }
 .div-data-contract{
-    width:15vw;
+    width:12vw;
     float:left;
     font-family: 'Gilroy';
 
 }
 .div-tipo-contract{
+    width:10vw;
+    float:left;
+    font-size: 1em;
+    font-family: 'Gilroy';
+}
+.div-visu-contract{
     width:15vw;
     float:left;
     font-size: 1em;
@@ -803,15 +809,19 @@ body{
     overflow: hidden;    
 }
 .td-contrato-contract{
-    width:15vw;
+    width:10vw;
     text-align: center;
 }
 .td-tipo-contract{
-    width:28vw;
+    width:16vw;
     text-align: center;
 }
 .td-data-contract{
-    width:17vw;
+    width:13vw;
+}
+.td-visu-contract{
+    width:4.5vw;
+    text-align:center;
 }
 
 .img-icon-list{
@@ -1235,7 +1245,7 @@ body{
     min-height: 25vw;
     border-radius:10px;
     overflow: hidden;
-    
+
 }
 .unview{
     display:none;
@@ -1250,9 +1260,32 @@ body{
     margin-left:2vw;
 }
 #empresa_contrato{
-       font-size: 1em;
+    font-size: 1em;
     font-family: 'Gilroy';
     border:0px;
     margin-left:1.5vw;
     outline: none;
+}
+.article-contract-anexo{
+    width:70vw;
+    height:40vw;
+    margin: 0 auto;
+}
+.title-contract-anexo{
+    width:70vw;
+    float:left;
+    text-align: center;
+    line-height: 5vh;
+    letter-spacing: 1.2px;
+    font-size:1em;
+    float:left;
+    font-family: 'Gilroy-Light';
+}
+.box-anexo{
+    width:70vw;
+    height:40vw;
+    border:0px;
+    outline: none;
+    scroll:none;
+    overflow: none;
 }
