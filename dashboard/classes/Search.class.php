@@ -301,61 +301,6 @@ class Search {
         }
     }
 
-    public function meusContratos() {
-        try {
-            $mes = 1;
-
-            $sql = 'SELECT * FROM CONTRATO '
-                    . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
-                    . ' WHERE ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
-            $sqll = Conexao::getInstance()->prepare($sql);
-            if ($sqll->execute()) {
-                $count = $sqll->rowCount();
-                if ($count > 0) {
-                    echo '<div class = "listtb" data-aos = "fade-left"
-                    data-aos-anchor = "#example-anchor"
-                    data-aos-offset = "400"
-                    data-aos-duration = "400">
-
-                    <table class = "tb-list">';
-
-                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
-                        $id_contrato = $dados->ID_CONTRATO;
-                        $vencimento = $dados->VENCIMENTO_CONTRATO;
-                        $numero = $dados->NUMERO_CONTRATO;
-                        $contratante = $dados->CONTRATANTE_CONTRATO;
-                        $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
-                        //  echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
-
-
-
-
-                        echo '<tr>
-                    <td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $id_contrato . '&d=1"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></a></th>
-                    <td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
-                    <td class = "td-contrato-contract">' . $numero . '</td>
-                    <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
-                    <td class = "td-data-contract">' . Search::formateDateBR($vencimento) . '</td>
-                    </tr>
-               
-                    ';
-                    }
-                } else {
-
-                    echo '
-                    <tr>
-                    <td> NENHUM CONTRATO CONTRATO COM VENCIMENTOS PARA OS PROXIMOS 30 DIAS</td>
-                    </tr>
-                    ';
-                }
-                echo '     </table>
-                    </div>';
-            }
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-    }
-
     public function filtroMeusContratos($tipos, $status_vencimento) {
         try {
             $date = date('Y-m-d');
@@ -463,17 +408,20 @@ class Search {
                         $numero = $dados->NUMERO_CONTRATO;
                         $contratante = $dados->CONTRATANTE_CONTRATO;
                         $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
+                        $anexo = $dados->URL_IMAGEM_CONTRATO;
                         //  echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
 
 
 
 
                         echo '<tr>
-                    <td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $id_contrato . '&d=1"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></a></th>
+                    <td class = "td-icon-contract"><a href="view_anexo.php?a='.$anexo.'&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list"></a></th>
                     <td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
                     <td class = "td-contrato-contract">' . $numero . '</td>
                     <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
                     <td class = "td-data-contract">' . Search::formateDateBR($vencimento) . '</td>
+                         <td class = "td-visu-contract"><a href="ver_contrato.php?c=' . $id_contrato . '&d=1" target="_blank"><img src = "img/eye.png" class = "img-icon-list" alt = "contrato-list"></a></td>
+                             <td class = "td-visu-contract"><a href="ver_contrato.php?c=' . $id_contrato . '&d=1" target="_blank"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></a></td>
                     </tr>
                
                     ';
