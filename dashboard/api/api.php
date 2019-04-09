@@ -126,6 +126,11 @@ if ($request == 'anexo') {
     }
 }
 
+if ($request == 'alteracao_contrato') {
+    $id_contrato = (null !== (filter_input(INPUT_POST, 'id_contrato'))) ? filter_input(INPUT_POST, 'id_contrato') : 0;
+    echo Update::UpdateContrato($id_contrato);
+}
+
 function formateDate($i) {
     $l = explode("/", $i);
     return $l[2] . '-' . $l[1] . '-' . $l[0];

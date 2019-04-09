@@ -474,6 +474,7 @@ class Search {
                     <td class = "td-contrato-contract">' . $numero . '</td>
                     <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
                     <td class = "td-data-contract">' . Search::formateDateBR($vencimento) . '</td>
+                    <td class = "td-icon-contract"><a href="alterar_contrato.php?c=' . $id_contrato . '&d=1"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></a></th>
                     </tr>
                
                     ';
