@@ -1243,3 +1243,16 @@ body{
 .view{
     display:block !important;
 }
+.division{
+    width: 40vw !important;
+}
+.left-title{
+    margin-left:2vw;
+}
+#empresa_contrato{
+       font-size: 1em;
+    font-family: 'Gilroy';
+    border:0px;
+    margin-left:1.5vw;
+    outline: none;
+}
