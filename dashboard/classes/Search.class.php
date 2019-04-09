@@ -331,7 +331,7 @@ class Search {
 
 
                         echo '<tr>
-                    <td class = "td-icon-contract"><a href="ver_contrato.php?c='.$id_contrato.'&d=1"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></a></th>
+                    <td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $id_contrato . '&d=1"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></a></th>
                     <td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
                     <td class = "td-contrato-contract">' . $numero . '</td>
                     <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
@@ -394,9 +394,10 @@ class Search {
                             NÚMERO CONTRATO:
                             <span>' . $numero . '</span>
                         </label>
-                    </div>
-
-                    <div class="form-contract-fim fright pright">
+                    </div>                    
+                </div>
+                <div class="line-finally-contract">                
+                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             VENCIMENTO:
                             <span>' . Search::formateDateBR($vencimento) . '</span>
@@ -410,8 +411,9 @@ class Search {
                             <span>' . $contratante . '</span>
                         </label>
                     </div>
-
-                    <div class="form-contract-fim fright pright">
+                </div>
+                <div class="line-finally-contract">                
+                    <div class="form-contract-fim">
                         <label class="title-info-contract">
                             CONTRATADA:
                             <span>' . $contratada . '</span>
@@ -426,7 +428,10 @@ class Search {
                         </label>
                     </div>
 
-                    <div class="form-contract-fim fright pright">
+                   
+                </div>
+                 <div class="line-finally-contract">                
+                   <div class="form-contract-fim">
                         <label class="title-info-contract">
                             CONCORRÊNCIA:
                             <span>' . $concorrencia . '</span>
@@ -440,20 +445,25 @@ class Search {
                             <span>R$ ' . $valorContrato . '</span>
                         </label>
                     </div>
-                    <div class="form-contract-fim">
+                
+                 
+                </div>
+                <div class="line-finally-contract">                
+                      <div class="form-contract-fim">
                         <label class="title-info-contract">
                             QUANTIDADE DE PARCELAS:
                             <span>' . $quantidadeParcelaContrato . '</span>
                         </label>
                     </div>
-                    <div class="form-contract-fim fright pright">
+                </div>
+                   <div class="line-finally-contract">                
+                      <div class="form-contract-fim">
                         <label class="title-info-contract">
                             VALOR DAS PARCELAS:
                             <span>R$ ' . $valorParcelasContrato . '</span>
                         </label>
                     </div>
                 </div>
-
                 <div class="line-finally-contract">
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
@@ -461,20 +471,25 @@ class Search {
                             <span>' . $quantidadeParcelasPagasContrato . '</span>
                         </label>
                     </div>
-                    <div class="form-contract-fim">
+                 
+                    
+                </div>
+                <div class="line-finally-contract">                
+                      <div class="form-contract-fim">
                         <label class="title-info-contract">
                             DATA PRIMEIRO PAGAMENTO:
                             <span>' . Search::formateDateBR($dataPagamentoParcela) . '</span>
                         </label>
                     </div>
-                    <div class="form-contract-fim fright pright">
+                </div>
+                <div class="line-finally-contract">                
+                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             ADITAMENTO:
                             <span>NÃO</span>
                         </label>
                     </div>
                 </div>
-
                 <div class="line-finally-contract">
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
@@ -482,7 +497,10 @@ class Search {
                             <span>' . Search::formateDateBR($inicioVigencia) . '</span>
                         </label>
                     </div>
-                    <div class="form-contract-fim fright pright">
+                    
+                </div>
+                <div class="line-finally-contract">                
+                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             FIM VIGÊNCIA:
                             <span>' . Search::formateDateBR($fimVigencia) . '</span>

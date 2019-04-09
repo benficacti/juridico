@@ -13,6 +13,7 @@ if(isset($_SESSION['login'])){
 <head>    
     <meta charset="UTF-8"/>
     <meta name="description" content="Gestão Eletronico de Contrato">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="icon" href="favicon.png">   
     <title>GEC - Gestão Eletronico de Contrato</title>

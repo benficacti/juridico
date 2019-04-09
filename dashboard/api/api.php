@@ -70,7 +70,7 @@ if ($request == 'adicionar_obs') {
 }
 
 if (($request == 'login') && ($request !== 0)) {
-     sleep(rand(1, 3));
+    sleep(rand(1, 3));
     $login = (null !== (filter_input(INPUT_POST, 'login'))) ? filter_input(INPUT_POST, 'login') : 0;
     $senha = (null !== (filter_input(INPUT_POST, 'senha'))) ? filter_input(INPUT_POST, 'senha') : 0;
     echo Search::loginAuth($login, $senha); //00; = efetuado / 01; usuario incorreto /02; senha incorreta
@@ -86,7 +86,14 @@ if ($request == 'info_contrato') {
     echo Search::infoContrato($contrato);
 }
 if ($request == 'proximos_vencimentos') {
-     Search::proximosVencimentos();
+    Search::proximosVencimentos();
+}
+if ($request == 'anexo') {
+    if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
+         $file = $_FILES["image_contract"]["tmp_name"];
+        $newName = "../uploads/".sha1(date("Y-m-d h:i:s", time()));
+        move_uploaded_file($file, $newName . ".pdf");
+    }
 }
 
 function formateDate($i) {
