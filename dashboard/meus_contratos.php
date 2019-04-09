@@ -1,10 +1,9 @@
 <?php
 session_start();
-if(!isset($_SESSION['login'])){
+if (!isset($_SESSION['login'])) {
     header('Location: login.php');
 }else{
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
@@ -57,14 +56,14 @@ if(!isset($_SESSION['login'])){
                         <div class="div-desc-contract">Descrição</div>
                         <div class="div-contrato-contract">Contrato</div>
                         <div class="div-data-contract">
-                            <select id="tipo_contrato">
+                            <select name="tipo_contrato" id="tipo_contrato" onchange="callApi();">
                                 <option value="0" selected>Tipo Contrato</option>
                                 <option value="1">Público</option>
                                 <option value="2">Privado</option>
                             </select>
                         </div>
                         <div class="div-data-contract">
-                            <select id="vencimento_contrato">
+                            <select id="vencimento_contrato" onchange="callApi();">
                                 <option value="0" selected>Status Vencimento</option>
                                 <option value="1">À vencer</option>
                                 <option value="2">Vencido</option>
@@ -73,8 +72,8 @@ if(!isset($_SESSION['login'])){
                     </div>
                     <div class="table-list" id="result" >
                         <!--CONTEUDO-->
-              
-                       
+
+
                     </div>
                 </div>
 
@@ -82,27 +81,34 @@ if(!isset($_SESSION['login'])){
         </div>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
-            AOS.init();
+                                AOS.init();
         </script>
-        
+
         <script>
-             $(document).ready(function () {
+            $(document).ready(function () {
                 $('#item_meus_contrato').addClass('item-active');
                 document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
                 callApi();
             });
 
             function callApi() {
+                var tipos = $("#tipo_contrato").val();
+                var status_vencimento = $("#vencimento_contrato").val();
                 $.ajax({
                     url: "api/api.php",
                     method: "post",
-                    data: {request: "meus_contratos"},
+                    data: {request: "filtro_meus_contratos",
+                           tipos: tipos,
+                           status_vencimento: status_vencimento
+                    },
                     success: function (data)
                     {
                         document.getElementById("result").innerHTML = data;
                     }
                 });
             }
+
+
         </script>
     </body>
 </html>

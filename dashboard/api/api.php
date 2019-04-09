@@ -102,6 +102,12 @@ if ($request == 'meus_contratos') {
     echo Search::meusContratos();
 }
 
+if ($request == 'filtro_meus_contratos') {
+    $tipos = (null !== (filter_input(INPUT_POST, 'tipos'))) ? filter_input(INPUT_POST, 'tipos') : 0;
+    $status_vencimento = (null !== (filter_input(INPUT_POST, 'status_vencimento'))) ? filter_input(INPUT_POST, 'status_vencimento') : 0;
+    echo Search::filtroMeusContratos($tipos, $status_vencimento);
+}
+
 if ($request == 'info_contrato') {
     $contrato = (null !== (filter_input(INPUT_POST, 'contrato'))) ? filter_input(INPUT_POST, 'contrato') : 0;
     echo Search::infoContrato($contrato);

@@ -356,6 +356,144 @@ class Search {
         }
     }
 
+    public function filtroMeusContratos($tipos, $status_vencimento) {
+        try {
+            $date = date('Y-m-d');
+            $mes = 1;
+
+            /*
+            $count = 0;
+            $and = "";
+            $wherex = "";
+            $where = false;
+            $tipox = "";
+            $vencimentox = "";
+
+            if ($t != 0) {
+                $tipox = ' contrato.ID_TIPO_CONTRATO = ' . $t;
+                $count++;
+                $where = true;
+            }
+            
+            if ($v != 0) {
+                $vencimentox = ' contrato.VENCIMENTO_CONTRATO >= "' . $v . '"';
+                $count++;
+                $where = true;
+            }
+            if ($count == 0) {
+                $where = true;
+            }
+            if ($where) {
+                $wherex = " WHERE ";
+                $login = "ID_LOGIN_CONTRATO = " . $_SESSION['login'];
+                if ($count == 1) {
+                    $and = " AND ";
+                    $login = $login;
+                }
+                if ($count > 1) {
+                    $and = " AND ";
+                    $login = $login . $and;
+                }
+            }
+            
+            echo $sql = 'SELECT * FROM CONTRATO '
+            . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO ' .
+            $wherex . $login . $tipox . $and . $vencimentox;
+            $sqll = Conexao::getInstance()->prepare($sql);
+             
+             */
+            
+              if (($tipos == 0)) {
+              $sql = 'SELECT * FROM CONTRATO '
+              . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+              . ' WHERE  ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+              $sqll = Conexao::getInstance()->prepare($sql);
+              }
+              if(($tipos == 1) or ($tipos == 2)) {
+              $sql = 'SELECT * FROM CONTRATO '
+              . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+              . ' WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+              $sqll = Conexao::getInstance()->prepare($sql);
+              }
+              if (($tipos == 0) and ( $status_vencimento == 1)) {
+              $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.VENCIMENTO_CONTRATO >= "' . $date . '" AND '
+                      . 'contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+              $sqll = Conexao::getInstance()->prepare($sql);
+              }
+              if (($tipos == 0) and ( $status_vencimento == 2)) {
+              $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.VENCIMENTO_CONTRATO < "' . $date . '" AND'
+                      . ' contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+              $sqll = Conexao::getInstance()->prepare($sql);
+              }
+               if (($tipos == 1) and ( $status_vencimento == 1)) {
+              $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
+                      . 'contrato.VENCIMENTO_CONTRATO >= "' . $date . '" AND contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+              $sqll = Conexao::getInstance()->prepare($sql);
+              }
+              
+              if (($tipos == 1) and ( $status_vencimento == 2)) {
+              $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
+                      . 'contrato.VENCIMENTO_CONTRATO < "' . $date . '" AND contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+              $sqll = Conexao::getInstance()->prepare($sql);
+              }
+               if (($tipos == 2) and ( $status_vencimento == 1)) {
+              $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
+                      . 'contrato.VENCIMENTO_CONTRATO >= "' . $date . '" AND contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+              $sqll = Conexao::getInstance()->prepare($sql);
+              }
+              if (($tipos == 2) and ( $status_vencimento == 2)) {
+              $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
+                      . 'contrato.VENCIMENTO_CONTRATO < "' . $date . '" AND contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+              $sqll = Conexao::getInstance()->prepare($sql);
+              }
+             
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    echo '<div class = "listtb" data-aos = "fade-left"
+                    data-aos-anchor = "#example-anchor"
+                    data-aos-offset = "400"
+                    data-aos-duration = "400">
+
+                    <table class = "tb-list">';
+
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $id_contrato = $dados->ID_CONTRATO;
+                        $vencimento = $dados->VENCIMENTO_CONTRATO;
+                        $numero = $dados->NUMERO_CONTRATO;
+                        $contratante = $dados->CONTRATANTE_CONTRATO;
+                        $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
+                        //  echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
+
+
+
+
+                        echo '<tr>
+                    <td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $id_contrato . '&d=1"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></a></th>
+                    <td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
+                    <td class = "td-contrato-contract">' . $numero . '</td>
+                    <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
+                    <td class = "td-data-contract">' . Search::formateDateBR($vencimento) . '</td>
+                    </tr>
+               
+                    ';
+                    }
+                } else {
+
+                    echo '
+                    <tr>
+                    <td> NENHUM CONTRATO CONTRATO COM VENCIMENTOS PARA OS PROXIMOS 30 DIAS</td>
+                    </tr>
+                    ';
+                }
+                echo '     </table>
+                    </div>';
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
     public function infoContrato($contrato) {
         try {
             $mes = 1;
