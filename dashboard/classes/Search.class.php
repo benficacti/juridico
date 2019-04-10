@@ -412,10 +412,10 @@ class Search {
                         //  echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
 
 
-
+                        
                         
                         echo '<tr>';
-						if(sizeof($anexo) > 0){
+						if(strlen($anexo) > 0){
 echo '<td class = "td-icon-contract"><a href="view_anexo.php?a='.$anexo.'&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list"></a></th>';
 						}	else{
 echo '<td class = "td-icon-contract"></th>';
