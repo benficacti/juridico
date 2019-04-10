@@ -641,7 +641,7 @@ if (!isset($_SESSION['login'])) {
                         ((total_finalizado)).toFixed(2);
                         //var total_final = total_finalizado + " de " + nValor;
                         var total_final = parcelas+" de "+qtd_parcela;
-                        document.getElementById('total_finalizado').value = mascaraValor(total_final);
+                        document.getElementById('total_finalizado').value = total_final;
                         $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
                     } else {
                         if (parcelas.length > 0) {
