@@ -96,7 +96,7 @@ if (!isset($_SESSION['login'])) {
                     document.getElementById('div-garantia').style.height = "70vh";
                     $("#adicionar_arquivo").click(function () {
 
-                        callApi();
+                        callApi(1);
                     });
                     $('#result').on('click', function () {
                         //NUMERO CONTRATO
@@ -132,12 +132,12 @@ if (!isset($_SESSION['login'])) {
                     document.getElementById('div-garantia').innerHTML = '';
                     document.getElementById('div-btn').innerHTML = '<div class="line-contrato" data-aos="fade-left" data-aos-offset="100" data-aos-duration="500">' +
                             '<div class="form-contrato cadastrar">' +
-                            '<input type="button" value="FINALIZAR" class="bt-login" style="float:left;" id="adicionar_garantia">' +
+                            '<input type="button" value="FINALIZAR" class="bt-login" style="float:LEFT; margin-right:30px;" id="adicionar_arquivo">' +
                             '</div>' +
                             '</div>';
                     document.getElementById('div-garantia').style.height = "0px";
                     $("#adicionar_arquivo").click(function () {
-                        callApi();
+                        callApi(2);
                     });
                     $('#result').on('click', function () {
                         //NUMERO CONTRATO
@@ -151,12 +151,17 @@ if (!isset($_SESSION['login'])) {
                 }
             });
 
-            function callApi() {
+            function callApi(i) {
+				
                 var form;
                 form = new FormData();
-                var property = document.getElementById('img_contrato').files[0];
+				if(i === 1){
+					  var property = document.getElementById('img_contrato').files[0];
+					    form.append('image_contract', property); // para apenas 1 arquivo
+				}
+              
                 form.append('request', 'anexo'); // para apenas 1 arquivo
-                form.append('image_contract', property); // para apenas 1 arquivo
+              
 
                 var idcontrato = $("#idcontrato").val();
                 document.getElementById("adicionar_arquivo").value = "ADICIONANDO...";

@@ -17,7 +17,7 @@ if (!isset($_SESSION['login'])) {
         <!-- CSS -->
         <link rel="stylesheet" href="css/css.css"/>
         <script type="text/javascript" src="js/jquery-1.6.4.js"></script>        
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+        <link href="css/aos.css" rel="stylesheet"/>
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.maskMoney.js"></script>
         <script src="js/masked.js"></script>
@@ -119,7 +119,7 @@ if (!isset($_SESSION['login'])) {
                     <div class="form-contract">
                         <label class="title-option-contract">VALOR CONTRATO:</label>
                         <div class="input-group-contract group-valor-contract"  id="input-group-contract-valor">
-                            <input type="text" class="input-contract input-valor" id="valor_contrato" placeholder="Valor Contrato" autocomplete="off"  onkeyup="calcular();">     
+                            <input type="text" class="input-contract input-valor" id="valor_contrato" placeholder="Valor Contrato" autocomplete="off"  >     
                         </div>
                     </div>
                     <div class="form-contract">
@@ -169,7 +169,7 @@ if (!isset($_SESSION['login'])) {
                 $('#item_cadastro_contrato').addClass('item-active');
                 $("#inicio_vigencia").mask("99/99/9999");
                 $("#fim_vigencia").mask("99/99/9999");
-                $("#data_pag_parcela").mask("99/99/9999");
+                
                 $("#vencimento").mask("99/99/9999");
                 function verifyFocus() {
                     //NUMERO CONTRATO
@@ -328,6 +328,7 @@ if (!isset($_SESSION['login'])) {
                         $("#div-parcelas").load("includes/implement_cadastro_contrato.html");
                         $("#input-group-contract-possuiparc").removeClass("input-group-contract-error");
                         $("#input-group-contract-possuiparcnao").removeClass("input-group-contract-error");
+					 setTimeout( function () { $("#data_pag_parcela").mask("99/99/9999")   }, 1000);
                     }
 
                 });
@@ -594,30 +595,44 @@ if (!isset($_SESSION['login'])) {
         <script>
             function calcular() {
                 $(document).ready(function () {
-
+						
+					
 
                     var valor_contrato = (document.getElementById('valor_contrato').value);
                     valor_contrato = valor_contrato.replace("R$ ", "");
                     var d = valor_contrato.toString();
                     var nValor;
-                    if (d.length > 6) {
                         valor_contrato = valor_contrato.replace(",", "");
                         valor_contrato = valor_contrato.replace(".", "");
-                        nValor = valor_contrato.substring(0, valor_contrato.length - 2) + "." + valor_contrato.substring(valor_contrato.length - 2, valor_contrato.length);
+						
+						
+                        nValor = valor_contrato;
+						
+						  nValor = nValor.replace(".", "");
+						  nValor = nValor.replace(",", "");
+						
                         var qtd_parcela = parseInt((document.getElementById('parcela').value).replace(",", "."));
                         var parcelas = nValor / qtd_parcela;
-                        document.getElementById('valor_parcela').value = ((parcelas)).toFixed(2);
+						
+						
+						var resultado = parcelas + "";
+						
+						var n = resultado.indexOf(".");
+						
+						if(n !== -1){
+							resultado = resultado.substring(0,n);
+						}else{
+							
+						}
+						
+						
+                        document.getElementById('valor_parcela').value ="R$ "+ mascaraValor(resultado);
                         var valor_parcelas = (document.getElementById('valor_parcela').value);
-                        valor_parcelas = parseFloat(valor_parcelas).toFixed(2);
-                    } else {
-                        valor_contrato = valor_contrato.replace(",", ".");
-                        nValor = parseFloat(valor_contrato);
-                        var qtd_parcela = parseInt((document.getElementById('parcela').value).replace(",", "."));
-                        var parcelas = nValor / qtd_parcela;
-                        document.getElementById('valor_parcela').value = ((parcelas)).toFixed(2);
-                        var valor_parcelas = (document.getElementById('valor_parcela').value);
-                        valor_parcelas = parseFloat(valor_parcelas).toFixed(2);
-                    }
+                        valor_parcelas = parseFloat(valor_parcelas);
+				
+						
+						
+                   
 
                     var parcelas = (document.getElementById('parcelas_finalizadas').value);
                     if (parcelas <= qtd_parcela) {
@@ -626,7 +641,7 @@ if (!isset($_SESSION['login'])) {
                         ((total_finalizado)).toFixed(2);
                         //var total_final = total_finalizado + " de " + nValor;
                         var total_final = parcelas+" de "+qtd_parcela;
-                        document.getElementById('total_finalizado').value = (total_final);
+                        document.getElementById('total_finalizado').value = total_final;
                         $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
                     } else {
                         if (parcelas.length > 0) {
@@ -638,7 +653,16 @@ if (!isset($_SESSION['login'])) {
                     }
                 });
             }
-
+function mascaraValor(valor) {
+    valor = valor.toString().replace(/\D/g,"");
+	valor = valor.toString().replace(/(\d)(\d{17})$/,"$1.$2");
+	valor = valor.toString().replace(/(\d)(\d{14})$/,"$1.$2");
+	valor = valor.toString().replace(/(\d)(\d{11})$/,"$1.$2");
+    valor = valor.toString().replace(/(\d)(\d{8})$/,"$1.$2");
+    valor = valor.toString().replace(/(\d)(\d{5})$/,"$1.$2");
+    valor = valor.toString().replace(/(\d)(\d{2})$/,"$1,$2");
+    return valor                    
+}
         </script>
 
     </body>

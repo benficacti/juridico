@@ -116,8 +116,8 @@ if ($request == 'proximos_vencimentos') {
     Search::proximosVencimentos();
 }
 if ($request == 'anexo') {
-	
-    if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
+	if(isset($_FILES["image_contract"])){
+		if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
         $file = $_FILES["image_contract"]["tmp_name"];
 
         $caminho = "../uploads/";
@@ -127,6 +127,10 @@ if ($request == 'anexo') {
     }else{
 		Update::adicionarAnexo(null);
 	}
+	}else{
+		Update::adicionarAnexo(null);
+	}
+    
 }
 
 if ($request == 'alteracao_contrato') {
@@ -136,9 +140,28 @@ if ($request == 'alteracao_contrato') {
 
 if ($request == 'update_contrato') {
 
-    $idContrato = (null !== (filter_input(INPUT_POST, 'idContrato'))) ? filter_input(INPUT_POST, 'idContrato') : 0;
-    echo '$idContrato';
-    
+    $idContrato = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : 0;
+    $empresa = (null !== (filter_input(INPUT_POST, 'empresa'))) ? filter_input(INPUT_POST, 'empresa') : 0;
+    $numero = (null !== (filter_input(INPUT_POST, 'numero'))) ? filter_input(INPUT_POST, 'numero') : 0;
+    $vencimento = (null !== (filter_input(INPUT_POST, 'vencimento'))) ? filter_input(INPUT_POST, 'vencimento') : 0;
+    $contratante = (null !== (filter_input(INPUT_POST, 'contratante'))) ? filter_input(INPUT_POST, 'contratante') : 0;
+    $contratada = (null !== (filter_input(INPUT_POST, 'contratada'))) ? filter_input(INPUT_POST, 'contratada') : 0;
+    $descTipoContrato = (null !== (filter_input(INPUT_POST, 'descTipoContrato'))) ? filter_input(INPUT_POST, 'descTipoContrato') : 0;
+    $concorrencia = (null !== (filter_input(INPUT_POST, 'concorrencia'))) ? filter_input(INPUT_POST, 'concorrencia') : 0;
+    $valorContrato = (null !== (filter_input(INPUT_POST, 'valorContrato'))) ? filter_input(INPUT_POST, 'valorContrato') : 0;
+    $qtdParCont = (null !== (filter_input(INPUT_POST, 'qtdParCont'))) ? filter_input(INPUT_POST, 'qtdParCont') : 0;
+    $valorParcContrato = (null !== (filter_input(INPUT_POST, 'valorParcContrato'))) ? filter_input(INPUT_POST, 'valorParcContrato') : 0;
+    $quantParcPagContr = (null !== (filter_input(INPUT_POST, 'quantParcPagContr'))) ? filter_input(INPUT_POST, 'quantParcPagContr') : 0;
+    $dataPagParc = (null !== (filter_input(INPUT_POST, 'dataPagParc'))) ? filter_input(INPUT_POST, 'dataPagParc') : 0;
+    $inicioVigencia = (null !== (filter_input(INPUT_POST, 'inicioVigencia'))) ? filter_input(INPUT_POST, 'inicioVigencia') : 0;
+    $fimVigencia = (null !== (filter_input(INPUT_POST, 'fimVigencia'))) ? filter_input(INPUT_POST, 'fimVigencia') : 0;
+    $descGarantia = (null !== (filter_input(INPUT_POST, 'descGarantia'))) ? filter_input(INPUT_POST, 'descGarantia') : 0;
+    $descObjeto = (null !== (filter_input(INPUT_POST, 'descObjeto'))) ? filter_input(INPUT_POST, 'descObjeto') : 0;
+    $descObservacao = (null !== (filter_input(INPUT_POST, 'descObservacao'))) ? filter_input(INPUT_POST, 'descObservacao') : 0;
+
+    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, 
+            $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, 
+            $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao);
 }
 
 function formateDate($i) {
