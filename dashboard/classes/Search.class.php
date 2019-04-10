@@ -425,8 +425,8 @@ echo '<td class = "td-icon-contract"></th>';
                     <td class = "td-contrato-contract">' . $numero . '</td>
                     <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
                     <td class = "td-data-contract">' . Search::formateDateBR($vencimento) . '</td>
-                         <td class = "td-visu-contract"><a href="ver_contrato.php?c=' . $id_contrato . '&d=1" target="_blank"><img src = "img/eye.png" class = "img-icon-list" alt = "contrato-list"></a></td>
-                             <td class = "td-visu-contract"><a href="alterar_contrato.php?c=' . $id_contrato . '&d=1" target="_blank"><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></a></td>
+                         <td class = "td-visu-contract"><a href="ver_contrato.php?c=' . $id_contrato . '&d=1" ><img src = "img/eye.png" class = "img-icon-list" alt = "contrato-list"></a></td>
+                             <td class = "td-visu-contract"><a href="alterar_contrato.php?c=' . $id_contrato . '&d=1" ><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list"></a></td>
                     </tr>
                
                     ';
