@@ -1289,3 +1289,6 @@ body{
     scroll:none;
     overflow: none;
 }
+@media (min-width: 1024px) { 
+    
+}

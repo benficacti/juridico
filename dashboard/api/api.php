@@ -38,7 +38,7 @@ if ($request == "cadastro_contrato") {
         $_quantidadeParcelasPagasContrato = null;
     }
     if ($_numeroContrato !== null) {
-        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, null, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, null, null, null, null, $_idTipoContrato, null, null, $_possui_parcela, $_empresa_contrato);
+        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, null, null, null, $_idTipoContrato, null, 1, $_possui_parcela, $_empresa_contrato);
         Insert::CadastraContrato($contrato);
         echo $_SESSION['contrato'];
     }
