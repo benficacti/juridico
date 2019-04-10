@@ -210,11 +210,11 @@ class Search {
         }
     }
 
-    public function BuscaContrato($numero) {
+    public function BuscaContrato($contratante) {
 
         try {
 
-            $sql = 'SELECT * FROM CONTRATO WHERE NUMERO_CONTRATO = ' . $numero;
+            $sql = 'SELECT * FROM CONTRATO WHERE CONTRATANTE_CONTRATO = "' . $contratante . '"';
             //$sql = 'CALL buscaContrato('.$numero.')';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
@@ -646,6 +646,10 @@ echo '<td class = "td-icon-contract"></th>';
         return $l[2] . "/" . $l[1] . "/" . $l[0];
     }
 
+    public function otherFormateDateBR($i) {
+        $l = explode('/', $i);
+        return $l[2] . "-" . $l[1] . "-" . $l[0];
+    }
     /*
       public function contratosProximoVencimento() {
       try {

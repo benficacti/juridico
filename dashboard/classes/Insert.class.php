@@ -125,7 +125,7 @@ class Insert {
 
 
             if ($insContS->execute()) {
-                $id = Search::BuscaContrato($numeroContrato);
+                $id = Search::BuscaContrato($contratanteContrato);
                 $_SESSION['contrato'] = $id;
                 echo '00;';
             }
