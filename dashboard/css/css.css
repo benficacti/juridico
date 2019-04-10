@@ -1289,6 +1289,62 @@ body{
     scroll:none;
     overflow: none;
 }
+@media (min-width: 640px) { 
+    *{
+        font-size:0.94em;
+    }
+    .article-contrato{
+        width:90vw;
+        margin:0px;
+    }
+    .line-contract{
+        width:90vw;
+    }
+    .group-date{
+        width:11vw;
+        float:RIGHT;
+        margin-left:0vw;
+        margin-right:1vw;
+    }
+    .input-date{
+        width:10vw;
+    }
+}
 @media (min-width: 1024px) { 
-    
+    *{
+        font-size:0.97em;
+    }
+    .article-contrato{
+        width:90vw;
+    }
+    .line-contract{
+        width:90vw;
+    }
+    .group-date{
+        width:11vw;
+        float:RIGHT;
+        margin-left:0vw;
+        margin-right:1vw;
+    }
+    .input-date{
+        width:10vw;
+    }
+}
+@media (min-width: 1200px) { 
+    *{
+        font-size:1.0em;
+    }
+    .article-contrato{
+        width:90vw;
+    }
+    .line-contract{
+        width:90vw;
+    }
+    .group-date{
+        width:11vw;
+        float:RIGHT;
+    }
+    .input-date{
+        width:10vw;
+    }
 }
