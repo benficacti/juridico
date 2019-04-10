@@ -375,12 +375,12 @@ if (!isset($_SESSION['login'])) {
                     var tipo_contrato = $("#tipo_contrato").val();
                     var possui_parcela = $("#possui_parcela").val();
                     var empresa_contrato = $("#empresa_contrato").val();
-                    //NUMERO CONTRATO
+                   /* //NUMERO CONTRATO
                     if (num_contrato.length <= 0) {
                         $("#input-group-contract-numero").addClass("input-group-contract-error");
                     } else {
                         $("#input-group-contract-numero").removeClass("input-group-contract-error");
-                    }
+                    }*/
                     //NOME CONTRATANTE
                     if (nome_contratante.length <= 0) {
                         $("#input-group-contract-contratante").addClass("input-group-contract-error");
@@ -479,7 +479,7 @@ if (!isset($_SESSION['login'])) {
                     if (possui_parcela == "1") {
                         if (parseInt(parcelas_finalizadas) <= parseInt(parcela)) {
                             $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
-                            if (num_contrato.length > 0 && nome_contratante.length > 0 && nome_contratada.length > 0
+                            if (nome_contratante.length > 0 && nome_contratada.length > 0
                                     && nome_concorrencia.length > 0 && inicio_vigencia.length > 0 && fim_vigencia.length > 0
                                     && valor_contrato.length > 0 && parcela.length > 0 && valor_parcela.length > 0
                                     && data_pag_parcela.length > 0 && parcelas_finalizadas.length > 0 && total_finalizado.length > 0
@@ -536,7 +536,7 @@ if (!isset($_SESSION['login'])) {
                             $('#cadastrar_contrato').attr('disabled', false);
                         }
                     } else if (possui_parcela == "2") {
-                        if (num_contrato.length > 0 && nome_contratante.length > 0 && nome_contratada.length > 0
+                        if (nome_contratante.length > 0 && nome_contratada.length > 0
                                 && nome_concorrencia.length > 0 && inicio_vigencia.length > 0 && fim_vigencia.length > 0
                                 && valor_contrato.length > 0 && vencimento.length > 0 && empresa_contrato !== "0") {
                             document.getElementById("cadastrar_contrato").value = "CADASTRANDO...";
