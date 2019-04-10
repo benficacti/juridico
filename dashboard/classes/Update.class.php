@@ -57,6 +57,23 @@ class Update {
             echo 'Falha ao obter Log';
         }
     }
+    
+    
+    public function AtualizaContrato($empresa, $numero, $concorrencia, $contratada, $descTipoContrato, $valorContrato, $qtdParCont,
+            $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao, $idContrato) {
+        try {
+            $sql = 'UPDATE `contrato` SET `NUMERO_CONTRATO`=' . $numero . ' '
+                    . 'WHERE ID_CONTRATO = ' . $idContrato;
+            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                echo 'alterado';
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao obter Log';
+        }
+    }
 
     public function adicionarAnexo($nomeUrl) {
         try {
@@ -110,12 +127,13 @@ class Update {
                         $descGarantia = $dados->DESC_GARANTIA;
                         $descObservacao = $dados->DESC_OBSER_EXIGEN;
                         $possui_parcelas = $dados->ID_POSSUI_PARCELA_CONTRATO;
-                        echo ' 
+                        echo '                            
                 <div class="line-finally-contract">
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             EMPRESA:               
                                 <span><input type="text" id="empresa" name="empresa" value="' . $empresa . '"></span>
+                                 <span><input type="text" id="contrato" name="empresa" value="' . $id_contrato . '"></span>    
                         </label>
                     </div>                    
                 </div>
@@ -260,7 +278,15 @@ class Update {
                             <span><input type="text" id="descObservacao" name="descObservacao" value="' . $descObservacao . '"></span>
                         </label>
                     </div>
-                </div>';
+                </div> 
+               <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <div class="btn-login">
+                        <input type="submit" value="PROSSEGUIR" class="bt-login" id="alterar_contrato">
+                    </div>
+                    </div>
+                </div>
+                ';
                     }
                 }
             }

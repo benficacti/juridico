@@ -23,7 +23,7 @@ if ($request == "cadastro_contrato") {
     $_idTipoContrato = (null !== (filter_input(INPUT_POST, 'tipo_contrato'))) ? filter_input(INPUT_POST, 'tipo_contrato') : null;
     $_possui_parcela = (null !== (filter_input(INPUT_POST, 'possui_parcela'))) ? filter_input(INPUT_POST, 'possui_parcela') : null;
     $_empresa_contrato = (null !== (filter_input(INPUT_POST, 'empresa_contrato'))) ? filter_input(INPUT_POST, 'empresa_contrato') : null;
-    
+
     if ($_possui_parcela == 1) {
         $_quantidadeParcelasContrato = (null !== (filter_input(INPUT_POST, 'parcela'))) ? filter_input(INPUT_POST, 'parcela') : null;
         $_valorDasParcelasContrato = (null !== (filter_input(INPUT_POST, 'valor_parcela'))) ? filter_input(INPUT_POST, 'valor_parcela') : null;
@@ -118,10 +118,10 @@ if ($request == 'proximos_vencimentos') {
 if ($request == 'anexo') {
     if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
         $file = $_FILES["image_contract"]["tmp_name"];
-        
+
         $caminho = "../uploads/";
         $newName = sha1(date("Y-m-d h:i:s", time()));
-        move_uploaded_file($file, $caminho.$newName . ".pdf");
+        move_uploaded_file($file, $caminho . $newName . ".pdf");
         Update::adicionarAnexo($newName);
     }
 }
@@ -129,6 +129,13 @@ if ($request == 'anexo') {
 if ($request == 'alteracao_contrato') {
     $id_contrato = (null !== (filter_input(INPUT_POST, 'id_contrato'))) ? filter_input(INPUT_POST, 'id_contrato') : 0;
     echo Update::UpdateContrato($id_contrato);
+}
+
+if ($request == 'update_contrato') {
+
+    $idContrato = (null !== (filter_input(INPUT_POST, 'idContrato'))) ? filter_input(INPUT_POST, 'idContrato') : 0;
+    echo '$idContrato';
+    
 }
 
 function formateDate($i) {

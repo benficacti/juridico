@@ -75,6 +75,9 @@ if (!isset($_SESSION['login'])) {
             $(document).ready(function () {
                 $('#item_painel_contrato').addClass('item-active');
 
+
+
+
                 callApi();
 
                 function callApi() {
@@ -90,6 +93,55 @@ if (!isset($_SESSION['login'])) {
                             document.getElementById("result").innerHTML = data;
 
 
+                            $('#alterar_contrato').click(function () {
+                                
+                               // var idContrato = $("#idcontrato").val();
+                                var empresa = $("#idcontrato").val();
+                                var numero = $("#idcontrato").val();
+                                var vencimento = $("#idcontrato").val();
+                                var concorrencia = $("#idcontrato").val();
+                                var contratada = $("#idcontrato").val();
+                                var descTipoContrato = $("#idcontrato").val();
+                                var valorContrato = $("#idcontrato").val();
+                                var qtdParCont = $("#idcontrato").val();
+                                var quantParcPagContr = $("#idcontrato").val();
+                                var dataPagParc = $("#idcontrato").val();
+                                var inicioVigencia = $("#idcontrato").val();
+                                var fimVigencia = $("#idcontrato").val();
+                                var descGarantia = $("#idcontrato").val();
+                                var descObjeto = $("#idcontrato").val();
+                                var descObservacao = $("#idcontrato").val();
+                                
+                                $.ajax({
+                                    url: "api/api.php",
+                                    method: "post",
+                                    data: {request: "update_contrato",
+                                        idContrato: idContrato,
+                                        empresa: empresa,
+                                        numero: numero,
+                                        vencimento: vencimento,
+                                        concorrencia: concorrencia,
+                                        contratada: contratada,
+                                        descTipoContrato: descTipoContrato,
+                                        valorContrato: valorContrato,
+                                        qtdParCont: qtdParCont,
+                                        quantParcPagContr: quantParcPagContr,
+                                        dataPagParc: dataPagParc,
+                                        inicioVigencia: inicioVigencia,
+                                        fimVigencia: fimVigencia,
+                                        descGarantia: descGarantia,
+                                        descObjeto: descObjeto,
+                                        descObservacao: descObservacao
+
+                                    },
+                                    success: function (data)
+                                   
+                                    {
+                                        alert(data);
+                                    }
+                                });
+
+                            });
                         }
                     });
                 }

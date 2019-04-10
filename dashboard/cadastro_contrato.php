@@ -56,8 +56,8 @@ if (!isset($_SESSION['login'])) {
                 <div class="line-contract" style="height:2vh;">
                     <select id="empresa_contrato">
                         <option value="0" selected>SELECIONE A EMPRESA</option>
-                        <option value="1">BENFICA BARUERI TRANSPORTE E TURISMO LTDA</option>
-                        <option value="2">RALIP TRANSPORTE E TURISMO LTDA</option>
+                        <option value="1">BB TRANSPORTE E TURISMO LTDA</option>
+                        <option value="2">RALIP TRANSPORTES RODOVIARIOS LTDA</option>
                     </select>
                 </div>
                 <div class="line-contract">
@@ -304,9 +304,9 @@ if (!isset($_SESSION['login'])) {
                         var empresa_contrato = $("#empresa_contrato").val();
                         if (empresa_contrato !== "0") {
                             if (empresa_contrato === "1") {
-                                document.getElementById('nome_concorrencia').value = "Contrato Privado BENFICA BBTT";
+                                document.getElementById('nome_concorrencia').value = "BBTT TRANSPORTES TURISMO LTDA";
                             } else {
-                                document.getElementById('nome_concorrencia').value = "Contrato Privado RALIP TRANSPORTE";
+                                document.getElementById('nome_concorrencia').value = " RALIP TRANSPORTES RODOVIARIO LTDA";
                             }
                         } else {
                             document.getElementById('nome_concorrencia').value = "AGUARDANDO EMPRESA";
@@ -348,9 +348,9 @@ if (!isset($_SESSION['login'])) {
                     if ($('#rd-privado').is(':checked')) {
                         var empresa_contrato = $("#empresa_contrato").val();
                         if (empresa_contrato === "1") {
-                            document.getElementById('nome_concorrencia').value = "Contrato Privado BENFICA BBTT";
+                            document.getElementById('nome_concorrencia').value = "BB TRANSPORTES TURISMO LTDA";
                         } else if (empresa_contrato === "2") {
-                            document.getElementById('nome_concorrencia').value = "Contrato Privado RALIP TRANSPORTE";
+                            document.getElementById('nome_concorrencia').value = "RALIP TRANSPORTES RODOVIARIO LTDA";
                         } else {
                             document.getElementById('nome_concorrencia').value = "AGUARDANDO EMPRESA";
                             $("#empresa_contrato").addClass("input-group-contract-error");
