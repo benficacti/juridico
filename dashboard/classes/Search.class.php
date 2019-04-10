@@ -408,14 +408,14 @@ class Search {
                         $numero = $dados->NUMERO_CONTRATO;
                         $contratante = $dados->CONTRATANTE_CONTRATO;
                         $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
-                        //$anexo = $dados->URL_IMAGEM_CONTRATO;
+                        $anexo = $dados->URL_IMAGEM_CONTRATO;
                         //  echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
 
 
 
-                        //<td class = "td-icon-contract"><a href="view_anexo.php?a='.$anexo.'&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list"></a></th>
+                        
                         echo '<tr>
-                    
+                    <td class = "td-icon-contract"><a href="view_anexo.php?a='.$anexo.'&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list"></a></th>
                     <td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
                     <td class = "td-contrato-contract">' . $numero . '</td>
                     <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
