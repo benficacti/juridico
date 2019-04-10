@@ -414,9 +414,14 @@ class Search {
 
 
                         
-                        echo '<tr>
-                    <td class = "td-icon-contract"><a href="view_anexo.php?a='.$anexo.'&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list"></a></th>
-                    <td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
+                        echo '<tr>';
+						if(sizeof($anexo) > 0){
+echo '<td class = "td-icon-contract"><a href="view_anexo.php?a='.$anexo.'&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list"></a></th>';
+						}	else{
+echo '<td class = "td-icon-contract"></th>';
+						}						
+                    
+                    echo '<td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
                     <td class = "td-contrato-contract">' . $numero . '</td>
                     <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
                     <td class = "td-data-contract">' . Search::formateDateBR($vencimento) . '</td>
@@ -736,7 +741,7 @@ class Search {
     public function BuscaGarantia($idcontrato) {
         try {
             $sql = 'SELECT ID_GARANTIA FROM '
-                    . 'GARANTIA WHERE ID_CONTRATO_GARANTIA = ' . $idcontrato;
+                    . 'GARANTIA WHERE DESC_GARANTIA = "' . $idcontrato . '"';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
@@ -754,7 +759,7 @@ class Search {
     public function BuscaObjeto($idcontrato) {
         try {
             $sql = 'SELECT ID_OBJETO FROM '
-                    . 'OBJETO WHERE ID_CONTRATO_OBJETO = ' . $idcontrato;
+                    . 'OBJETO WHERE DESC_OBJETO = "' . $idcontrato . '"';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
@@ -772,7 +777,7 @@ class Search {
     public function BuscaObs($idcontrato) {
         try {
             $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
-                    . 'observacoes_exigencias WHERE ID_CONTRATO_OBSERVACOES = ' . $idcontrato;
+                    . 'observacoes_exigencias WHERE DESC_OBSER_EXIGEN = "' . $idcontrato . '"';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();

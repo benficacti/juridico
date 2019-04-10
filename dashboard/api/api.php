@@ -116,8 +116,8 @@ if ($request == 'proximos_vencimentos') {
     Search::proximosVencimentos();
 }
 if ($request == 'anexo') {
-	
-    if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
+	if(isset($_FILES["image_contract"])){
+		if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
         $file = $_FILES["image_contract"]["tmp_name"];
 
         $caminho = "../uploads/";
@@ -127,6 +127,10 @@ if ($request == 'anexo') {
     }else{
 		Update::adicionarAnexo(null);
 	}
+	}else{
+		Update::adicionarAnexo(null);
+	}
+    
 }
 
 if ($request == 'alteracao_contrato') {
