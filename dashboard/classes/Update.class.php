@@ -67,7 +67,9 @@ class Update {
         
         try {
             $sql = 'UPDATE `contrato` SET `NUMERO_CONTRATO`=' . $numero . ',`CONTRATANTE_CONTRATO` = "'.$contratante.'",'
-                    . ' `CONTRATADO_CONTRATO` = "'.$contratada.'", `CONCORRENCIA_CONTRATO` = "'.$concorrencia.'", `VALOR_CONTRATO`="'.$valorContrato.'"'
+                    . ' `CONTRATADO_CONTRATO` = "'.$contratada.'", `CONCORRENCIA_CONTRATO` = "'.$concorrencia.'", '
+                    . ' `VALOR_CONTRATO`="'.$valorContrato.'", `QUANTIDADE_PARCELAS_CONTRATO` = '.$qtdParCont.','
+                    . ' `VALOR_DAS_PARCELAS_CONTRATO`= '.$valorParcContrato. ''
                     . ' WHERE ID_CONTRATO = "'.$idContrato.'" ';
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
