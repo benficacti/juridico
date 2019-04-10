@@ -94,37 +94,41 @@ if (!isset($_SESSION['login'])) {
 
 
                             $('#alterar_contrato').click(function () {
-                                
-                               // var idContrato = $("#idcontrato").val();
-                                var empresa = $("#idcontrato").val();
-                                var numero = $("#idcontrato").val();
-                                var vencimento = $("#idcontrato").val();
-                                var concorrencia = $("#idcontrato").val();
-                                var contratada = $("#idcontrato").val();
-                                var descTipoContrato = $("#idcontrato").val();
-                                var valorContrato = $("#idcontrato").val();
-                                var qtdParCont = $("#idcontrato").val();
-                                var quantParcPagContr = $("#idcontrato").val();
-                                var dataPagParc = $("#idcontrato").val();
-                                var inicioVigencia = $("#idcontrato").val();
-                                var fimVigencia = $("#idcontrato").val();
-                                var descGarantia = $("#idcontrato").val();
-                                var descObjeto = $("#idcontrato").val();
-                                var descObservacao = $("#idcontrato").val();
+
+                                var idcontrato = $("#idcontrato").val();
+                                var empresa = $("#empresa").val();
+                                var numero = $("#numero").val();
+                                var vencimento = $("#vencimento").val();
+                                var contratante = $("#contratante").val();
+                                var contratada = $("#contratada").val();
+                                var descTipoContrato = $("#descTipoContrato").val();
+                                var concorrencia = $("#concorrencia").val();
+                                var valorContrato = $("#valorContrato").val();
+                                var qtdParCont = $("#qtdParCont").val();
+                                var valorParcContrato = $("#valorParcContrato").val();
+                                var quantParcPagContr = $("#quantParcPagContr").val();
+                                var dataPagParc = $("#dataPagParc").val();
+                                var inicioVigencia = $("#inicioVigencia").val();
+                                var fimVigencia = $("#fimVigencia").val();
+                                var descGarantia = $("#descGarantia").val();
+                                var descObjeto = $("#descObjeto").val();
+                                var descObservacao = $("#descObservacao").val();
                                 
                                 $.ajax({
                                     url: "api/api.php",
                                     method: "post",
                                     data: {request: "update_contrato",
-                                        idContrato: idContrato,
-                                        empresa: empresa,
+                                        idcontrato: idcontrato,
+                                        empresa:  empresa,
                                         numero: numero,
                                         vencimento: vencimento,
-                                        concorrencia: concorrencia,
+                                        contratante: contratante,
                                         contratada: contratada,
                                         descTipoContrato: descTipoContrato,
+                                        concorrencia: concorrencia,
                                         valorContrato: valorContrato,
                                         qtdParCont: qtdParCont,
+                                        valorParcContrato: valorParcContrato,
                                         quantParcPagContr: quantParcPagContr,
                                         dataPagParc: dataPagParc,
                                         inicioVigencia: inicioVigencia,
@@ -133,11 +137,13 @@ if (!isset($_SESSION['login'])) {
                                         descObjeto: descObjeto,
                                         descObservacao: descObservacao
 
+                                        
                                     },
                                     success: function (data)
-                                   
+
                                     {
                                         alert(data);
+                                        window.location.href = "meus_contratos.php";
                                     }
                                 });
 

@@ -59,19 +59,24 @@ class Update {
     }
     
     
-    public function AtualizaContrato($empresa, $numero, $concorrencia, $contratada, $descTipoContrato, $valorContrato, $qtdParCont,
-            $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao, $idContrato) {
+    public function AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, 
+            $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, 
+            $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao) {
+            
+    
+        
         try {
-            $sql = 'UPDATE `contrato` SET `NUMERO_CONTRATO`=' . $numero . ' '
-                    . 'WHERE ID_CONTRATO = ' . $idContrato;
+            $sql = 'UPDATE `contrato` SET `NUMERO_CONTRATO`=' . $numero . ',`CONTRATANTE_CONTRATO` = "'.$contratante.'",'
+                    . ' `CONTRATADO_CONTRATO` = "'.$contratada.'", `CONCORRENCIA_CONTRATO` = "'.$concorrencia.'", `VALOR_CONTRATO`="'.$valorContrato.'"'
+                    . ' WHERE ID_CONTRATO = "'.$idContrato.'" ';
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
-                echo 'alterado';
+                echo 'Alterado';
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao obter Log';
+            echo 'Falha ao realizar Alteração!';
         }
     }
 
@@ -132,8 +137,8 @@ class Update {
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             EMPRESA:               
-                                <span><input type="text" id="empresa" name="empresa" value="' . $empresa . '"></span>
-                                 <span><input type="text" id="contrato" name="empresa" value="' . $id_contrato . '"></span>    
+                                <span><input type="hidden" id="idcontrato" name="idcontrato" value="' . $id_contrato . '"></span>
+                                <span><input type="text" id="empresa" name="empresa" value="' . $empresa . '"></span>   
                         </label>
                     </div>                    
                 </div>
@@ -157,7 +162,7 @@ class Update {
                     <div class="form-contract-fim">
                         <label class="title-info-contract">
                             CONTRATANTE:
-                            <span><input type="text" id="concorrencia" name="concorrencia" value="' . $contratante . '"></span>
+                            <span><input type="text" id="contratante" name="contratante" value="' . $contratante . '"></span>
                         </label>
                     </div>
                 </div>
@@ -208,7 +213,7 @@ class Update {
                       <div class="form-contract-fim">
                         <label class="title-info-contract">
                             VALOR DAS PARCELAS:
-                            <span><input type="text" id="valorContrato" name="valorContrato" value="' . $valorParcelasContrato . '"></span>
+                            <span><input type="text" id="valorParcContrato" name="valorParcContrato" value="' . $valorParcelasContrato . '"></span>
                         </label>
                     </div>
                 </div>
@@ -282,7 +287,7 @@ class Update {
                <div class="line-finally-contract">
                     <div class="form-contract-fim">
                         <div class="btn-login">
-                        <input type="submit" value="PROSSEGUIR" class="bt-login" id="alterar_contrato">
+                        <input type="submit" value="ALTERAR" class="bt-login" id="alterar_contrato">
                     </div>
                     </div>
                 </div>
