@@ -57,29 +57,87 @@ class Update {
             echo 'Falha ao obter Log';
         }
     }
-    
-    
-    public function AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, 
-            $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, 
-            $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao) {
-            
-           $dataPagParcx = Search::otherFormateDateBR($dataPagParc);
-           $inicioVigenciax = Search::otherFormateDateBR($inicioVigencia);
-           $fimVigenciax = Search::otherFormateDateBR($fimVigencia);
-           $vencimentox = Search::otherFormateDateBR($vencimento);
+
+    public function AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao) {
+
+
+        $idObjeto = Search::BuscaObjeto($idContrato);
+        $idGarantia = Search::BuscaGarantia($idContrato);
+        $idTipoContrato = Search::BuscaTipoContrato($idContrato);
+        $idObser_exigencia = Search::BuscaObs($idContrato);
         
+       
+            $dataPagParcx = Search::otherFormateDateBR($dataPagParc);
+            $inicioVigenciax = Search::otherFormateDateBR($inicioVigencia);
+            $fimVigenciax = Search::otherFormateDateBR($fimVigencia);
+            $vencimentox = Search::otherFormateDateBR($vencimento);
+        
+
+
         try {
-            $sql = 'UPDATE `contrato` SET `NUMERO_CONTRATO`=' . $numero . ',`CONTRATANTE_CONTRATO` = "'.$contratante.'",'
-                    . ' `CONTRATADO_CONTRATO` = "'.$contratada.'", `CONCORRENCIA_CONTRATO` = "'.$concorrencia.'", '
-                    . ' `VALOR_CONTRATO`= "'.$valorContrato.'", `QUANTIDADE_PARCELAS_CONTRATO` = '.$qtdParCont.', '
-                    . ' `VALOR_DAS_PARCELAS_CONTRATO`= "'.$valorParcContrato. '", `QUANTIDADE_PARCELAS_PAGAS_CONTRATO` = '.$quantParcPagContr.','
-                    . ' `DATA_PAGAMENTO_DAS_PARCELAS_CONTRATO` = "'.$dataPagParcx.'", `INICIO_VIGENCIA_CONTRATO` = "'.$inicioVigenciax.'", '
-                    . ' `FINAL_VIGENCIA_CONTRATO` = "'.$fimVigenciax.'", `VENCIMENTO_CONTRATO` = "'.$vencimentox.'" '
-                    . ' WHERE ID_CONTRATO = "'.$idContrato.'" ';
+            $sql = 'UPDATE `contrato` SET `NUMERO_CONTRATO`=' . $numero . ',`CONTRATANTE_CONTRATO` = "' . $contratante . '",'
+                    . ' `CONTRATADO_CONTRATO` = "' . $contratada . '", `CONCORRENCIA_CONTRATO` = "' . $concorrencia . '", '
+                    . ' `VALOR_CONTRATO`= "' . $valorContrato . '", `QUANTIDADE_PARCELAS_CONTRATO` = ' . $qtdParCont . ', '
+                    . ' `VALOR_DAS_PARCELAS_CONTRATO`= "' . $valorParcContrato . '", `QUANTIDADE_PARCELAS_PAGAS_CONTRATO` = ' . $quantParcPagContr . ','
+                    . ' `DATA_PAGAMENTO_DAS_PARCELAS_CONTRATO` = "' . $dataPagParcx . '", `INICIO_VIGENCIA_CONTRATO` = "' . $inicioVigenciax . '", '
+                    . ' `FINAL_VIGENCIA_CONTRATO` = "' . $fimVigenciax . '", `VENCIMENTO_CONTRATO` = "' . $vencimentox . '" '
+                    . ' WHERE ID_CONTRATO = "' . $idContrato . '" ';
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
-                echo 'Alterado';
+                echo 'Contrato Alterado </br>';
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao realizar Alteração!';
+        }
+
+        try {
+            $sql = 'UPDATE `objeto` SET `DESC_OBJETO`= "' . $descObjeto . '" '
+                    . ' WHERE ID_OBJETO = "' . $idObjeto . '" ';
+            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                // echo ' Objeto Alterado';
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao realizar Alteração!';
+        }
+
+        try {
+            $sql = 'UPDATE `garantia` SET `DESC_GARANTIA`= "' . $descGarantia . '" '
+                    . ' WHERE ID_GARANTIA = "' . $idGarantia . '" ';
+            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                // echo ' Garantia Alterado';
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao realizar Alteração!';
+        }
+
+        try {
+            $sql = 'UPDATE `tipo_contrato` SET `DESC_TIPO_CONTRATO`= "' . $descTipoContrato . '" '
+                    . ' WHERE ID_TIPO_CONTRATO = "' . $idTipoContrato . '" ';
+            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+              //  echo ' Tipo_Contrato Alterado';
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao realizar Alteração!';
+        }
+        
+        try {
+            $sql = 'UPDATE `observacoes_exigencias` SET `DESC_OBSER_EXIGEN`= "' . $descObservacao . '" '
+                    . ' WHERE ID_OBSERVACOES_EXIGENCIAS = ' . $idObser_exigencia . ' ';
+            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+               // echo ' Observações Alterado';
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());

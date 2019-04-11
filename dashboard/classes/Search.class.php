@@ -646,9 +646,9 @@ echo '<td class = "td-icon-contract"></th>';
         return $l[2] . "/" . $l[1] . "/" . $l[0];
     }
 
-    public function otherFormateDateBR($i) {
-        $l = explode('/', $i);
-        return $l[2] . "-" . $l[1] . "-" . $l[0];
+    public function otherFormateDateBR($e) {
+        $t = explode('/', $e);
+        return $t[2] . "-" . $t[1] . "-" . $t[0];
     }
     /*
       public function contratosProximoVencimento() {
@@ -742,16 +742,16 @@ echo '<td class = "td-icon-contract"></th>';
         }
     }
 
-    public function BuscaGarantia($idcontrato) {
+    public function BuscaGarantia($idContrato) {
         try {
-            $sql = 'SELECT ID_GARANTIA FROM '
-                    . 'GARANTIA WHERE DESC_GARANTIA = "' . $idcontrato . '"';
+            $sql = 'SELECT ID_GARANTIA_CONTRATO FROM '
+                    . 'CONTRATO WHERE ID_CONTRATO = ' . $idContrato . '';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
                 if ($count > 0) {
                     foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
-                        return $dados->ID_GARANTIA;
+                        return $dados->ID_GARANTIA_CONTRATO;
                     }
                 }
             }
@@ -760,16 +760,16 @@ echo '<td class = "td-icon-contract"></th>';
         }
     }
 
-    public function BuscaObjeto($idcontrato) {
+    public function BuscaObjeto($idContrato) {
         try {
-            $sql = 'SELECT ID_OBJETO FROM '
-                    . 'OBJETO WHERE DESC_OBJETO = "' . $idcontrato . '"';
+            $sql = 'SELECT ID_OBJETO_CONTRATO FROM '
+                    . 'CONTRATO WHERE ID_CONTRATO = ' . $idContrato . '';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
                 if ($count > 0) {
                     foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
-                        return $dados->ID_OBJETO;
+                        return $dados->ID_OBJETO_CONTRATO;
                     }
                 }
             }
@@ -777,17 +777,38 @@ echo '<td class = "td-icon-contract"></th>';
             echo $exc->getTraceAsString();
         }
     }
-
-    public function BuscaObs($idcontrato) {
+    
+    
+    
+    public function BuscaTipoContrato($idContrato) {
         try {
-            $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
-                    . 'observacoes_exigencias WHERE DESC_OBSER_EXIGEN = "' . $idcontrato . '"';
+            $sql = 'SELECT ID_TIPO_CONTRATO FROM '
+                    . 'CONTRATO WHERE ID_CONTRATO = ' . $idContrato . '';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
                 if ($count > 0) {
                     foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
-                        return $dados->ID_OBSERVACOES_EXIGENCIAS;
+                        return $dados->ID_TIPO_CONTRATO;
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+    
+
+    public function BuscaObs($idContrato) {
+        try {
+            $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS_CONTRATO FROM '
+                    . 'CONTRATO WHERE ID_CONTRATO = "' . $idContrato . '"';
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_OBSERVACOES_EXIGENCIAS_CONTRATO;
                     }
                 }
             }
