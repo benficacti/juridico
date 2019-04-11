@@ -105,11 +105,11 @@ if (!isset($_SESSION['login'])) {
                     </div>
                     <div class="form-contract">
                         <label class="title-option-contract">DATA VIGÊNCIA:</label>
-                        <div class="input-group-contract group-date"  id="input-group-contract-inivigencia">
+                        <div class="input-group-contract group-date" style=""  id="input-group-contract-inivigencia">
                             <input type="text" class="input-contract input-date" id="inicio_vigencia" placeholder="00/00/0000" >     
                         </div>
-                        <label class="title-option-contract" style="margin-left:1vw !important">á</label>
-                        <div class="input-group-contract group-date pright" style="margin-left:1vw !important"  id="input-group-contract-fimvigencia">
+                        <label class="title-option-contract " style="margin-left:0vw !important;margin-right:1vw; float:right;">á</label>
+                        <div class="input-group-contract group-date pright" id="input-group-contract-fimvigencia">
                             <input type="text" class="input-contract input-date" id="fim_vigencia" placeholder="00/00/0000"  >     
                         </div>
                     </div>
@@ -169,7 +169,7 @@ if (!isset($_SESSION['login'])) {
                 $('#item_cadastro_contrato').addClass('item-active');
                 $("#inicio_vigencia").mask("99/99/9999");
                 $("#fim_vigencia").mask("99/99/9999");
-                
+
                 $("#vencimento").mask("99/99/9999");
                 function verifyFocus() {
                     //NUMERO CONTRATO
@@ -328,7 +328,9 @@ if (!isset($_SESSION['login'])) {
                         $("#div-parcelas").load("includes/implement_cadastro_contrato.html");
                         $("#input-group-contract-possuiparc").removeClass("input-group-contract-error");
                         $("#input-group-contract-possuiparcnao").removeClass("input-group-contract-error");
-					 setTimeout( function () { $("#data_pag_parcela").mask("99/99/9999")   }, 1000);
+                        setTimeout(function () {
+                            $("#data_pag_parcela").mask("99/99/9999")
+                        }, 1000);
                     }
 
                 });
@@ -375,12 +377,12 @@ if (!isset($_SESSION['login'])) {
                     var tipo_contrato = $("#tipo_contrato").val();
                     var possui_parcela = $("#possui_parcela").val();
                     var empresa_contrato = $("#empresa_contrato").val();
-                   /* //NUMERO CONTRATO
-                    if (num_contrato.length <= 0) {
-                        $("#input-group-contract-numero").addClass("input-group-contract-error");
-                    } else {
-                        $("#input-group-contract-numero").removeClass("input-group-contract-error");
-                    }*/
+                    /* //NUMERO CONTRATO
+                     if (num_contrato.length <= 0) {
+                     $("#input-group-contract-numero").addClass("input-group-contract-error");
+                     } else {
+                     $("#input-group-contract-numero").removeClass("input-group-contract-error");
+                     }*/
                     //NOME CONTRATANTE
                     if (nome_contratante.length <= 0) {
                         $("#input-group-contract-contratante").addClass("input-group-contract-error");
@@ -595,44 +597,44 @@ if (!isset($_SESSION['login'])) {
         <script>
             function calcular() {
                 $(document).ready(function () {
-						
-					
+
+
 
                     var valor_contrato = (document.getElementById('valor_contrato').value);
                     valor_contrato = valor_contrato.replace("R$ ", "");
                     var d = valor_contrato.toString();
                     var nValor;
-                        valor_contrato = valor_contrato.replace(",", "");
-                        valor_contrato = valor_contrato.replace(".", "");
-						
-						
-                        nValor = valor_contrato;
-						
-						  nValor = nValor.replace(".", "");
-						  nValor = nValor.replace(",", "");
-						
-                        var qtd_parcela = parseInt((document.getElementById('parcela').value).replace(",", "."));
-                        var parcelas = nValor / qtd_parcela;
-						
-						
-						var resultado = parcelas + "";
-						
-						var n = resultado.indexOf(".");
-						
-						if(n !== -1){
-							resultado = resultado.substring(0,n);
-						}else{
-							
-						}
-						
-						
-                        document.getElementById('valor_parcela').value ="R$ "+ mascaraValor(resultado);
-                        var valor_parcelas = (document.getElementById('valor_parcela').value);
-                        valor_parcelas = parseFloat(valor_parcelas);
-				
-						
-						
-                   
+                    valor_contrato = valor_contrato.replace(",", "");
+                    valor_contrato = valor_contrato.replace(".", "");
+
+
+                    nValor = valor_contrato;
+
+                    nValor = nValor.replace(".", "");
+                    nValor = nValor.replace(",", "");
+
+                    var qtd_parcela = parseInt((document.getElementById('parcela').value).replace(",", "."));
+                    var parcelas = nValor / qtd_parcela;
+
+
+                    var resultado = parcelas + "";
+
+                    var n = resultado.indexOf(".");
+
+                    if (n !== -1) {
+                        resultado = resultado.substring(0, n);
+                    } else {
+
+                    }
+
+
+                    document.getElementById('valor_parcela').value = "R$ " + mascaraValor(resultado);
+                    var valor_parcelas = (document.getElementById('valor_parcela').value);
+                    valor_parcelas = parseFloat(valor_parcelas);
+
+
+
+
 
                     var parcelas = (document.getElementById('parcelas_finalizadas').value);
                     if (parcelas <= qtd_parcela) {
@@ -640,7 +642,7 @@ if (!isset($_SESSION['login'])) {
                         var total_finalizado = parseFloat(valor_parcelas) * parcelas;
                         ((total_finalizado)).toFixed(2);
                         //var total_final = total_finalizado + " de " + nValor;
-                        var total_final = parcelas+" de "+qtd_parcela;
+                        var total_final = parcelas + " de " + qtd_parcela;
                         document.getElementById('total_finalizado').value = total_final;
                         $("#input-group-contract-parcfim").removeClass("input-group-contract-error");
                     } else {
@@ -653,16 +655,16 @@ if (!isset($_SESSION['login'])) {
                     }
                 });
             }
-function mascaraValor(valor) {
-    valor = valor.toString().replace(/\D/g,"");
-	valor = valor.toString().replace(/(\d)(\d{17})$/,"$1.$2");
-	valor = valor.toString().replace(/(\d)(\d{14})$/,"$1.$2");
-	valor = valor.toString().replace(/(\d)(\d{11})$/,"$1.$2");
-    valor = valor.toString().replace(/(\d)(\d{8})$/,"$1.$2");
-    valor = valor.toString().replace(/(\d)(\d{5})$/,"$1.$2");
-    valor = valor.toString().replace(/(\d)(\d{2})$/,"$1,$2");
-    return valor                    
-}
+            function mascaraValor(valor) {
+                valor = valor.toString().replace(/\D/g, "");
+                valor = valor.toString().replace(/(\d)(\d{17})$/, "$1.$2");
+                valor = valor.toString().replace(/(\d)(\d{14})$/, "$1.$2");
+                valor = valor.toString().replace(/(\d)(\d{11})$/, "$1.$2");
+                valor = valor.toString().replace(/(\d)(\d{8})$/, "$1.$2");
+                valor = valor.toString().replace(/(\d)(\d{5})$/, "$1.$2");
+                valor = valor.toString().replace(/(\d)(\d{2})$/, "$1,$2");
+                return valor
+            }
         </script>
 
     </body>
