@@ -757,6 +757,15 @@ body{
     text-align: center;
     font-family: 'Gilroy';
 }
+
+#nContrato::-webkit-input-placeholder{
+    font-family: 'Gilroy';
+    color: black;
+}
+
+#nContrato{
+    border: none;
+}
 .div-contrato-contract{
     width:15vw;
     float:left;

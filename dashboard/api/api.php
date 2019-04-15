@@ -105,7 +105,8 @@ if ($request == 'meus_contratos') {
 if ($request == 'filtro_meus_contratos') {
     $tipos = (null !== (filter_input(INPUT_POST, 'tipos'))) ? filter_input(INPUT_POST, 'tipos') : 0;
     $status_vencimento = (null !== (filter_input(INPUT_POST, 'status_vencimento'))) ? filter_input(INPUT_POST, 'status_vencimento') : 0;
-    echo Search::filtroMeusContratos($tipos, $status_vencimento);
+    $nContrato = (null !== (filter_input(INPUT_POST, 'nContrato'))) ? filter_input(INPUT_POST, 'nContrato') : 0;
+    echo Search::filtroMeusContratos($tipos, $status_vencimento, $nContrato);
 }
 
 if ($request == 'info_contrato') {
@@ -113,24 +114,25 @@ if ($request == 'info_contrato') {
     echo Search::infoContrato($contrato);
 }
 if ($request == 'proximos_vencimentos') {
-    Search::proximosVencimentos();
+    $vencimento = (null !== (filter_input(INPUT_POST, 'vencimento'))) ? filter_input(INPUT_POST, 'vencimento') : 0;
+    $busca = (null !== (filter_input(INPUT_POST, 'busca'))) ? filter_input(INPUT_POST, 'busca') : 0;
+    echo Search::proximosVencimentos($vencimento, $busca);
 }
 if ($request == 'anexo') {
-	if(isset($_FILES["image_contract"])){
-		if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
-        $file = $_FILES["image_contract"]["tmp_name"];
+    if (isset($_FILES["image_contract"])) {
+        if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
+            $file = $_FILES["image_contract"]["tmp_name"];
 
-        $caminho = "../uploads/";
-        $newName = sha1(date("Y-m-d h:i:s", time()));
-        move_uploaded_file($file, $caminho . $newName . ".pdf");
-        Update::adicionarAnexo($newName);
-    }else{
-		Update::adicionarAnexo(null);
-	}
-	}else{
-		Update::adicionarAnexo(null);
-	}
-    
+            $caminho = "../uploads/";
+            $newName = sha1(date("Y-m-d h:i:s", time()));
+            move_uploaded_file($file, $caminho . $newName . ".pdf");
+            Update::adicionarAnexo($newName);
+        } else {
+            Update::adicionarAnexo(null);
+        }
+    } else {
+        Update::adicionarAnexo(null);
+    }
 }
 
 if ($request == 'alteracao_contrato') {
@@ -159,9 +161,7 @@ if ($request == 'update_contrato') {
     $descObjeto = (null !== (filter_input(INPUT_POST, 'descObjeto'))) ? filter_input(INPUT_POST, 'descObjeto') : 0;
     $descObservacao = (null !== (filter_input(INPUT_POST, 'descObservacao'))) ? filter_input(INPUT_POST, 'descObservacao') : 0;
 
-    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, 
-            $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, 
-            $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao);
+    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao);
 }
 
 function formateDate($i) {
