@@ -257,9 +257,6 @@ class Search {
                         . ' WHERE VENCIMENTO_CONTRATO > "' . $data . '" AND ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
                  $sqll = Conexao::getInstance()->prepare($sql);
                 break;
-            default :
-                
-            
         }
 
 
