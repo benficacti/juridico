@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION['login'])) {
     header('Location: login.php');
 } else {
+    
 }
 ?>
 <!DOCTYPE html>
@@ -77,7 +78,8 @@ if (!isset($_SESSION['login'])) {
                 vencimentos-panel
                 -->
                 <div class="panels ">
-                    <div class="line-contract-panel">
+                    <input type="text" id="busca" onkeyup="callApi();">
+                    <div class="line-contract-panel"> 
                         <div class="title-contract-panel">
                             <label class="lbl-title-panel">
                                 PRÓXIMOS VENCIMENTOS
@@ -99,15 +101,17 @@ if (!isset($_SESSION['login'])) {
                                 </label>
                             </div>
                         </div>
+
                         <div class="info-contract-panel">
                             <div class="title-info-contract-panel">
-                                <select id="vencimento_contrato" class="lbl-info-title-panel">
-                                    <option id="0">VENCIMENTO</option>
-                                    <option id="1">VENCIDO</option>
-                                    <option id="2">À VENCER</option>
+                                <select id="vencimento_contrato" class="lbl-info-title-panel" onchange="callApi();">
+                                    <option value="0">VENCIMENTO</option>
+                                    <option value="1">VENCIDO</option>
+                                    <option value="2">À VENCER</option>
                                 </select>
                             </div>
                         </div>
+
 
                         <div class="info-contract-panel">
                             <div class="title-info-contract-panel">
@@ -116,10 +120,13 @@ if (!isset($_SESSION['login'])) {
                                 </label>
                             </div>
                         </div>
+
                     </div>
 
+                    
+
                     <div id="result">
-                        
+
                     </div>
 
                 </div>
@@ -134,7 +141,7 @@ if (!isset($_SESSION['login'])) {
 
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
-            AOS.init();
+                            AOS.init();
         </script>
 
         <script  type="text/javascript">
@@ -144,14 +151,20 @@ if (!isset($_SESSION['login'])) {
             $(document).ready(function () {
                 $('#item_painel_contrato').addClass('item-active');
                 // document.getElementById("result").innerHTML = "<div class='center-img'><img src='../images/loading.gif' alt='imgLoading' class='img-loading'></div>";
-                  callApi();
+                callApi();
             });
 
             function callApi() {
+                var vencimento = $("#vencimento_contrato").val();
+                var busca = $("#busca").val();
                 $.ajax({
                     url: "api/api.php",
                     method: "post",
-                    data: {request: "proximos_vencimentos"},
+
+                    data: {request: "proximos_vencimentos",
+                        vencimento: vencimento,
+                        busca: busca
+                    },
                     success: function (data)
                     {
                         document.getElementById("result").innerHTML = data;

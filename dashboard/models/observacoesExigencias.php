@@ -13,38 +13,29 @@
  */
 class observacoesExigencias {
 
-    private $idContratoObs;
-    private $statusObs;
-    private $descObs;
-
-    function __construct($idContratoObs, $statusObs, $descObs) {
-        $this->idContratoObs = $idContratoObs;
-        $this->statusObs = $statusObs;
-        $this->descObs = $descObs;
+    private $descObserExigen;
+    private $idContratoObservacoes;
+    
+    function __construct($descObserExigen, $idContratoObservacoes) {
+        $this->descObserExigen = $descObserExigen;
+        $this->idContratoObservacoes = $idContratoObservacoes;
     }
 
-    function getIdContratoObs() {
-        return $this->idContratoObs;
+    function getDescObserExigen() {
+        return $this->descObserExigen;
     }
 
-    function getStatusObs() {
-        return $this->statusObs;
+    function getIdContratoObservacoes() {
+        return $this->idContratoObservacoes;
     }
 
-    function getDescObs() {
-        return $this->descObs;
+    function setDescObserExigen($descObserExigen) {
+        $this->descObserExigen = $descObserExigen;
     }
 
-    function setIdContratoObs($idContratoObs) {
-        $this->idContratoObs = $idContratoObs;
+    function setIdContratoObservacoes($idContratoObservacoes) {
+        $this->idContratoObservacoes = $idContratoObservacoes;
     }
 
-    function setStatusObs($statusObs) {
-        $this->statusObs = $statusObs;
-    }
-
-    function setDescObs($descObs) {
-        $this->descObs = $descObs;
-    }
 
 }

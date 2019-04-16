@@ -44,52 +44,46 @@ if ($request == "cadastro_contrato") {
     }
 }
 
-if ($request == 'adicionar_garantia') {
+
+
+if ($request == "adicionar_garantia") {
     sleep(1);
     $_idContratoGarantia = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_statusGarantia = (null !== (filter_input(INPUT_POST, 'status_garantia'))) ? filter_input(INPUT_POST, 'status_garantia') : null;
-    $_descGarantia = (null !== (filter_input(INPUT_POST, 'garantia'))) ? filter_input(INPUT_POST, 'garantia') : null;
-    $garantia = new garantia($_statusGarantia, $_descGarantia, $_idContratoGarantia);
-    $idGarantia = Insert::CadastraGarantia($garantia);
+    $descGarantia = (null !== (filter_input(INPUT_POST, 'garantia'))) ? filter_input(INPUT_POST, 'garantia') : null;
+    $garantia = new garantia($descGarantia);
+    $idGarantia = Insert::CadastraGarantia($garantia, $_idContratoGarantia);
     if ($idGarantia != null) {
         echo Update::adicionaGarantia($_idContratoGarantia, $_statusGarantia, $idGarantia);
     }
 }
 
+
 if ($request == 'adicionar_objeto') {
     sleep(1);
-    $_idContratoObejto = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
+    $idContratoObjeto = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_status_objeto = (null !== (filter_input(INPUT_POST, 'status_objeto'))) ? filter_input(INPUT_POST, 'status_objeto') : null;
-    $_descObejto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : null;
-    $objeto = new objeto($_idContratoObejto, $_status_objeto, $_descObejto);
-    $idObjeto = Insert::CadastraObjeto($objeto);
+    $descObjeto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : null;
+   $objeto = new objeto($descObjeto, $idContratoObjeto);
+   $idObjeto = Insert::CadastraObjeto($objeto);
     if ($idObjeto != null) {
-        echo Update::adicionaObjeto($_idContratoObejto, $_status_objeto, $idObjeto);
+        echo Update::adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto);
     }
 }
 
+
 if ($request == 'adicionar_obs') {
     sleep(1);
-    $_idContratoObs = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
+    $idContratoObservacoes = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_status_obs = (null !== (filter_input(INPUT_POST, 'status_obs'))) ? filter_input(INPUT_POST, 'status_obs') : null;
-    $_descObs = (null !== (filter_input(INPUT_POST, 'obs'))) ? filter_input(INPUT_POST, 'obs') : null;
-    $obs = new observacoesExigencias($_idContratoObs, $_status_obs, $_descObs);
-    $idObjeto = Insert::CadastraObs($obs);
-    if ($idObjeto != null) {
-        echo Update::adicionaObs($_idContratoObs, $_status_obs, $idObjeto);
+    $descObserExigen = (null !== (filter_input(INPUT_POST, 'obs'))) ? filter_input(INPUT_POST, 'obs') : null;
+    $obs = new observacoesExigencias($descObserExigen, $idContratoObservacoes);
+    $idObservacoes = Insert::CadastraObs($obs);
+    if ($idObservacoes != null) {
+        echo Update::adicionaObs($idContratoObservacoes, $_status_obs, $idObservacoes);
     }
 }
-if ($request == 'adicionar_obs') {
-    sleep(rand(1, 3));
-    $_idContratoObs = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
-    $_status_obs = (null !== (filter_input(INPUT_POST, 'status_obs'))) ? filter_input(INPUT_POST, 'status_obs') : null;
-    $_descObs = (null !== (filter_input(INPUT_POST, 'obs'))) ? filter_input(INPUT_POST, 'obs') : null;
-    $obs = new observacoesExigencias($_idContratoObs, $_status_obs, $_descObs);
-    $idObjeto = Insert::CadastraObs($obs);
-    if ($idObjeto != null) {
-        echo Update::adicionaObs($_idContratoObs, $_status_obs, $idObjeto);
-    }
-}
+
 if (($request == 'login') && ($request !== 0)) {
     sleep(rand(1, 3));
     $login = (null !== (filter_input(INPUT_POST, 'login'))) ? filter_input(INPUT_POST, 'login') : 0;
@@ -105,7 +99,8 @@ if ($request == 'meus_contratos') {
 if ($request == 'filtro_meus_contratos') {
     $tipos = (null !== (filter_input(INPUT_POST, 'tipos'))) ? filter_input(INPUT_POST, 'tipos') : 0;
     $status_vencimento = (null !== (filter_input(INPUT_POST, 'status_vencimento'))) ? filter_input(INPUT_POST, 'status_vencimento') : 0;
-    echo Search::filtroMeusContratos($tipos, $status_vencimento);
+    $nContrato = (null !== (filter_input(INPUT_POST, 'nContrato'))) ? filter_input(INPUT_POST, 'nContrato') : 0;
+    echo Search::filtroMeusContratos($tipos, $status_vencimento, $nContrato);
 }
 
 if ($request == 'info_contrato') {
@@ -113,24 +108,25 @@ if ($request == 'info_contrato') {
     echo Search::infoContrato($contrato);
 }
 if ($request == 'proximos_vencimentos') {
-    Search::proximosVencimentos();
+    $vencimento = (null !== (filter_input(INPUT_POST, 'vencimento'))) ? filter_input(INPUT_POST, 'vencimento') : 0;
+    $busca = (null !== (filter_input(INPUT_POST, 'busca'))) ? filter_input(INPUT_POST, 'busca') : 0;
+    echo Search::proximosVencimentos($vencimento, $busca);
 }
 if ($request == 'anexo') {
-	if(isset($_FILES["image_contract"])){
-		if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
-        $file = $_FILES["image_contract"]["tmp_name"];
+    if (isset($_FILES["image_contract"])) {
+        if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {
+            $file = $_FILES["image_contract"]["tmp_name"];
 
-        $caminho = "../uploads/";
-        $newName = sha1(date("Y-m-d h:i:s", time()));
-        move_uploaded_file($file, $caminho . $newName . ".pdf");
-        Update::adicionarAnexo($newName);
-    }else{
-		Update::adicionarAnexo(null);
-	}
-	}else{
-		Update::adicionarAnexo(null);
-	}
-    
+            $caminho = "../uploads/";
+            $newName = sha1(date("Y-m-d h:i:s", time()));
+            move_uploaded_file($file, $caminho . $newName . ".pdf");
+            Update::adicionarAnexo($newName);
+        } else {
+            Update::adicionarAnexo(null);
+        }
+    } else {
+        Update::adicionarAnexo(null);
+    }
 }
 
 if ($request == 'alteracao_contrato') {
@@ -159,9 +155,9 @@ if ($request == 'update_contrato') {
     $descObjeto = (null !== (filter_input(INPUT_POST, 'descObjeto'))) ? filter_input(INPUT_POST, 'descObjeto') : 0;
     $descObservacao = (null !== (filter_input(INPUT_POST, 'descObservacao'))) ? filter_input(INPUT_POST, 'descObservacao') : 0;
 
-    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, 
-            $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, 
-            $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao);
+    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato,
+            $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia,
+            $fimVigencia, $descGarantia, $descObjeto, $descObservacao);
 }
 
 function formateDate($i) {

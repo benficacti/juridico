@@ -161,7 +161,7 @@ if (!isset($_SESSION['login'])) {
                         },
                         success: function (data)
                         {
-                            // alert(data);
+                            
                             var res = data.split(";");
                             if (typeof res[0] !== "undefined" && res[0] == "00") {
                                 location.href = "cadastro_obs.php";
@@ -170,6 +170,7 @@ if (!isset($_SESSION['login'])) {
                                 document.getElementById("adicionar_objeto").value = "TENTAR NOVAMENTE";
                                 $('#adicionar_objeto').attr('disabled', false);
                             }
+                           
 
                         }
                     });

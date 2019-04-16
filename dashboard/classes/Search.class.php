@@ -230,13 +230,38 @@ class Search {
         }
     }
 
-    public function proximosVencimentos() {
+    public function proximosVencimentos($vencimento, $busca) {
+        $data = date('Y-m-d');
+        switch ($vencimento) {
+            case 0:
+                $sql = "SELECT * FROM CONTRATO "
+                . " INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO"
+                . " WHERE NUMERO_CONTRATO like '%" . $busca . "%' or VENCIMENTO_CONTRATO like '%" . $busca . "%' or"
+                . " CONTRATANTE_CONTRATO like '%" . $busca . "%'";
+                 $sqll = Conexao::getInstance()->prepare($sql);
+                break;
+
+            case 1:
+                $sql = 'SELECT * FROM CONTRATO '
+                        . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                        . ' WHERE VENCIMENTO_CONTRATO < "' . $data . '"';
+                 $sqll = Conexao::getInstance()->prepare($sql);
+                break;
+
+            case 2:
+                $sql = 'SELECT * FROM CONTRATO '
+                        . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                        . ' WHERE VENCIMENTO_CONTRATO >= "' . $data . '"';
+                 $sqll = Conexao::getInstance()->prepare($sql);
+                break;
+        }
+
+
+        
+
         try {
             $mes = 1;
 
-            $sql = 'SELECT * FROM CONTRATO '
-                    . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
-                    . ' WHERE ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
@@ -260,7 +285,9 @@ class Search {
                         <div class="info-contract-panel">
                             <div class="title-info-contract-panel">
                                 <label class="lbl-info-line-panel">
-                                    <div class = "desc-contratante-panel"> ' . $contratante . '</div>
+                                    <div class = "desc-contratante-panel">
+                                        ' . $contratante . '
+                                        </div>
                                 </label>
                             </div>
                         </div>
@@ -301,7 +328,7 @@ class Search {
         }
     }
 
-    public function filtroMeusContratos($tipos, $status_vencimento) {
+    public function filtroMeusContratos($tipos, $status_vencimento, $nContrato) {
         try {
             $date = date('Y-m-d');
             $mes = 1;
@@ -347,47 +374,60 @@ class Search {
               $sqll = Conexao::getInstance()->prepare($sql);
 
              */
+            $a = ($tipos == 0);
 
             if (($tipos == 0)) {
-                $sql = 'SELECT * FROM CONTRATO '
-                        . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
-                        . ' WHERE  ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+                $sql = "SELECT * FROM CONTRATO "
+                        . " INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO"
+                        . " WHERE NUMERO_CONTRATO like '%" . $nContrato . "%' and ID_LOGIN_CONTRATO = " . $_SESSION['login'];
                 $sqll = Conexao::getInstance()->prepare($sql);
             }
             if (($tipos == 1) or ( $tipos == 2)) {
-                $sql = 'SELECT * FROM CONTRATO '
-                        . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
-                        . ' WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+                $sql = "SELECT * FROM CONTRATO "
+                        . " INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO"
+                        . " WHERE NUMERO_CONTRATO like '%" . $nContrato . "%' and contrato.ID_TIPO_CONTRATO = " . $tipos . " AND ID_LOGIN_CONTRATO = " . $_SESSION['login'];
                 $sqll = Conexao::getInstance()->prepare($sql);
             }
             if (($tipos == 0) and ( $status_vencimento == 1)) {
-                $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.VENCIMENTO_CONTRATO >= "' . $date . '" AND '
-                        . 'contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+                $sql = 'SELECT * FROM CONTRATO'
+                        . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                        . ' WHERE contrato.VENCIMENTO_CONTRATO >= "' . $date . '" AND '
+                        . ' contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
                 $sqll = Conexao::getInstance()->prepare($sql);
             }
             if (($tipos == 0) and ( $status_vencimento == 2)) {
-                $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.VENCIMENTO_CONTRATO < "' . $date . '" AND'
+                $sql = 'SELECT * FROM CONTRATO'
+                        . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                        . ' WHERE contrato.VENCIMENTO_CONTRATO < "' . $date . '" AND'
                         . ' contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
                 $sqll = Conexao::getInstance()->prepare($sql);
             }
             if (($tipos == 1) and ( $status_vencimento == 1)) {
-                $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
+                $sql = 'SELECT * FROM CONTRATO'
+                        . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                        . ' WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
                         . 'contrato.VENCIMENTO_CONTRATO >= "' . $date . '" AND contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
                 $sqll = Conexao::getInstance()->prepare($sql);
             }
 
             if (($tipos == 1) and ( $status_vencimento == 2)) {
-                $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
+                $sql = 'SELECT * FROM CONTRATO'
+                        . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                        . ' WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
                         . 'contrato.VENCIMENTO_CONTRATO < "' . $date . '" AND contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
                 $sqll = Conexao::getInstance()->prepare($sql);
             }
             if (($tipos == 2) and ( $status_vencimento == 1)) {
-                $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
+                $sql = 'SELECT * FROM CONTRATO'
+                        . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                        . ' WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
                         . 'contrato.VENCIMENTO_CONTRATO >= "' . $date . '" AND contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
                 $sqll = Conexao::getInstance()->prepare($sql);
             }
             if (($tipos == 2) and ( $status_vencimento == 2)) {
-                $sql = 'SELECT * FROM CONTRATO INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
+                $sql = 'SELECT * FROM CONTRATO'
+                        . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
+                        . ' WHERE contrato.ID_TIPO_CONTRATO = ' . $tipos . ' AND '
                         . 'contrato.VENCIMENTO_CONTRATO < "' . $date . '" AND contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
                 $sqll = Conexao::getInstance()->prepare($sql);
             }
@@ -412,16 +452,16 @@ class Search {
                         //  echo 'Contrato '.$numero.' - '.' Vencimento'.$vencimento.'<br>';
 
 
-                        
-                        
+
+
                         echo '<tr>';
-						if(strlen($anexo) > 0){
-echo '<td class = "td-icon-contract"><a href="view_anexo.php?a='.$anexo.'&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list"></a></th>';
-						}	else{
-echo '<td class = "td-icon-contract"></th>';
-						}						
-                    
-                    echo '<td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
+                        if (strlen($anexo) > 0) {
+                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list"></a></th>';
+                        } else {
+                            echo '<td class = "td-icon-contract"></th>';
+                        }
+
+                        echo '<td class = "td-desc-contract"><div class = "td-desc-list-contract">' . $contratante . '</div></td>
                     <td class = "td-contrato-contract">' . $numero . '</td>
                     <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
                     <td class = "td-data-contract">' . Search::formateDateBR($vencimento) . '</td>
@@ -650,6 +690,7 @@ echo '<td class = "td-icon-contract"></th>';
         $t = explode('/', $e);
         return $t[2] . "-" . $t[1] . "-" . $t[0];
     }
+
     /*
       public function contratosProximoVencimento() {
       try {
@@ -742,16 +783,37 @@ echo '<td class = "td-icon-contract"></th>';
         }
     }
 
-    public function BuscaGarantia($idContrato) {
+    public function BuscaGarantia($_idContratoGarantia) {
         try {
-            $sql = 'SELECT ID_GARANTIA_CONTRATO FROM '
-                    . 'CONTRATO WHERE ID_CONTRATO = ' . $idContrato . '';
+            $sql = 'SELECT ID_GARANTIA FROM '
+                    . 'GARANTIA WHERE ID_CONTRATO_GARANTIA = ' . $_idContratoGarantia . '';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
                 if ($count > 0) {
                     foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
-                        return $dados->ID_GARANTIA_CONTRATO;
+                        return $dados->ID_GARANTIA;
+                    }
+                }else{
+                    echo 'não buscou ID_GARANTIA';
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function BuscaObjeto($idContratoObjeto) {
+        try {
+            
+            $sql = 'SELECT ID_OBJETO FROM '
+                    . 'OBJETO WHERE ID_CONTRATO_OBJETO = ' . $idContratoObjeto . '';
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_OBJETO;
                     }
                 }
             }
@@ -760,26 +822,6 @@ echo '<td class = "td-icon-contract"></th>';
         }
     }
 
-    public function BuscaObjeto($idContrato) {
-        try {
-            $sql = 'SELECT ID_OBJETO_CONTRATO FROM '
-                    . 'CONTRATO WHERE ID_CONTRATO = ' . $idContrato . '';
-            $sqll = Conexao::getInstance()->prepare($sql);
-            if ($sqll->execute()) {
-                $count = $sqll->rowCount();
-                if ($count > 0) {
-                    foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
-                        return $dados->ID_OBJETO_CONTRATO;
-                    }
-                }
-            }
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-    }
-    
-    
-    
     public function BuscaTipoContrato($idContrato) {
         try {
             $sql = 'SELECT ID_TIPO_CONTRATO FROM '
@@ -797,18 +839,17 @@ echo '<td class = "td-icon-contract"></th>';
             echo $exc->getTraceAsString();
         }
     }
-    
 
-    public function BuscaObs($idContrato) {
+    public function BuscaObs($idContratoObs) {
         try {
-            $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS_CONTRATO FROM '
-                    . 'CONTRATO WHERE ID_CONTRATO = "' . $idContrato . '"';
+            $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
+                    . 'OBSERVACOES_EXIGENCIAS WHERE ID_CONTRATO_OBSERVACOES = ' . $idContratoObs . '';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
                 if ($count > 0) {
                     foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
-                        return $dados->ID_OBSERVACOES_EXIGENCIAS_CONTRATO;
+                        return $dados->ID_OBSERVACOES_EXIGENCIAS;
                     }
                 }
             }

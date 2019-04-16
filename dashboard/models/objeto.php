@@ -12,39 +12,29 @@
  * @author USUARIO
  */
 class objeto {
-
-    private $idContratoObejto;
-    private $statusObjeto;
     private $descObjeto;
-
-    function __construct($idContratoObejto, $statusObjeto, $descObjeto) {
-        $this->idContratoObejto = $idContratoObejto;
-        $this->statusObjeto = $statusObjeto;
+    private $idContratoObjeto;
+    
+    function __construct($descObjeto, $idContratoObjeto) {
         $this->descObjeto = $descObjeto;
-    }
-
-    function getIdContratoObejto() {
-        return $this->idContratoObejto;
-    }
-
-    function getStatusObjeto() {
-        return $this->statusObjeto;
+        $this->idContratoObjeto = $idContratoObjeto;
     }
 
     function getDescObjeto() {
         return $this->descObjeto;
     }
 
-    function setIdContratoObejto($idContratoObejto) {
-        $this->idContratoObejto = $idContratoObejto;
-    }
-
-    function setStatusObjeto($statusObjeto) {
-        $this->statusObjeto = $statusObjeto;
+    function getIdContratoObjeto() {
+        return $this->idContratoObjeto;
     }
 
     function setDescObjeto($descObjeto) {
         $this->descObjeto = $descObjeto;
     }
+
+    function setIdContratoObjeto($idContratoObjeto) {
+        $this->idContratoObjeto = $idContratoObjeto;
+    }
+
 
 }
