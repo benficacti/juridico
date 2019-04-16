@@ -113,7 +113,6 @@ if (!isset($_SESSION['login'])) {
                                 var descGarantia = $("#descGarantia").val();
                                 var descObjeto = $("#descObjeto").val();
                                 var descObservacao = $("#descObservacao").val();
-                                
                                 $.ajax({
                                     url: "api/api.php",
                                     method: "post",

@@ -91,7 +91,7 @@ class Update {
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao realizar Alteração!';
+            echo 'Falha alterar contrato!';
         }
 
         try {
@@ -104,7 +104,7 @@ class Update {
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao realizar Alteração!';
+            echo 'Falha alterar objeto!';
         }
 
         try {
@@ -117,7 +117,7 @@ class Update {
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao realizar Alteração!';
+            echo 'Falha ao alterar garantia!';
         }
 
         try {
@@ -130,20 +130,23 @@ class Update {
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao realizar Alteração!';
+            echo 'Falha ao alterar tipo contrato!';
         }
         
         try {
+            
             $sql = 'UPDATE `observacoes_exigencias` SET `DESC_OBSER_EXIGEN`= "' . $descObservacao . '" '
                     . ' WHERE ID_OBSERVACOES_EXIGENCIAS = ' . $idObser_exigencia . ' ';
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
-               // echo ' Observações Alterado';
+              //  echo ' Observações Alterado1';
+            }else{
+             //   echo 'Não alterou observação!';
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao realizar Alteração!';
+            echo 'Falha ao alterar observações!';
         }
     }
 

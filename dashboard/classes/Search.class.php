@@ -844,7 +844,7 @@ class Search {
     public function BuscaObs($idContratoObs) {
         try {
             $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
-                    . 'OBSERVACOES_EXIGENCIAS WHERE ID_CONTRATO_OBSERVACOES = "' . $idContratoObs . '"';
+                    . 'OBSERVACOES_EXIGENCIAS WHERE ID_CONTRATO_OBSERVACOES = ' . $idContratoObs . '';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();

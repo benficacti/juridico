@@ -83,17 +83,7 @@ if ($request == 'adicionar_obs') {
         echo Update::adicionaObs($idContratoObservacoes, $_status_obs, $idObservacoes);
     }
 }
-if ($request == 'adicionar_obs') {
-    sleep(rand(1, 3));
-    $_idContratoObs = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
-    $_status_obs = (null !== (filter_input(INPUT_POST, 'status_obs'))) ? filter_input(INPUT_POST, 'status_obs') : null;
-    $_descObs = (null !== (filter_input(INPUT_POST, 'obs'))) ? filter_input(INPUT_POST, 'obs') : null;
-    $obs = new observacoesExigencias($_idContratoObs, $_status_obs, $_descObs);
-    $idObjeto = Insert::CadastraObs($obs);
-    if ($idObjeto != null) {
-        echo Update::adicionaObs($_idContratoObs, $_status_obs, $idObjeto);
-    }
-}
+
 if (($request == 'login') && ($request !== 0)) {
     sleep(rand(1, 3));
     $login = (null !== (filter_input(INPUT_POST, 'login'))) ? filter_input(INPUT_POST, 'login') : 0;
@@ -165,7 +155,9 @@ if ($request == 'update_contrato') {
     $descObjeto = (null !== (filter_input(INPUT_POST, 'descObjeto'))) ? filter_input(INPUT_POST, 'descObjeto') : 0;
     $descObservacao = (null !== (filter_input(INPUT_POST, 'descObservacao'))) ? filter_input(INPUT_POST, 'descObservacao') : 0;
 
-    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao);
+    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato,
+            $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia,
+            $fimVigencia, $descGarantia, $descObjeto, $descObservacao);
 }
 
 function formateDate($i) {
