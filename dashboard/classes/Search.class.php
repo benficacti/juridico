@@ -237,22 +237,21 @@ class Search {
                 $sql = "SELECT * FROM CONTRATO "
                 . " INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO"
                 . " WHERE NUMERO_CONTRATO like '%" . $busca . "%' or VENCIMENTO_CONTRATO like '%" . $busca . "%' or"
-                . " CONTRATANTE_CONTRATO like '%" . $busca . "%'"
-                . " and ID_LOGIN_CONTRATO = " . $_SESSION['login'];
+                . " CONTRATANTE_CONTRATO like '%" . $busca . "%'";
                  $sqll = Conexao::getInstance()->prepare($sql);
                 break;
 
             case 1:
                 $sql = 'SELECT * FROM CONTRATO '
                         . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
-                        . ' WHERE VENCIMENTO_CONTRATO < "' . $data . '" AND ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+                        . ' WHERE VENCIMENTO_CONTRATO < "' . $data . '"';
                  $sqll = Conexao::getInstance()->prepare($sql);
                 break;
 
             case 2:
                 $sql = 'SELECT * FROM CONTRATO '
                         . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
-                        . ' WHERE VENCIMENTO_CONTRATO >= "' . $data . '" AND ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
+                        . ' WHERE VENCIMENTO_CONTRATO >= "' . $data . '"';
                  $sqll = Conexao::getInstance()->prepare($sql);
                 break;
         }
