@@ -143,7 +143,6 @@ if (!isset($_SESSION['login'])) {
                     garantia = $("#garantia").val();
                 }
 
-
                 //OBS
                 if (garantia.length <= 0) {
                     $("#input-group-contract-garantia").addClass("input-group-contract-error");
@@ -155,9 +154,11 @@ if (!isset($_SESSION['login'])) {
                     //document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
                     document.getElementById("adicionar_garantia").value = "ADICIONANDO...";
                     $('#adicionar_garantia').attr('disabled', true);
+                    
                     $.ajax({
                         url: "api/api.php",
                         method: "post",
+                        
                         data: {request: "adicionar_garantia",
                             status_garantia: status_garantia,
                             garantia: garantia,
@@ -165,7 +166,8 @@ if (!isset($_SESSION['login'])) {
                         },
                         success: function (data)
                         {
-                            //   alert(data);
+                           
+                         
                             var res = data.split(";");
                             if (typeof res[0] !== "undefined" && res[0] == "00") {
                                 location.href = "cadastro_objeto.php";
@@ -174,6 +176,7 @@ if (!isset($_SESSION['login'])) {
                                 document.getElementById("adicionar_garantia").value = "TENTAR NOVAMENTE";
                                 $('#adicionar_garantia').attr('disabled', false);
                             }
+                            
                         }
                     });
                 } else {

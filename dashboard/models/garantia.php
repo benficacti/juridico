@@ -12,40 +12,18 @@
  * @author USUARIO
  */
 class garantia {
-
-    private $statusGarantia;
     private $descGarantia;
-    private $idContratoGarantia;
     
-    function __construct($statusGarantia, $descGarantia, $idContratoGarantia) {
-        $this->statusGarantia = $statusGarantia;
+    function __construct($descGarantia) {
         $this->descGarantia = $descGarantia;
-        $this->idContratoGarantia = $idContratoGarantia;
-    }
-    function getStatusGarantia() {
-        return $this->statusGarantia;
     }
 
     function getDescGarantia() {
         return $this->descGarantia;
     }
 
-    function getIdContratoGarantia() {
-        return $this->idContratoGarantia;
-    }
-
-    function setStatusGarantia($statusGarantia) {
-        $this->statusGarantia = $statusGarantia;
-    }
-
     function setDescGarantia($descGarantia) {
         $this->descGarantia = $descGarantia;
     }
-
-    function setIdContratoGarantia($idContratoGarantia) {
-        $this->idContratoGarantia = $idContratoGarantia;
-    }
-
-
 
 }

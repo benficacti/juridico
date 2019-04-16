@@ -44,13 +44,15 @@ if ($request == "cadastro_contrato") {
     }
 }
 
-if ($request == 'adicionar_garantia') {
+
+
+if ($request == "adicionar_garantia") {
     sleep(1);
     $_idContratoGarantia = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_statusGarantia = (null !== (filter_input(INPUT_POST, 'status_garantia'))) ? filter_input(INPUT_POST, 'status_garantia') : null;
-    $_descGarantia = (null !== (filter_input(INPUT_POST, 'garantia'))) ? filter_input(INPUT_POST, 'garantia') : null;
-    $garantia = new garantia($_statusGarantia, $_descGarantia, $_idContratoGarantia);
-    $idGarantia = Insert::CadastraGarantia($garantia);
+    $descGarantia = (null !== (filter_input(INPUT_POST, 'garantia'))) ? filter_input(INPUT_POST, 'garantia') : null;
+    $garantia = new garantia($descGarantia);
+    $idGarantia = Insert::CadastraGarantia($garantia, $_idContratoGarantia);
     if ($idGarantia != null) {
         echo Update::adicionaGarantia($_idContratoGarantia, $_statusGarantia, $idGarantia);
     }
@@ -58,14 +60,14 @@ if ($request == 'adicionar_garantia') {
 
 if ($request == 'adicionar_objeto') {
     sleep(1);
-    $_idContratoObejto = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
+    $idContratoObjeto = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_status_objeto = (null !== (filter_input(INPUT_POST, 'status_objeto'))) ? filter_input(INPUT_POST, 'status_objeto') : null;
-    $_descObejto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : null;
-    $objeto = new objeto($_idContratoObejto, $_status_objeto, $_descObejto);
-    $idObjeto = Insert::CadastraObjeto($objeto);
-    if ($idObjeto != null) {
-        echo Update::adicionaObjeto($_idContratoObejto, $_status_objeto, $idObjeto);
-    }
+    $descObejto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : null;
+    $objeto = new objeto($descObjeto, $idContratoObjeto);
+  echo  $idObjeto = Insert::CadastraObjeto($objeto, $idContratoObjeto);
+   // if ($idObjeto != null) {
+   //     echo Update::adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto);
+  //  }
 }
 
 if ($request == 'adicionar_obs') {

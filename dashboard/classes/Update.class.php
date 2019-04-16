@@ -15,6 +15,7 @@ class Update {
 
     public function adicionaGarantia($_idContratoGarantia, $idStatusGarantia, $idGarantia) {
         try {
+            
             $sql = 'UPDATE `contrato` SET `ID_STATUS_GARANTIA_CONTRATO`=' . $idStatusGarantia . ',`ID_GARANTIA_CONTRATO`=' . $idGarantia . ' '
                     . 'WHERE ID_CONTRATO = ' . $_idContratoGarantia;
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
@@ -24,11 +25,12 @@ class Update {
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao obter Log';
+            echo 'Falha ao adicionar garantia';
         }
     }
 
-    public function adicionaObjeto($_idContratoObjeto, $idStatusObjeto, $idObjeto) {
+    
+    public function adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto) {
         try {
             $sql = 'UPDATE `contrato` SET `ID_OBJETO_CONTRATO`=' . $idObjeto . ' '
                     . 'WHERE ID_CONTRATO = ' . $_idContratoObjeto;
@@ -39,7 +41,7 @@ class Update {
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao obter Log';
+            echo 'Falha ao adicionar objeto';
         }
     }
 

@@ -138,40 +138,40 @@ class Insert {
         }
     }
 
-    public function CadastraGarantia($garantia) {
+    public function CadastraGarantia($garantia, $_idContratoGarantia) {
 
         try {
-            $idContratoGarantia = $garantia->getIdContratoGarantia();
             $descGarantia = $garantia->getDescGarantia();
-
-
-            $ins = "INSERT INTO `garantia`(`DESC_GARANTIA`) "
-                    . "VALUES (:DESC_GARANTIA)";
+            $ins = "INSERT INTO `garantia`(`DESC_GARANTIA`, `ID_CONTRATO_GARANTIA`) "
+                    . "VALUES (:DESC_GARANTIA, :ID_CONTRATO_GARANTIA)";
             $i_ins = Conexao::getInstance()->prepare($ins);
             $i_ins->bindParam(":DESC_GARANTIA", $descGarantia);
+            $i_ins->bindParam(":ID_CONTRATO_GARANTIA", $_idContratoGarantia);
             if ($i_ins->execute()) {
-                return Search::BuscaGarantia($descGarantia);
+                return Search::BuscaGarantia($_idContratoGarantia);
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao cadastrar aditamento';
+            echo 'Falha ao cadastrar Garantia';
         }
     }
 
-    public function CadastraObjeto($objeto) {
+    public function CadastraObjeto($objeto, $idContratoObjeto) {
         try {
-            $idContratoObejto = $objeto->getIdContratoObejto();
+            echo $objeto;
+            $idContratoObejto = $objeto->getIdContratoObjeto();
             $descObejto = $objeto->getDescObjeto();
-            $ins = "INSERT INTO `objeto`(`DESC_OBJETO`) "
-                    . "VALUES (:DESC_OBJETO)";
+            $ins = "INSERT INTO `objeto`(`DESC_OBJETO`, `ID_CONTRATO_OBJETO`) "
+                    . "VALUES (:DESC_OBJETO, :ID_CONTRATO_OBJETO)";
             $i_ins = Conexao::getInstance()->prepare($ins);
             $i_ins->bindParam(":DESC_OBJETO", $descObejto);
+            $i_ins->bindParam(":ID_CONTRATO_OBJETO", $idContratoObejto);
             if ($i_ins->execute()) {
-                return Search::BuscaObjeto($descObejto);
+                return Search::BuscaObjeto($idContratoObjeto);
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao cadastrar aditamento';
+            echo 'Falha ao cadastrar Objeto';
         }
     }
 
@@ -188,7 +188,7 @@ class Insert {
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
-            echo 'Falha ao cadastrar aditamento';
+            echo 'Falha ao cadastrar Observação';
         }
     }
 
