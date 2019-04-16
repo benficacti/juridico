@@ -1071,16 +1071,81 @@ body{
     resize: both;
     overflow: hidden;
     border-bottom:1px dashed black;
-
+}
+.line-finally-contract-update{
+    min-width:80vw;
+    max-width:80vw;
+    width:80vw;
+    min-height:7vh;
+    height:7vh;
+    resize: both;
+    overflow: hidden;
+    border-bottom:1px dashed black;
 }
 .form-contract-fim{
     height: 5vh;
     float:left;
 }
+.form-contract-fim-update{
+    height: 5vh;
+    width:50vw;  
+}
+.form-contract-fim-icon{
+    height: 5vh;
+    float:left;
+    width:35vw;
+}
+.span-group-input{
+    margin-top:0.5vh;
+    width:25vw;
+    height: 6vh;
+    float:right !important;
+    border:1px solid  #ccc;
+    border-radius:10px;
+    background-color:#eee;
+}
+.span-update-active{
+    background-color: white !important;
+}
+.input-update-active{
+    background-color: white !important;
+}
+.span-group-img{
+    width:3vw;
+    margin-top:1vh;
+    float:right !important;
+}
+.input-update{
+    width:23vw;
+    height: 5vh;   
+    background-color:#eee;
+    margin-left:1vh;
+    padding-left: 10px;
+    padding-top:1vh;
+    letter-spacing: 1.2px;
+    font-size:1em;
+    outline: none;
+    border:0px;
+    font-family: 'Gilroy-Light';
+    flex-direction: column;
+    justify-content: center
+}
+.img-pencil{ 
+    width:2vw;
+
+    height: 5vh;    
+}
+.img-pencil:hover{
+    cursor:pointer;
+}
+.figure-pencil{
+    width:2vw;
+    margin: 0 auto !important;
+}
 .title-info-contract{
     min-height: 5vh;
     max-height: 60vh;
-    line-height: 5vh;
+    line-height: 7vh;
     float:left;
     letter-spacing: 1.2px;
     font-size:1em;
@@ -1228,6 +1293,7 @@ body{
     margin-left:1vw;
     color: #0399D4;
     cursor:pointer;
+    text-decoration: none;
 }
 .group-digitalizacao{
     width: 54vw;
@@ -1289,6 +1355,7 @@ body{
     scroll:none;
     overflow: none;
 }
+
 @media (min-width: 640px) { 
     *{
         font-size:0.94em;
@@ -1296,6 +1363,7 @@ body{
     .article-contrato{
         width:90vw;
         margin:0px;
+
     }
     .line-contract{
         width:90vw;
