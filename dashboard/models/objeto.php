@@ -12,7 +12,6 @@
  * @author USUARIO
  */
 class objeto {
-
     private $descObjeto;
     private $idContratoObjeto;
     

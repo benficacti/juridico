@@ -158,16 +158,15 @@ class Insert {
 
     public function CadastraObjeto($objeto, $idContratoObjeto) {
         try {
-            echo $objeto;
-            $idContratoObejto = $objeto->getIdContratoObjeto();
+            $idContratoNObjeto = $idContratoObjeto->getIdContratoObjeto();
             $descObejto = $objeto->getDescObjeto();
             $ins = "INSERT INTO `objeto`(`DESC_OBJETO`, `ID_CONTRATO_OBJETO`) "
                     . "VALUES (:DESC_OBJETO, :ID_CONTRATO_OBJETO)";
             $i_ins = Conexao::getInstance()->prepare($ins);
             $i_ins->bindParam(":DESC_OBJETO", $descObejto);
-            $i_ins->bindParam(":ID_CONTRATO_OBJETO", $idContratoObejto);
+            $i_ins->bindParam(":ID_CONTRATO_OBJETO", $idContratoNObjeto);
             if ($i_ins->execute()) {
-                return Search::BuscaObjeto($idContratoObjeto);
+                return Search::BuscaObjeto($idContratoNObjeto);
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());

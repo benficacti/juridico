@@ -58,13 +58,14 @@ if ($request == "adicionar_garantia") {
     }
 }
 
+
 if ($request == 'adicionar_objeto') {
     sleep(1);
     $idContratoObjeto = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_status_objeto = (null !== (filter_input(INPUT_POST, 'status_objeto'))) ? filter_input(INPUT_POST, 'status_objeto') : null;
-    $descObejto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : null;
-    $objeto = new objeto($descObjeto, $idContratoObjeto);
-  echo  $idObjeto = Insert::CadastraObjeto($objeto, $idContratoObjeto);
+    $descObjeto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : null;
+   $objeto = new objeto($descObjeto, $idContratoObjeto);
+ echo  $idObjeto = Insert::CadastraObjeto($objeto, $idContratoObjeto);
    // if ($idObjeto != null) {
    //     echo Update::adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto);
   //  }

@@ -804,10 +804,10 @@ class Search {
         }
     }
 
-    public function BuscaObjeto($idContratoObjeto) {
+    public function BuscaObjeto($idContratoNObjeto) {
         try {
             $sql = 'SELECT ID_OBJETO FROM '
-                    . 'OBJETO WHERE ID_CONTRATO_OBJETO = ' . $idContratoObjeto . '';
+                    . 'OBJETO WHERE ID_CONTRATO_OBJETO = ' . $idContratoNObjeto . '';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
