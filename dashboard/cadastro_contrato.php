@@ -377,6 +377,7 @@ if (!isset($_SESSION['login'])) {
                     var tipo_contrato = $("#tipo_contrato").val();
                     var possui_parcela = $("#possui_parcela").val();
                     var empresa_contrato = $("#empresa_contrato").val();
+                    alert(num_contrato);
                     /* //NUMERO CONTRATO
                      if (num_contrato.length <= 0) {
                      $("#input-group-contract-numero").addClass("input-group-contract-error");
