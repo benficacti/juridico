@@ -156,17 +156,17 @@ class Insert {
         }
     }
 
-    public function CadastraObjeto($objeto, $idContratoObjeto) {
+    public function CadastraObjeto($objeto) {
         try {
-            $idContratoNObjeto = $idContratoObjeto->getIdContratoObjeto();
-            $descObejto = $objeto->getDescObjeto();
+            $idContratoObjeto = $objeto->getIdContratoObjeto();
+            $descObejeto = $objeto->getDescObjeto();
             $ins = "INSERT INTO `objeto`(`DESC_OBJETO`, `ID_CONTRATO_OBJETO`) "
                     . "VALUES (:DESC_OBJETO, :ID_CONTRATO_OBJETO)";
             $i_ins = Conexao::getInstance()->prepare($ins);
-            $i_ins->bindParam(":DESC_OBJETO", $descObejto);
-            $i_ins->bindParam(":ID_CONTRATO_OBJETO", $idContratoNObjeto);
+            $i_ins->bindParam(":DESC_OBJETO", $descObejeto);
+            $i_ins->bindParam(":ID_CONTRATO_OBJETO", $idContratoObjeto);
             if ($i_ins->execute()) {
-                return Search::BuscaObjeto($idContratoNObjeto);
+                return Search::BuscaObjeto($idContratoObjeto);
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
@@ -176,14 +176,15 @@ class Insert {
 
     public function CadastraObs($obs) {
         try {
-            $idContratoObs = $obs->getIdContratoObs();
-            $descObs = $obs->getDescObs();
-            $ins = "INSERT INTO `observacoes_exigencias`( `DESC_OBSER_EXIGEN`)  "
-                    . "VALUES (:DESC_OBSER_EXIGEN)";
+            $idContratoObs = $obs->getIdContratoObservacoes();
+            $descObs = $obs->getDescObserExigen();
+            $ins = "INSERT INTO `observacoes_exigencias`( `DESC_OBSER_EXIGEN`, `ID_CONTRATO_OBSERVACOES`)  "
+                    . "VALUES (:DESC_OBSER_EXIGEN, :ID_CONTRATO_OBSERVACOES)";
             $i_ins = Conexao::getInstance()->prepare($ins);
             $i_ins->bindParam(":DESC_OBSER_EXIGEN", $descObs);
+            $i_ins->bindParam(":ID_CONTRATO_OBSERVACOES", $idContratoObs);
             if ($i_ins->execute()) {
-                return Search::BuscaObs($descObs);
+                return Search::BuscaObs($idContratoObs);
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());

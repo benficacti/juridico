@@ -804,10 +804,11 @@ class Search {
         }
     }
 
-    public function BuscaObjeto($idContratoNObjeto) {
+    public function BuscaObjeto($idContratoObjeto) {
         try {
+            
             $sql = 'SELECT ID_OBJETO FROM '
-                    . 'OBJETO WHERE ID_CONTRATO_OBJETO = ' . $idContratoNObjeto . '';
+                    . 'OBJETO WHERE ID_CONTRATO_OBJETO = ' . $idContratoObjeto . '';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
@@ -840,16 +841,16 @@ class Search {
         }
     }
 
-    public function BuscaObs($idContrato) {
+    public function BuscaObs($idContratoObs) {
         try {
-            $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS_CONTRATO FROM '
-                    . 'CONTRATO WHERE ID_CONTRATO = "' . $idContrato . '"';
+            $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
+                    . 'OBSERVACOES_EXIGENCIAS WHERE ID_CONTRATO_OBSERVACOES = "' . $idContratoObs . '"';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();
                 if ($count > 0) {
                     foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
-                        return $dados->ID_OBSERVACOES_EXIGENCIAS_CONTRATO;
+                        return $dados->ID_OBSERVACOES_EXIGENCIAS;
                     }
                 }
             }

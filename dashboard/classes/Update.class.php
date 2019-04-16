@@ -33,11 +33,11 @@ class Update {
     public function adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto) {
         try {
             $sql = 'UPDATE `contrato` SET `ID_OBJETO_CONTRATO`=' . $idObjeto . ' '
-                    . 'WHERE ID_CONTRATO = ' . $_idContratoObjeto;
+                    . 'WHERE ID_CONTRATO = ' . $idContratoObjeto;
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
-                return "00;" . $_idContratoObjeto;
+                return "00;" . $idContratoObjeto;
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
@@ -45,14 +45,14 @@ class Update {
         }
     }
 
-    public function adicionaObs($_idContratoObs, $idStatusObs, $idObs) {
+    public function adicionaObs($idContratoObservacoes, $_status_obs, $idObservacoes) {
         try {
-            $sql = 'UPDATE `contrato` SET `ID_OBSERVACOES_EXIGENCIAS_CONTRATO`=' . $idObs . ' '
-                    . 'WHERE ID_CONTRATO = ' . $_idContratoObs;
+            $sql = 'UPDATE `contrato` SET `ID_OBSERVACOES_EXIGENCIAS_CONTRATO`=' . $idObservacoes . ' '
+                    . 'WHERE ID_CONTRATO = ' . $idContratoObservacoes;
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
-                return "00;" . $_idContratoObs;
+                return "00;" . $idContratoObservacoes;
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());

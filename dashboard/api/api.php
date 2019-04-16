@@ -65,21 +65,22 @@ if ($request == 'adicionar_objeto') {
     $_status_objeto = (null !== (filter_input(INPUT_POST, 'status_objeto'))) ? filter_input(INPUT_POST, 'status_objeto') : null;
     $descObjeto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : null;
    $objeto = new objeto($descObjeto, $idContratoObjeto);
- echo  $idObjeto = Insert::CadastraObjeto($objeto, $idContratoObjeto);
-   // if ($idObjeto != null) {
-   //     echo Update::adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto);
-  //  }
+   $idObjeto = Insert::CadastraObjeto($objeto);
+    if ($idObjeto != null) {
+        echo Update::adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto);
+    }
 }
+
 
 if ($request == 'adicionar_obs') {
     sleep(1);
-    $_idContratoObs = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
+    $idContratoObservacoes = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_status_obs = (null !== (filter_input(INPUT_POST, 'status_obs'))) ? filter_input(INPUT_POST, 'status_obs') : null;
-    $_descObs = (null !== (filter_input(INPUT_POST, 'obs'))) ? filter_input(INPUT_POST, 'obs') : null;
-    $obs = new observacoesExigencias($_idContratoObs, $_status_obs, $_descObs);
-    $idObjeto = Insert::CadastraObs($obs);
-    if ($idObjeto != null) {
-        echo Update::adicionaObs($_idContratoObs, $_status_obs, $idObjeto);
+    $descObserExigen = (null !== (filter_input(INPUT_POST, 'obs'))) ? filter_input(INPUT_POST, 'obs') : null;
+    $obs = new observacoesExigencias($descObserExigen, $idContratoObservacoes);
+    $idObservacoes = Insert::CadastraObs($obs);
+    if ($idObservacoes != null) {
+        echo Update::adicionaObs($idContratoObservacoes, $_status_obs, $idObservacoes);
     }
 }
 if ($request == 'adicionar_obs') {
