@@ -203,164 +203,304 @@ class Update {
                         $descObservacao = $dados->DESC_OBSER_EXIGEN;
                         $possui_parcelas = $dados->ID_POSSUI_PARCELA_CONTRATO;
                         echo '                            
-                <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            EMPRESA:               
-                                <span><input type="hidden" id="idcontrato" name="idcontrato" value="' . $id_contrato . '"></span>
-                                <span><input type="text" id="empresa" name="empresa" value="' . $empresa . '"></span>   
-                        </label>
-                    </div>                    
-                </div>
-                <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            NÚMERO CONTRATO:
-                                <span><input type="text" id="numero" name="numero" value="' . $numero . '"></span>  
-                        </label>
-                    </div>                    
-                </div>
-                <div class="line-finally-contract">                
-                     <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            VENCIMENTO:
-                            <span><input type="text" id="vencimento" name="vencimento" value="' . Search::formateDateBR($vencimento) . '"></span>
-                        </label>
+                 <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                EMPRESA:               
+                                <span><input type="hidden" id="idcontrato" name="idcontrato" value="' . $id_contrato . '">
+                                    <input type="hidden" id="change_empresa" name="" value="true"></span>
+                            </label>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-empresa">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-empresa">
+                                <input type="text" id="empresa" class="input-update" name="empresa" value="' . $empresa . '">
+                            </div>  
+                        </div>                    
                     </div>
-                </div>
-                <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            CONTRATANTE:
-                            <span><input type="text" id="contratante" name="contratante" value="' . $contratante . '"></span>
-                        </label>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                NÚMERO CONTRATO:
+                            </label>
+                            <input type="hidden" id="change_numero" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-numero">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-numero">
+                                <input type="text" class="input-update" id="numero" name="numero" value="' . $numero . '">
+                            </div>  
+                        </div>                    
                     </div>
-                </div>
-                <div class="line-finally-contract">                
-                    <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            CONTRATADA:
-                           <span><input type="text" id="contratada" name="contratada" value="' . $contratada . '"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            TIPO CONTRATO:
-                            <span><input type="text" id="descTipoContrato" name="descTipoContrato" value="' . $descTipoContrato . '"></span>
-                        </label>
-                    </div>
+                    <div class="line-finally-contract-update">                
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                VENCIMENTO:
+                            </label>
+                            <input type="hidden" id="change_vencimento" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-vencimento">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-vencimento">
+                                <input type="text" id="vencimento" class="input-update" name="vencimento" value="' . Search::formateDateBR($vencimento) . '">
 
-                   
-                </div>
-                 <div class="line-finally-contract">                
-                   <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            CONCORRÊNCIA:
-                           <span><input type="text" id="concorrencia" name="concorrencia" value="' . $concorrencia . '"></span> 
-                        </label>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-                <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            VALOR CONTRATO:
-                            <span><input type="text" id="valorContrato" name="valorContrato" value="' . $valorContrato . '"></span>
-                        </label>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                CONTRATANTE:                                
+                            </label>
+                            <input type="hidden" id="change_contratante" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-contratante">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-contratante">
+                                <input type="text" id="contratante" class="input-update" name="contratante" value="' . $contratante . '">
+                            </div>
+                        </div>
                     </div>
-                </div>';
+                    <div class="line-finally-contract-update">                
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                CONTRATADA:                                
+                            </label>
+                            <input type="hidden" id="change_contratada" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-contratada">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-contratada">
+                                <input type="text" id="contratada" class="input-update" name="contratada" value="' . $contratada . '">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                TIPO CONTRATO:                                
+                            </label>
+                            <input type="hidden" id="change_tipocontrato" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil"  id="div-img-tipocontrato">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input"  id="span-tipocontrato"><select id="tipocontrato" class="input-update">
+                                    <option value="0">Selecione o contrato</option>
+                                    <option value="1">PÚBLICO</option>
+                                    <option value="2">PRIVADO</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="line-finally-contract-update">                
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                CONCORRÊNCIA:
+                            </label>
+                            <input type="hidden" id="change_concorrencia" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-concorrencia">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input"  id="span-concorrencia">
+                                <input type="text" id="concorrencia" class="input-update" name="concorrencia" value="' . $concorrencia . '">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                VALOR CONTRATO:
+                            </label>
+                            <input type="hidden" id="change_valor" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-valor">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-valor">
+                                <input type="text" id="valor" class="input-update"  value="' . $valorContrato . '">
+                            </div>
+                        </div>
+                    </div>';
                         if ($possui_parcelas == 1) {
-                            ECHO '<div class="line-finally-contract">                      
-                      <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            QUANTIDADE DE PARCELAS:
-                            <span><input type="text" id="qtdParCont" name="qtdParCont" value="' . $quantidadeParcelaContrato . '"></span>
-                        </label>
+                            ECHO '
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                QUANTIDADE DE PARCELAS:
+                            </label>
+                            <input type="hidden" id="change_qtdparc" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-qtdparc">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input"  id="span-qtdparc">
+                                <input type="text" id="qtdparc" class="input-update" name="qtdparc" value="' . $valorContrato . '">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                   <div class="line-finally-contract">                
-                      <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            VALOR DAS PARCELAS:
-                            <span><input type="text" id="valorParcContrato" name="valorParcContrato" value="' . $valorParcelasContrato . '"></span>
-                        </label>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                VALOR DAS PARCELAS:
+                            </label>
+                            <input type="hidden" id="change_valparc" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-valparc">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-valparc">
+                                <input type="text" id="valparc" class="input-update" name="valorContrato" value="' . $valorContrato . '">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            QUANTIDADE DE PARCELAS PAGAS:
-                            <span><input type="text" id="quantParcPagContr" name="quantParcPagContr" value="' . $quantidadeParcelasPagasContrato . '"></span>
-                        </label>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                QTD DE PARCELAS PAGAS:
+                            </label>
+                            <input type="hidden" id="change_parcpagas" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-parcpagas">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-parcpagas">
+                                <input type="text" id="parcpagas" class="input-update" name="valorContrato" value="' . $valorContrato . '">
+                            </div>
+                        </div>
                     </div>
-                </div>                
-                <div class="line-finally-contract">                
-                      <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            DATA PRIMEIRO PAGAMENTO:
-                            <span><input type="text" id="dataPagParc" name="dataPagParc" value="' . Search::formateDateBR($dataPagamentoParcela) . '"></span>
-                        </label>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                DATA 1º PAGAMENTO:
+                            </label>
+                            <input type="hidden" id="change_datapag" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-datapag">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-datapag">
+                                <input type="text" id="datapag" class="input-update" name="valorContrato" value="' . $valorContrato . '">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="line-finally-contract">                
-                     <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            ADITAMENTO:
-                            <span>NÃO</span>
-                        </label>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                ADITAMENTO:
+                            </label>
+                            <input type="hidden" id="change_aditamento" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-aditamento">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" style="background-color:white; border:0px;">
+                                <a href="#" class="title-upload">ADITAR CONTRATO</a>
+                            </div>
+                        </div>
                     </div>
-                </div>';
+                   ';
                         }
 
-                        echo' <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            INICIO VIGÊNCIA:
-                            <span><input type="text" id="inicioVigencia" name="inicioVigencia" value="' . Search::formateDateBR($inicioVigencia) . '"></span>
-                        </label>
+                        echo'  <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                INICIO VIGÊNCIA:
+                            </label>
+                            <input type="hidden" id="change_inivigencia" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-inivigencia">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-inivigencia">
+                                <input type="text" id="inivigencia" class="input-update" name="valorContrato" value="' . $valorContrato . '">
+                            </div>
+                        </div>
                     </div>
-                    
-                </div>
-                <div class="line-finally-contract">                
-                     <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            FIM VIGÊNCIA:
-                            <span><input type="text" id="fimVigencia" name="fimVigencia" value="' . Search::formateDateBR($fimVigencia) . '"></span>
-                        </label>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                FIM VIGÊNCIA:
+                            </label>
+                            <input type="hidden" id="change_fimvigencia" name="" value="true"></span>
+                            <div class="span-group-img">
+                                <div class="figure-pencil" id="div-img-fimvigencia">
+                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" id="span-fimvigencia">
+                                <input type="text" id="fimvigencia" class="input-update" name="valorContrato" value="' . $valorContrato . '">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <p class="title-info-contract">
-                            GARANTIA:
-                            <span><input type="text" id="descGarantia" name="descGarantia" value="' . $descGarantia . '"></span>
-                        </p>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                GARANTIA:
+                            </label>
+                            <div class="span-group-img">
+                                <div class="figure-pencil">
+                             <!--       <img src="img/pencil.png" class="img-pencil" alt="pencil">-->
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" style="background-color:white; border:0px;">
+                                <a href="#" class="title-upload">ADICIONAR GARANTIA</a>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                OBJETO:
+                            </label>
+                            <div class="span-group-img">
+                                <div class="figure-pencil">
+                             <!--       <img src="img/pencil.png" class="img-pencil" alt="pencil">-->
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" style="background-color:white; border:0px;">
+                                <a href="#" class="title-upload">ADICIONAR OBJETO</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            OBJETO:
-                            <span><input type="text" id="descObjeto" name="descObjeto" value="' . $descObjeto . '"></span>
-                        </label>
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                OBSERVAÇÃO:
+                            </label>
+                            <div class="span-group-img">
+                                <div class="figure-pencil">
+                             <!--       <img src="img/pencil.png" class="img-pencil" alt="pencil">-->
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" style="background-color:white; border:0px;">
+                                <a href="#" class="title-upload">VER / EDITAR</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <label class="title-info-contract">
-                            OBSERVAÇÃO:
-                            <span><input type="text" id="descObservacao" name="descObservacao" value="' . $descObservacao . '"></span>
-                        </label>
-                    </div>
-                </div> 
-               <div class="line-finally-contract">
-                    <div class="form-contract-fim">
-                        <div class="btn-login">
-                        <input type="submit" value="ALTERAR" class="bt-login" id="alterar_contrato">
-                    </div>
-                    </div>
-                </div>
                 ';
                     }
                 }
