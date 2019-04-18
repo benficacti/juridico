@@ -687,7 +687,7 @@ class Search {
     }
 
     public function otherFormateDateBR($e) {
-        $t = explode('/', $e);
+        $t = explode('-', $e);
         return $t[2] . "-" . $t[1] . "-" . $t[0];
     }
 

@@ -154,7 +154,7 @@ if ($request == 'update_contrato') {
     $descGarantia = (null !== (filter_input(INPUT_POST, 'descGarantia'))) ? filter_input(INPUT_POST, 'descGarantia') : 0;
     $descObjeto = (null !== (filter_input(INPUT_POST, 'descObjeto'))) ? filter_input(INPUT_POST, 'descObjeto') : 0;
     $descObservacao = (null !== (filter_input(INPUT_POST, 'descObservacao'))) ? filter_input(INPUT_POST, 'descObservacao') : 0;
-
+    sleep(1);
     echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato,
             $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia,
             $fimVigencia, $descGarantia, $descObjeto, $descObservacao);

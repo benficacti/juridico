@@ -85,16 +85,75 @@ if (!isset($_SESSION['login'])) {
                         $("#tipocontrato").attr('disabled', false);
                     } else {
                         document.getElementById('div-img-' + input).innerHTML = '<img src="img/loading.gif" class="img-pencil" alt="gif">';
-                        setTimeout(function () {
+                        callApi2(input);
+                    }
+                }
+
+
+                function callApi2(input) {
+
+                    $("#tipocontrato").attr('disabled', false);
+                    var idcontrato = $("#idcontrato").val();
+                    var empresa = $("#empresa").val();
+                    var numero = $("#numero").val();
+                    var vencimento = $("#vencimento").val();
+                    var contratante = $("#contratante").val();
+                    var contratada = $("#contratada").val();
+                    var descTipoContrato = $("#tipocontrato").val();
+                    var concorrencia = $("#concorrencia").val();
+                    var valorContrato = $("#valor").val();
+                    var qtdParCont = $("#qtdParCont").val();
+                    var valorParcContrato = $("#valorParcContrato").val();
+                    var quantParcPagContr = $("#quantParcPagContr").val();
+                    var dataPagParc = $("#dataPagParc").val();
+                    var inicioVigencia = $("#inivigencia").val();
+                    var fimVigencia = $("#fimvigencia").val();
+                    $("#tipocontrato").attr('disabled', true);
+
+                   
+                    $.ajax({
+                        url: "api/api.php",
+                        method: "post",
+                        data: {request: "update_contrato",
+                            idcontrato: idcontrato,
+                            empresa: empresa,
+                            numero: numero,
+                            vencimento: vencimento,
+                            contratante: contratante,
+                            contratada: contratada,
+                            descTipoContrato: descTipoContrato,
+                            concorrencia: concorrencia,
+                            valorContrato: valorContrato,
+                            qtdParCont: qtdParCont,
+                            valorParcContrato: valorParcContrato,
+                            quantParcPagContr: quantParcPagContr,
+                            dataPagParc: dataPagParc,
+                            inicioVigencia: inicioVigencia,
+                            fimVigencia: fimVigencia
+
+                        },
+                        success: function (data)
+
+                        {
                             $("#span-" + input).removeClass("span-update-active");
                             $("#" + input).removeClass("input-update-active");
                             $("#" + input).attr('readonly', true);
-                            $("#tipocontrato").attr('disabled', true);
                             document.getElementById("change_" + input).value = true;
                             document.getElementById('div-img-' + input).innerHTML = '<img src="img/pencil.png" class="img-pencil" alt="pencil">';
-                        }, 2000);
-                    }
+
+
+
+
+                        }
+                    });
+
+
                 }
+
+
+
+
+
                 callApi();
                 function callApi() {
                     var id_contrato = $("#idcontrato").val();
@@ -239,6 +298,9 @@ if (!isset($_SESSION['login'])) {
                         }
                     });
                 }
+
+
+
             });
 
         </script>

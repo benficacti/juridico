@@ -74,7 +74,7 @@ class Update {
             $fimVigenciax = Search::otherFormateDateBR($fimVigencia);
             $vencimentox = Search::otherFormateDateBR($vencimento);
         
-
+            
 
         try {
             $sql = 'UPDATE `contrato` SET `NUMERO_CONTRATO`=' . $numero . ',`CONTRATANTE_CONTRATO` = "' . $contratante . '",'
@@ -121,8 +121,8 @@ class Update {
         }
 
         try {
-            $sql = 'UPDATE `tipo_contrato` SET `DESC_TIPO_CONTRATO`= "' . $descTipoContrato . '" '
-                    . ' WHERE ID_TIPO_CONTRATO = "' . $idTipoContrato . '" ';
+            $sql = 'UPDATE `contrato` SET `ID_TIPO_CONTRATO`= "' . $descTipoContrato . '" '
+                    . ' WHERE ID_CONTRATO = "' . $idContrato . '" ';
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
@@ -248,7 +248,7 @@ class Update {
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-vencimento">
-                                <input type="text" id="vencimento" class="input-update" name="vencimento" value="' . Search::formateDateBR($vencimento) . '">
+                                <input type="text" id="vencimento" class="input-update" name="vencimento" value="' . Search::otherFormateDateBR($vencimento) . '">
 
                             </div>
 
@@ -297,7 +297,8 @@ class Update {
                                     <img src="img/pencil.png" class="img-pencil" alt="pencil">
                                 </div>                                 
                             </div>
-                            <div class="span-group-input"  id="span-tipocontrato"><select id="tipocontrato" class="input-update">
+                            <div class="span-group-input"  id="span-tipocontrato">
+                                <select id="tipocontrato" class="input-update">
                                     <option value="0">Selecione o contrato</option>
                                     <option value="1">PÚBLICO</option>
                                     <option value="2">PRIVADO</option>
@@ -436,7 +437,7 @@ class Update {
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-inivigencia">
-                                <input type="text" id="inivigencia" class="input-update" name="valorContrato" value="' . $valorContrato . '">
+                                <input type="text" id="inivigencia" class="input-update" name="valorContrato" value="' . Search::otherFormateDateBR($inicioVigencia) . '">
                             </div>
                         </div>
                     </div>
@@ -452,7 +453,7 @@ class Update {
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-fimvigencia">
-                                <input type="text" id="fimvigencia" class="input-update" name="valorContrato" value="' . $valorContrato . '">
+                                <input type="text" id="fimvigencia" class="input-update" name="valorContrato" value="' . Search::otherFormateDateBR($fimVigencia) . '">
                             </div>
                         </div>
                     </div>
