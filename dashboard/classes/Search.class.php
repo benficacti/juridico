@@ -229,7 +229,7 @@ class Search {
             echo $exc->getTraceAsString();
         }
     }
-
+    
     public function proximosVencimentos($vencimento, $busca) {
         $data = date('Y-m-d');
         switch ($vencimento) {
