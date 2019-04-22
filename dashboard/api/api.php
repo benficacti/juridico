@@ -1,5 +1,4 @@
 <?php
-
 include '../models/contrato.php';
 include '../models/garantia.php';
 include '../models/objeto.php';
@@ -164,3 +163,43 @@ function formateDate($i) {
     $l = explode("/", $i);
     return $l[2] . '-' . $l[1] . '-' . $l[0];
 }
+
+if ($request == 'addGarantia') {
+  $addGarantia = (null !== (filter_input(INPUT_POST, 'addGarantia'))) ? filter_input(INPUT_POST, 'addGarantia') : 0;
+  $_SESSION['contrato'] = $addGarantia;
+  if (!empty($addGarantia)) {
+      if (isset($addGarantia)) {
+          echo '01';
+      }
+  }
+  
+}
+
+if ($request == 'addGarantiaUpdate') {
+    $garantia = (null !== (filter_input(INPUT_POST,'garantia'))) ? filter_input(INPUT_POST,'garantia') : 0;
+    $idcontrato = (null !== (filter_input(INPUT_POST,'idcontrato'))) ? filter_input(INPUT_POST,'idcontrato') : 0;
+    
+ echo Update::updateAdicionaGarantia($garantia, $idcontrato);
+}
+
+
+if ($request == 'addObjeto') {
+ $addObjeto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : 0;
+  $_SESSION['contrato'] = $addObjeto;
+  if (!empty($addObjeto)) {
+      if (isset($addObjeto)) {
+          echo '01';
+      }
+  }
+ 
+  
+}
+
+
+if ($request == 'addObjetoUpdate') {
+    $objeto = (null !== (filter_input(INPUT_POST,'objeto'))) ? filter_input(INPUT_POST,'objeto') : 0;
+    $idcontrato = (null !== (filter_input(INPUT_POST,'idcontrato'))) ? filter_input(INPUT_POST,'idcontrato') : 0;
+    
+ echo Update::updateAdicionaObjeto($objeto, $idcontrato);
+}
+

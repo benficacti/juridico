@@ -74,6 +74,7 @@ if (!isset($_SESSION['login'])) {
         <script type="text/javascript">
 
             $(document).ready(function () {
+
                 function changeFunc(input) {
                     var change = document.getElementById("change_" + input).value;
                     if (change === 'true') {
@@ -89,7 +90,44 @@ if (!isset($_SESSION['login'])) {
                     }
                 }
 
+                function FuncGarantia() {
+                    var addGarantia = $("#idcontrato").val();
 
+                    $.ajax({
+                        url: 'api/api.php',
+                        method: 'post',
+                        data: {request: "addGarantia",
+                            addGarantia: addGarantia
+                        },
+                        success: function (data) {
+                            if (data === "01") {
+                                window.location.href = "update_garantia.php";
+                            }
+                        }
+
+                    });
+                }
+                
+                
+                function FuncObjeto(){
+                    var objeto = $("#idcontrato").val();
+                    $.ajax({
+                        url: 'api/api.php',
+                        method: 'post',
+                        data:{request: "addObjeto",
+                            objeto: objeto
+                            
+                        },
+                        success: function(data){
+                            if (data === "01") {
+                                window.location.href = "update_objeto.php";
+                            }
+                        }
+                    });
+                }
+                
+                
+                
                 function callApi2(input) {
 
                     $("#tipocontrato").attr('disabled', false);
@@ -110,7 +148,7 @@ if (!isset($_SESSION['login'])) {
                     var fimVigencia = $("#fimvigencia").val();
                     $("#tipocontrato").attr('disabled', true);
 
-                   
+
                     $.ajax({
                         url: "api/api.php",
                         method: "post",
@@ -236,65 +274,14 @@ if (!isset($_SESSION['login'])) {
                             $("#div-img-fimvigencia").click(function () {
                                 changeFunc('fimvigencia');
                             });
-                            /*
-                             $('#alterar_contrato').click(function () {
-                             
-                             var idcontrato = $("#idcontrato").val();
-                             var empresa = $("#empresa").val();
-                             var numero = $("#numero").val();
-                             var vencimento = $("#vencimento").val();
-                             var contratante = $("#contratante").val();
-                             var contratada = $("#contratada").val();
-                             var descTipoContrato = $("#descTipoContrato").val();
-                             var concorrencia = $("#concorrencia").val();
-                             var valorContrato = $("#valor").val();
-                             var qtdParCont = $("#qtdParCont").val();
-                             var valorParcContrato = $("#valorParcContrato").val();
-                             var quantParcPagContr = $("#quantParcPagContr").val();
-                             var dataPagParc = $("#dataPagParc").val();
-                             var inicioVigencia = $("#inicioVigencia").val();
-                             var fimVigencia = $("#fimVigencia").val();
-                             var descGarantia = $("#descGarantia").val();
-                             var descObjeto = $("#descObjeto").val();
-                             var descObservacao = $("#descObservacao").val();
-                             $.ajax({
-                             url: "api/api.php",
-                             method: "post",
-                             data: {request: "update_contrato",
-                             idcontrato: idcontrato,
-                             empresa: empresa,
-                             numero: numero,
-                             vencimento: vencimento,
-                             contratante: contratante,
-                             contratada: contratada,
-                             descTipoContrato: descTipoContrato,
-                             concorrencia: concorrencia,
-                             valorContrato: valorContrato,
-                             qtdParCont: qtdParCont,
-                             valorParcContrato: valorParcContrato,
-                             quantParcPagContr: quantParcPagContr,
-                             dataPagParc: dataPagParc,
-                             inicioVigencia: inicioVigencia,
-                             fimVigencia: fimVigencia,
-                             descGarantia: descGarantia,
-                             descObjeto: descObjeto,
-                             descObservacao: descObservacao
-                             
-                             
-                             },
-                             success: function (data)
-                             
-                             {
-                             alert(data);
-                             window.location.href = "meus_contratos.php";
-                             
-                             
-                             
-                             
-                             
-                             }
-                             });
-                             */
+
+                            $("#addGarantia").click(function () {
+                                FuncGarantia('idcontrato');
+                            });
+                            
+                            $("#addObjeto").click(function (){
+                                FuncObjeto('addObjeto');
+                            });
                         }
                     });
                 }

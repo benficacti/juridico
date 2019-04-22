@@ -468,7 +468,7 @@ class Update {
                                 </div>                                 
                             </div>
                             <div class="span-group-input" style="background-color:white; border:0px;">
-                                <a href="#" class="title-upload">ADICIONAR GARANTIA</a>
+                                <span id="addGarantia" class="title-upload">ADICIONAR GARANTIA </span>
                             </div>
                         </div>
                     </div>                    
@@ -483,7 +483,7 @@ class Update {
                                 </div>                                 
                             </div>
                             <div class="span-group-input" style="background-color:white; border:0px;">
-                                <a href="#" class="title-upload">ADICIONAR OBJETO</a>
+                                <span id="addObjeto" class="title-upload">ADICIONAR OBJETO </span>
                             </div>
                         </div>
                     </div>
@@ -510,5 +510,43 @@ class Update {
             echo $exc->getTraceAsString();
         }
     }
+    
+    
+    
+    public function updateAdicionaGarantia($garantia, $idcontrato) {
+        try {
+            
+            $sql = 'UPDATE `GARANTIA` SET `DESC_GARANTIA` = "' . $garantia . '"'
+                    . 'WHERE ID_CONTRATO_GARANTIA = ' . $idcontrato;
+            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                echo 'GARANTIA ADICIONADO COM SUCESSO!';
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao adicionar garantia';
+        }
+    }
+    
+    
+    
+     public function updateAdicionaObjeto($objeto, $idcontrato) {
+        try {
+            
+            $sql = 'UPDATE `OBJETO` SET `DESC_OBJETO` = "' . $objeto . '"'
+                    . 'WHERE ID_CONTRATO_OBJETO = ' . $idcontrato;
+            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                echo 'OBJETO ADICIONADO COM SUCESSO!';
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao adicionar garantia';
+        }
+    }
+    
+    
 
 }

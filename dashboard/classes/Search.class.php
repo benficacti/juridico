@@ -858,4 +858,50 @@ class Search {
         }
     }
 
+    public function BuscaGarantiaUpdate($id){
+        try{
+            
+            $sql = 'SELECT * FROM GARANTIA WHERE ID_CONTRATO_GARANTIA = '.$id;
+            $ssql = Conexao::getInstance()->prepare($sql);
+            if ($ssql->execute()) {
+                $count = $ssql->rowCount();
+                if ($count > 0) {
+                    foreach ($ssql->fetchall(PDO::FETCH_OBJ) as $dados){
+                       return $d = $dados->DESC_GARANTIA;
+                    }
+                }else{
+                    echo'Não achou linha';
+                }
+                
+            }else{
+                echo' Não buscou'; 
+            }
+        } catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    
+    public function BuscaObjetoUpdate($id){
+        try{
+            
+            $sql = 'SELECT * FROM OBJETO WHERE ID_CONTRATO_OBJETO = '.$id;
+            $ssql = Conexao::getInstance()->prepare($sql);
+            if ($ssql->execute()) {
+                $count = $ssql->rowCount();
+                if ($count > 0) {
+                    foreach ($ssql->fetchall(PDO::FETCH_OBJ) as $dados){
+                        
+                       return $d = $dados->DESC_OBJETO;
+                    }
+                }else{
+                    echo'Não achou linha';
+                }
+                
+            }else{
+                echo' Não buscou'; 
+            }
+        } catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
 }
