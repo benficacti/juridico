@@ -191,15 +191,31 @@ if ($request == 'addObjeto') {
           echo '01';
       }
   }
- 
-  
 }
 
-
-if ($request == 'addObjetoUpdate') {
-    $objeto = (null !== (filter_input(INPUT_POST,'objeto'))) ? filter_input(INPUT_POST,'objeto') : 0;
+if ($request == 'addGarantiaUpdate') {
+    $garantia = (null !== (filter_input(INPUT_POST,'garantia'))) ? filter_input(INPUT_POST,'garantia') : 0;
     $idcontrato = (null !== (filter_input(INPUT_POST,'idcontrato'))) ? filter_input(INPUT_POST,'idcontrato') : 0;
     
- echo Update::updateAdicionaObjeto($objeto, $idcontrato);
+ echo Update::updateAdicionaGarantia($garantia, $idcontrato);
 }
 
+
+if ($request == 'addObservacaoUpdate') {
+    $obs = (null !== (filter_input(INPUT_POST,'obs'))) ? filter_input(INPUT_POST,'obs') : 0;
+    $idcontrato = (null !== (filter_input(INPUT_POST,'idcontrato'))) ? filter_input(INPUT_POST,'idcontrato') : 0;
+    
+ echo Update::updateAdicionaObjeto($obs, $idcontrato);
+}
+
+
+if ($request == 'addObservacao') {
+    $addObs = (null !== (filter_input(INPUT_POST,'addObs'))) ? filter_input(INPUT_POST,'addObs') : 0;
+    $_SESSION['contrato'] = $addObs;
+    if (!empty($addObs)) {
+        if (isset($addObs)) {
+            echo '01';
+        }
+    }
+
+}

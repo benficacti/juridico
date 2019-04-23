@@ -453,7 +453,6 @@ class Search {
 
 
 
-
                         echo '<tr>';
                         if (strlen($anexo) > 0) {
                             echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list"></a></th>';
@@ -892,6 +891,32 @@ class Search {
                     foreach ($ssql->fetchall(PDO::FETCH_OBJ) as $dados){
                         
                        return $d = $dados->DESC_OBJETO;
+                    }
+                }else{
+                    echo'Não achou linha';
+                }
+                
+            }else{
+                echo' Não buscou'; 
+            }
+        } catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    
+    
+    
+    public function BuscaObservacaoUpdate($id){
+        try{
+            
+            $sql = 'SELECT * FROM OBSERVACOES_EXIGENCIAS WHERE ID_CONTRATO_OBSERVACOES = '.$id;
+            $ssql = Conexao::getInstance()->prepare($sql);
+            if ($ssql->execute()) {
+                $count = $ssql->rowCount();
+                if ($count > 0) {
+                    foreach ($ssql->fetchall(PDO::FETCH_OBJ) as $dados){
+                        
+                       return $d = $dados->DESC_OBSER_EXIGEN;
                     }
                 }else{
                     echo'Não achou linha';

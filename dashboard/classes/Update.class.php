@@ -498,7 +498,7 @@ class Update {
                                 </div>                                 
                             </div>
                             <div class="span-group-input" style="background-color:white; border:0px;">
-                                <a href="#" class="title-upload">VER / EDITAR</a>
+                                <span id="addObs" class="title-upload">VER / EDITAR</span>
                             </div>
                         </div>
                     </div>
@@ -531,7 +531,24 @@ class Update {
     
     
     
-     public function updateAdicionaObjeto($objeto, $idcontrato) {
+     public function updateAdicionaObjeto($obs, $idcontrato) {
+        try {
+            
+            $sql = 'UPDATE `OBSERVACOES_EXIGENCIAS` SET `DESC_OBSER_EXIGEN` = "' . $obs . '"'
+                    . 'WHERE ID_CONTRATO_OBSERVACOES = ' . $idcontrato;
+            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                echo 'OBSERVACOES ADICIONADO COM SUCESSO!';
+            }
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+            echo 'Falha ao adicionar garantia';
+        }
+    }
+    
+    
+     public function updateAdicionaObservacao($objeto, $idcontrato) {
         try {
             
             $sql = 'UPDATE `OBJETO` SET `DESC_OBJETO` = "' . $objeto . '"'

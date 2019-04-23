@@ -18,6 +18,7 @@ if (!isset($_SESSION['login'])) {
         <link rel="stylesheet" href="css/css.css"/>
         <script type="text/javascript" src="js/jquery-1.6.4.js"></script>        
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/aos.css"/>
         <script src="js/jquery.min.js"></script>
     </head>
     <body>
@@ -42,7 +43,7 @@ if (!isset($_SESSION['login'])) {
             </nav>
         </div>
         <!-- BOX CONTEUDO DA PAG -->
-
+        
         <div class="box-conteudo">
             <input type="hidden" id="idcontrato" value="<?php echo $_GET['c'] ?>">
             <article class="article-contract-fim" data-aos="zoom-in" >
@@ -126,6 +127,23 @@ if (!isset($_SESSION['login'])) {
                     });
                 }
                 
+                
+                function FuncObser(){
+                    var addObs = $("#idcontrato").val();
+                    $.ajax({
+                        url:'api/api.php',
+                        method:'post',
+                        data:{request:'addObservacao',
+                            addObs: addObs
+                            
+                        },
+                        success: function(data){
+                            if (data === "01") {
+                               window.location.href = "update_obs.php";
+                            }
+                        }
+                    });
+                }
                 
                 
                 function callApi2(input) {
@@ -281,6 +299,10 @@ if (!isset($_SESSION['login'])) {
                             
                             $("#addObjeto").click(function (){
                                 FuncObjeto('addObjeto');
+                            });
+                            
+                            $("#addObs").click(function (){
+                                FuncObser('addObs');
                             });
                         }
                     });
