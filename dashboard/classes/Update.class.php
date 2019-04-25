@@ -202,6 +202,7 @@ class Update {
                         $descGarantia = $dados->DESC_GARANTIA;
                         $descObservacao = $dados->DESC_OBSER_EXIGEN;
                         $possui_parcelas = $dados->ID_POSSUI_PARCELA_CONTRATO;
+                        $status_garantia = $dados->ID_STATUS_GARANTIA_CONTRATO;
                         echo '                            
                  <div class="line-finally-contract-update">
                         <div class="form-contract-fim-update">
@@ -468,7 +469,13 @@ class Update {
                                 </div>                                 
                             </div>
                             <div class="span-group-input" style="background-color:white; border:0px;">
-                                <span id="addGarantia" class="title-upload">ADICIONAR GARANTIA </span>
+                             ';if (($status_garantia) == 1) {
+                                   echo '<span id="addGarantia" class="title-upload">EDITAR GARANTIA</span>';
+                                 }else{
+                                      echo '<span id="addGarantia" class="title-upload">ADICIONAR GARANTIA</span>';
+                                 }
+                                 echo'
+                                
                             </div>
                         </div>
                     </div>                    
@@ -521,7 +528,14 @@ class Update {
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
-                echo 'GARANTIA ADICIONADO COM SUCESSO!';
+                
+                $upd = 'UPDATE `CONTRATO` SET `ID_STATUS_GARANTIA_CONTRATO` = 1 WHERE ID_CONTRATO ='.$idcontrato;
+                $updd = Conexao::getInstance()->prepare($upd);
+                if ($updd->execute()) {
+                     echo 'GARANTIA ADICIONADA COM SUCESSO!';
+                }
+                        
+               
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
@@ -531,7 +545,7 @@ class Update {
     
     
     
-     public function updateAdicionaObjeto($obs, $idcontrato) {
+     public function updateAdicionaObservacao($obs, $idcontrato) {
         try {
             
             $sql = 'UPDATE `OBSERVACOES_EXIGENCIAS` SET `DESC_OBSER_EXIGEN` = "' . $obs . '"'
@@ -548,7 +562,7 @@ class Update {
     }
     
     
-     public function updateAdicionaObservacao($objeto, $idcontrato) {
+     public function updateAdicionaObjeto($objeto, $idcontrato) {
         try {
             
             $sql = 'UPDATE `OBJETO` SET `DESC_OBJETO` = "' . $objeto . '"'

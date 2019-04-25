@@ -175,12 +175,6 @@ if ($request == 'addGarantia') {
   
 }
 
-if ($request == 'addGarantiaUpdate') {
-    $garantia = (null !== (filter_input(INPUT_POST,'garantia'))) ? filter_input(INPUT_POST,'garantia') : 0;
-    $idcontrato = (null !== (filter_input(INPUT_POST,'idcontrato'))) ? filter_input(INPUT_POST,'idcontrato') : 0;
-    
- echo Update::updateAdicionaGarantia($garantia, $idcontrato);
-}
 
 
 if ($request == 'addObjeto') {
@@ -205,7 +199,14 @@ if ($request == 'addObservacaoUpdate') {
     $obs = (null !== (filter_input(INPUT_POST,'obs'))) ? filter_input(INPUT_POST,'obs') : 0;
     $idcontrato = (null !== (filter_input(INPUT_POST,'idcontrato'))) ? filter_input(INPUT_POST,'idcontrato') : 0;
     
- echo Update::updateAdicionaObjeto($obs, $idcontrato);
+ echo Update::updateAdicionaObservacao($obs, $idcontrato);
+}
+
+if ($request == 'addObjetoUpdate') {
+    $objeto = (null !== (filter_input(INPUT_POST,'objeto'))) ? filter_input(INPUT_POST,'objeto') : 0;
+    $idcontrato = (null !== (filter_input(INPUT_POST,'idcontrato'))) ? filter_input(INPUT_POST,'idcontrato') : 0;
+    
+ echo Update::updateAdicionaObjeto($objeto, $idcontrato);
 }
 
 
