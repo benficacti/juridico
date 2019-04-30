@@ -15,7 +15,7 @@ class Update {
 
     public function adicionaGarantia($_idContratoGarantia, $idStatusGarantia, $idGarantia) {
         try {
-            
+
             $sql = 'UPDATE `contrato` SET `ID_STATUS_GARANTIA_CONTRATO`=' . $idStatusGarantia . ',`ID_GARANTIA_CONTRATO`=' . $idGarantia . ' '
                     . 'WHERE ID_CONTRATO = ' . $_idContratoGarantia;
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
@@ -29,7 +29,6 @@ class Update {
         }
     }
 
-    
     public function adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto) {
         try {
             $sql = 'UPDATE `contrato` SET `ID_OBJETO_CONTRATO`=' . $idObjeto . ' '
@@ -67,14 +66,14 @@ class Update {
         $idGarantia = Search::BuscaGarantia($idContrato);
         $idTipoContrato = Search::BuscaTipoContrato($idContrato);
         $idObser_exigencia = Search::BuscaObs($idContrato);
-        
-       
-            $dataPagParcx = Search::otherFormateDateBR($dataPagParc);
-            $inicioVigenciax = Search::otherFormateDateBR($inicioVigencia);
-            $fimVigenciax = Search::otherFormateDateBR($fimVigencia);
-            $vencimentox = Search::otherFormateDateBR($vencimento);
-        
-            
+
+
+        $dataPagParcx = Search::otherFormateDateBR($dataPagParc);
+        $inicioVigenciax = Search::otherFormateDateBR($inicioVigencia);
+        $fimVigenciax = Search::otherFormateDateBR($fimVigencia);
+        $vencimentox = Search::otherFormateDateBR($vencimento);
+
+
 
         try {
             $sql = 'UPDATE `contrato` SET `NUMERO_CONTRATO`=' . $numero . ',`CONTRATANTE_CONTRATO` = "' . $contratante . '",'
@@ -126,23 +125,23 @@ class Update {
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
-              //  echo ' Tipo_Contrato Alterado';
+                //  echo ' Tipo_Contrato Alterado';
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
             echo 'Falha ao alterar tipo contrato!';
         }
-        
+
         try {
-            
+
             $sql = 'UPDATE `observacoes_exigencias` SET `DESC_OBSER_EXIGEN`= "' . $descObservacao . '" '
                     . ' WHERE ID_OBSERVACOES_EXIGENCIAS = ' . $idObser_exigencia . ' ';
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
-              //  echo ' Observações Alterado1';
-            }else{
-             //   echo 'Não alterou observação!';
+                //  echo ' Observações Alterado1';
+            } else {
+                //   echo 'Não alterou observação!';
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
@@ -469,12 +468,13 @@ class Update {
                                 </div>                                 
                             </div>
                             <div class="span-group-input" style="background-color:white; border:0px;">
-                             ';if (($status_garantia) == 1) {
-                                   echo '<span id="addGarantia" class="title-upload">EDITAR GARANTIA</span>';
-                                 }else{
-                                      echo '<span id="addGarantia" class="title-upload">ADICIONAR GARANTIA</span>';
-                                 }
-                                 echo'
+                             ';
+                        if (($status_garantia) == 1) {
+                            echo '<span id="addGarantia" class="title-upload">EDITAR GARANTIA</span>';
+                        } else {
+                            echo '<span id="addGarantia" class="title-upload">ADICIONAR GARANTIA</span>';
+                        }
+                        echo'
                                 
                             </div>
                         </div>
@@ -517,37 +517,31 @@ class Update {
             echo $exc->getTraceAsString();
         }
     }
-    
-    
-    
+
     public function updateAdicionaGarantia($garantia, $idcontrato) {
         try {
-            
+
             $sql = 'UPDATE `GARANTIA` SET `DESC_GARANTIA` = "' . $garantia . '"'
                     . 'WHERE ID_CONTRATO_GARANTIA = ' . $idcontrato;
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
-                
-                $upd = 'UPDATE `CONTRATO` SET `ID_STATUS_GARANTIA_CONTRATO` = 1 WHERE ID_CONTRATO ='.$idcontrato;
+
+                $upd = 'UPDATE `CONTRATO` SET `ID_STATUS_GARANTIA_CONTRATO` = 1 WHERE ID_CONTRATO =' . $idcontrato;
                 $updd = Conexao::getInstance()->prepare($upd);
                 if ($updd->execute()) {
-                     echo 'GARANTIA ADICIONADA COM SUCESSO!';
+                    echo 'GARANTIA ADICIONADA COM SUCESSO!';
                 }
-                        
-               
             }
         } catch (PDOException $e) {
             var_dump($e->getMessage());
             echo 'Falha ao adicionar garantia';
         }
     }
-    
-    
-    
-     public function updateAdicionaObservacao($obs, $idcontrato) {
+
+    public function updateAdicionaObservacao($obs, $idcontrato) {
         try {
-            
+
             $sql = 'UPDATE `OBSERVACOES_EXIGENCIAS` SET `DESC_OBSER_EXIGEN` = "' . $obs . '"'
                     . 'WHERE ID_CONTRATO_OBSERVACOES = ' . $idcontrato;
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
@@ -560,11 +554,10 @@ class Update {
             echo 'Falha ao adicionar garantia';
         }
     }
-    
-    
-     public function updateAdicionaObjeto($objeto, $idcontrato) {
+
+    public function updateAdicionaObjeto($objeto, $idcontrato) {
         try {
-            
+
             $sql = 'UPDATE `OBJETO` SET `DESC_OBJETO` = "' . $objeto . '"'
                     . 'WHERE ID_CONTRATO_OBJETO = ' . $idcontrato;
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
@@ -577,7 +570,36 @@ class Update {
             echo 'Falha ao adicionar garantia';
         }
     }
-    
-    
+
+    public function updatelogin($nova_senha, $token) {
+        $idUsuario = Search::buscaPrivateToken($token);
+        try {          
+            $upd = 'UPDATE `LOGIN` SET `SENHA_LOGIN` = "' . $nova_senha . '"'
+                    . 'WHERE ID_USUARIO_LOGIN = ' . $idUsuario;
+            $updd = Conexao::getInstance()->prepare($upd);
+            if ($updd->execute()) {
+                $updp = 'UPDATE `RECUPERAR_SENHA` SET `ID_STATUS_ALTERAR` = 2 WHERE ID_USUARIO = '.$idUsuario;
+                $uppd = Conexao::getInstance()->prepare($updp);
+                if($uppd->execute()){
+                     return '00';
+                }
+               
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function desativarRec($idUsuario) {
+        try {
+            $upd = 'UPDATE `RECUPERAR_SENHA` SET `ID_STATUS_ALTERAR` = 2 WHERE ID_USUARIO = ' . $idUsuario;
+            $updd = Conexao::getInstance()->prepare($upd);
+            if ($updd->execute()) {            
+                return true;
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
 
 }

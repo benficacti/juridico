@@ -47,36 +47,7 @@ if (!isset($_SESSION['login'])) {
 
         <div class="box-conteudo">
             <article class="article-contract-fim" data-aos="zoom-in" >
-                <!--<header class="header-contract-fim">
-                    <label class="title-contract-fim">PAINEL</label>
-                </header>-->
-                <!--   <div class="panels options">
-                       <div class="line-contract-panel options">
-                           <div class="title-contract-panel options">
-                               <label class="lbl-title-panel">
-                                   CONSULTA CONTRATO
-                               </label>
-                           </div>
-                       </div>
-                       <div class="line-contract-panel options2">
-                           <label class="title-option-panel">Nº CONTRATO:</label>
-                           <div class="input-group-option-panel input-group-login-active"  id="input-group-contract-numero">
-                               <input type="text" class="input-panel" id="numero_contrato" placeholder="Nº Contrato" autocomplete="off" >     
-                           </div>
-                       </div>
-                       <div class="line-contract-panel options">
-                           <div class="title-contract-panel options">
-                               <label class="lbl-title-panel">
-                                   RESULTADO
-                               </label>
-                           </div>
-                       </div>
-                        <div class="line-contract-panel options">
-                           
-                       </div>
-                   </div>
-                vencimentos-panel
-                -->
+                
                 <div class="panels ">
                     <input type="text" id="busca" onkeyup="callApi();">
                     <div class="line-contract-panel"> 

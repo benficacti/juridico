@@ -1,4 +1,5 @@
 <?php
+
 include '../models/contrato.php';
 include '../models/garantia.php';
 include '../models/objeto.php';
@@ -63,8 +64,8 @@ if ($request == 'adicionar_objeto') {
     $idContratoObjeto = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_status_objeto = (null !== (filter_input(INPUT_POST, 'status_objeto'))) ? filter_input(INPUT_POST, 'status_objeto') : null;
     $descObjeto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : null;
-   $objeto = new objeto($descObjeto, $idContratoObjeto);
-   $idObjeto = Insert::CadastraObjeto($objeto);
+    $objeto = new objeto($descObjeto, $idContratoObjeto);
+    $idObjeto = Insert::CadastraObjeto($objeto);
     if ($idObjeto != null) {
         echo Update::adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto);
     }
@@ -154,9 +155,7 @@ if ($request == 'update_contrato') {
     $descObjeto = (null !== (filter_input(INPUT_POST, 'descObjeto'))) ? filter_input(INPUT_POST, 'descObjeto') : 0;
     $descObservacao = (null !== (filter_input(INPUT_POST, 'descObservacao'))) ? filter_input(INPUT_POST, 'descObservacao') : 0;
     sleep(1);
-    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato,
-            $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia,
-            $fimVigencia, $descGarantia, $descObjeto, $descObservacao);
+    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao);
 }
 
 function formateDate($i) {
@@ -165,58 +164,79 @@ function formateDate($i) {
 }
 
 if ($request == 'addGarantia') {
-  $addGarantia = (null !== (filter_input(INPUT_POST, 'addGarantia'))) ? filter_input(INPUT_POST, 'addGarantia') : 0;
-  $_SESSION['contrato'] = $addGarantia;
-  if (!empty($addGarantia)) {
-      if (isset($addGarantia)) {
-          echo '01';
-      }
-  }
-  
+    $addGarantia = (null !== (filter_input(INPUT_POST, 'addGarantia'))) ? filter_input(INPUT_POST, 'addGarantia') : 0;
+    $_SESSION['contrato'] = $addGarantia;
+    if (!empty($addGarantia)) {
+        if (isset($addGarantia)) {
+            echo '01';
+        }
+    }
 }
 
 
 
 if ($request == 'addObjeto') {
- $addObjeto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : 0;
-  $_SESSION['contrato'] = $addObjeto;
-  if (!empty($addObjeto)) {
-      if (isset($addObjeto)) {
-          echo '01';
-      }
-  }
+    $addObjeto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : 0;
+    $_SESSION['contrato'] = $addObjeto;
+    if (!empty($addObjeto)) {
+        if (isset($addObjeto)) {
+            echo '01';
+        }
+    }
 }
 
 if ($request == 'addGarantiaUpdate') {
-    $garantia = (null !== (filter_input(INPUT_POST,'garantia'))) ? filter_input(INPUT_POST,'garantia') : 0;
-    $idcontrato = (null !== (filter_input(INPUT_POST,'idcontrato'))) ? filter_input(INPUT_POST,'idcontrato') : 0;
-    
- echo Update::updateAdicionaGarantia($garantia, $idcontrato);
+    $garantia = (null !== (filter_input(INPUT_POST, 'garantia'))) ? filter_input(INPUT_POST, 'garantia') : 0;
+    $idcontrato = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : 0;
+
+    echo Update::updateAdicionaGarantia($garantia, $idcontrato);
 }
 
 
 if ($request == 'addObservacaoUpdate') {
-    $obs = (null !== (filter_input(INPUT_POST,'obs'))) ? filter_input(INPUT_POST,'obs') : 0;
-    $idcontrato = (null !== (filter_input(INPUT_POST,'idcontrato'))) ? filter_input(INPUT_POST,'idcontrato') : 0;
-    
- echo Update::updateAdicionaObservacao($obs, $idcontrato);
+    $obs = (null !== (filter_input(INPUT_POST, 'obs'))) ? filter_input(INPUT_POST, 'obs') : 0;
+    $idcontrato = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : 0;
+
+    echo Update::updateAdicionaObservacao($obs, $idcontrato);
 }
 
 if ($request == 'addObjetoUpdate') {
-    $objeto = (null !== (filter_input(INPUT_POST,'objeto'))) ? filter_input(INPUT_POST,'objeto') : 0;
-    $idcontrato = (null !== (filter_input(INPUT_POST,'idcontrato'))) ? filter_input(INPUT_POST,'idcontrato') : 0;
-    
- echo Update::updateAdicionaObjeto($objeto, $idcontrato);
+    $objeto = (null !== (filter_input(INPUT_POST, 'objeto'))) ? filter_input(INPUT_POST, 'objeto') : 0;
+    $idcontrato = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : 0;
+
+    echo Update::updateAdicionaObjeto($objeto, $idcontrato);
 }
 
 
 if ($request == 'addObservacao') {
-    $addObs = (null !== (filter_input(INPUT_POST,'addObs'))) ? filter_input(INPUT_POST,'addObs') : 0;
+    $addObs = (null !== (filter_input(INPUT_POST, 'addObs'))) ? filter_input(INPUT_POST, 'addObs') : 0;
     $_SESSION['contrato'] = $addObs;
     if (!empty($addObs)) {
         if (isset($addObs)) {
             echo '01';
         }
     }
+}
 
+if ($request == 'enviar') {
+    $email = (null !== (filter_input(INPUT_POST, 'email'))) ? filter_input(INPUT_POST, 'email') : 0;
+    
+    echo $token = Search::buscaEmailUsuario($email);
+}
+
+
+if ($request == 'reset_senha') {
+    $esqueci_senha = (null !== (filter_input(INPUT_POST, 'esqueci_senha'))) ? filter_input(INPUT_POST, 'esqueci_senha') : 0;
+    if (!empty($esqueci_senha)) {
+        if (isset($esqueci_senha)) {
+            echo '1';
+        }
+    }
+}
+
+if ($request == 'contra_senha') {
+    $nova_senha = (null !==(filter_input(INPUT_POST, 'nova_senha'))) ? filter_input(INPUT_POST, 'nova_senha') : 0; 
+    $token = (null !==(filter_input(INPUT_POST, 'token'))) ? filter_input(INPUT_POST, 'token') : 0;
+    
+   echo Update::updatelogin($nova_senha, $token);
 }

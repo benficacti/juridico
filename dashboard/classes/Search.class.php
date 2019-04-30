@@ -1,6 +1,6 @@
 <?php
 
-//include '../persistencia/Conexao.php';
+include '../persistencia/Conexao.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -42,7 +42,7 @@ class Search {
     }
 
     public function loginAuth($login, $senha) {
-
+        
         try {
 
 
@@ -229,35 +229,35 @@ class Search {
             echo $exc->getTraceAsString();
         }
     }
-    
+
     public function proximosVencimentos($vencimento, $busca) {
         $data = date('Y-m-d');
         switch ($vencimento) {
             case 0:
                 $sql = "SELECT * FROM CONTRATO "
-                . " INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO"
-                . " WHERE NUMERO_CONTRATO like '%" . $busca . "%' or VENCIMENTO_CONTRATO like '%" . $busca . "%' or"
-                . " CONTRATANTE_CONTRATO like '%" . $busca . "%'";
-                 $sqll = Conexao::getInstance()->prepare($sql);
+                        . " INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO"
+                        . " WHERE NUMERO_CONTRATO like '%" . $busca . "%' or VENCIMENTO_CONTRATO like '%" . $busca . "%' or"
+                        . " CONTRATANTE_CONTRATO like '%" . $busca . "%'";
+                $sqll = Conexao::getInstance()->prepare($sql);
                 break;
 
             case 1:
                 $sql = 'SELECT * FROM CONTRATO '
                         . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
                         . ' WHERE VENCIMENTO_CONTRATO < "' . $data . '"';
-                 $sqll = Conexao::getInstance()->prepare($sql);
+                $sqll = Conexao::getInstance()->prepare($sql);
                 break;
 
             case 2:
                 $sql = 'SELECT * FROM CONTRATO '
                         . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
                         . ' WHERE VENCIMENTO_CONTRATO >= "' . $data . '"';
-                 $sqll = Conexao::getInstance()->prepare($sql);
+                $sqll = Conexao::getInstance()->prepare($sql);
                 break;
         }
 
 
-        
+
 
         try {
             $mes = 1;
@@ -793,7 +793,7 @@ class Search {
                     foreach ($sqll->fetchall(PDO::FETCH_OBJ) as $dados) {
                         return $dados->ID_GARANTIA;
                     }
-                }else{
+                } else {
                     echo 'não buscou ID_GARANTIA';
                 }
             }
@@ -804,7 +804,7 @@ class Search {
 
     public function BuscaObjeto($idContratoObjeto) {
         try {
-            
+
             $sql = 'SELECT ID_OBJETO FROM '
                     . 'OBJETO WHERE ID_CONTRATO_OBJETO = ' . $idContratoObjeto . '';
             $sqll = Conexao::getInstance()->prepare($sql);
@@ -857,76 +857,116 @@ class Search {
         }
     }
 
-    public function BuscaGarantiaUpdate($id){
-        try{
-            
-            $sql = 'SELECT * FROM GARANTIA WHERE ID_CONTRATO_GARANTIA = '.$id;
+    public function BuscaGarantiaUpdate($id) {
+        try {
+
+            $sql = 'SELECT * FROM GARANTIA WHERE ID_CONTRATO_GARANTIA = ' . $id;
             $ssql = Conexao::getInstance()->prepare($sql);
             if ($ssql->execute()) {
                 $count = $ssql->rowCount();
                 if ($count > 0) {
-                    foreach ($ssql->fetchall(PDO::FETCH_OBJ) as $dados){
-                       return $d = $dados->DESC_GARANTIA;
+                    foreach ($ssql->fetchall(PDO::FETCH_OBJ) as $dados) {
+                        return $d = $dados->DESC_GARANTIA;
                     }
-                }else{
+                } else {
                     echo'Não achou linha';
                 }
-                
-            }else{
-                echo' Não buscou'; 
+            } else {
+                echo' Não buscou';
             }
-        } catch (Exception $e){
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
-    
-    public function BuscaObjetoUpdate($id){
-        try{
-            
-            $sql = 'SELECT * FROM OBJETO WHERE ID_CONTRATO_OBJETO = '.$id;
+
+    public function BuscaObjetoUpdate($id) {
+        try {
+
+            $sql = 'SELECT * FROM OBJETO WHERE ID_CONTRATO_OBJETO = ' . $id;
             $ssql = Conexao::getInstance()->prepare($sql);
             if ($ssql->execute()) {
                 $count = $ssql->rowCount();
                 if ($count > 0) {
-                    foreach ($ssql->fetchall(PDO::FETCH_OBJ) as $dados){
+                    foreach ($ssql->fetchall(PDO::FETCH_OBJ) as $dados) {
+
+                        return $d = $dados->DESC_OBJETO;
+                    }
+                } else {
+                    echo'Não achou linha';
+                }
+            } else {
+                echo' Não buscou';
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function BuscaObservacaoUpdate($id) {
+        try {
+
+            $sql = 'SELECT * FROM OBSERVACOES_EXIGENCIAS WHERE ID_CONTRATO_OBSERVACOES = ' . $id;
+            $ssql = Conexao::getInstance()->prepare($sql);
+            if ($ssql->execute()) {
+                $count = $ssql->rowCount();
+                if ($count > 0) {
+                    foreach ($ssql->fetchall(PDO::FETCH_OBJ) as $dados) {
+
+                        return $d = $dados->DESC_OBSER_EXIGEN;
+                    }
+                } else {
+                    echo'Não achou linha';
+                }
+            } else {
+                echo' Não buscou';
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function buscaEmailUsuario($email) {
+        try {
+             $random = substr(str_shuffle(str_repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 5)), 0, 15);
+            $sql = 'SELECT * FROM USUARIO WHERE EMAIL_USUARIO = "' . $email . '"';
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $idUsuario = $dados->ID_USUARIO;
+                        $token1 = $dados->EMAIL_USUARIO;
+                        $token = sha1(rand(1000,999999) . $random);
                         
-                       return $d = $dados->DESC_OBJETO;
+                       $tokenCadastrado = Insert::gerarToken($idUsuario, $token);
+                       if ($tokenCadastrado == '00') {
+                           return $token;
+                       }
                     }
-                }else{
-                    echo'Não achou linha';
                 }
-                
-            }else{
-                echo' Não buscou'; 
             }
-        } catch (Exception $e){
-            echo $e->getMessage();
+        } catch (Exception $exc) {
+            echo $exc->getMessage();
         }
     }
+
     
-    
-    
-    public function BuscaObservacaoUpdate($id){
-        try{
-            
-            $sql = 'SELECT * FROM OBSERVACOES_EXIGENCIAS WHERE ID_CONTRATO_OBSERVACOES = '.$id;
+    public function buscaPrivateToken($token) {
+        try {
+            $sql = 'SELECT * FROM RECUPERAR_SENHA WHERE PRIVATE_TOKEN = "' . $token . '" AND ID_STATUS_ALTERAR = 1';
             $ssql = Conexao::getInstance()->prepare($sql);
             if ($ssql->execute()) {
                 $count = $ssql->rowCount();
                 if ($count > 0) {
-                    foreach ($ssql->fetchall(PDO::FETCH_OBJ) as $dados){
-                        
-                       return $d = $dados->DESC_OBSER_EXIGEN;
+                    foreach ($ssql->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_USUARIO;
+                        //Update::updatelogin($idUsuario, $usuario, $senha);
                     }
-                }else{
-                    echo'Não achou linha';
                 }
-                
-            }else{
-                echo' Não buscou'; 
             }
-        } catch (Exception $e){
-            echo $e->getMessage();
+        } catch (Exception $exc) {
+            echo $exc->getMessage();
         }
     }
+
 }

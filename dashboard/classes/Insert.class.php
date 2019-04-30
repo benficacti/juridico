@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-include '../persistencia/Conexao.php';
 //include 'negocio/aditamentos.php';
 
 
@@ -192,4 +191,38 @@ class Insert {
         }
     }
 
+    public function gerarToken($idUsuario, $token) {
+        $idStatusAlterar = 1; // alterar
+        try {
+            $sql = 'SELECT * FROM RECUPERAR_SENHA WHERE ID_USUARIO = "' . $idUsuario . '" AND ID_STATUS_ALTERAR = 1';
+            $ssql = Conexao::getInstance()->prepare($sql);
+            if ($ssql->execute()) {
+                $count = $ssql->rowCount();
+                if ($count > 0) {
+                    foreach ($ssql->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $idUsuario = $dados->ID_USUARIO;
+
+                        if (Update::desativarRec($idUsuario)){
+                            return  Insert::gerarToken($idUsuario, $token);
+                        }
+                    }
+                } else {
+                    $ins = "INSERT INTO `recuperar_senha`(`ID_USUARIO`, `PRIVATE_TOKEN`, `ID_STATUS_ALTERAR`)"
+                            . "VALUES(:ID_USUARIO, :PRIVATE_TOKEN, :ID_STATUS_ALTERAR)";
+                    $inss = Conexao::getInstance()->prepare($ins);
+                    $inss->bindParam(":ID_USUARIO", $idUsuario);
+                    $inss->bindParam(":PRIVATE_TOKEN", $token);
+                    $inss->bindParam(":ID_STATUS_ALTERAR", $idStatusAlterar);
+                    if ($inss->execute()) {
+                        return '00';
+                        
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getMessage();
+        }
+    }
+
+    
 }

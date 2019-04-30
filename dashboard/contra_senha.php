@@ -1,13 +1,7 @@
 <?php
-session_start();
-if(isset($_SESSION['login'])){
-    header('Location: painel.php');
-}else{
- 
-}
-
+$contraSenha = filter_input(INPUT_GET, 'id');
+//$idUsuario = Search::buscaPrivateToken($contraSenha);
 ?>
-
 <!DOCTYPE html
     <html lang="pt-br"> 
 <head>    
@@ -40,21 +34,19 @@ if(isset($_SESSION['login'])){
                     </header>
                     <article class="article-login">
                         <div class="line-login">
-                            <label class="title-login" for="login">USUÁRIO</label>
                             <div class="input-group-login"  id="input-group-login-user">
-                                <input type="text" class="input-login" id="login" placeholder="Digite seu E-mail" autocomplete="off" >     
+                                <input type="hidden" id="token" value="<?php echo$contraSenha ?>">
+                                <input type="text" class="input-login" id="nova_senha" placeholder="NOVA SENHA" autocomplete="off" >     
                             </div>
                         </div>
                         <div class="line-login">
-                            <label class="title-login title-senha" for="senha">SENHA</label>
-                            <label class="title-login title-senha-right"  id="esqueceu_senha">Esqueceu Senha?</label>
                             <div class="input-group-login" id="input-group-login-senha">
-                                <input type="password" class="input-login" id="senha"  autocomplete="off"  placeholder="Digite sua Senha">     
+                                <input type="password" class="input-login" id="confirmar_senha"  autocomplete="off"  placeholder="CONFIRMAR SENHA">     
                             </div>                         
                         </div>
                         <div class="line-login">
                             <div class="btn-login">
-                                <input type="submit" class="bt-login" id="entrar" value="ENTRAR">     
+                                <input type="submit" class="bt-login" id="entrar" value="CADASTRAR">     
                             </div>
                         </div>
                     </article>
@@ -72,12 +64,12 @@ if(isset($_SESSION['login'])){
     <script type="text/javascript">
         $(document).ready(function () {
             $('#container').on('click', function () {
-                if ($("#login").is(":focus")) {
+                if ($("#nova_senha").is(":focus")) {
                     $("#input-group-login-user").addClass("input-group-login-active");
                 } else {
                     $("#input-group-login-user").removeClass("input-group-login-active");
                 }
-                if ($("#senha").is(":focus")) {
+                if ($("#confirmar_senha").is(":focus")) {
                     $("#input-group-login-senha").addClass("input-group-login-active");
                 } else {
                     $("#input-group-login-senha").removeClass("input-group-login-active");
@@ -85,76 +77,66 @@ if(isset($_SESSION['login'])){
             });
 
         });
-        $("#login").keydown(function () {
+        $("#nova_senha").keydown(function () {
             $("#input-group-login-user").removeClass("input-group-login-error");
         });
-        $("#senha").keydown(function () {
+        $("#confirmar_senha").keydown(function () {
             $("#input-group-login-senha").removeClass("input-group-login-error");
         });
         $("#entrar").click(function () {
             callApi();
         });
-        $("#esqueceu_senha").click(function(){
-            callApi1();
-        });
         function callApi() {
-            var login = $("#login").val();
-            var senha = $("#senha").val();
-            if (login.length <= 0) {
+            var nova_senha = $("#nova_senha").val();
+            var confirmar_senha = $("#confirmar_senha").val();
+            var token = $("#token").val();
+            if (nova_senha.length <= 0) {
                 $("#input-group-login-user").addClass("input-group-login-error");
             } else {
                 $("#input-group-login-user").removeClass("input-group-login-error");
             }
-            if (senha.length <= 0) {
+            if (confirmar_senha.length <= 0) {
                 $("#input-group-login-senha").addClass("input-group-login-error");
             } else {
                 $("#input-group-login-senha").removeClass("input-group-login-error");
             }
-            if (login.length > 0 && senha.length > 0) {
-                document.getElementById("entrar").value = "CONECTANDO...";
+            
+            if (nova_senha === confirmar_senha) {
+    
+                if (nova_senha.length > 0 && confirmar_senha.length > 0) {
+                document.getElementById("entrar").value = "SALVANDO...";
                 $.ajax({
                     url: "api/api.php",
                     method: "post",
-                    data: {request: "login",
-                        login: login,
-                        senha: senha
+                    data: {request: "contra_senha",
+                        nova_senha: nova_senha,
+                        token: token
                     },
                     success: function (data)
                     {
-                        var res = data.split(";");
-                        if (typeof res[0] !== "undefined" && res[0] == "00") {
-                            location.href = "painel.php";
-                        } else if (typeof res[0] !== "undefined" && res[0] == "01") {
-                            $("#input-group-login-user").addClass("input-group-login-error");
-                            $("#input-group-login-senha").addClass("input-group-login-error");
-                            document.getElementById("entrar").value = "ENTRAR";
-                        } else {
-                            $("#input-group-login-senha").addClass("input-group-login-error");
-                            document.getElementById("entrar").value = "ENTRAR";
-                        }
+                      
+                        //alert(data);
+                        if (data==="00") {
+                           window.location.href="login.php";
+                        } 
+                        
                     }
                 });
             } else {
                 document.getElementById("entrar").value = "ENTRAR";
             }
+            }else{
+                alert("senhas não conferem!");
+            }
+           
         }
-        
-        function callApi1(){
-            var esqueci_senha = 1;
-            alert(esqueci_senha);
-            $.ajax({
-               url:"api/api.php",
-               method:"post",
-               data:{request:"reset_senha",
-                   esqueci_senha: esqueci_senha
-               },
-               success: function(data){
-                   if (data === '1') {
-                      window.location.href = "email.php";
-                   }
-               }
-            });
-        }
+
+     
     </script>
 </body>
 </html>
+
+
+
+
+
