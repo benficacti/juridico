@@ -60,8 +60,8 @@ class Update {
     }
 
     public function AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao) {
-
-
+        echo $numero;
+        
         $idObjeto = Search::BuscaObjeto($idContrato);
         $idGarantia = Search::BuscaGarantia($idContrato);
         $idTipoContrato = Search::BuscaTipoContrato($idContrato);
