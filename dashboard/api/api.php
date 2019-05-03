@@ -138,7 +138,7 @@ if ($request == 'update_contrato') {
 
     $idContrato = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : 0;
     $empresa = (null !== (filter_input(INPUT_POST, 'empresa'))) ? filter_input(INPUT_POST, 'empresa') : 0;
-    $numero = (null !== (filter_input(INPUT_POST, 'numero'))) ? filter_input(INPUT_POST, 'numero') : 0;
+    $numero = (null !== (filter_input(INPUT_POST, 'numero'))) ? filter_input(INPUT_POST, 'numero') : null;
     $vencimento = (null !== (filter_input(INPUT_POST, 'vencimento'))) ? filter_input(INPUT_POST, 'vencimento') : 0;
     $contratante = (null !== (filter_input(INPUT_POST, 'contratante'))) ? filter_input(INPUT_POST, 'contratante') : 0;
     $contratada = (null !== (filter_input(INPUT_POST, 'contratada'))) ? filter_input(INPUT_POST, 'contratada') : 0;
