@@ -19,10 +19,7 @@ $contraSenha = filter_input(INPUT_GET, 'id');
 </head>
 <body>
     <section id="container">
-        <article id="article-left">
-
-        </article>
-        <article id="article-right">
+        <article id="article-right" style=" width: 100vw !important;">
             <div class="container-login">
                 <div class="login">
 
@@ -36,7 +33,7 @@ $contraSenha = filter_input(INPUT_GET, 'id');
                         <div class="line-login">
                             <div class="input-group-login"  id="input-group-login-user">
                                 <input type="hidden" id="token" value="<?php echo$contraSenha ?>">
-                                <input type="text" class="input-login" id="nova_senha" placeholder="NOVA SENHA" autocomplete="off" >     
+                                <input type="password" class="input-login" id="nova_senha" placeholder="NOVA SENHA" autocomplete="off" >     
                             </div>
                         </div>
                         <div class="line-login">
@@ -50,10 +47,17 @@ $contraSenha = filter_input(INPUT_GET, 'id');
                             </div>
                         </div>
                     </article>
-
                 </div>
             </div>
         </article>
+        <div class="rod-rodape">
+            <div class="fai-rodape">
+                <footer class="fa-rodape">
+                     <span class="version">versão:1.0.0 </span>
+                     <p> © <?php echo date('Y'); ?> Todos direitos reservados: Desenvolvido por: CTI-BBTT</p>      
+                </footer>    
+            </div>
+        </div>
     </section>
 
 
@@ -100,38 +104,38 @@ $contraSenha = filter_input(INPUT_GET, 'id');
             } else {
                 $("#input-group-login-senha").removeClass("input-group-login-error");
             }
-            
+
             if (nova_senha === confirmar_senha) {
-    
+
                 if (nova_senha.length > 0 && confirmar_senha.length > 0) {
-                document.getElementById("entrar").value = "SALVANDO...";
-                $.ajax({
-                    url: "api/api.php",
-                    method: "post",
-                    data: {request: "contra_senha",
-                        nova_senha: nova_senha,
-                        token: token
-                    },
-                    success: function (data)
-                    {
-                      
-                        //alert(data);
-                        if (data==="00") {
-                           window.location.href="login.php";
-                        } 
-                        
-                    }
-                });
+                    document.getElementById("entrar").value = "SALVANDO...";
+                    $.ajax({
+                        url: "api/api.php",
+                        method: "post",
+                        data: {request: "contra_senha",
+                            nova_senha: nova_senha,
+                            token: token
+                        },
+                        success: function (data)
+                        {
+
+                            //alert(data);
+                            if (data === "00") {
+                                window.location.href = "login.php";
+                            }
+
+                        }
+                    });
+                } else {
+                    document.getElementById("entrar").value = "ENTRAR";
+                }
             } else {
-                document.getElementById("entrar").value = "ENTRAR";
-            }
-            }else{
                 alert("senhas não conferem!");
             }
-           
+
         }
 
-     
+
     </script>
 </body>
 </html>

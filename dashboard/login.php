@@ -141,7 +141,6 @@ if(isset($_SESSION['login'])){
         
         function callApi1(){
             var esqueci_senha = 1;
-            alert(esqueci_senha);
             $.ajax({
                url:"api/api.php",
                method:"post",

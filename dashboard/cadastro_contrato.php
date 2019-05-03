@@ -106,11 +106,11 @@ if (!isset($_SESSION['login'])) {
                     <div class="form-contract">
                         <label class="title-option-contract">DATA VIGÊNCIA:</label>
                         <div class="input-group-contract group-date" style=""  id="input-group-contract-inivigencia">
-                            <input type="text" class="input-contract input-date" id="inicio_vigencia" placeholder="00/00/0000" >     
+                            <input type="text" class="input-contract input-date" id="fim_vigencia" placeholder="00/00/0000" >     
                         </div>
                         <label class="title-option-contract " style="margin-left:0vw !important;margin-right:1vw; float:right;">á</label>
                         <div class="input-group-contract group-date pright" id="input-group-contract-fimvigencia">
-                            <input type="text" class="input-contract input-date" id="fim_vigencia" placeholder="00/00/0000"  >     
+                            <input type="text" class="input-contract input-date" id="inicio_vigencia" placeholder="00/00/0000"  >     
                         </div>
                     </div>
                 </div>

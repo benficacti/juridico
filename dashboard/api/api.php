@@ -238,5 +238,5 @@ if ($request == 'contra_senha') {
     $nova_senha = (null !==(filter_input(INPUT_POST, 'nova_senha'))) ? filter_input(INPUT_POST, 'nova_senha') : 0; 
     $token = (null !==(filter_input(INPUT_POST, 'token'))) ? filter_input(INPUT_POST, 'token') : 0;
     
-   echo Update::updatelogin($nova_senha, $token);
+  echo  Update::updatelogin($nova_senha, $token);
 }

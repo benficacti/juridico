@@ -49,7 +49,7 @@ if (!isset($_SESSION['login'])) {
             <article class="article-contract-fim" data-aos="zoom-in" >
                 
                 <div class="panels ">
-                    <input type="text" id="busca" onkeyup="callApi();">
+                    <input type="text" class="pesquisar_painel" placeholder="PESQUISAR" id="busca" onkeyup="callApi();">
                     <div class="line-contract-panel"> 
                         <div class="title-contract-panel">
                             <label class="lbl-title-panel">

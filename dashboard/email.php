@@ -1,32 +1,48 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <script src="js/jquery.min.js"></script>
+<!DOCTYPE html
+    <html lang="pt-br"> 
+<head>    
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Gestão Eletronico de Contrato">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="icon" href="favicon.png">   
+    <title>GEC - Gestão Eletronico de Contrato</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/css.css"/>
+    <script type="text/javascript" src="js/jquery-1.6.4.js"></script>        
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+    <section id="container">
+       
+        <article id="article-right" style="width: 100vw !important;">
+            <div class="container-login">
+                <div class="login">
 
-        <title></title>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        </nav>
-        <div class="container-ticket" >
-            <table class="table" id="tb_vendas" style=" text-align: center;" >
-                <thead>
-                    <tr>
-                        <th scope="col">
-                            <input type="email" name="email" id="email" placeholder="DIGITE SEU E-MAIL" data-value="0"  class="form-control"autocomplete="off">
-                        </th>
-                    </tr>
+                    <header class="header-login">
+                        <h2 class="title-header-login">
+                            <span class="title-form-login">Gestão Eletrônica de Contratos</span>
+                        </h2>
+                    </header>
+                    <article class="article-login">
+                        <div class="line-login">
+                            <label class="title-login title-senha" for="senha">Email</label>
+                            <div class="input-group-login" id="input-group-login-senha">
+                                <input type="text" class="input-login" id="email"  autocomplete="off"  placeholder="Digite seu email">     
+                            </div>                         
+                        </div>
+                        <div class="line-login">
+                            <div class="btn-login">
+                                <input type="submit" class="bt-login" id="enviar" value="ENVIAR">     
+                            </div>
+                        </div>
+                    </article>
 
-                    <tr>
-                        <th>
-                            <button id="enviar" style="cursor:pointer;border-radius:10px; padding:3px;">Enviar redefinar por E-mail</button>
-                        </th>
-                    </tr>
-
-                </thead>
-            </table>
-        </div>
+                </div>
+            </div>
+        </article>
+    </section>
         <script type="text/javascript">
             $("#enviar").click(function () {
                 var email = $("#email").val();
