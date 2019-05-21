@@ -5,6 +5,7 @@ if (!isset($_SESSION['login'])) {
 } else {
     
 }
+error_reporting(0);
 include './classes/Search.class.php';
 include './persistencia/Conexao.php';
 ?>

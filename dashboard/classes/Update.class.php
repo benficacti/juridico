@@ -92,7 +92,7 @@ class Update {
             var_dump($e->getMessage());
             echo 'Falha alterar contrato!';
         }
-
+/*
         try {
             $sql = 'UPDATE `objeto` SET `DESC_OBJETO`= "' . $descObjeto . '" '
                     . ' WHERE ID_OBJETO = "' . $idObjeto . '" ';
@@ -118,7 +118,7 @@ class Update {
             var_dump($e->getMessage());
             echo 'Falha ao alterar garantia!';
         }
-
+*/
         try {
             $sql = 'UPDATE `contrato` SET `ID_TIPO_CONTRATO`= "' . $descTipoContrato . '" '
                     . ' WHERE ID_CONTRATO = "' . $idContrato . '" ';
@@ -131,7 +131,7 @@ class Update {
             var_dump($e->getMessage());
             echo 'Falha ao alterar tipo contrato!';
         }
-
+/*
         try {
 
             $sql = 'UPDATE `observacoes_exigencias` SET `DESC_OBSER_EXIGEN`= "' . $descObservacao . '" '
@@ -146,7 +146,7 @@ class Update {
         } catch (PDOException $e) {
             var_dump($e->getMessage());
             echo 'Falha ao alterar observações!';
-        }
+        }*/
     }
 
     public function adicionarAnexo($nomeUrl) {

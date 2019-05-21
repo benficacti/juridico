@@ -5,7 +5,7 @@ if (!isset($_SESSION['login'])) {
 } else {
   // echo $_SESSION['contrato'] . "br"; 
 }
-
+error_reporting(0);
 include './classes/Search.class.php';
 include './persistencia/Conexao.php';
 
