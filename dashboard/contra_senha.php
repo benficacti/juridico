@@ -119,10 +119,10 @@ $contraSenha = filter_input(INPUT_GET, 'id');
                         success: function (data)
                         {
 
-                            //alert(data);
-                            if (data === "00") {
-                                window.location.href = "login.php";
-                            }
+                            alert(data);
+                           // if (data === "00") {
+                            //    window.location.href = "login.php";
+                           // }
 
                         }
                     });
