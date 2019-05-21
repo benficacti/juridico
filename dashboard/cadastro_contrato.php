@@ -304,9 +304,9 @@ if (!isset($_SESSION['login'])) {
                         var empresa_contrato = $("#empresa_contrato").val();
                         if (empresa_contrato !== "0") {
                             if (empresa_contrato === "1") {
-                                document.getElementById('nome_concorrencia').value = "BBTT TRANSPORTES TURISMO LTDA";
+                                document.getElementById('nome_concorrencia').value = " Não possui concorrência";
                             } else {
-                                document.getElementById('nome_concorrencia').value = " RALIP TRANSPORTES RODOVIARIO LTDA";
+                                document.getElementById('nome_concorrencia').value = " Não possui concorrência";
                             }
                         } else {
                             document.getElementById('nome_concorrencia').value = "AGUARDANDO EMPRESA";
@@ -351,9 +351,9 @@ if (!isset($_SESSION['login'])) {
                     if ($('#rd-privado').is(':checked')) {
                         var empresa_contrato = $("#empresa_contrato").val();
                         if (empresa_contrato === "1") {
-                            document.getElementById('nome_concorrencia').value = "BB TRANSPORTES TURISMO LTDA";
+                            document.getElementById('nome_concorrencia').value = "Não possui concorrência";
                         } else if (empresa_contrato === "2") {
-                            document.getElementById('nome_concorrencia').value = "RALIP TRANSPORTES RODOVIARIO LTDA";
+                            document.getElementById('nome_concorrencia').value = "Não possui concorrência";
                         } else {
                             document.getElementById('nome_concorrencia').value = "AGUARDANDO EMPRESA";
                             $("#empresa_contrato").addClass("input-group-contract-error");
@@ -414,12 +414,7 @@ if (!isset($_SESSION['login'])) {
                     } else {
                         $("#input-group-contract-fimvigencia").removeClass("input-group-contract-error");
                     }
-                    //VALOR CONTRATO
-                    if (valor_contrato.length <= 0) {
-                        $("#input-group-contract-valor").addClass("input-group-contract-error");
-                    } else {
-                        $("#input-group-contract-valor").removeClass("input-group-contract-error");
-                    }
+                    
                     //POSSUI PARCELA
                     if (possui_parcela === "0") {
                         $("#input-group-contract-possuiparc").addClass("input-group-contract-error");
@@ -541,7 +536,7 @@ if (!isset($_SESSION['login'])) {
                     } else if (possui_parcela == "2") {
                         if (nome_contratante.length > 0 && nome_contratada.length > 0
                                 && nome_concorrencia.length > 0 && inicio_vigencia.length > 0 && fim_vigencia.length > 0
-                                && valor_contrato.length > 0 && vencimento.length > 0 && empresa_contrato !== "0") {
+                                && vencimento.length > 0 && empresa_contrato !== "0") {
                             document.getElementById("cadastrar_contrato").value = "CADASTRANDO...";
                             $('#cadastrar_contrato').attr('disabled', true);
                             //document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
