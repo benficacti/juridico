@@ -59,7 +59,6 @@ class Insert {
             $vencimentoContrato = $contrato->get_vencimentoContrato();
             $possuiParcela = $contrato->get_possuiParcela();
             $empresaContrato = $contrato->get_empresaContrato();
-            $vencimentoContrato = $contrato->get_vencimentoContrato();
             $idLogin = $_SESSION['login'];
 
             /*
@@ -124,12 +123,13 @@ class Insert {
 
 
             if ($insContS->execute()) {
-                $id = Search::BuscaContrato($contratanteContrato);
+                $id = Search::BuscaUltimoId($idLogin);
+
                 $_SESSION['contrato'] = $id;
                 echo '00;';
             }
-            //   }
-            //  }
+//   }
+//  }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         } catch (Exception $exc) {
@@ -202,8 +202,8 @@ class Insert {
                     foreach ($ssql->fetchAll(PDO::FETCH_OBJ) as $dados) {
                         $idUsuario = $dados->ID_USUARIO;
 
-                        if (Update::desativarRec($idUsuario)){
-                            return  Insert::gerarToken($idUsuario, $token);
+                        if (Update::desativarRec($idUsuario)) {
+                            return Insert::gerarToken($idUsuario, $token);
                         }
                     }
                 } else {
@@ -215,7 +215,6 @@ class Insert {
                     $inss->bindParam(":ID_STATUS_ALTERAR", $idStatusAlterar);
                     if ($inss->execute()) {
                         return '00';
-                        
                     }
                 }
             }
@@ -224,5 +223,4 @@ class Insert {
         }
     }
 
-    
 }

@@ -42,7 +42,7 @@ class Search {
     }
 
     public function loginAuth($login, $senha) {
-        
+
         try {
 
 
@@ -225,6 +225,23 @@ class Search {
                     }
                 }
             }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function BuscaUltimoId($idLogin) {
+
+        try {
+            $sql = 'SELECT ID_CONTRATO FROM CONTRATO WHERE ID_LOGIN_CONTRATO = "' . $idLogin . '" ORDER BY ID_CONTRATO DESC LIMIT 1 ';
+            $p_sqll = Conexao::getInstance()->prepare($sql);
+            $p_sqll->execute();
+            $count = $p_sqll->rowCount();
+            if ($count >= 1) {
+                foreach ($p_sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                    return $dados->ID_CONTRATO;
+                }
+            }          
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -927,7 +944,7 @@ class Search {
 
     public function buscaEmailUsuario($email) {
         try {
-             $random = substr(str_shuffle(str_repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 5)), 0, 15);
+            $random = substr(str_shuffle(str_repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 5)), 0, 15);
             $sql = 'SELECT * FROM USUARIO WHERE EMAIL_USUARIO = "' . $email . '"';
             $sqll = Conexao::getInstance()->prepare($sql);
             if ($sqll->execute()) {
@@ -936,12 +953,12 @@ class Search {
                     foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
                         $idUsuario = $dados->ID_USUARIO;
                         $token1 = $dados->EMAIL_USUARIO;
-                        $token = sha1(rand(1000,999999) . $random);
-                        
-                       $tokenCadastrado = Insert::gerarToken($idUsuario, $token);
-                       if ($tokenCadastrado == '00') {
-                           return $token;
-                       }
+                        $token = sha1(rand(1000, 999999) . $random);
+
+                        $tokenCadastrado = Insert::gerarToken($idUsuario, $token);
+                        if ($tokenCadastrado == '00') {
+                            return $token;
+                        }
                     }
                 }
             }
@@ -950,7 +967,6 @@ class Search {
         }
     }
 
-    
     public function buscaPrivateToken($token) {
         try {
             $sql = 'SELECT * FROM RECUPERAR_SENHA WHERE PRIVATE_TOKEN = "' . $token . '" AND ID_STATUS_ALTERAR = 1';
