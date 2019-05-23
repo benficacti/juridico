@@ -42,7 +42,7 @@ $mail2->html('<!DOCTYPE html>
         <link rel="stylesheet" href="css/css.css"/>
     </head>
     <body>
-       <a href="http://127.0.0.1/GitHubBB/juridico/dashboard/contra_senha.php?id=' . $token . ' ">reset</a>      
+       <a href="http://192.168.0.185:8080/juridico/dashboard/contra_senha.php?id=' . $token . ' ">reset</a>      
     </body>
 </html>');
 if ($mail2->Send("RECOUVER")) {

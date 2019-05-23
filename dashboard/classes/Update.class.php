@@ -573,7 +573,6 @@ class Update {
 
     public function updatelogin($nova_senha, $token) {
         $idUsuario = Search::buscaPrivateToken($token);
-        echo $token.'ID';
         try {          
             $upd = 'UPDATE `LOGIN` SET `SENHA_LOGIN` = "' . $nova_senha . '"'
                     . 'WHERE ID_USUARIO_LOGIN = ' . $idUsuario;
