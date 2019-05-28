@@ -241,7 +241,17 @@ class Search {
                 foreach ($p_sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
                     return $dados->ID_CONTRATO;
                 }
-            }          
+            } else {
+                $sql = 'SELECT ID_CONTRATO FROM CONTRATO';
+                $p_sqll = Conexao::getInstance()->prepare($sql);
+                $p_sqll->execute();
+                $count = $p_sqll->rowCount();
+                if ($count >= 1) {
+                    foreach ($p_sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_CONTRATO;
+                    }
+                }
+            }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -538,6 +548,7 @@ class Search {
                         $descGarantia = $dados->DESC_GARANTIA;
                         $descObservacao = $dados->DESC_OBSER_EXIGEN;
                         $possui_parcelas = $dados->ID_POSSUI_PARCELA_CONTRATO;
+                        $url_img = $dados->URL_IMAGEM_CONTRATO;
                         echo ' 
                 <div class="line-finally-contract">
                     <div class="form-contract-fim">
@@ -687,8 +698,26 @@ class Search {
                             OBSERVAÇÃO:
                             <span>' . $descObservacao . '</span>
                         </label>
-                    </div>
-                </div>';
+                    </div>                 
+                </div>
+                
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            ANEXO:';
+                            
+                        if (strlen($url_img)>0) {
+
+                        echo '<span> <a href="view_anexo.php?a=' . $url_img . '&d=1"><img src = "img/lupa.png" class = "img-icon-list" alt = "contrato-list"></a></span>';
+                         }else{
+                             echo' NÃO EXISTE ANEXO!';
+                         }
+                            
+                                
+                        '</label>
+                    </div>                 
+                </div>
+                    ';
                     }
                 }
             }

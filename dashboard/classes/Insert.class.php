@@ -127,6 +127,8 @@ class Insert {
 
                 $_SESSION['contrato'] = $id;
                 echo '00;';
+            }else{
+                echo'Não cadastrou';
             }
 //   }
 //  }

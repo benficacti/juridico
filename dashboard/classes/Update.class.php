@@ -61,7 +61,7 @@ class Update {
 
     public function AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao) {
         echo $numero;
-        
+
         $idObjeto = Search::BuscaObjeto($idContrato);
         $idGarantia = Search::BuscaGarantia($idContrato);
         $idTipoContrato = Search::BuscaTipoContrato($idContrato);
@@ -92,33 +92,33 @@ class Update {
             var_dump($e->getMessage());
             echo 'Falha alterar contrato!';
         }
-/*
-        try {
-            $sql = 'UPDATE `objeto` SET `DESC_OBJETO`= "' . $descObjeto . '" '
-                    . ' WHERE ID_OBJETO = "' . $idObjeto . '" ';
-            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
-            $sqll = Conexao::getInstance()->prepare($sql);
-            if ($sqll->execute()) {
-                // echo ' Objeto Alterado';
-            }
-        } catch (PDOException $e) {
-            var_dump($e->getMessage());
-            echo 'Falha alterar objeto!';
-        }
+        /*
+          try {
+          $sql = 'UPDATE `objeto` SET `DESC_OBJETO`= "' . $descObjeto . '" '
+          . ' WHERE ID_OBJETO = "' . $idObjeto . '" ';
+          // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+          $sqll = Conexao::getInstance()->prepare($sql);
+          if ($sqll->execute()) {
+          // echo ' Objeto Alterado';
+          }
+          } catch (PDOException $e) {
+          var_dump($e->getMessage());
+          echo 'Falha alterar objeto!';
+          }
 
-        try {
-            $sql = 'UPDATE `garantia` SET `DESC_GARANTIA`= "' . $descGarantia . '" '
-                    . ' WHERE ID_GARANTIA = "' . $idGarantia . '" ';
-            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
-            $sqll = Conexao::getInstance()->prepare($sql);
-            if ($sqll->execute()) {
-                // echo ' Garantia Alterado';
-            }
-        } catch (PDOException $e) {
-            var_dump($e->getMessage());
-            echo 'Falha ao alterar garantia!';
-        }
-*/
+          try {
+          $sql = 'UPDATE `garantia` SET `DESC_GARANTIA`= "' . $descGarantia . '" '
+          . ' WHERE ID_GARANTIA = "' . $idGarantia . '" ';
+          // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+          $sqll = Conexao::getInstance()->prepare($sql);
+          if ($sqll->execute()) {
+          // echo ' Garantia Alterado';
+          }
+          } catch (PDOException $e) {
+          var_dump($e->getMessage());
+          echo 'Falha ao alterar garantia!';
+          }
+         */
         try {
             $sql = 'UPDATE `contrato` SET `ID_TIPO_CONTRATO`= "' . $descTipoContrato . '" '
                     . ' WHERE ID_CONTRATO = "' . $idContrato . '" ';
@@ -131,22 +131,22 @@ class Update {
             var_dump($e->getMessage());
             echo 'Falha ao alterar tipo contrato!';
         }
-/*
-        try {
+        /*
+          try {
 
-            $sql = 'UPDATE `observacoes_exigencias` SET `DESC_OBSER_EXIGEN`= "' . $descObservacao . '" '
-                    . ' WHERE ID_OBSERVACOES_EXIGENCIAS = ' . $idObser_exigencia . ' ';
-            // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
-            $sqll = Conexao::getInstance()->prepare($sql);
-            if ($sqll->execute()) {
-                //  echo ' Observações Alterado1';
-            } else {
-                //   echo 'Não alterou observação!';
-            }
-        } catch (PDOException $e) {
-            var_dump($e->getMessage());
-            echo 'Falha ao alterar observações!';
-        }*/
+          $sql = 'UPDATE `observacoes_exigencias` SET `DESC_OBSER_EXIGEN`= "' . $descObservacao . '" '
+          . ' WHERE ID_OBSERVACOES_EXIGENCIAS = ' . $idObser_exigencia . ' ';
+          // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
+          $sqll = Conexao::getInstance()->prepare($sql);
+          if ($sqll->execute()) {
+          //  echo ' Observações Alterado1';
+          } else {
+          //   echo 'Não alterou observação!';
+          }
+          } catch (PDOException $e) {
+          var_dump($e->getMessage());
+          echo 'Falha ao alterar observações!';
+          } */
     }
 
     public function adicionarAnexo($nomeUrl) {
@@ -509,6 +509,22 @@ class Update {
                             </div>
                         </div>
                     </div>
+                    
+                     <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                Anexo:
+                            </label>
+                            <div class="span-group-img">
+                                <div class="figure-pencil">
+                             <!--       <img src="img/pencil.png" class="img-pencil" alt="pencil">-->
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" style="background-color:white; border:0px;">
+                                <span id="addAnex" class="title-upload">VER / EDITAR</span>
+                            </div>
+                        </div>
+                    </div>
                 ';
                     }
                 }
@@ -573,17 +589,16 @@ class Update {
 
     public function updatelogin($nova_senha, $token) {
         $idUsuario = Search::buscaPrivateToken($token);
-        try {          
+        try {
             $upd = 'UPDATE `LOGIN` SET `SENHA_LOGIN` = "' . $nova_senha . '"'
                     . 'WHERE ID_USUARIO_LOGIN = ' . $idUsuario;
             $updd = Conexao::getInstance()->prepare($upd);
             if ($updd->execute()) {
-                $updp = 'UPDATE `RECUPERAR_SENHA` SET `ID_STATUS_ALTERAR` = 2 WHERE ID_USUARIO = '.$idUsuario;
+                $updp = 'UPDATE `RECUPERAR_SENHA` SET `ID_STATUS_ALTERAR` = 2 WHERE ID_USUARIO = ' . $idUsuario;
                 $uppd = Conexao::getInstance()->prepare($updp);
-                if($uppd->execute()){
-                     return '00';
+                if ($uppd->execute()) {
+                    return '00';
                 }
-               
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -594,7 +609,7 @@ class Update {
         try {
             $upd = 'UPDATE `RECUPERAR_SENHA` SET `ID_STATUS_ALTERAR` = 2 WHERE ID_USUARIO = ' . $idUsuario;
             $updd = Conexao::getInstance()->prepare($upd);
-            if ($updd->execute()) {            
+            if ($updd->execute()) {
                 return true;
             }
         } catch (Exception $exc) {
@@ -602,4 +617,17 @@ class Update {
         }
     }
 
+    
+    public function excluirAnexo($anexo){
+        $null = null;
+        try {
+            $upd = 'UPDATE `CONTRATO` SET `URL_IMAGEM_CONTRATO` = "'.$null.'" WHERE URL_IMAGEM_CONTRATO ="'.$anexo.'" ';
+            $updd = Conexao::getInstance()->prepare($upd);
+            if ($updd->execute()) {
+                return '00';
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
 }

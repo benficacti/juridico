@@ -43,7 +43,7 @@ if (!isset($_SESSION['login'])) {
             </nav>
         </div>
         <!-- BOX CONTEUDO DA PAG -->
-        
+
         <div class="box-conteudo">
             <input type="hidden" id="idcontrato" value="<?php echo $_GET['c'] ?>">
             <article class="article-contract-fim" data-aos="zoom-in" >
@@ -108,44 +108,65 @@ if (!isset($_SESSION['login'])) {
 
                     });
                 }
-                
-                
-                function FuncObjeto(){
+
+                function FuncAnex() {
+                    var anexo = $("#idcontrato").val();
+                    $.ajax({
+                        url: 'api/api.php',
+                        method: 'post',
+                        data: {request: "addAnexo",
+                            anexo: anexo
+                        },
+                        success: function (data) {
+
+                            if (data === "01") {
+                                window.location.href = "update_anexo.php";
+
+                            }
+
+
+                        }
+
+                    });
+                }
+
+
+                function FuncObjeto() {
                     var objeto = $("#idcontrato").val();
                     $.ajax({
                         url: 'api/api.php',
                         method: 'post',
-                        data:{request: "addObjeto",
+                        data: {request: "addObjeto",
                             objeto: objeto
-                            
+
                         },
-                        success: function(data){
+                        success: function (data) {
                             if (data === "01") {
                                 window.location.href = "update_objeto.php";
                             }
                         }
                     });
                 }
-                
-                
-                function FuncObser(){
+
+
+                function FuncObser() {
                     var addObs = $("#idcontrato").val();
                     $.ajax({
-                        url:'api/api.php',
-                        method:'post',
-                        data:{request:'addObservacao',
+                        url: 'api/api.php',
+                        method: 'post',
+                        data: {request: 'addObservacao',
                             addObs: addObs
-                            
+
                         },
-                        success: function(data){
+                        success: function (data) {
                             if (data === "01") {
-                               window.location.href = "update_obs.php";
+                                window.location.href = "update_obs.php";
                             }
                         }
                     });
                 }
-                
-                
+
+
                 function callApi2(input) {
 
                     $("#tipocontrato").attr('disabled', false);
@@ -296,13 +317,17 @@ if (!isset($_SESSION['login'])) {
                             $("#addGarantia").click(function () {
                                 FuncGarantia('idcontrato');
                             });
-                            
-                            $("#addObjeto").click(function (){
+
+                            $("#addObjeto").click(function () {
                                 FuncObjeto('addObjeto');
                             });
-                            
-                            $("#addObs").click(function (){
+
+                            $("#addObs").click(function () {
                                 FuncObser('addObs');
+                            });
+
+                            $("#addAnex").click(function () {
+                                FuncAnex('addAnex');
                             });
                         }
                     });

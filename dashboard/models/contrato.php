@@ -34,11 +34,11 @@ private $_idFinalizacaoContrato;
 private $_idTipoContrato;
 private $_idStatusGarantiaContrato;
 private $_idObservacoesExigenciasContrato;
-private $_possuiParcela;
+private $_urlImagemContrato;
 private $_empresaContrato;
+private $_possuiParcela;
 
-
-function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, $_objetoContrato, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, $_idGarantiaContrato, $_idAditamentoContrato, $_idLoginContrato, $_idFinalizacaoContrato, $_idTipoContrato, $_idStatusGarantiaContrato, $_idObservacoesExigenciasContrato, $_possuiParcela, $_empresaContrato) {
+function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, $_objetoContrato, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, $_idGarantiaContrato, $_idAditamentoContrato, $_idLoginContrato, $_idFinalizacaoContrato, $_idTipoContrato, $_idStatusGarantiaContrato, $_idObservacoesExigenciasContrato, $_urlImagemContrato, $_empresaContrato, $_possuiParcela) {
     $this->_numeroContrato = $_numeroContrato;
     $this->_contratanteContrato = $_contratanteContrato;
     $this->_contratadoContrato = $_contratadoContrato;
@@ -60,9 +60,11 @@ function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContra
     $this->_idTipoContrato = $_idTipoContrato;
     $this->_idStatusGarantiaContrato = $_idStatusGarantiaContrato;
     $this->_idObservacoesExigenciasContrato = $_idObservacoesExigenciasContrato;
-    $this->_possuiParcela = $_possuiParcela;
+    $this->_urlImagemContrato = $_urlImagemContrato;
     $this->_empresaContrato = $_empresaContrato;
+    $this->_possuiParcela = $_possuiParcela;
 }
+
 function get_numeroContrato() {
     return $this->_numeroContrato;
 }
@@ -147,12 +149,16 @@ function get_idObservacoesExigenciasContrato() {
     return $this->_idObservacoesExigenciasContrato;
 }
 
-function get_possuiParcela() {
-    return $this->_possuiParcela;
+function get_urlImagemContrato() {
+    return $this->_urlImagemContrato;
 }
 
 function get_empresaContrato() {
     return $this->_empresaContrato;
+}
+
+function get_possuiParcela() {
+    return $this->_possuiParcela;
 }
 
 function set_numeroContrato($_numeroContrato) {
@@ -239,13 +245,18 @@ function set_idObservacoesExigenciasContrato($_idObservacoesExigenciasContrato) 
     $this->_idObservacoesExigenciasContrato = $_idObservacoesExigenciasContrato;
 }
 
-function set_possuiParcela($_possuiParcela) {
-    $this->_possuiParcela = $_possuiParcela;
+function set_urlImagemContrato($_urlImagemContrato) {
+    $this->_urlImagemContrato = $_urlImagemContrato;
 }
 
 function set_empresaContrato($_empresaContrato) {
     $this->_empresaContrato = $_empresaContrato;
 }
+
+function set_possuiParcela($_possuiParcela) {
+    $this->_possuiParcela = $_possuiParcela;
+}
+
 
 
 }

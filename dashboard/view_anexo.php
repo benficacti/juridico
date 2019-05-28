@@ -19,6 +19,22 @@ if (!isset($_SESSION['login'])) {
         <script type="text/javascript" src="js/jquery-1.6.4.js"></script>        
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
         <script src="js/jquery.min.js"></script>
+        
+        <style>
+            .botao-anexo{
+                text-transform: uppercase;
+                border-bottom-left-radius: 9px;
+                border-bottom-right-radius: 9px;
+                border-top-left-radius: 9px;
+                border-top-right-radius: 9px;
+                height: 35px;
+                width: 150px;
+                text-indent: 0;
+                font-size: 14px;
+                font-family: 'Arial';
+                background-color: ghostwhite;               
+            }
+        </style>
     </head>
     <body>
         <!-- Conteúdo -->
@@ -45,11 +61,13 @@ if (!isset($_SESSION['login'])) {
 
         <div class="box-conteudo">
             <article class="article-contract-anexo" data-aos="zoom-in" >
-                <header class="header-contract-anexo">
+                <header class="header-contract-anexo">                  
+                    <button class="botao-anexo" id="excluir">excluir</button>
+                    <input type="hidden" id="anex" value="<?php echo $_GET['a']; ?>" />
                     <?php
                     switch ($_GET['d']) {
                         case 1:
-                            echo ' <label class="title-contract-anexo"><a href="meus_contratos.php">Voltar ao Meus contratos</a></label>';
+                            echo '<label class="title-contract-anexo"><a href="meus_contratos.php">Voltar ao Meus contratos</a></label>';
                             break;
                         case 2:
                             echo'<label class="title-contract-anexo"><a href="painel.php">Voltar ao Painel</a></label>';
@@ -69,6 +87,35 @@ if (!isset($_SESSION['login'])) {
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();
+        </script>
+
+        <script>
+            $("#excluir").click(function () {
+                callApi();
+            });
+
+
+            function callApi() {
+                var anexo = $("#anex").val();
+
+                $.ajax({
+
+                    url: 'api/api.php',
+                    method: 'post',
+                    data: {request: 'excluir_anexo',
+                        anexo: anexo
+                    },
+                    success:function(data){
+                        if (data === '00') {
+                            alert('Anexo excluido com sucesso!');
+                            window.location.href='meus_contratos.php';
+                            
+                        }
+                    }
+                    
+
+                });
+            }
         </script>
 
     </body>

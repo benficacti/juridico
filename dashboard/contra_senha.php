@@ -118,7 +118,7 @@ $contraSenha = filter_input(INPUT_GET, 'id');
                         },
                         success: function (data)
                         {
-
+                            
                             alert("Senha alterada com sucesso!");
                             if (data === "00") {
                                 window.location.href = "login.php";

@@ -559,7 +559,7 @@ if (!isset($_SESSION['login'])) {
                                 },
                                 success: function (data)
                                 {
-                                    // alert(data);
+                                     alert(data);
                                     var res = data.split(";");
                                     if (typeof res[0] !== "undefined" && res[0] == "00") {
                                         location.href = "cadastro_garantia.php";

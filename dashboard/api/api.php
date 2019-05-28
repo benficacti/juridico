@@ -21,10 +21,10 @@ if ($request == "cadastro_contrato") {
     $_valorContrato = (null !== (filter_input(INPUT_POST, 'valor_contrato'))) ? filter_input(INPUT_POST, 'valor_contrato') : null;
     $_vencimentoContrato = formateDate((null !== (filter_input(INPUT_POST, 'vencimento'))) ? filter_input(INPUT_POST, 'vencimento') : null);
     $_idTipoContrato = (null !== (filter_input(INPUT_POST, 'tipo_contrato'))) ? filter_input(INPUT_POST, 'tipo_contrato') : null;
-    $_possui_parcela = (null !== (filter_input(INPUT_POST, 'possui_parcela'))) ? filter_input(INPUT_POST, 'possui_parcela') : null;
-    $_empresa_contrato = (null !== (filter_input(INPUT_POST, 'empresa_contrato'))) ? filter_input(INPUT_POST, 'empresa_contrato') : null;
+    $_possuiParcela = (null !== (filter_input(INPUT_POST, 'possui_parcela'))) ? filter_input(INPUT_POST, 'possui_parcela') : null;
+    $_empresaContrato = (null !== (filter_input(INPUT_POST, 'empresa_contrato'))) ? filter_input(INPUT_POST, 'empresa_contrato') : null;
 
-    if ($_possui_parcela == 1) {
+    if ($_possuiParcela == 1) {
         $_quantidadeParcelasContrato = (null !== (filter_input(INPUT_POST, 'parcela'))) ? filter_input(INPUT_POST, 'parcela') : null;
         $_valorDasParcelasContrato = (null !== (filter_input(INPUT_POST, 'valor_parcela'))) ? filter_input(INPUT_POST, 'valor_parcela') : null;
         $_dataPagamentoDasParcelasContrato = formateDate((null !== (filter_input(INPUT_POST, 'data_pag_parcela'))) ? filter_input(INPUT_POST, 'data_pag_parcela') : null);
@@ -37,8 +37,15 @@ if ($request == "cadastro_contrato") {
         $_valorTotalPagoContrato = null;
         $_quantidadeParcelasPagasContrato = null;
     }
-    if ($_numeroContrato !== null) {
-        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, null, null, null, $_idTipoContrato, null, 1, $_possui_parcela, $_empresa_contrato);
+
+
+    if ($_numeroContrato !=="") {
+        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, null, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela);
+        Insert::CadastraContrato($contrato);
+        echo $_SESSION['contrato'];
+    } else {
+        $_numeroContrato = null;
+        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, null, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela);
         Insert::CadastraContrato($contrato);
         echo $_SESSION['contrato'];
     }
@@ -155,7 +162,7 @@ if ($request == 'update_contrato') {
     $descObjeto = (null !== (filter_input(INPUT_POST, 'descObjeto'))) ? filter_input(INPUT_POST, 'descObjeto') : 0;
     $descObservacao = (null !== (filter_input(INPUT_POST, 'descObservacao'))) ? filter_input(INPUT_POST, 'descObservacao') : 0;
     sleep(1);
-    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia);//, $descGarantia, $descObjeto, $descObservacao);
+    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia); //, $descGarantia, $descObjeto, $descObservacao);
 }
 
 function formateDate($i) {
@@ -180,6 +187,16 @@ if ($request == 'addObjeto') {
     $_SESSION['contrato'] = $addObjeto;
     if (!empty($addObjeto)) {
         if (isset($addObjeto)) {
+            echo '01';
+        }
+    }
+}
+
+if ($request == 'addAnexo') {
+    $addAnexo = (null !== (filter_input(INPUT_POST, 'anexo'))) ? filter_input(INPUT_POST, 'anexo') : 0;
+    $_SESSION['contrato'] = $addAnexo;
+    if (!empty($addAnexo)) {
+        if (isset($addAnexo)) {
             echo '01';
         }
     }
@@ -220,7 +237,7 @@ if ($request == 'addObservacao') {
 
 if ($request == 'enviar') {
     $email = (null !== (filter_input(INPUT_POST, 'email'))) ? filter_input(INPUT_POST, 'email') : 0;
-    
+
     echo $token = Search::buscaEmailUsuario($email);
 }
 
@@ -235,8 +252,14 @@ if ($request == 'reset_senha') {
 }
 
 if ($request == 'contra_senha') {
-    $nova_senha = (null !==(filter_input(INPUT_POST, 'nova_senha'))) ? filter_input(INPUT_POST, 'nova_senha') : 0; 
-    $token = (null !==(filter_input(INPUT_POST, 'token'))) ? filter_input(INPUT_POST, 'token') : 0;
-    
-  echo  Update::updatelogin($nova_senha, $token);
+    $nova_senha = (null !== (filter_input(INPUT_POST, 'nova_senha'))) ? filter_input(INPUT_POST, 'nova_senha') : 0;
+    $token = (null !== (filter_input(INPUT_POST, 'token'))) ? filter_input(INPUT_POST, 'token') : 0;
+
+    echo Update::updatelogin($nova_senha, $token);
+}
+
+if ($request == 'excluir_anexo') {
+    $anexo = (null !== (filter_input(INPUT_POST, 'anexo'))) ? filter_input(INPUT_POST, 'anexo') : 0;
+
+    echo Update::excluirAnexo($anexo);
 }
