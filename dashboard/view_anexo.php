@@ -32,6 +32,7 @@ if (!isset($_SESSION['login'])) {
                 text-indent: 0;
                 font-size: 14px;
                 font-family: 'Arial';
+                font-weight: bold;
                 background-color: ghostwhite;               
             }
         </style>
