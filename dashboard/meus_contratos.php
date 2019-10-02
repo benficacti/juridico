@@ -72,7 +72,7 @@ if (!isset($_SESSION['login'])) {
                                 <option value="2">Vencido</option>
                             </select>
                         </div>
-                        <div class="div-visu-contract"> Visualizar / Editar</div>
+                        <div class="div-visu-contract"> Visualizar / Editar / Aditar</div>
                     </div>
                     <div class="table-list" id="result" >
                         <!--CONTEUDO-->

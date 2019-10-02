@@ -59,6 +59,7 @@ class Insert {
             $vencimentoContrato = $contrato->get_vencimentoContrato();
             $possuiParcela = $contrato->get_possuiParcela();
             $empresaContrato = $contrato->get_empresaContrato();
+            $idContrado = $contrato->get_idAditamentoContrato();
             $idLogin = $_SESSION['login'];
 
             /*
@@ -123,11 +124,49 @@ class Insert {
 
 
             if ($insContS->execute()) {
-                $id = Search::BuscaUltimoId($idLogin);
 
+                $query = 'SELECT ID_CONTRATO FROM contrato WHERE ID_LOGIN_CONTRATO = "' . $idLogin . '" ORDER by `ID_CONTRATO` desc LIMIT 1';
+                $querys = Conexao::getInstance()->prepare($query);
+                $querys->execute();
+                $linh = $querys->rowCount();
+                if ($linh > 0) {
+
+                    foreach ($querys->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $idContSub = $dados->ID_CONTRATO;
+
+                        $inserAdi = "INSERT INTO `aditamentos`(`ID_CONTRATO_ADITADO_ADITAMENTO`, `ID_CONTRATO_SUBMETIDO`, `DATA_ADITAMENTO`)"
+                                . "VALUES ("
+                                . ":ID_CONTRATO_ADITADO_ADITAMENTO, :ID_CONTRATO_SUBMETIDO, CURTIME())";
+                        $inserAdit = Conexao::getInstance()->prepare($inserAdi);
+                        $inserAdit->bindParam(":ID_CONTRATO_ADITADO_ADITAMENTO", $idContrado);
+                        $inserAdit->bindParam(":ID_CONTRATO_SUBMETIDO", $idContSub);
+
+                        if ($inserAdit->execute()) {
+                            $cons = 'SELECT ID_ADITAMENTO FROM aditamentos WHERE ID_CONTRATO_ADITADO_ADITAMENTO = "' . $idContrado . '" and ID_CONTRATO_SUBMETIDO ='.$idContSub;
+                            $conss = Conexao::getInstance()->prepare($cons);
+                            $conss->execute();
+                            $row = $conss->rowCount();
+                            if ($row > 0){
+                                foreach ($conss->fetchAll(PDO::FETCH_OBJ) as $dados){
+                                    $idAditamento = $dados->ID_ADITAMENTO;
+                                    
+                                    
+                                    Update::insert_id_no_contrato($idAditamento, $idContrado);
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+
+
+
+
+
+                $id = Search::BuscaUltimoId($idLogin);
                 $_SESSION['contrato'] = $id;
                 echo '00;';
-            }else{
+            } else {
                 echo'Não cadastrou';
             }
 //   }
@@ -222,6 +261,26 @@ class Insert {
             }
         } catch (Exception $exc) {
             echo $exc->getMessage();
+        }
+    }
+
+    public static function Aditamento_contrato($aditamento) {
+
+
+        try {
+
+            $ins = "INSERT INTO `recuperar_senha`(`ID_USUARIO`, `PRIVATE_TOKEN`, `ID_STATUS_ALTERAR`)"
+                    . "VALUES(:ID_USUARIO, :PRIVATE_TOKEN, :ID_STATUS_ALTERAR)";
+            $inss = Conexao::getInstance()->prepare($ins);
+            $inss->bindParam(":ID_USUARIO", $idUsuario);
+            $inss->bindParam(":PRIVATE_TOKEN", $token);
+            $inss->bindParam(":ID_STATUS_ALTERAR", $idStatusAlterar);
+            if ($inss->execute()) {
+                return '00';
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao realizar aditamento no contrato';
         }
     }
 

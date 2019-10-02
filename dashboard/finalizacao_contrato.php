@@ -53,7 +53,6 @@ if (!isset($_SESSION['login'])) {
 
                 </div>
             </article>
-
         </div>
 
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

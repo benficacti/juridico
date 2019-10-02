@@ -4,7 +4,9 @@ if (!isset($_SESSION['login'])) {
     header('Location: login.php');
 } else {
     $_SESSION['contrato'] = 0;
+    
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
@@ -49,123 +51,38 @@ if (!isset($_SESSION['login'])) {
 
         <div class="box-conteudo">
             <article class="article-contrato" data-aos="zoom-in" id="result">
-
                 <header class="header-article-contrato">
-                    <label class="title-contrato">CADASTRO CONTRATO</label>
+                    <label class="title-contrato">SUBMISSÃO DE CONTRATO</label>
 
                 </header>
-                <span style="margin-left: 2vw;">
-                    <?php
-                    include './persistencia/Conexao.php';
-                    include './classes/Search.class.php';
-                    $id_contr = filter_input(INPUT_GET, 'id_contr');
-
-                    if ($id_contr > 1) {
-                        Search::Contra_a_aditar($id_contr);
-                    }
-                    ?>
-                    <input type="hidden" value="<?php echo $id_contr;?>" id="id_contrs"/>
-                </span>
-                <div class="line-contract" style="height:2vh;">
-                    <select id="empresa_contrato">
-                        <option value="0" selected>SELECIONE A EMPRESA</option>
-                        <option value="1">BB TRANSPORTE E TURISMO LTDA</option>
-                        <option value="2">RALIP TRANSPORTES RODOVIARIOS LTDA</option>
-                    </select>
-                </div>
                 <div class="line-contract">
                     <div class="form-contract">
-                        <label class="title-option-contract">Nº CONTRATO:</label>
-                        <div class="input-group-contract input-group-login-active"  id="input-group-contract-numero">
-                            <input type="text" class="input-contract" id="numero_contrato" placeholder="Nº Contrato" autocomplete="nope" >     
+                        <div class="input-group-contract-submeter">
+                            <input type="text" list="list_contrato" class="input-contract" id="contrato_padrao" placeholder="CONTRATO PARA SUBMISSÃO" autocomplete="nope" >  
+                            <datalist id="list_contrato">
+                                <?php
+                                include './persistencia/Conexao.php';
+                                include './classes/Search.class.php';
+                                Search::ListarContratos();
+                                ?>
+                            </datalist>
                         </div>
                     </div>
                     <div class="form-contract">
-                        <input type="hidden" id="tipo_contrato">
-                        <label class="title-option-contract"> TIPO CONTRATO:</label>
-                        <label class="input-radio-contract mleft2" id="input-group-contract-tipocontrato">
-                            <input type="radio" id="rd-publico" name="radio-group">
-                            <label for="rd-publico" class="rd-label-contract">Público</label>
-                        </label>
-                        <label class="input-radio-contract" id="input-group-contract-tipocontratoprivado">
-                            <input type="radio" id="rd-privado" name="radio-group">
-                            <label for="rd-privado" class="rd-label-contract">Privado</label>
-
-                        </label>
-
-                    </div>
-                </div>
-                <div class="line-contract">
-                    <div class="form-contract">
-                        <label class="title-option-contract">CONTRATANTE:</label>
-                        <div class="input-group-contract group-contratante"  id="input-group-contract-contratante">
-                            <input type="text" class="input-contract" id="nome_contratante" placeholder="Nome Contratante" autocomplete="nope" autocomplete="off"  >     
-                        </div>
-                    </div>
-                    <div class="form-contract">
-                        <label class="title-option-contract">CONTRATADA:</label>
-                        <div class="input-group-contract group-contratante pright"  id="input-group-contract-contratada">
-                            <input type="text" class="input-contract" id="nome_contratada" placeholder="Nome Contratada" autocomplete="nope" autocomplete="off" >     
-                        </div>
-                    </div>
-                </div>
-                <div class="line-contract">
-                    <div class="form-contract">
-                        <label class="title-option-contract">CONCORRÊNCIA:</label>
-                        <div class="input-group-contract group-concorrencia"  id="input-group-contract-concorrencia">
-                            <input type="text" class="input-contract" id="nome_concorrencia" placeholder="Nome Concorrência" autocomplete="nope"autocomplete="off"  >     
-                        </div>
-                    </div>
-                    <div class="form-contract">
-                        <label class="title-option-contract">DATA VIGÊNCIA:</label>
-                        <div class="input-group-contract group-date" style=""  id="input-group-contract-inivigencia">
-                            <input type="text" class="input-contract input-date" id="fim_vigencia" placeholder="00/00/0000" >     
-                        </div>
-                        <label class="title-option-contract " style="margin-left:0vw !important;margin-right:1vw; float:right;">á</label>
-                        <div class="input-group-contract group-date pright" id="input-group-contract-fimvigencia">
-                            <input type="text" class="input-contract input-date" id="inicio_vigencia" placeholder="00/00/0000"  >     
+                        <div class="input-group-contract-submeter">
+                            <input type="text" list="list_contrato" class="input-contract" id="contrato_padrao" placeholder="CONTRATO PADRÃO" autocomplete="nope" >  
+                            <datalist id="list_contrato">
+                                <?php
+                                Search::ListarContratos();
+                                ?>
+                            </datalist>    
                         </div>
                     </div>
                 </div>
 
-                <div class="line-contract">
-                    <div class="form-contract">
-                        <label class="title-option-contract">VALOR CONTRATO:</label>
-                        <div class="input-group-contract group-valor-contract"  id="input-group-contract-valor">
-                            <input type="text" class="input-contract input-valor" id="valor_contrato" placeholder="Valor Contrato" autocomplete="off"  >     
-                        </div>
-                    </div>
-                    <div class="form-contract">
-                        <input type="hidden" id="tipo_contrato">
-                        <label class="title-option-contract"> POSSUI PARCELAS:</label>
-                        <label class="input-radio-contract mleft3" id="input-group-contract-possuiparc">
-                            <input type="radio" id="rd-sim" name="radio-parc">
-                            <label for="rd-sim" class="rd-label-contract">SIM</label>
-                        </label>
-                        <label class="input-radio-contract" id="input-group-contract-possuiparcnao">
-                            <input type="radio" id="rd-nao" name="radio-parc">
-                            <label for="rd-nao" class="rd-label-contract">NÃO</label>
-
-                        </label>
-
-                    </div>
-                </div>
-                <input type="hidden" id="possui_parcela" value="0">
-                <div id="div-parcelas">
-
-                </div>
-                <div class="line-contract division" >
-                    <div class="form-contract" id="left-title">
-                        <label class="title-option-contract" >VENCIMENTO:</label>
-                        <!--<div class="pright">*</div>-->
-                        <div class="input-group-contract group-vencimento"  id="input-group-contract-vencimento" >
-                            <input type="text" class="input-contract input-vencimento" id="vencimento" placeholder="00/00/0000" autocomplete="nope"/>
-                        </div>
-                    </div>
-                </div>
                 <div class="line-contract">
                     <div class="btn-login">
-                        <input type="submit" value="PROSSEGUIR" class="bt-login" id="cadastrar_contrato">
+                        <input type="submit" value="SUBMETER" class="bt-login" id="cadastrar_contrato">
                     </div>
                 </div>
 
@@ -390,8 +307,7 @@ if (!isset($_SESSION['login'])) {
                     var tipo_contrato = $("#tipo_contrato").val();
                     var possui_parcela = $("#possui_parcela").val();
                     var empresa_contrato = $("#empresa_contrato").val();
-                    var id_contr_aditado = $("#id_contrs").val();
-                    
+
                     /* //NUMERO CONTRATO
                      if (num_contrato.length <= 0) {
                      $("#input-group-contract-numero").addClass("input-group-contract-error");
@@ -519,8 +435,7 @@ if (!isset($_SESSION['login'])) {
                                         vencimento: vencimento,
                                         parcelas_finalizadas: parcelas_finalizadas,
                                         possui_parcela: possui_parcela,
-                                        empresa_contrato: empresa_contrato,
-                                        id_contr_aditado: id_contr_aditado
+                                        empresa_contrato: empresa_contrato
                                     },
                                     success: function (data)
                                     {
@@ -570,8 +485,7 @@ if (!isset($_SESSION['login'])) {
                                     vencimento: vencimento,
                                     tipo_contrato: tipo_contrato,
                                     possui_parcela: possui_parcela,
-                                    empresa_contrato: empresa_contrato,
-                                    id_contr_aditado: id_contr_aditado
+                                    empresa_contrato: empresa_contrato
                                 },
                                 success: function (data)
                                 {

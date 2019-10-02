@@ -536,6 +536,19 @@ class Update {
 
     public function updateAdicionaGarantia($garantia, $idcontrato) {
         try {
+           
+            $login = $_SESSION['login'];
+
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                $ip = $_SERVER['HTTP_CLIENT_IP'];
+            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            } else {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            }
+            $mac = NULL;
+
+            $tipo_log = 10;
 
             $sql = 'UPDATE `GARANTIA` SET `DESC_GARANTIA` = "' . $garantia . '"'
                     . 'WHERE ID_CONTRATO_GARANTIA = ' . $idcontrato;
@@ -546,7 +559,18 @@ class Update {
                 $upd = 'UPDATE `CONTRATO` SET `ID_STATUS_GARANTIA_CONTRATO` = 1 WHERE ID_CONTRATO =' . $idcontrato;
                 $updd = Conexao::getInstance()->prepare($upd);
                 if ($updd->execute()) {
-                    echo 'GARANTIA ADICIONADA COM SUCESSO!';
+
+                    $ins = "INSERT INTO `LOG`(`ID_TIPO_LOG`, `DATA_LOG`, `HORA_LOG`, `ID_LOGIN_LOG`, `IP_LOG`, `MAC_ADDRESS_LOG`, `ID_CONTRATO`)"
+                            . "VALUES(:ID_TIPO_LOG, CURDATE(), CURTIME(), :ID_LOGIN_LOG, :IP_LOG, :MAC_ADDRESS_LOG, :ID_CONTRATO)";
+                    $i_ins = Conexao::getInstance()->prepare($ins);
+                    $i_ins->bindParam(':ID_TIPO_LOG', $tipo_log);
+                    $i_ins->bindParam(':ID_LOGIN_LOG', $login);
+                    $i_ins->bindParam(':IP_LOG', $ip);
+                    $i_ins->bindParam(':MAC_ADDRESS_LOG', $mac);
+                    $i_ins->bindParam(':ID_CONTRATO', $idcontrato);
+                    if ($i_ins->execute()) {
+                        echo 'GARANTIA ADICIONADA COM SUCESSO!';
+                    }
                 }
             }
         } catch (PDOException $e) {
@@ -617,11 +641,10 @@ class Update {
         }
     }
 
-    
-    public function excluirAnexo($anexo){
+    public function excluirAnexo($anexo) {
         $null = null;
         try {
-            $upd = 'UPDATE `CONTRATO` SET `URL_IMAGEM_CONTRATO` = "'.$null.'" WHERE URL_IMAGEM_CONTRATO ="'.$anexo.'" ';
+            $upd = 'UPDATE `CONTRATO` SET `URL_IMAGEM_CONTRATO` = "' . $null . '" WHERE URL_IMAGEM_CONTRATO ="' . $anexo . '" ';
             $updd = Conexao::getInstance()->prepare($upd);
             if ($updd->execute()) {
                 return '00';
@@ -630,4 +653,19 @@ class Update {
             echo $ex->getMessage();
         }
     }
+
+    public static function insert_id_no_contrato($idAditamento, $idContrado) {
+        
+        
+         try {
+            $upd = 'UPDATE `CONTRATO` SET `ID_ADITAMENTO_CONTRATO` = "' . $idAditamento . '" WHERE ID_CONTRATO ="' . $idContrado . '" ';
+            $updd = Conexao::getInstance()->prepare($upd);
+            if ($updd->execute()) {
+                return '00';
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
 }

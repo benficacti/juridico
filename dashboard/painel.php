@@ -38,16 +38,16 @@ if (!isset($_SESSION['login'])) {
             <nav>
                 <div class="barra-lateral-nav">
                     <?php include('includes/menu.php'); ?>
-
-
+                    
+                    
                 </div>
             </nav>
         </div>
         <!-- BOX CONTEUDO DA PAG -->
-
+        
         <div class="box-conteudo">
             <article class="article-contract-fim" data-aos="zoom-in" >
-                
+
                 <div class="panels ">
                     <input type="text" class="pesquisar_painel" placeholder="PESQUISAR" id="busca" onkeyup="callApi();">
                     <div class="line-contract-panel"> 
@@ -75,6 +75,14 @@ if (!isset($_SESSION['login'])) {
 
                         <div class="info-contract-panel">
                             <div class="title-info-contract-panel">
+                                <label class="lbl-info-title-panel">
+                                    CONTRATADO
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
                                 <select id="vencimento_contrato" class="lbl-info-title-panel" onchange="callApi();">
                                     <option value="0">VENCIMENTO</option>
                                     <option value="1">VENCIDO</option>
@@ -94,7 +102,7 @@ if (!isset($_SESSION['login'])) {
 
                     </div>
 
-                    
+
 
                     <div id="result">
 
@@ -112,7 +120,7 @@ if (!isset($_SESSION['login'])) {
 
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
-                            AOS.init();
+                                    AOS.init();
         </script>
 
         <script  type="text/javascript">

@@ -1,5 +1,5 @@
 <?php
-
+include '../persistencia/Conexao.php';
 include '../models/contrato.php';
 include '../models/garantia.php';
 include '../models/objeto.php';
@@ -11,6 +11,7 @@ $request = (null !== (filter_input(INPUT_POST, 'request'))) ? filter_input(INPUT
 
 
 if ($request == "cadastro_contrato") {
+    
     sleep(1);
     $_numeroContrato = (null !== (filter_input(INPUT_POST, 'numero'))) ? filter_input(INPUT_POST, 'numero') : null;
     $_contratanteContrato = (null !== (filter_input(INPUT_POST, 'nome_contratante'))) ? filter_input(INPUT_POST, 'nome_contratante') : null;
@@ -23,7 +24,9 @@ if ($request == "cadastro_contrato") {
     $_idTipoContrato = (null !== (filter_input(INPUT_POST, 'tipo_contrato'))) ? filter_input(INPUT_POST, 'tipo_contrato') : null;
     $_possuiParcela = (null !== (filter_input(INPUT_POST, 'possui_parcela'))) ? filter_input(INPUT_POST, 'possui_parcela') : null;
     $_empresaContrato = (null !== (filter_input(INPUT_POST, 'empresa_contrato'))) ? filter_input(INPUT_POST, 'empresa_contrato') : null;
-
+    $_idAditamentoContrato = (null !== (filter_input(INPUT_POST, 'id_contr_aditado'))) ? filter_input(INPUT_POST, 'id_contr_aditado') : null;
+    
+    
     if ($_possuiParcela == 1) {
         $_quantidadeParcelasContrato = (null !== (filter_input(INPUT_POST, 'parcela'))) ? filter_input(INPUT_POST, 'parcela') : null;
         $_valorDasParcelasContrato = (null !== (filter_input(INPUT_POST, 'valor_parcela'))) ? filter_input(INPUT_POST, 'valor_parcela') : null;
@@ -38,14 +41,14 @@ if ($request == "cadastro_contrato") {
         $_quantidadeParcelasPagasContrato = null;
     }
 
-
+    
     if ($_numeroContrato !=="") {
-        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, null, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela);
+        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, $_idAditamentoContrato, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela);
         Insert::CadastraContrato($contrato);
         echo $_SESSION['contrato'];
     } else {
         $_numeroContrato = null;
-        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, null, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela);
+        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, $_idAditamentoContrato, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela);
         Insert::CadastraContrato($contrato);
         echo $_SESSION['contrato'];
     }
@@ -92,7 +95,6 @@ if ($request == 'adicionar_obs') {
 }
 
 if (($request == 'login') && ($request !== 0)) {
-    sleep(rand(1, 3));
     $login = (null !== (filter_input(INPUT_POST, 'login'))) ? filter_input(INPUT_POST, 'login') : 0;
     $senha = (null !== (filter_input(INPUT_POST, 'senha'))) ? filter_input(INPUT_POST, 'senha') : 0;
     echo Search::loginAuth($login, $senha); //00; = efetuado / 01; usuario incorreto /02; senha incorreta
@@ -262,4 +264,10 @@ if ($request == 'excluir_anexo') {
     $anexo = (null !== (filter_input(INPUT_POST, 'anexo'))) ? filter_input(INPUT_POST, 'anexo') : 0;
 
     echo Update::excluirAnexo($anexo);
+}
+
+if ($request == 'aditamento_contrato') {
+    $aditamento = (null !== (filter_input(INPUT_POST, 'aditamento'))) ? filter_input(INPUT_POST, 'aditamento') : 0;
+
+    echo Insert::Aditamento_contrato($aditamento);
 }

@@ -129,15 +129,38 @@ if (!isset($_SESSION['login'])) {
 
                     });
                 }
-
-
-                function FuncObjeto() {
-                    var objeto = $("#idcontrato").val();
+                
+                
+                
+                function FuncAnex() {
+                    var anexo = $("#idcontrato").val();
                     $.ajax({
                         url: 'api/api.php',
                         method: 'post',
-                        data: {request: "addObjeto",
-                            objeto: objeto
+                        data: {request: "addAnexo",
+                            anexo: anexo
+                        },
+                        success: function (data) {
+
+                            if (data === "01") {
+                                window.location.href = "update_anexo.php";
+
+                            }
+
+
+                        }
+
+                    });
+                }
+
+
+                function FuncAditar() {
+                    var aditamento = $("#idcontrato").val();
+                    $.ajax({
+                        url: 'api/api.php',
+                        method: 'post',
+                        data: {request: "aditamento_contrato",
+                            aditamento: aditamento
 
                         },
                         success: function (data) {
@@ -328,6 +351,10 @@ if (!isset($_SESSION['login'])) {
 
                             $("#addAnex").click(function () {
                                 FuncAnex('addAnex');
+                            });
+                            
+                            $("#aditar").click(function () {
+                               FuncAditar('aditar'); 
                             });
                         }
                     });

@@ -13,33 +13,40 @@
  */
 class aditamentos {
 
-    private $idAtualContratoAditamento;
+    private $idContratoAditadoAditamento;
+    private $idContratoSubmetido;
     private $dataAditamento;
-    private $numeroAditamento;
 
-   
-    function getIdAtualContratoAditamento() {
-        return $this->idAtualContratoAditamento;
+    function __construct($idContratoAditadoAditamento, $idContratoSubmetido, $dataAditamento) {
+        $this->idContratoAditadoAditamento = $idContratoAditadoAditamento;
+        $this->idContratoSubmetido = $idContratoSubmetido;
+        $this->dataAditamento = $dataAditamento;
+    }
+
+    
+    function getIdContratoAditadoAditamento() {
+        return $this->idContratoAditadoAditamento;
+    }
+
+    function getIdContratoSubmetido() {
+        return $this->idContratoSubmetido;
     }
 
     function getDataAditamento() {
         return $this->dataAditamento;
     }
 
-    function getNumeroAditamento() {
-        return $this->numeroAditamento;
+    function setIdContratoAditadoAditamento($idContratoAditadoAditamento) {
+        $this->idContratoAditadoAditamento = $idContratoAditadoAditamento;
     }
 
-    function setIdAtualContratoAditamento($idAtualContratoAditamento) {
-        $this->idAtualContratoAditamento = $idAtualContratoAditamento;
+    function setIdContratoSubmetido($idContratoSubmetido) {
+        $this->idContratoSubmetido = $idContratoSubmetido;
     }
 
     function setDataAditamento($dataAditamento) {
         $this->dataAditamento = $dataAditamento;
     }
 
-    function setNumeroAditamento($numeroAditamento) {
-        $this->numeroAditamento = $numeroAditamento;
-    }
 
 }
