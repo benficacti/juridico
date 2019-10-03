@@ -55,7 +55,6 @@ if (!isset($_SESSION['login'])) {
 
                         <div class="div-icon-contract"></div>
                         <div class="div-desc-contract">Descrição</div>
-                        
                         <input class="div-contrato-contract" type="number" id="nContrato"placeholder="Contrato" onkeyup="callApi();">
                         
                         <div class="div-data-contract">

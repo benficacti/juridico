@@ -43,6 +43,8 @@ class Insert {
 
         try {
 
+            $idAditamentoContrado = "";
+
             $numeroContrato = $contrato->get_numeroContrato();
             $idTipoContrato = $contrato->get_idTipoContrato(); // PUBLICO OU PRIVADO
             $contratanteContrato = $contrato->get_contratanteContrato();
@@ -59,8 +61,14 @@ class Insert {
             $vencimentoContrato = $contrato->get_vencimentoContrato();
             $possuiParcela = $contrato->get_possuiParcela();
             $empresaContrato = $contrato->get_empresaContrato();
-            $idContrado = $contrato->get_idAditamentoContrato();
+            $idAditamentoContrado = $contrato->get_idAditamentoContrato();
             $idLogin = $_SESSION['login'];
+
+            if ($idAditamentoContrado != "") {
+                $idAditamentoContrado = $contrato->get_idAditamentoContrato();
+            } else {
+                $idAditamentoContrado = NULL;
+            }
 
             /*
               $insGar = "INSERT INTO `GARANTIA`(`DESC_GARANTIA`,`NUMERO_CONTRATO_GARANTIA`)VALUES(:DESC_GARANTIA,:NUMERO_CONTRATO_GARANTIA)";
@@ -125,6 +133,8 @@ class Insert {
 
             if ($insContS->execute()) {
 
+                if(strlen($idAditamentoContrado) > 0){
+                
                 $query = 'SELECT ID_CONTRATO FROM contrato WHERE ID_LOGIN_CONTRATO = "' . $idLogin . '" ORDER by `ID_CONTRATO` desc LIMIT 1';
                 $querys = Conexao::getInstance()->prepare($query);
                 $querys->execute();
@@ -138,28 +148,27 @@ class Insert {
                                 . "VALUES ("
                                 . ":ID_CONTRATO_ADITADO_ADITAMENTO, :ID_CONTRATO_SUBMETIDO, CURTIME())";
                         $inserAdit = Conexao::getInstance()->prepare($inserAdi);
-                        $inserAdit->bindParam(":ID_CONTRATO_ADITADO_ADITAMENTO", $idContrado);
+                        $inserAdit->bindParam(":ID_CONTRATO_ADITADO_ADITAMENTO", $idAditamentoContrado);
                         $inserAdit->bindParam(":ID_CONTRATO_SUBMETIDO", $idContSub);
 
                         if ($inserAdit->execute()) {
-                            $cons = 'SELECT ID_ADITAMENTO FROM aditamentos WHERE ID_CONTRATO_ADITADO_ADITAMENTO = "' . $idContrado . '" and ID_CONTRATO_SUBMETIDO ='.$idContSub;
+                            $cons = 'SELECT ID_ADITAMENTO FROM aditamentos WHERE ID_CONTRATO_ADITADO_ADITAMENTO = "' . $idAditamentoContrado . '" and ID_CONTRATO_SUBMETIDO =' . $idContSub;
                             $conss = Conexao::getInstance()->prepare($cons);
                             $conss->execute();
                             $row = $conss->rowCount();
-                            if ($row > 0){
-                                foreach ($conss->fetchAll(PDO::FETCH_OBJ) as $dados){
+                            if ($row > 0) {
+                                foreach ($conss->fetchAll(PDO::FETCH_OBJ) as $dados) {
                                     $idAditamento = $dados->ID_ADITAMENTO;
-                                    
-                                    
-                                    Update::insert_id_no_contrato($idAditamento, $idContrado);
+
+
+                                    Update::insert_id_no_contrato($idAditamento, $idAditamentoContrado);
                                 }
                             }
-                            
                         }
                     }
                 }
 
-
+            }
 
 
 

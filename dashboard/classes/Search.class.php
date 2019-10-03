@@ -428,12 +428,20 @@ class Search {
              */
             $a = ($tipos == 0);
 
-            if (($tipos == 0)) {
+            
+            if(strlen($nContrato) < 1){
+                $sql = "SELECT * FROM CONTRATO "
+                        . " INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO"
+                        . " WHERE ID_LOGIN_CONTRATO = " . $_SESSION['login'];
+                $sqll = Conexao::getInstance()->prepare($sql);
+            }else{
                 $sql = "SELECT * FROM CONTRATO "
                         . " INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO"
                         . " WHERE NUMERO_CONTRATO like '%" . $nContrato . "%' and ID_LOGIN_CONTRATO = " . $_SESSION['login'];
                 $sqll = Conexao::getInstance()->prepare($sql);
             }
+            
+            
             if (($tipos == 1) or ( $tipos == 2)) {
                 $sql = "SELECT * FROM CONTRATO "
                         . " INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO"
@@ -483,6 +491,7 @@ class Search {
                         . 'contrato.VENCIMENTO_CONTRATO < "' . $date . '" AND contrato.ID_LOGIN_CONTRATO = ' . $_SESSION['login'];
                 $sqll = Conexao::getInstance()->prepare($sql);
             }
+      
 
             if ($sqll->execute()) {
                 $count = $sqll->rowCount();

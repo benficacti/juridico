@@ -17,7 +17,6 @@ $mac = NULL;
 
 $tipo_log = 15;
 
-
 $ins = "INSERT INTO `LOG`(`ID_TIPO_LOG`, `DATA_LOG`, `HORA_LOG`, `ID_LOGIN_LOG`, `IP_LOG`, `MAC_ADDRESS_LOG`)"
         . "VALUES(:ID_TIPO_LOG, CURDATE(), CURTIME(), :ID_LOGIN_LOG, :IP_LOG, :MAC_ADDRESS_LOG)";
 $i_ins = Conexao::getInstance()->prepare($ins);
