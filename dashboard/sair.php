@@ -34,4 +34,6 @@ if ($i_ins->execute()) {
 
     header('Location: login.php');
 }
+
+
 ?>
