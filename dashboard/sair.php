@@ -6,6 +6,7 @@ session_start();
 
 $login = $_SESSION['login'];
 
+
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
     $ip = $_SERVER['HTTP_CLIENT_IP'];
 } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {

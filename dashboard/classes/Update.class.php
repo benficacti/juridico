@@ -59,8 +59,8 @@ class Update {
         }
     }
 
-    public function AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia, $descGarantia, $descObjeto, $descObservacao) {
-        echo $numero;
+    public function AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia) {
+
 
         $idObjeto = Search::BuscaObjeto($idContrato);
         $idGarantia = Search::BuscaGarantia($idContrato);
@@ -169,7 +169,7 @@ class Update {
     public function UpdateContrato($id_contrato) {
         try {
             $mes = 1;
-
+            $ativo = 0;
             $sql = 'SELECT * FROM CONTRATO '
                     . ' INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO'
                     . ' INNER JOIN EMPRESA_CONTRATO ON contrato.ID_EMPRESA_CONTRATO = empresa_contrato.ID_EMPRESA_CONTRATO'
@@ -202,6 +202,21 @@ class Update {
                         $descObservacao = $dados->DESC_OBSER_EXIGEN;
                         $possui_parcelas = $dados->ID_POSSUI_PARCELA_CONTRATO;
                         $status_garantia = $dados->ID_STATUS_GARANTIA_CONTRATO;
+
+                        //VERIFICAR SE POSSUI ADITAMENTO
+                        $possuiAditamento = Search::possuiAditamento($id_contrato);
+
+                        //SE POSSUIR 
+                        if ($possuiAditamento > 0) {
+
+                            // VERIFICAR SE O ADITAMENTO ESTA ATIVO
+                            $aditamentoAtivo = Search::verificarAditamento($id_contrato);
+                            if ($aditamentoAtivo > 0) {
+                               
+                                $ativo = 1;
+                            }
+                        }
+
                         echo '                            
                  <div class="line-finally-contract-update">
                         <div class="form-contract-fim-update">
@@ -341,7 +356,7 @@ class Update {
                         </div>
                     </div>';
                         if ($possui_parcelas == 1) {
-                            ECHO '
+                            echo '
                     <div class="line-finally-contract-update">
                         <div class="form-contract-fim-update">
                             <label class="title-info-contract">
@@ -513,7 +528,7 @@ class Update {
                      <div class="line-finally-contract-update">
                         <div class="form-contract-fim-update">
                             <label class="title-info-contract">
-                                Anexo:
+                                ANEXO:
                             </label>
                             <div class="span-group-img">
                                 <div class="figure-pencil">
@@ -524,8 +539,27 @@ class Update {
                                 <span id="addAnex" class="title-upload">VER / EDITAR</span>
                             </div>
                         </div>
+                    </div>';
+
+                        if ($ativo == 0) {
+                            echo
+                            '<div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                EXCLUIR CONTRATO:
+                            </label>
+                            <div class="span-group-img">
+                                <div class="figure-pencil">
+                             <!--       <img src="img/pencil.png" class="img-pencil" alt="pencil">-->
+                                </div>                                 
+                            </div>
+                            <div class="span-group-input" style="background-color:white; border:0px;">
+                                <span id="excluir_contr" class="title-upload" style=" color: orange !important;">EXCLUIR</span>
+                            </div>
+                        </div>
                     </div>
                 ';
+                        }
                     }
                 }
             }
@@ -536,7 +570,7 @@ class Update {
 
     public function updateAdicionaGarantia($garantia, $idcontrato) {
         try {
-           
+
             $login = $_SESSION['login'];
 
             if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -655,13 +689,51 @@ class Update {
     }
 
     public static function insert_id_no_contrato($idAditamento, $idContrado) {
-        
-        
-         try {
+
+
+        try {
             $upd = 'UPDATE `CONTRATO` SET `ID_ADITAMENTO_CONTRATO` = "' . $idAditamento . '" WHERE ID_CONTRATO ="' . $idContrado . '" ';
             $updd = Conexao::getInstance()->prepare($upd);
             if ($updd->execute()) {
                 return '00';
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    public static function alterarStatusContrato($excluir_contr) {
+
+        try {
+            $possuiAditamento = Search::possuiAditamento($excluir_contr);
+
+            if ($possuiAditamento > 0) {
+
+                $verificaAditamentoAtivo = Search::verificarAditamento($excluir_contr);
+
+                if ($verificaAditamentoAtivo > 0) {
+                    return '01';
+                } else {
+                    $upd = 'UPDATE `CONTRATO` SET `ID_STATUS_CONTRATO` = 2 WHERE ID_CONTRATO ="' . $excluir_contr . '" ';
+                    $updd = Conexao::getInstance()->prepare($upd);
+                    if ($updd->execute()) {
+                        return '00';
+                    }
+                }
+            } else {
+
+                $upd = 'UPDATE `CONTRATO` SET `ID_STATUS_CONTRATO` = 2 WHERE ID_CONTRATO ="' . $excluir_contr . '" ';
+                $updd = Conexao::getInstance()->prepare($upd);
+                if ($updd->execute()) {
+                    return '00';
+                }
+
+//                $verificaContratoAtivo = Search::verificaAtivo($excluir_contr);
+//
+//                if ($verificaContratoAtivo > 0) {
+//
+//                    
+//                }
             }
         } catch (Exception $ex) {
             echo $ex->getMessage();

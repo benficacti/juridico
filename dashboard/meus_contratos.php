@@ -53,25 +53,28 @@ if (!isset($_SESSION['login'])) {
                     </div>
                     <div class="title-list-tb">
 
-                        <div class="div-icon-contract"></div>
-                        <div class="div-desc-contract">Descrição</div>
-                        <input class="div-contrato-contract" type="number" id="nContrato"placeholder="Contrato" onkeyup="callApi();">
+                        
+                        <!--<div class="div-desc-contract">Descrição</div>-->
+                        <input class="div-contrato-contract" type="text" id="nContratante"placeholder="Contratante" onkeyup="callApi();">
+                        <input class="div-contrato-contract" type="text" id="nContratado"placeholder="Contratado" onkeyup="callApi();">
+                        <input class="div-contrato1" type="number" id="nContrato"placeholder="Contrato" onkeyup="callApi();">
                         
                         <div class="div-data-contract">
                             <select name="tipo_contrato" id="tipo_contrato" onchange="callApi();">
-                                <option value="0" selected>Tipo Contrato</option>
+                                <option value="0">Tipo Contrato</option>
                                 <option value="1">Público</option>
                                 <option value="2">Privado</option>
                             </select>
                         </div>
                         <div class="div-data-contract">
                             <select id="vencimento_contrato" onchange="callApi();">
-                                <option value="0" selected>Status Vencimento</option>
+                                <option value="0">Status Vencimento</option>
                                 <option value="1">À vencer</option>
                                 <option value="2">Vencido</option>
                             </select>
                         </div>
-                        <div class="div-visu-contract"> Visualizar / Editar / Aditar</div>
+                        <input class="div-visu-contract" type="text" id="nVisualizar" value="Visualizar / Editar / Aditar" readonly="false">
+                        <!--<div class="div-visu-contract"> Visualizar / Editar / Aditar</div>-->
                     </div>
                     <div class="table-list" id="result" >
                         <!--CONTEUDO-->
@@ -98,13 +101,18 @@ if (!isset($_SESSION['login'])) {
                 var tipos = $("#tipo_contrato").val();
                 var status_vencimento = $("#vencimento_contrato").val();
                 var nContrato = $("#nContrato").val();
+                var nContratado = $("#nContratado").val();
+                var nContratante = $("#nContratante").val();
+                
                 $.ajax({
                     url: "api/api.php",
                     method: "post",
                     data: {request: "filtro_meus_contratos",
                         tipos: tipos,
                         status_vencimento: status_vencimento,
-                        nContrato: nContrato
+                        nContrato: nContrato,
+                        nContratado: nContratado,
+                        nContratante: nContratante
                     },
                     success: function (data)
                     {

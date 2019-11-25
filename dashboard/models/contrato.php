@@ -37,8 +37,9 @@ private $_idObservacoesExigenciasContrato;
 private $_urlImagemContrato;
 private $_empresaContrato;
 private $_possuiParcela;
+private $_statusContrato;
 
-function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, $_objetoContrato, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, $_idGarantiaContrato, $_idAditamentoContrato, $_idLoginContrato, $_idFinalizacaoContrato, $_idTipoContrato, $_idStatusGarantiaContrato, $_idObservacoesExigenciasContrato, $_urlImagemContrato, $_empresaContrato, $_possuiParcela) {
+function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, $_objetoContrato, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, $_idGarantiaContrato, $_idAditamentoContrato, $_idLoginContrato, $_idFinalizacaoContrato, $_idTipoContrato, $_idStatusGarantiaContrato, $_idObservacoesExigenciasContrato, $_urlImagemContrato, $_empresaContrato, $_possuiParcela, $_statusContrato) {
     $this->_numeroContrato = $_numeroContrato;
     $this->_contratanteContrato = $_contratanteContrato;
     $this->_contratadoContrato = $_contratadoContrato;
@@ -63,6 +64,7 @@ function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContra
     $this->_urlImagemContrato = $_urlImagemContrato;
     $this->_empresaContrato = $_empresaContrato;
     $this->_possuiParcela = $_possuiParcela;
+    $this->_statusContrato = $_statusContrato;
 }
 
 function get_numeroContrato() {
@@ -161,6 +163,10 @@ function get_possuiParcela() {
     return $this->_possuiParcela;
 }
 
+function get_statusContrato() {
+    return $this->_statusContrato;
+}
+
 function set_numeroContrato($_numeroContrato) {
     $this->_numeroContrato = $_numeroContrato;
 }
@@ -255,6 +261,10 @@ function set_empresaContrato($_empresaContrato) {
 
 function set_possuiParcela($_possuiParcela) {
     $this->_possuiParcela = $_possuiParcela;
+}
+
+function set_statusContrato($_statusContrato) {
+    $this->_statusContrato = $_statusContrato;
 }
 
 
