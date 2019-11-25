@@ -129,29 +129,6 @@ if (!isset($_SESSION['login'])) {
 
                     });
                 }
-                
-                
-                
-                function FuncAnex() {
-                    var anexo = $("#idcontrato").val();
-                    $.ajax({
-                        url: 'api/api.php',
-                        method: 'post',
-                        data: {request: "addAnexo",
-                            anexo: anexo
-                        },
-                        success: function (data) {
-
-                            if (data === "01") {
-                                window.location.href = "update_anexo.php";
-
-                            }
-
-
-                        }
-
-                    });
-                }
 
 
                 function FuncAditar() {
@@ -187,6 +164,39 @@ if (!isset($_SESSION['login'])) {
                             }
                         }
                     });
+                }
+
+
+
+                function FuncExcluir_contr() {
+                    var excluir_contr = $("#idcontrato").val();
+                    if (excluir_contr.length > 0) {
+                        if (confirm("Deseja excluir realmente?")) {
+                            
+                            $.ajax({
+                                url: 'api/api.php',
+                                method: 'post',
+                                data: {request: "excluir_contrato",
+                                    excluir_contr: excluir_contr
+
+                                },
+                                success: function (data) {
+
+                                    if (data === "00") {
+                                        window.location.href = "meus_contratos.php";
+                                    }else{
+                                        alert('Contrato possui aditamento!');
+                                        window.location.href = "meus_contratos.php";
+                                    }
+                                }
+                            });
+
+                        } else {
+                            alert('Não foi excluido!');
+                        }
+
+                    }
+
                 }
 
 
@@ -352,9 +362,13 @@ if (!isset($_SESSION['login'])) {
                             $("#addAnex").click(function () {
                                 FuncAnex('addAnex');
                             });
-                            
+
                             $("#aditar").click(function () {
-                               FuncAditar('aditar'); 
+                                FuncAditar('aditar');
+                            });
+
+                            $("#excluir_contr").click(function () {
+                                FuncExcluir_contr('excluir_contr');
                             });
                         }
                     });

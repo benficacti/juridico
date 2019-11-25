@@ -461,7 +461,7 @@ body{
 }
 .container-list{
     width:90%;
-    height: 100px;;
+    height: 100px;
     margin: 0 auto;
 
 }
@@ -814,9 +814,9 @@ body{
     width:5vw;
 }
 .div-desc-contract{
-    width:22vw;
+    width:10vw;
     float:left;
-    text-align: center;
+    text-align: right;
     font-family: 'Gilroy';
 }
 
@@ -825,17 +825,44 @@ body{
     color: black;
 }
 
+#nContratado::-webkit-input-placeholder{
+    font-family: 'Gilroy';
+    color: black;
+}
+
+#nContratante::-webkit-input-placeholder{
+    font-family: 'Gilroy';
+    color: black;
+}
+#nContratado{
+    border: none;
+}#nContratante{
+    border: none;
+}
 #nContrato{
     border: none;
 }
+#nVisualizar{
+    border: none;
+    outline: none;
+    
+}
 .div-contrato-contract{
-    width:15vw;
+    width:12.8vw;
+    float:left;
+    text-align: right;
+    font-family: 'Gilroy';
+    outline: none;
+}
+.div-contrato1{
+    width:12.8vw;
     float:left;
     text-align: center;
     font-family: 'Gilroy';
+    outline: none;
 }
 .div-data-contract{
-    width:12vw;
+    width:10vw;
     float:left;
     font-family: 'Gilroy';
 
@@ -847,10 +874,12 @@ body{
     font-family: 'Gilroy';
 }
 .div-visu-contract{
+    margin-left: 1.5vw;
     width:15vw;
     float:left;
     font-size: 1em;
     font-family: 'Gilroy';
+    text-align: right;
 }
 #vencimento_contrato{
     font-size: 1em;
@@ -867,7 +896,7 @@ body{
     text-align: center;
 }
 .td-desc-contract{
-    width:20vw;
+    width:10vw;
     float:left;        
     margin-left:10px;
     display:inline-block;
