@@ -12,23 +12,48 @@
  * @author USUARIO
  */
 class login {
-    private $usuarioLogin;
-    private $senhaLogin;
+    private $_idUsuarioLogin;
+    private $_usuarioLogin;
+    private $_senhaLogin;
+    private $_idTipoAcesso;
     
-    function getUsuarioLogin() {
-        return $this->usuarioLogin;
+    function __construct($_idUsuarioLogin, $_usuarioLogin, $_senhaLogin, $_idTipoAcesso) {
+        $this->_idUsuarioLogin = $_idUsuarioLogin;
+        $this->_usuarioLogin = $_usuarioLogin;
+        $this->_senhaLogin = $_senhaLogin;
+        $this->_idTipoAcesso = $_idTipoAcesso;
     }
 
-    function getSenhaLogin() {
-        return $this->senhaLogin;
+    function get_idUsuarioLogin() {
+        return $this->_idUsuarioLogin;
     }
 
-    function setUsuarioLogin($usuarioLogin) {
-        $this->usuarioLogin = $usuarioLogin;
+    function get_usuarioLogin() {
+        return $this->_usuarioLogin;
     }
 
-    function setSenhaLogin($senhaLogin) {
-        $this->senhaLogin = $senhaLogin;
+    function get_senhaLogin() {
+        return $this->_senhaLogin;
+    }
+
+    function get_idTipoAcesso() {
+        return $this->_idTipoAcesso;
+    }
+
+    function set_idUsuarioLogin($_idUsuarioLogin) {
+        $this->_idUsuarioLogin = $_idUsuarioLogin;
+    }
+
+    function set_usuarioLogin($_usuarioLogin) {
+        $this->_usuarioLogin = $_usuarioLogin;
+    }
+
+    function set_senhaLogin($_senhaLogin) {
+        $this->_senhaLogin = $_senhaLogin;
+    }
+
+    function set_idTipoAcesso($_idTipoAcesso) {
+        $this->_idTipoAcesso = $_idTipoAcesso;
     }
 
 

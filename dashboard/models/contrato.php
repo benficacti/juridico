@@ -38,8 +38,9 @@ private $_urlImagemContrato;
 private $_empresaContrato;
 private $_possuiParcela;
 private $_statusContrato;
+private $_idSetorContrato;
 
-function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, $_objetoContrato, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, $_idGarantiaContrato, $_idAditamentoContrato, $_idLoginContrato, $_idFinalizacaoContrato, $_idTipoContrato, $_idStatusGarantiaContrato, $_idObservacoesExigenciasContrato, $_urlImagemContrato, $_empresaContrato, $_possuiParcela, $_statusContrato) {
+function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, $_objetoContrato, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, $_idGarantiaContrato, $_idAditamentoContrato, $_idLoginContrato, $_idFinalizacaoContrato, $_idTipoContrato, $_idStatusGarantiaContrato, $_idObservacoesExigenciasContrato, $_urlImagemContrato, $_empresaContrato, $_possuiParcela, $_statusContrato, $_idSetorContrato) {
     $this->_numeroContrato = $_numeroContrato;
     $this->_contratanteContrato = $_contratanteContrato;
     $this->_contratadoContrato = $_contratadoContrato;
@@ -65,6 +66,7 @@ function __construct($_numeroContrato, $_contratanteContrato, $_contratadoContra
     $this->_empresaContrato = $_empresaContrato;
     $this->_possuiParcela = $_possuiParcela;
     $this->_statusContrato = $_statusContrato;
+    $this->_idSetorContrato = $_idSetorContrato;
 }
 
 function get_numeroContrato() {
@@ -167,6 +169,10 @@ function get_statusContrato() {
     return $this->_statusContrato;
 }
 
+function get_idSetorContrato() {
+    return $this->_idSetorContrato;
+}
+
 function set_numeroContrato($_numeroContrato) {
     $this->_numeroContrato = $_numeroContrato;
 }
@@ -267,6 +273,9 @@ function set_statusContrato($_statusContrato) {
     $this->_statusContrato = $_statusContrato;
 }
 
+function set_idSetorContrato($_idSetorContrato) {
+    $this->_idSetorContrato = $_idSetorContrato;
+}
 
 
 }

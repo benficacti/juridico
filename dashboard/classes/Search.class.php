@@ -51,7 +51,7 @@ class Search {
                 $ip = $_SERVER['REMOTE_ADDR'];
             }
             $mac = NULL;
-
+            $null = NULL;
             $tipo_log = 14;
 
             $login = str_replace("'", "", $login);
@@ -72,6 +72,7 @@ class Search {
                         $nivel = $dados->ID_TIPO_ACESSO_LOGIN;
                         $usuario = $dados->NOME_USUARIO;
                         $tipo_acesso = $dados->DESC_TIPO_ACESSO;
+                        $id_tipo_acesso_login = $dados->ID_TIPO_ACESSO_LOGIN;
                         $_SESSION['idlogin'] = $idlogin;
 
                         if ($senha == $senhas) {
@@ -79,15 +80,17 @@ class Search {
                             $_SESSION['nivel'] = $nivel;
                             $_SESSION['usuario'] = $usuario;
                             $_SESSION['tipo_acesso'] = $tipo_acesso;
+                            $_SESSION['tipo_acesso_login'] = $id_tipo_acesso_login;
 
 
-                            $ins = "INSERT INTO `LOG`(`ID_TIPO_LOG`, `DATA_LOG`, `HORA_LOG`, `ID_LOGIN_LOG`, `IP_LOG`, `MAC_ADDRESS_LOG`)"
-                                    . "VALUES(:ID_TIPO_LOG, CURDATE(), CURTIME(), :ID_LOGIN_LOG, :IP_LOG, :MAC_ADDRESS_LOG)";
+                            $ins = "INSERT INTO `LOG`(`ID_TIPO_LOG`, `DATA_LOG`, `HORA_LOG`, `ID_LOGIN_LOG`, `IP_LOG`, `MAC_ADDRESS_LOG`, `ID_CONTRATO`)"
+                                    . "VALUES(:ID_TIPO_LOG, CURDATE(), CURTIME(), :ID_LOGIN_LOG, :IP_LOG, :MAC_ADDRESS_LOG, :ID_CONTRATO)";
                             $i_ins = Conexao::getInstance()->prepare($ins);
                             $i_ins->bindParam(':ID_TIPO_LOG', $tipo_log);
-                            $i_ins->bindParam(':ID_LOGIN_LOG', $login);
+                            $i_ins->bindParam(':ID_LOGIN_LOG', $idlogin);
                             $i_ins->bindParam(':IP_LOG', $ip);
                             $i_ins->bindParam(':MAC_ADDRESS_LOG', $mac);
+                            $i_ins->bindParam(':ID_CONTRATO', $null);
 
                             if ($i_ins->execute()) {
                                 return "00;";
@@ -324,8 +327,10 @@ class Search {
                         $numero = $dados->NUMERO_CONTRATO;
                         $contratado = $dados->CONTRATADO_CONTRATO;
                         $contratante = $dados->CONTRATANTE_CONTRATO;
+                        $idSetor = $dados->ID_SETOR_CONTRATO;
                         $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
 
+                        $setor = Search::descSetor($idSetor);
                         if ($numero == NULL) {
                             $numero = '<strong style="color:gray">***</strong>';
                         }
@@ -360,6 +365,13 @@ class Search {
                             <div class="title-info-contract-panel">
                                 <label class="lbl-info-line-panel">
                                     ' . Search::formateDateBR($vencimento) . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . $setor . '
                                 </label>
                             </div>
                         </div>
@@ -709,6 +721,9 @@ class Search {
                         $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
                         $anexo = $dados->URL_IMAGEM_CONTRATO;
                         $aditamento = $dados->ID_ADITAMENTO_CONTRATO;
+                        $idSetor = $dados->ID_SETOR_CONTRATO;
+
+                        $descSetor = Search::descSetor($idSetor);
 
                         $possuiAditamento = Search::buscarContrato($aditamento);
 
@@ -717,28 +732,29 @@ class Search {
 
                         //VERIFICAR O NUMERO DO CONTRATO PAI
                         $NumerocontratoPai = Search::NumeroContratoPai($feito_de_um_aditamento);
-                        
+
                         $ContranteContratoPai = Search::ContratanteContratoPai($feito_de_um_aditamento);
 
                         $NumerocontratoFilho = Search::NumeroContratoFilho($possuiAditamento);
-                        
+
                         $ContranteContratoFilho = Search::ContratanteContratoFilho($possuiAditamento);
 
                         echo '<tr>';
                         if (strlen($anexo) > 0 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) > 0) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da '.$ContranteContratoPai.' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: '.$NumerocontratoFilho.' da '.$ContranteContratoFilho.'"></a></th>';;
+                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
+                            ;
                         } elseif (strlen($anexo) > 0 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) < 1) {
-                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: '.$NumerocontratoFilho.' da '.$ContranteContratoFilho.'"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) > 0) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da '.$ContranteContratoPai.' "></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: '.$NumerocontratoFilho.' da '.$ContranteContratoFilho.'"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
                         } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) > 0) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da '.$ContranteContratoPai.' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
                         } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) < 1) {
                             echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) < 1) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: '.$NumerocontratoFilho.' da '.$ContranteContratoFilho.'"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) > 0) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da '.$ContranteContratoPai.' "></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a></th>';
                         } else {
                             echo '<td class = "td-icon-contract">...</th>';
                         }
@@ -750,6 +766,7 @@ class Search {
                             <td class = "td-contrato-contract">' . $numero . '</td>
                             <td class = "td-tipo-contract">' . $descTipoContrato . '</td>
                             <td class = "td-data-contract">' . Search::formateDateBR($vencimento) . '</td>
+                            <td class = "td-setor-contract">' . $descSetor . '</td>    
                             <td class = "td-visu-contract"><a href="ver_contrato.php?c=' . $id_contrato . '&d=1" ><img src = "img/eye.png" class = "img-icon-list" alt = "contrato-list" title = "Visualizar Contrato"></a></td>
                             <td class = "td-visu-contract"><a href="alterar_contrato.php?c=' . $id_contrato . '&d=1" ><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list" title = "Editar Contrato"></a></td>
                             <td class = "td-visu-contract"><a href="cadastro_contrato.php?id_contr=' . $id_contrato . '" ><img src = "img/editar_contrato.png" class = "img-icon-list" alt = "contrato-list" title = "Aditar Contrato"></a></td>                         
@@ -811,6 +828,8 @@ class Search {
                         $possui_parcelas = $dados->ID_POSSUI_PARCELA_CONTRATO;
                         $idAditamentoContrato = $dados->ID_ADITAMENTO_CONTRATO;
                         $url_img = $dados->URL_IMAGEM_CONTRATO;
+                        $idSetor = $dados->ID_SETOR_CONTRATO;
+                        $setor = Search::descSetor($idSetor);
 
                         if ($idAditamentoContrato > 1) {
                             $sq = 'SELECT `ID_CONTRATO_SUBMETIDO` FROM `aditamentos` WHERE `ID_ADITAMENTO` = ' . $idAditamentoContrato;
@@ -1023,6 +1042,15 @@ class Search {
                              </div>
                              ';
                         }
+                        
+                       echo '<div class="line-finally-contract">                
+                            <div class="form-contract-fim">
+                               <label class="title-info-contract">
+                                   SETOR:
+                                   <span>' . $setor . '</span>
+                               </label>
+                           </div>
+                        </div>';
                     }
                 }
             }
@@ -1485,7 +1513,7 @@ class Search {
             }
         } catch (Exception $ex) {
             echo $ex->getMessage();
-            echo 'Falha ao verificar se contrato esta ativo';
+            echo 'Falha ao retornar linha';
         }
     }
 
@@ -1508,7 +1536,7 @@ class Search {
             }
         } catch (Exception $ex) {
             echo $ex->getMessage();
-            echo 'Falha ao verificar se contrato esta ativo';
+            echo 'Falha ao buscar numero contrato';
         }
     }
 
@@ -1530,12 +1558,12 @@ class Search {
             }
         } catch (Exception $ex) {
             echo $ex->getMessage();
-            echo 'Falha ao verificar se contrato esta ativo';
+            echo 'Falha ao buscar numero contrato';
         }
     }
 
     public static function ContratanteContratoPai($feito_de_um_aditamento) {
-        
+
         try {
             $sql = 'SELECT CONTRATANTE_CONTRATO FROM contrato  '
                     . 'WHERE ID_CONTRATO = "' . $feito_de_um_aditamento . '" '
@@ -1552,13 +1580,13 @@ class Search {
             }
         } catch (Exception $ex) {
             echo $ex->getMessage();
-            echo 'Falha ao verificar se contrato esta ativo';
+            echo 'Falha ao buscar contratante';
         }
     }
 
     public static function ContratanteContratoFilho($possuiAditamento) {
-        
-        
+
+
         try {
             $sql = 'SELECT CONTRATANTE_CONTRATO FROM contrato  '
                     . 'WHERE ID_CONTRATO = "' . $possuiAditamento . '" '
@@ -1575,7 +1603,322 @@ class Search {
             }
         } catch (Exception $ex) {
             echo $ex->getMessage();
+            echo 'Falha ao buscar contrante';
+        }
+    }
+
+    public static function idSetor($descSetor) {
+
+        try {
+            $sql = 'SELECT ID_SETOR FROM setor  '
+                    . 'WHERE DESC_SETOR = "' . $descSetor . '"';
+            $lqs = Conexao::getInstance()->prepare($sql);
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        return $dados->ID_SETOR;
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao buscar idSetor';
+        }
+    }
+
+    public static function idUsuario($nome, $email) {
+
+
+        try {
+            $sql = 'SELECT ID_USUARIO FROM usuario where NOME_USUARIO = "' . $nome . '" and EMAIL_USUARIO = "' . $email . '"';
+            $lqs = Conexao::getInstance()->prepare($sql);
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        return $dados->ID_USUARIO;
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao buscar idUsuario';
+        }
+    }
+
+    public static function senhaLogin($idUsuario) {
+
+
+        try {
+
+            $sql = 'SELECT SENHA_LOGIN FROM login'
+                    . 'WHERE ID_USUARIO_LOGIN = "' . $idUsuario . '"';
+            $lqs = Conexao::getInstance()->prepare($sql);
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        return $dados->SENHA_LOGIN;
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
             echo 'Falha ao verificar se contrato esta ativo';
+        }
+    }
+
+    public static function ListarSetor() {
+
+        try {
+
+            $sql = 'SELECT * FROM SETOR';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        echo' <option value=' . $dados->DESC_SETOR . '></option> ';
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao Listar Setores';
+        }
+    }
+
+    public static function verificaSetorExiste(setor $setor) {
+
+        try {
+
+            $descSetor = $setor->getDescSetor();
+
+            $sql = 'SELECT ID_SETOR FROM SETOR where DESC_SETOR = "' . $descSetor . '"';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+
+                return $row;
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao verificar se setor existe';
+        }
+    }
+
+    public static function LoginSenha($idUsuario, $senha) {
+
+        try {
+
+            //$sql = 'SELECT USUARIO_LOGIN, SENHA_LOGIN FROM login where ID_USUARIO_LOGIN = "' . $idUsuario . '" AND SENHA_LOGIN = "' . $senha . '"';
+            $sql = 'SELECT * from login INNER JOIN usuario ON login.ID_USUARIO_LOGIN = usuario.ID_USUARIO where ID_USUARIO_LOGIN = "' . $idUsuario . '" AND SENHA_LOGIN = "' . $senha . '"';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        $inf[] = array(
+                            'USUARIO' => $dados->USUARIO_LOGIN,
+                            'SENHA' => $dados->SENHA_LOGIN,
+                            'EMAIL' => $dados->EMAIL_USUARIO
+                        );
+
+                        $json = json_encode($inf);
+                        return $json;
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao pegar usuario e senha';
+        }
+    }
+
+    public static function verificarEmailExiste($_emailUsuario) {
+
+        try {
+
+            //$sql = 'SELECT USUARIO_LOGIN, SENHA_LOGIN FROM login where ID_USUARIO_LOGIN = "' . $idUsuario . '" AND SENHA_LOGIN = "' . $senha . '"';
+            $sql = 'SELECT ID_USUARIO from usuario WHERE EMAIL_USUARIO = "' . $_emailUsuario . '" ';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+
+                return $row;
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao pegar usuario e senha';
+        }
+    }
+
+    public static function obterIdUsuario($email) {
+
+        try {
+
+            //$sql = 'SELECT USUARIO_LOGIN, SENHA_LOGIN FROM login where ID_USUARIO_LOGIN = "' . $idUsuario . '" AND SENHA_LOGIN = "' . $senha . '"';
+            $sql = 'SELECT ID_USUARIO from usuario WHERE EMAIL_USUARIO = "' . $email . '" ';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_USUARIO;
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao obter idUsuario';
+        }
+    }
+
+    public static function idTime($idUsuario) {
+
+        try {
+
+            //$sql = 'SELECT USUARIO_LOGIN, SENHA_LOGIN FROM login where ID_USUARIO_LOGIN = "' . $idUsuario . '" AND SENHA_LOGIN = "' . $senha . '"';
+            $sql = 'SELECT ID_TIME_LOGIN from time_login WHERE ID_USUARIO_LOGIN = "' . $idUsuario . '" ';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->ID_TIME_LOGIN;
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao obter idUsuario';
+        }
+    }
+
+    public static function verificarTempo($email) {
+
+
+        try {
+
+            //$sql = 'SELECT USUARIO_LOGIN, SENHA_LOGIN FROM login where ID_USUARIO_LOGIN = "' . $idUsuario . '" AND SENHA_LOGIN = "' . $senha . '"';
+            $sql = 'SELECT ID_USUARIO from usuario WHERE EMAIL_USUARIO = "' . $email . '" ';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+
+                        $idUsuario = Search::obterIdUsuario($email);
+
+                        $verificaTime = Search::verificarTime($idUsuario);
+
+                        if ($verificaTime > '24:00') {
+
+                            return '00';
+                        }
+
+                        return '01';
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao obter idUsuario';
+        }
+    }
+
+    public static function verificarTime($idUsuario) {
+
+        try {
+
+
+            // $sql = 'SELECT ID_TIME_LOGIN from time_login WHERE ID_USUARIO_LOGIN = "'.$email.'" ';
+            $sql = 'SELECT TIMEDIFF(CURRENT_TIMESTAMP, `TIME_LOGIN`) TIME from TIME_LOGIN where `ID_USUARIO_LOGIN` = "' . $idUsuario . '"';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        return $dados->TIME;
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao obter idUsuario';
+        }
+    }
+
+    
+    public static function descSetor($idSetor) {
+
+        try {
+
+            //$sql = 'SELECT USUARIO_LOGIN, SENHA_LOGIN FROM login where ID_USUARIO_LOGIN = "' . $idUsuario . '" AND SENHA_LOGIN = "' . $senha . '"';
+            $sql = 'SELECT DESC_SETOR from setor WHERE ID_SETOR = "'.$idSetor.'"';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        return $dados->DESC_SETOR;
+                       
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao obter nome do setor';
+        }
+    }
+    
+    public static function descSetorJson() {
+
+        try {
+
+            //$sql = 'SELECT USUARIO_LOGIN, SENHA_LOGIN FROM login where ID_USUARIO_LOGIN = "' . $idUsuario . '" AND SENHA_LOGIN = "' . $senha . '"';
+            $sql = 'SELECT DESC_SETOR from setor';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        $inf[]= array(
+                          'NOME'=>  $dados->DESC_SETOR
+                        );
+                    }
+                    $json = json_encode($inf);
+                        return $json;
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao obter nome do setor';
         }
     }
 

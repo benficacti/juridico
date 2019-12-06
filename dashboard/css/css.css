@@ -398,7 +398,7 @@ body{
 }
 .barra-lateral{
     margin: 0;
-    width: 15vw;
+    width: 12vw;
     /*height: 92vh;*/
     float: left;
 }
@@ -434,7 +434,7 @@ body{
 .box-conteudo{
     float: left;
     background-color: #fff;
-    width: 85vw;
+    width: 88vw;
     height: 92vh;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -874,12 +874,21 @@ body{
     font-family: 'Gilroy';
 }
 .div-visu-contract{
-    margin-left: 1.5vw;
-    width:15vw;
+    margin-left: 0.5vw;
+    width:10vw;
     float:left;
     font-size: 1em;
     font-family: 'Gilroy';
     text-align: right;
+}
+
+.div-setor-contract{
+    margin-left: 0.3vw;
+    width:6vw;
+    float:left;
+    font-size: 1em;
+    font-family: 'Gilroy';
+    text-align: center;
 }
 #vencimento_contrato{
     font-size: 1em;
@@ -913,15 +922,20 @@ body{
     text-align: center;
 }
 .td-tipo-contract{
-    width:16vw;
-    text-align: center;
+    width:10vw;
+    text-align: right;
 }
 .td-data-contract{
-    width:13vw;
+    width:10vw;
+    text-align: right;
+}
+.td-setor-contract{
+    width:10vw;
+    text-align: right;
 }
 .td-visu-contract{
     width:4.5vw;
-    text-align:center;
+    text-align:right;
 }
 
 .img-icon-list{
@@ -1316,18 +1330,18 @@ body{
     border: 1px solid black;
 }
 .info-contract-panel{
-    width:15vw;
+    width:13vw;
     height: 5vh;
     float:left;
 }
 .title-info-contract-panel{
-    width:15vw;
+    width:13vw;
     height:5vh;
     text-align:center;
     float:left;  
 }
 .lbl-info-title-panel{
-    text-aling:center;
+    text-align: center;
     line-height: 5vh;
     font-size:1em;
     font-family: 'Gilroy';
@@ -1430,6 +1444,24 @@ body{
     border:0px;
     margin-left:1.5vw;
     outline: none;
+}
+
+#perfil_usuario{
+    font-size: 1em;
+    font-family: 'Gilroy';
+    border:0px;
+    outline: none;
+    padding-right: 11vw; 
+    margin: 0.1vw
+}
+
+#id_setor{
+    font-size: 1em;
+    font-family: 'Gilroy';
+    border:0px;
+    outline: none;
+    padding-right: 4vw; 
+    margin: 0.1vw
 }
 .article-contract-anexo{
     width:70vw;

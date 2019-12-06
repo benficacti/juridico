@@ -5,6 +5,10 @@ include '../models/contrato.php';
 include '../models/garantia.php';
 include '../models/objeto.php';
 include '../models/observacoesExigencias.php';
+include '../models/setor.php';
+include '../models/login.php';
+include '../util/Util.class.php';
+include '../models/usuario.php';
 include '../classes/Update.class.php';
 include '../classes/Insert.class.php';
 include '../classes/Search.class.php';
@@ -26,8 +30,9 @@ if ($request == "cadastro_contrato") {
     $_possuiParcela = (null !== (filter_input(INPUT_POST, 'possui_parcela'))) ? filter_input(INPUT_POST, 'possui_parcela') : null;
     $_empresaContrato = (null !== (filter_input(INPUT_POST, 'empresa_contrato'))) ? filter_input(INPUT_POST, 'empresa_contrato') : null;
     $_idAditamentoContrato = (null !== (filter_input(INPUT_POST, 'id_contr_aditado'))) ? filter_input(INPUT_POST, 'id_contr_aditado') : null;
+    $_idSetorContrato = (null !== (filter_input(INPUT_POST, 'id_setor'))) ? filter_input(INPUT_POST, 'id_setor') : null;
 
-
+    
     if ($_possuiParcela == 1) {
         $_quantidadeParcelasContrato = (null !== (filter_input(INPUT_POST, 'parcela'))) ? filter_input(INPUT_POST, 'parcela') : null;
         $_valorDasParcelasContrato = (null !== (filter_input(INPUT_POST, 'valor_parcela'))) ? filter_input(INPUT_POST, 'valor_parcela') : null;
@@ -44,13 +49,15 @@ if ($request == "cadastro_contrato") {
 
 
     if ($_numeroContrato !== "") {
-        // $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, $_idAditamentoContrato, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela);
-        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, $_idAditamentoContrato, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela, null);
+
+        // $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, $_idAditamentoContrato, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela, null);
+        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, $_idAditamentoContrato, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela, 1, $_idSetorContrato);
         Insert::CadastraContrato($contrato);
         echo $_SESSION['contrato'];
     } else {
         $_numeroContrato = null;
-        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, $_idAditamentoContrato, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela, null);
+        //$contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, $_idAditamentoContrato, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela, null);
+        $contrato = new contrato($_numeroContrato, $_contratanteContrato, $_contratadoContrato, $_concorrenciaContrato, 1, $_valorContrato, $_quantidadeParcelasContrato, $_valorDasParcelasContrato, $_quantidadeParcelasPagasContrato, $_dataPagamentoDasParcelasContrato, $_valorTotalPagoContrato, $_inicioVigenciaContrato, $_finalVigenciaContrato, $_vencimentoContrato, 1, $_idAditamentoContrato, null, null, $_idTipoContrato, null, 1, null, $_empresaContrato, $_possuiParcela, 1, $_idSetorContrato);
         Insert::CadastraContrato($contrato);
         echo $_SESSION['contrato'];
     }
@@ -169,8 +176,7 @@ if ($request == 'update_contrato') {
     $descObjeto = (null !== (filter_input(INPUT_POST, 'descObjeto'))) ? filter_input(INPUT_POST, 'descObjeto') : 0;
     $descObservacao = (null !== (filter_input(INPUT_POST, 'descObservacao'))) ? filter_input(INPUT_POST, 'descObservacao') : 0;
     sleep(1);
-    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato,
-            $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia); //, $descGarantia, $descObjeto, $descObservacao);
+    echo Update::AtualizaContrato($idContrato, $empresa, $numero, $vencimento, $contratante, $contratada, $descTipoContrato, $concorrencia, $valorContrato, $qtdParCont, $valorParcContrato, $quantParcPagContr, $dataPagParc, $inicioVigencia, $fimVigencia); //, $descGarantia, $descObjeto, $descObservacao);
 }
 
 function formateDate($i) {
@@ -244,10 +250,21 @@ if ($request == 'addObservacao') {
 
 
 if ($request == 'excluir_contrato') {
-    $excluir_contr = (null !== (filter_input(INPUT_POST, 'excluir_contr'))) ? filter_input(INPUT_POST, 'excluir_contr') : null;    
+    $excluir_contr = (null !== (filter_input(INPUT_POST, 'excluir_contr'))) ? filter_input(INPUT_POST, 'excluir_contr') : null;
     if (!empty($excluir_contr)) {
         if (isset($excluir_contr)) {
             echo $update_status_contrato = Update::alterarStatusContrato($excluir_contr);
+        }
+    }
+}
+
+if ($request == 'alter_setor') {
+    
+    $idcontrato = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
+    $descSetor = (null !== (filter_input(INPUT_POST, 'descSetor'))) ? filter_input(INPUT_POST, 'descSetor') : null;
+    if (!empty($idcontrato)) {
+        if (isset($idcontrato)) {
+            echo $update = Update::updatesetor($idcontrato, $descSetor);
         }
     }
 }
@@ -275,14 +292,65 @@ if ($request == 'contra_senha') {
     echo Update::updatelogin($nova_senha, $token);
 }
 
+if ($request == 'link_temporario') {
+    $nova_senha = (null !== (filter_input(INPUT_POST, 'nova_senha'))) ? filter_input(INPUT_POST, 'nova_senha') : 0;
+    $email = (null !== (filter_input(INPUT_POST, 'email'))) ? filter_input(INPUT_POST, 'email') : 0;
+
+    echo Update::updateLink($nova_senha, $email);
+}
+
 if ($request == 'excluir_anexo') {
     $anexo = (null !== (filter_input(INPUT_POST, 'anexo'))) ? filter_input(INPUT_POST, 'anexo') : 0;
 
     echo Update::excluirAnexo($anexo);
 }
 
+
 if ($request == 'aditamento_contrato') {
     $aditamento = (null !== (filter_input(INPUT_POST, 'aditamento'))) ? filter_input(INPUT_POST, 'aditamento') : 0;
 
     echo Insert::Aditamento_contrato($aditamento);
+}
+
+if ($request == 'cadastro_novo_usuario') {
+    $_nomeUsuario = (null !== (filter_input(INPUT_POST, 'usuario'))) ? filter_input(INPUT_POST, 'usuario') : null;
+    $_emailUsuario = (null !== (filter_input(INPUT_POST, 'email'))) ? filter_input(INPUT_POST, 'email') : null;
+    $descSetor = (null !== (filter_input(INPUT_POST, 'setor'))) ? filter_input(INPUT_POST, 'setor') : null;
+    $_usuarioLogin = (null !== (filter_input(INPUT_POST, 'login'))) ? filter_input(INPUT_POST, 'login') : null;
+    $_idTipoAcesso = (null !== (filter_input(INPUT_POST, 'perfil'))) ? filter_input(INPUT_POST, 'perfil') : null;
+
+    $idSetorCadastrar = "";
+
+    $verificarEmailExiste = Search::verificarEmailExiste($_emailUsuario);
+
+    if ($verificarEmailExiste > 0) {
+        echo '01';
+    } else {
+
+
+        $setor = new setor($descSetor);
+
+        $verificarSetorExiste = Search::verificaSetorExiste($setor);
+
+        if ($verificarSetorExiste < 1) {
+
+            $idSetorCadastrar = Insert::cadastrarSetor($setor);
+        } else {
+            $idSetorCadastrar = Search::idSetor($descSetor);
+        }
+
+
+
+        $usuario = new usuario($_nomeUsuario, $_emailUsuario, $idSetorCadastrar);
+
+        $_idUsuarioLogin = Insert::cadastrarUsuario($usuario);
+
+
+
+        $_senhaLogin = Util::geradorSenha();
+
+        $login = new login($_idUsuarioLogin, $_usuarioLogin, $_senhaLogin, $_idTipoAcesso);
+
+        echo $cadastrarLogin = Insert::cadastrarLogin($login);
+    }
 }

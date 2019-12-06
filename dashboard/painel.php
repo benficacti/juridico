@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION['login'])) {
-    header('Location: login.php');
+if (($_SESSION['tipo_acesso_login']) != 1) {
+
+    header('Location: meus_contratos.php');
 } else {
     
 }
@@ -29,7 +30,7 @@ if (!isset($_SESSION['login'])) {
                 </div>
                 <div class="dados-user-nav">
                     <div class="dados-user">
-                        <?php include('includes/topbar.php'); ?>
+<?php include('includes/topbar.php'); ?>
                     </div>
                 </div>
             </nav>
@@ -37,14 +38,14 @@ if (!isset($_SESSION['login'])) {
         <div class="barra-lateral">
             <nav>
                 <div class="barra-lateral-nav">
-                    <?php include('includes/menu.php'); ?>
-                    
-                    
+<?php include('includes/menu.php'); ?>
+
+
                 </div>
             </nav>
         </div>
         <!-- BOX CONTEUDO DA PAG -->
-        
+
         <div class="box-conteudo">
             <article class="article-contract-fim" data-aos="zoom-in" >
 
@@ -91,6 +92,13 @@ if (!isset($_SESSION['login'])) {
                             </div>
                         </div>
 
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-title-panel">
+                                    SETOR
+                                </label>
+                            </div>
+                        </div>
 
                         <div class="info-contract-panel">
                             <div class="title-info-contract-panel">

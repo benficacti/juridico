@@ -5,6 +5,9 @@ if (!isset($_SESSION['login'])) {
 } else {
     $_SESSION['contrato'] = 0;
 }
+
+include './persistencia/Conexao.php';
+include './classes/Search.class.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br"> 
@@ -56,17 +59,15 @@ if (!isset($_SESSION['login'])) {
                 </header>
                 <span style="margin-left: 2vw;">
                     <?php
-                    include './persistencia/Conexao.php';
-                    include './classes/Search.class.php';
                     $id_contr = filter_input(INPUT_GET, 'id_contr');
 
                     if ($id_contr > 1) {
                         Search::Contra_a_aditar($id_contr);
                     }
                     ?>
-                    <input type="hidden" value="<?php echo $id_contr;?>" id="id_contrs"/>
+                    <input type="hidden" value="<?php echo $id_contr; ?>" id="id_contrs"/>
                 </span>
-                <div class="line-contract" style="height:2vh;">
+                <div class="line-contract">
                     <select id="empresa_contrato">
                         <option value="0" selected>SELECIONE A EMPRESA</option>
                         <option value="1">BB TRANSPORTE E TURISMO LTDA</option>
@@ -127,7 +128,7 @@ if (!isset($_SESSION['login'])) {
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="line-contract">
                     <div class="form-contract">
                         <label class="title-option-contract">VALOR CONTRATO:</label>
@@ -145,16 +146,16 @@ if (!isset($_SESSION['login'])) {
                         <label class="input-radio-contract" id="input-group-contract-possuiparcnao">
                             <input type="radio" id="rd-nao" name="radio-parc">
                             <label for="rd-nao" class="rd-label-contract">NÃO</label>
-
                         </label>
-
                     </div>
                 </div>
+
                 <input type="hidden" id="possui_parcela" value="0">
                 <div id="div-parcelas">
 
                 </div>
-                <div class="line-contract division" >
+
+                <div class="line-contract">
                     <div class="form-contract" id="left-title">
                         <label class="title-option-contract" >VENCIMENTO:</label>
                         <!--<div class="pright">*</div>-->
@@ -162,12 +163,22 @@ if (!isset($_SESSION['login'])) {
                             <input type="text" class="input-contract input-vencimento" id="vencimento" placeholder="00/00/0000" autocomplete="nope"/>
                         </div>
                     </div>
-                </div>
-                <div class="line-contract">
-                    <div class="btn-login">
-                        <input type="submit" value="PROSSEGUIR" class="bt-login" id="cadastrar_contrato">
+                    <div class="form-contract">
+                        <label class="title-option-contract">SETOR ORIGEM:</label>
+                        <div class="input-group-contract group-contratante pright">
+                            <input type="text" list="list_setor" class="input-contract" id="id_setor" placeholder="Setor Origem" autocomplete="nope"autocomplete="off">   
+                            <datalist id="list_setor">
+                                <?php
+                                Search::ListarSetor();
+                                ?>
+                            </datalist>
+                        </div>
                     </div>
-                </div>
+                    <div class="line-contract">
+                        <div class="btn-login">
+                            <input type="submit" value="PROSSEGUIR" class="bt-login" id="cadastrar_contrato">
+                        </div>
+                    </div>
 
             </article>
 
@@ -272,6 +283,13 @@ if (!isset($_SESSION['login'])) {
                     }
                     //VENCIMENTO
                     if ($("#vencimento").is(":focus")) {
+                        $("#input-group-contract-vencimento").addClass("input-group-contract-active");
+                        $("#input-group-contract-vencimento").removeClass("input-group-contract-error");
+                    } else {
+                        $("#input-group-contract-vencimento").removeClass("input-group-contract-active");
+                    }
+
+                    if ($("#id_setor").is(":focus")) {
                         $("#input-group-contract-vencimento").addClass("input-group-contract-active");
                         $("#input-group-contract-vencimento").removeClass("input-group-contract-error");
                     } else {
@@ -391,7 +409,8 @@ if (!isset($_SESSION['login'])) {
                     var possui_parcela = $("#possui_parcela").val();
                     var empresa_contrato = $("#empresa_contrato").val();
                     var id_contr_aditado = $("#id_contrs").val();
-                    
+                    var id_setor = $("#id_setor").val();
+
                     /* //NUMERO CONTRATO
                      if (num_contrato.length <= 0) {
                      $("#input-group-contract-numero").addClass("input-group-contract-error");
@@ -498,7 +517,7 @@ if (!isset($_SESSION['login'])) {
                                     && vencimento.length > 0 && empresa_contrato !== "0") {
                                 document.getElementById("cadastrar_contrato").value = "CADASTRANDO...";
                                 $('#cadastrar_contrato').attr('disabled', true);
-                                //document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
+                                document.getElementById("result").innerHTML = "<div class='center-img'><img src='img/loading.gif' alt='imgLoading' class='img-loading'></div>";
                                 $.ajax({
                                     url: "api/api.php",
                                     method: "post",
@@ -506,7 +525,6 @@ if (!isset($_SESSION['login'])) {
                                         numero: num_contrato,
                                         nome_contratante: nome_contratante,
                                         nome_contratada: nome_contratada,
-                                        nome_contratante: nome_contratante,
                                         nome_concorrencia: nome_concorrencia,
                                         inicio_vigencia: inicio_vigencia,
                                         fim_vigencia: fim_vigencia,
@@ -520,10 +538,12 @@ if (!isset($_SESSION['login'])) {
                                         parcelas_finalizadas: parcelas_finalizadas,
                                         possui_parcela: possui_parcela,
                                         empresa_contrato: empresa_contrato,
-                                        id_contr_aditado: id_contr_aditado
+                                        id_contr_aditado: id_contr_aditado,
+                                        id_setor: id_setor
                                     },
                                     success: function (data)
                                     {
+                                        console.log(data);
                                         // alert(data);
                                         var res = data.split(";");
                                         if (typeof res[0] !== "undefined" && res[0] == "00") {
@@ -571,11 +591,13 @@ if (!isset($_SESSION['login'])) {
                                     tipo_contrato: tipo_contrato,
                                     possui_parcela: possui_parcela,
                                     empresa_contrato: empresa_contrato,
-                                    id_contr_aditado: id_contr_aditado
+                                    id_contr_aditado: id_contr_aditado,
+                                    id_setor: id_setor
                                 },
                                 success: function (data)
                                 {
-                                    alert(data);
+                                    console.log(data);
+                                    /*alert(data);*/
                                     var res = data.split(";");
                                     if (typeof res[0] !== "undefined" && res[0] == "00") {
                                         location.href = "cadastro_garantia.php";

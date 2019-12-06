@@ -53,12 +53,12 @@ if (!isset($_SESSION['login'])) {
                     </div>
                     <div class="title-list-tb">
 
-                        
+
                         <!--<div class="div-desc-contract">Descrição</div>-->
                         <input class="div-contrato-contract" type="text" id="nContratante"placeholder="Contratante" onkeyup="callApi();">
                         <input class="div-contrato-contract" type="text" id="nContratado"placeholder="Contratado" onkeyup="callApi();">
                         <input class="div-contrato1" type="number" id="nContrato"placeholder="Contrato" onkeyup="callApi();">
-                        
+
                         <div class="div-data-contract">
                             <select name="tipo_contrato" id="tipo_contrato" onchange="callApi();">
                                 <option value="0">Tipo Contrato</option>
@@ -73,7 +73,9 @@ if (!isset($_SESSION['login'])) {
                                 <option value="2">Vencido</option>
                             </select>
                         </div>
-                        <input class="div-visu-contract" type="text" id="nVisualizar" value="Visualizar / Editar / Aditar" readonly="false">
+                        <input class="div-setor-contract" type="text" id="nVisualizar" value="Setor" readonly="false">
+                        <input class="div-visu-contract" type="text" id="nVisualizar" value="Ver / Editar / Aditar" readonly="false">
+
                         <!--<div class="div-visu-contract"> Visualizar / Editar / Aditar</div>-->
                     </div>
                     <div class="table-list" id="result" >
@@ -103,7 +105,7 @@ if (!isset($_SESSION['login'])) {
                 var nContrato = $("#nContrato").val();
                 var nContratado = $("#nContratado").val();
                 var nContratante = $("#nContratante").val();
-                
+
                 $.ajax({
                     url: "api/api.php",
                     method: "post",

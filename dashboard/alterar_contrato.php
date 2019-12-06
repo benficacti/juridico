@@ -198,6 +198,39 @@ if (!isset($_SESSION['login'])) {
                     }
 
                 }
+                
+                function FuncSetor_contr(idSetor, setorAtual) {
+                    var idcontrato = $("#idcontrato").val();
+                    var setor = idSetor;
+                    if (setor.length > 0) {
+                        if (confirm("Deseja realmente o setor: "+setorAtual+" para: "+setor+" ?")) {
+                            
+                            $.ajax({
+                                url: 'api/api.php',
+                                method: 'post',
+                                data: {request: "alter_setor",
+                                    idcontrato: idcontrato,
+                                    descSetor: setor
+
+                                },
+                                success: function (data) {
+
+                                    if (data === "00") {
+                                        window.location.href = "meus_contratos.php";
+                                    }else{
+                                        alert('Contrato possui aditamento!');
+                                        window.location.href = "meus_contratos.php";
+                                    }
+                                }
+                            });
+
+                        } else {
+                            alert('Não foi setor!');
+                        }
+
+                    }
+
+                }
 
 
                 function callApi2(input) {
@@ -369,6 +402,12 @@ if (!isset($_SESSION['login'])) {
 
                             $("#excluir_contr").click(function () {
                                 FuncExcluir_contr('excluir_contr');
+                            });
+                            
+                            $("#addASetor").click(function () {
+                                var setor = $("#id_setor").val();
+                                var setorAtual = $("#setorAtual").val();
+                                FuncSetor_contr(setor, setorAtual);
                             });
                         }
                     });

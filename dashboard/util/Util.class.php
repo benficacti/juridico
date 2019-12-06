@@ -12,5 +12,17 @@
  * @author USUARIO
  */
 class Util {
-    //put your code here
+
+    public function geradorSenha() {
+
+        $senha = "";
+        $senha .= "ABCDEFGHIJKLMNOPQRSTUVYXWZ"; // contem as letras maiúsculas
+        $senha .= "abcdefghijklmnopqrstuvyxwz"; // contem as letras minusculas
+        $senha .= "0123456789"; // contem os números
+        //$senha .= "!@#$%¨&*()_+=";
+
+
+        return $newSenha = substr(str_shuffle($senha), 1, 5);
+    }
+
 }

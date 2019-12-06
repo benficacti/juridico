@@ -202,7 +202,11 @@ class Update {
                         $descObservacao = $dados->DESC_OBSER_EXIGEN;
                         $possui_parcelas = $dados->ID_POSSUI_PARCELA_CONTRATO;
                         $status_garantia = $dados->ID_STATUS_GARANTIA_CONTRATO;
-
+                        $idSetor = $dados->ID_SETOR_CONTRATO;
+                        $setor = Search::descSetor($idSetor);
+                        $nome = Search::descSetorJson();
+                        $json = json_decode($nome);
+                        
                         //VERIFICAR SE POSSUI ADITAMENTO
                         $possuiAditamento = Search::possuiAditamento($id_contrato);
 
@@ -212,7 +216,7 @@ class Update {
                             // VERIFICAR SE O ADITAMENTO ESTA ATIVO
                             $aditamentoAtivo = Search::verificarAditamento($id_contrato);
                             if ($aditamentoAtivo > 0) {
-                               
+
                                 $ativo = 1;
                             }
                         }
@@ -227,7 +231,7 @@ class Update {
                             </label>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-empresa">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-empresa">
@@ -243,7 +247,7 @@ class Update {
                             <input type="hidden" id="change_numero" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-numero">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-numero">
@@ -259,7 +263,7 @@ class Update {
                             <input type="hidden" id="change_vencimento" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-vencimento">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-vencimento">
@@ -277,7 +281,7 @@ class Update {
                             <input type="hidden" id="change_contratante" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-contratante">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-contratante">
@@ -293,7 +297,7 @@ class Update {
                             <input type="hidden" id="change_contratada" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-contratada">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-contratada">
@@ -309,7 +313,7 @@ class Update {
                             <input type="hidden" id="change_tipocontrato" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil"  id="div-img-tipocontrato">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input"  id="span-tipocontrato">
@@ -331,7 +335,7 @@ class Update {
                             <input type="hidden" id="change_concorrencia" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-concorrencia">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input"  id="span-concorrencia">
@@ -347,7 +351,7 @@ class Update {
                             <input type="hidden" id="change_valor" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-valor">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-valor">
@@ -365,7 +369,7 @@ class Update {
                             <input type="hidden" id="change_qtdparc" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-qtdparc">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input"  id="span-qtdparc">
@@ -381,7 +385,7 @@ class Update {
                             <input type="hidden" id="change_valparc" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-valparc">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-valparc">
@@ -397,7 +401,7 @@ class Update {
                             <input type="hidden" id="change_parcpagas" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-parcpagas">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-parcpagas">
@@ -413,7 +417,7 @@ class Update {
                             <input type="hidden" id="change_datapag" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-datapag">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-datapag">
@@ -429,7 +433,7 @@ class Update {
                             <input type="hidden" id="change_aditamento" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-aditamento">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" style="background-color:white; border:0px;">
@@ -448,7 +452,7 @@ class Update {
                             <input type="hidden" id="change_inivigencia" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-inivigencia">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-inivigencia">
@@ -464,7 +468,7 @@ class Update {
                             <input type="hidden" id="change_fimvigencia" name="" value="true"></span>
                             <div class="span-group-img">
                                 <div class="figure-pencil" id="div-img-fimvigencia">
-                                    <img src="img/pencil.png" class="img-pencil" alt="pencil">
+                                    <img src="img/pencil.png" class="img-pencil" title="Clique para Editar">
                                 </div>                                 
                             </div>
                             <div class="span-group-input" id="span-fimvigencia">
@@ -472,6 +476,34 @@ class Update {
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="line-finally-contract-update">
+                        <div class="form-contract-fim-update">
+                            <label class="title-info-contract">
+                                SETOR:
+                            </label>
+                            <input type="hidden" id="setorAtual" value="'.$setor.'">
+                            <input type="hidden" id="change_fimvigencia" name="" value="true">
+                            <div class="span-group-img">
+                                <div class="figure-pencil">
+                                    <span id="addASetor" class="img-pencil"><img src="img/pencil.png" class="img-pencil" title="clique para editar"></span>
+                                </div>  
+                                
+                            </div>
+                            <div class="span-group-input" id="span-fimvigencia">
+                                <input type="text" list="list_setor" id="id_setor" value="'.$setor.'" class="input-update" name="valorContrato">
+                                 <datalist id="list_setor">';
+                                   
+                                        foreach ($json as $registro):
+                                            echo '<option>'.$registro->NOME.'</option>';
+                                        endforeach;
+                                    
+                                 '</datalist>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
                     <div class="line-finally-contract-update">
                         <div class="form-contract-fim-update">
                             <label class="title-info-contract">
@@ -737,6 +769,38 @@ class Update {
             }
         } catch (Exception $ex) {
             echo $ex->getMessage();
+        }
+    }
+
+    public static function updateLink($nova_senha, $email) {
+
+        $idUsuario = Search::obterIdUsuario($email);
+
+        try {
+            $upd = 'UPDATE `LOGIN` SET `SENHA_LOGIN` = "' . $nova_senha . '"'
+                    . 'WHERE ID_USUARIO_LOGIN = ' . $idUsuario;
+            $updd = Conexao::getInstance()->prepare($upd);
+            if ($updd->execute()) {
+                return '00';
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function updatesetor($idcontrato, $descSetor) {
+        
+        try {
+            $idSetor = Search::idSetor($descSetor);
+            
+            $upd = 'UPDATE `contrato` SET `ID_SETOR_CONTRATO` = "' . $idSetor . '"'
+                    . 'WHERE ID_CONTRATO = ' . $idcontrato;
+            $updd = Conexao::getInstance()->prepare($upd);
+            if ($updd->execute()) {
+                return '00';
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
         }
     }
 

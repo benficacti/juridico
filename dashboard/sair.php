@@ -4,7 +4,7 @@ include './persistencia/Conexao.php';
 
 session_start();
 
-$login = $_SESSION['login'];
+$idLogin = $_SESSION['idlogin'];
 
 
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -22,7 +22,7 @@ $ins = "INSERT INTO `LOG`(`ID_TIPO_LOG`, `DATA_LOG`, `HORA_LOG`, `ID_LOGIN_LOG`,
         . "VALUES(:ID_TIPO_LOG, CURDATE(), CURTIME(), :ID_LOGIN_LOG, :IP_LOG, :MAC_ADDRESS_LOG)";
 $i_ins = Conexao::getInstance()->prepare($ins);
 $i_ins->bindParam(':ID_TIPO_LOG', $tipo_log);
-$i_ins->bindParam(':ID_LOGIN_LOG', $login);
+$i_ins->bindParam(':ID_LOGIN_LOG', $idLogin);
 $i_ins->bindParam(':IP_LOG', $ip);
 $i_ins->bindParam(':MAC_ADDRESS_LOG', $mac);
 
@@ -35,5 +35,9 @@ if ($i_ins->execute()) {
     header('Location: login.php');
 }
 
+unset($_SESSION['usuario']);
+    unset($_SESSiON['nivel']);
+    session_destroy();
 
+    header('Location: login.php');
 ?>

@@ -39,11 +39,12 @@ class Insert {
         }
     }
 
-    public function CadastraContrato($contrato) {
+    public function CadastraContrato(contrato $contrato) {
 
         try {
 
             $idAditamentoContrado = "";
+            $idSetor = "";
 
             $numeroContrato = $contrato->get_numeroContrato();
             $idTipoContrato = $contrato->get_idTipoContrato(); // PUBLICO OU PRIVADO
@@ -62,7 +63,15 @@ class Insert {
             $possuiParcela = $contrato->get_possuiParcela();
             $empresaContrato = $contrato->get_empresaContrato();
             $idAditamentoContrado = $contrato->get_idAditamentoContrato();
+            $idStatusContrato = $contrato->get_statusContrato();
             $idLogin = $_SESSION['login'];
+
+            $descSetor = $contrato->get_idSetorContrato();
+            $idSetor = Search::idSetor($descSetor);
+
+            if ($idSetor < 1) {               
+                $idSetor = Insert::idSetorcadastrarSetor($descSetor);
+            }
 
             if ($idAditamentoContrado != "") {
                 $idAditamentoContrado = $contrato->get_idAditamentoContrato();
@@ -104,12 +113,12 @@ class Insert {
                     . "`CONTRATADO_CONTRATO`,`CONCORRENCIA_CONTRATO`,`INICIO_VIGENCIA_CONTRATO`,`FINAL_VIGENCIA_CONTRATO`,"
                     . "`VALOR_CONTRATO`,`QUANTIDADE_PARCELAS_CONTRATO`,`VALOR_DAS_PARCELAS_CONTRATO`,"
                     . "`DATA_PAGAMENTO_DAS_PARCELAS_CONTRATO`,`QUANTIDADE_PARCELAS_PAGAS_CONTRATO`,`VALOR_TOTAL_PAGO_CONTRATO`,"
-                    . "`VENCIMENTO_CONTRATO`,`ID_LOGIN_CONTRATO`, `ID_POSSUI_PARCELA_CONTRATO`, `ID_EMPRESA_CONTRATO`)"
+                    . "`VENCIMENTO_CONTRATO`,`ID_LOGIN_CONTRATO`, `ID_POSSUI_PARCELA_CONTRATO`, `ID_EMPRESA_CONTRATO`,`ID_STATUS_CONTRATO`, `ID_SETOR_CONTRATO`)"
                     . "VALUES("
                     . ":NUMERO_CONTRATO,:ID_TIPO_CONTRATO,:CONTRATANTE_CONTRATO,:CONTRATADO_CONTRATO,:CONCORRENCIA_CONTRATO,"
                     . ":INICIO_VIGENCIA_CONTRATO,:FINAL_VIGENCIA_CONTRATO,:VALOR_CONTRATO,:QUANTIDADE_PARCELAS_CONTRATO,"
                     . ":VALOR_DAS_PARCELAS_CONTRATO,:DATA_PAGAMENTO_DAS_PARCELAS_CONTRATO,:QUANTIDADE_PARCELAS_PAGAS_CONTRATO,"
-                    . ":VALOR_TOTAL_PAGO_CONTRATO,:VENCIMENTO_CONTRATO,:ID_LOGIN_CONTRATO,:ID_POSSUI_PARCELA_CONTRATO, :ID_EMPRESA_CONTRATO)";
+                    . ":VALOR_TOTAL_PAGO_CONTRATO,:VENCIMENTO_CONTRATO,:ID_LOGIN_CONTRATO,:ID_POSSUI_PARCELA_CONTRATO, :ID_EMPRESA_CONTRATO, :ID_STATUS_CONTRATO, :ID_SETOR_CONTRATO)";
             $insContS = Conexao::getInstance()->prepare($insCont);
             $insContS->bindParam(":NUMERO_CONTRATO", $numeroContrato);
             $insContS->bindParam(":ID_TIPO_CONTRATO", $idTipoContrato);
@@ -128,47 +137,48 @@ class Insert {
             $insContS->bindParam(":ID_LOGIN_CONTRATO", $idLogin);
             $insContS->bindParam(":ID_POSSUI_PARCELA_CONTRATO", $possuiParcela);
             $insContS->bindParam(":ID_EMPRESA_CONTRATO", $empresaContrato);
+            $insContS->bindParam(":ID_STATUS_CONTRATO", $idStatusContrato);
+            $insContS->bindParam(":ID_SETOR_CONTRATO", $idSetor);
 
 
 
             if ($insContS->execute()) {
 
-                if(strlen($idAditamentoContrado) > 0){
-                
-                $query = 'SELECT ID_CONTRATO FROM contrato WHERE ID_LOGIN_CONTRATO = "' . $idLogin . '" ORDER by `ID_CONTRATO` desc LIMIT 1';
-                $querys = Conexao::getInstance()->prepare($query);
-                $querys->execute();
-                $linh = $querys->rowCount();
-                if ($linh > 0) {
+                if (strlen($idAditamentoContrado) > 0) {
 
-                    foreach ($querys->fetchAll(PDO::FETCH_OBJ) as $dados) {
-                        $idContSub = $dados->ID_CONTRATO;
+                    $query = 'SELECT ID_CONTRATO FROM contrato WHERE ID_LOGIN_CONTRATO = "' . $idLogin . '" ORDER by `ID_CONTRATO` desc LIMIT 1';
+                    $querys = Conexao::getInstance()->prepare($query);
+                    $querys->execute();
+                    $linh = $querys->rowCount();
+                    if ($linh > 0) {
 
-                        $inserAdi = "INSERT INTO `aditamentos`(`ID_CONTRATO_ADITADO_ADITAMENTO`, `ID_CONTRATO_SUBMETIDO`, `DATA_ADITAMENTO`)"
-                                . "VALUES ("
-                                . ":ID_CONTRATO_ADITADO_ADITAMENTO, :ID_CONTRATO_SUBMETIDO, CURTIME())";
-                        $inserAdit = Conexao::getInstance()->prepare($inserAdi);
-                        $inserAdit->bindParam(":ID_CONTRATO_ADITADO_ADITAMENTO", $idAditamentoContrado);
-                        $inserAdit->bindParam(":ID_CONTRATO_SUBMETIDO", $idContSub);
+                        foreach ($querys->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                            $idContSub = $dados->ID_CONTRATO;
 
-                        if ($inserAdit->execute()) {
-                            $cons = 'SELECT ID_ADITAMENTO FROM aditamentos WHERE ID_CONTRATO_ADITADO_ADITAMENTO = "' . $idAditamentoContrado . '" and ID_CONTRATO_SUBMETIDO =' . $idContSub;
-                            $conss = Conexao::getInstance()->prepare($cons);
-                            $conss->execute();
-                            $row = $conss->rowCount();
-                            if ($row > 0) {
-                                foreach ($conss->fetchAll(PDO::FETCH_OBJ) as $dados) {
-                                    $idAditamento = $dados->ID_ADITAMENTO;
+                            $inserAdi = "INSERT INTO `aditamentos`(`ID_CONTRATO_ADITADO_ADITAMENTO`, `ID_CONTRATO_SUBMETIDO`, `DATA_ADITAMENTO`)"
+                                    . "VALUES ("
+                                    . ":ID_CONTRATO_ADITADO_ADITAMENTO, :ID_CONTRATO_SUBMETIDO, CURTIME())";
+                            $inserAdit = Conexao::getInstance()->prepare($inserAdi);
+                            $inserAdit->bindParam(":ID_CONTRATO_ADITADO_ADITAMENTO", $idAditamentoContrado);
+                            $inserAdit->bindParam(":ID_CONTRATO_SUBMETIDO", $idContSub);
+
+                            if ($inserAdit->execute()) {
+                                $cons = 'SELECT ID_ADITAMENTO FROM aditamentos WHERE ID_CONTRATO_ADITADO_ADITAMENTO = "' . $idAditamentoContrado . '" and ID_CONTRATO_SUBMETIDO =' . $idContSub;
+                                $conss = Conexao::getInstance()->prepare($cons);
+                                $conss->execute();
+                                $row = $conss->rowCount();
+                                if ($row > 0) {
+                                    foreach ($conss->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                                        $idAditamento = $dados->ID_ADITAMENTO;
 
 
-                                    Update::insert_id_no_contrato($idAditamento, $idAditamentoContrado);
+                                        Update::insert_id_no_contrato($idAditamento, $idAditamentoContrado);
+                                    }
                                 }
                             }
                         }
                     }
                 }
-
-            }
 
 
 
@@ -290,6 +300,107 @@ class Insert {
         } catch (Exception $ex) {
             echo $ex->getMessage();
             echo 'Falha ao realizar aditamento no contrato';
+        }
+    }
+
+    public static function cadastrarSetor(setor $setor) {
+
+        try {
+
+            $descSetor = $setor->getDescSetor();
+
+            $ins = "INSERT INTO `setor`(`DESC_SETOR`)"
+                    . "VALUES(:DESC_SETOR)";
+            $inss = Conexao::getInstance()->prepare($ins);
+            $inss->bindParam(":DESC_SETOR", $descSetor);
+            if ($inss->execute()) {
+
+                return $idSetor = Search::idSetor($descSetor);
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao cadastrar setor';
+        }
+    }
+
+    public static function cadastrarUsuario(usuario $usuario) {
+
+        try {
+
+            $nome = $usuario->get_nomeUsuario();
+            $email = $usuario->get_emailUsuario();
+            $idSetor = $usuario->get_idSetorUsuario();
+
+            $ins = "INSERT INTO `usuario`(`NOME_USUARIO`,`EMAIL_USUARIO`,`ID_SETOR_USUARIO`)"
+                    . "VALUES(:NOME_USUARIO, :EMAIL_USUARIO, :ID_SETOR_USUARIO)";
+            $inss = Conexao::getInstance()->prepare($ins);
+            $inss->bindParam(":NOME_USUARIO", $nome);
+            $inss->bindParam(":EMAIL_USUARIO", $email);
+            $inss->bindParam(":ID_SETOR_USUARIO", $idSetor);
+            if ($inss->execute()) {
+
+                return $idUsuario = Search::idUsuario($nome, $email);
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao cadastrar usuario';
+        }
+    }
+
+    public static function cadastrarLogin(login $login) {
+
+
+        try {
+
+            $idUsuario = $login->get_idUsuarioLogin();
+            $usuario = $login->get_usuarioLogin();
+            $senha = $login->get_senhaLogin();
+            $idTipoAcesso = $login->get_idTipoAcesso();
+
+            $ins = "INSERT INTO `time_login`(`TIME_LOGIN`, `ID_USUARIO_LOGIN`)"
+                    . "VALUES(CURTIME(), :ID_USUARIO_LOGIN)";
+            $inss = Conexao::getInstance()->prepare($ins);
+            $inss->bindParam(":ID_USUARIO_LOGIN", $idUsuario);
+            if ($inss->execute()) {
+                $idTime = Search::idTime($idUsuario);
+
+
+                $ins = "INSERT INTO `login`(`ID_USUARIO_LOGIN`,`USUARIO_LOGIN`,`SENHA_LOGIN`,`ID_TIPO_ACESSO_LOGIN`, `ID_TIME_LOGIN`)"
+                        . "VALUES(:ID_USUARIO_LOGIN, :USUARIO_LOGIN, :SENHA_LOGIN, :ID_TIPO_ACESSO_LOGIN, :ID_TIME_LOGIN)";
+                $inss = Conexao::getInstance()->prepare($ins);
+                $inss->bindParam(":ID_USUARIO_LOGIN", $idUsuario);
+                $inss->bindParam(":USUARIO_LOGIN", $usuario);
+                $inss->bindParam(":SENHA_LOGIN", $senha);
+                $inss->bindParam(":ID_TIPO_ACESSO_LOGIN", $idTipoAcesso);
+                $inss->bindParam(":ID_TIME_LOGIN", $idTime);
+                if ($inss->execute()) {
+
+                    $infor = Search::LoginSenha($idUsuario, $senha);
+                    return $infor;
+                    //return  $senhaLogin = Search::senhaLogin($idUsuario);
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao cadastrar login';
+        }
+    }
+
+    public static function idSetorcadastrarSetor($descSetor) {
+
+        try {
+
+            $ins = "INSERT INTO `setor`(`DESC_SETOR`)"
+                    . "VALUES(:DESC_SETOR)";
+            $inss = Conexao::getInstance()->prepare($ins);
+            $inss->bindParam(":DESC_SETOR", $descSetor);
+            if ($inss->execute()) {
+
+                return $idSetor = Search::idSetor($descSetor);
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao cadastrar setor';
         }
     }
 
