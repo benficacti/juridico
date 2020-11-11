@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 11-Nov-2020 às 13:08
+-- Generation Time: 11-Nov-2020 às 14:35
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -503,11 +503,7 @@ INSERT INTO `log` (`ID_LOG`, `ID_TIPO_LOG`, `DATA_LOG`, `HORA_LOG`, `ID_LOGIN_LO
 (37, 14, '2019-12-25', '21:47:24', 4, '192.168.0.208', NULL, NULL),
 (38, 15, '2019-12-25', '21:54:04', 4, '192.168.0.208', NULL, NULL),
 (39, 14, '2020-10-20', '16:15:01', 4, '192.168.0.93', NULL, NULL),
-(40, 14, '2020-10-21', '08:30:27', 5, '192.168.0.248', NULL, NULL),
-(41, 14, '2020-10-21', '08:33:00', 5, '192.168.0.91', NULL, NULL),
-(42, 14, '2020-10-21', '10:45:06', 5, '192.168.0.91', NULL, NULL),
 (43, 14, '2020-10-21', '14:16:48', 4, '192.168.0.91', NULL, NULL),
-(44, 14, '2020-10-21', '14:44:48', 5, '192.168.0.91', NULL, NULL),
 (45, 14, '2020-10-21', '14:48:49', 4, '192.168.0.91', NULL, NULL),
 (46, 15, '2020-10-21', '15:26:23', 4, '192.168.0.91', NULL, NULL),
 (47, 14, '2020-10-21', '15:29:46', 4, '192.168.0.91', NULL, NULL),
@@ -516,8 +512,14 @@ INSERT INTO `log` (`ID_LOG`, `ID_TIPO_LOG`, `DATA_LOG`, `HORA_LOG`, `ID_LOGIN_LO
 (50, 14, '2020-10-27', '15:03:19', 4, '192.168.0.88', NULL, NULL),
 (51, 14, '2020-10-28', '10:36:01', 4, '192.168.0.88', NULL, NULL),
 (52, 14, '2020-10-30', '09:40:02', 4, '192.168.0.92', NULL, NULL),
-(53, 15, '2020-11-10', '15:05:28', 5, '192.168.0.123', NULL, NULL),
-(54, 14, '2020-11-11', '08:14:28', 4, '192.168.0.123', NULL, NULL);
+(54, 14, '2020-11-11', '08:14:28', 4, '192.168.0.123', NULL, NULL),
+(55, 15, '2020-11-11', '09:18:42', 4, '192.168.0.15', NULL, NULL),
+(56, 14, '2020-11-11', '09:23:19', 4, '192.168.0.15', NULL, NULL),
+(57, 15, '2020-11-11', '09:23:30', 4, '192.168.0.15', NULL, NULL),
+(58, 14, '2020-11-11', '10:09:18', 4, '192.168.0.15', NULL, NULL),
+(59, 15, '2020-11-11', '10:29:16', 4, '192.168.0.15', NULL, NULL),
+(60, 14, '2020-11-11', '10:33:43', 6, '192.168.0.15', NULL, NULL),
+(61, 15, '2020-11-11', '10:34:12', 6, '192.168.0.15', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -543,7 +545,7 @@ INSERT INTO `login` (`ID_LOGIN`, `ID_USUARIO_LOGIN`, `USUARIO_LOGIN`, `SENHA_LOG
 (2, 2, 'jonathan', '123456', 1, NULL),
 (3, 3, 'edson', '654321', 1, NULL),
 (4, 4, 'virginiajur19', '654882j', 1, NULL),
-(5, 6, 'danijur20', '654320j', 3, NULL);
+(6, 7, 'danijur20', 'cCLwA', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -954,6 +956,13 @@ CREATE TABLE `time_login` (
   `ID_USUARIO_LOGIN` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `time_login`
+--
+
+INSERT INTO `time_login` (`ID_TIME_LOGIN`, `TIME_LOGIN`, `ID_USUARIO_LOGIN`) VALUES
+(1, '10:29:00', 7);
+
 -- --------------------------------------------------------
 
 --
@@ -1068,7 +1077,7 @@ INSERT INTO `usuario` (`ID_USUARIO`, `NOME_USUARIO`, `EMAIL_USUARIO`, `ID_SETOR_
 (2, 'Jonathan', 'jonathan@benficabbtt.com.br', 2),
 (3, 'Edson Reis', 'edson.reis@benficabbtt.com.br', 2),
 (4, 'Virginia', 'virginia@benficabbttt.com.br', 1),
-(6, 'Danielly', 'danielly@benficabbtt.com.br', 1);
+(7, 'Danielly', 'danielly@benficabbtt.com.br', 1);
 
 --
 -- Indexes for dumped tables
@@ -1278,12 +1287,12 @@ ALTER TABLE `garantia`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `ID_LOG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `ID_LOG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `ID_LOGIN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_LOGIN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `objeto`
 --
@@ -1333,7 +1342,7 @@ ALTER TABLE `status_garantia`
 -- AUTO_INCREMENT for table `time_login`
 --
 ALTER TABLE `time_login`
-  MODIFY `ID_TIME_LOGIN` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_TIME_LOGIN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tipo_acesso`
 --
@@ -1358,7 +1367,7 @@ ALTER TABLE `tipo_log`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
