@@ -725,6 +725,10 @@ class Search {
 
                         $descSetor = Search::descSetor($idSetor);
 
+                        //VERIFICAR SE POSSUI OBJETO
+                        $possuiObjeto = Search::verificarObjeto($id_contrato);
+
+                        //VERIFICAR SE POSSUI ADITAMENTO
                         $possuiAditamento = Search::buscarContrato($aditamento);
 
                         //VERIFICAR QUAL CONTRATO FOI CRIADO APARTIR DE ADITAMENTO
@@ -742,13 +746,16 @@ class Search {
                         echo '<tr>';
                         if (strlen($anexo) > 0 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) > 0) {
                             echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
-                            ;
                         } elseif (strlen($anexo) > 0 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) < 1) {
-                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) > 0) {
                             echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
                         } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) > 0) {
                             echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
+                        } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) > 0) {
+                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
+                        } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) < 1) {
+                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
                         } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) < 1) {
                             echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) < 1) {
@@ -758,6 +765,7 @@ class Search {
                         } else {
                             echo '<td class = "td-icon-contract">...</th>';
                         }
+
 
 
 
@@ -1042,8 +1050,8 @@ class Search {
                              </div>
                              ';
                         }
-                        
-                       echo '<div class="line-finally-contract">                
+
+                        echo '<div class="line-finally-contract">                
                             <div class="form-contract-fim">
                                <label class="title-info-contract">
                                    SETOR:
@@ -1051,6 +1059,18 @@ class Search {
                                </label>
                            </div>
                         </div>';
+                        
+                        if (strlen($descObjeto) > 0) {
+                            echo '<div class="line-finally-contract">
+                                <div class="form-contract-fim">
+                                    <label class="title-info-contract">
+                                        OBJETO:
+                                           <span>'. $descObjeto .'</span>
+                                    </label>
+                                </div>                 
+                             </div>
+                             ';
+                        }
                     }
                 }
             }
@@ -1868,13 +1888,12 @@ class Search {
         }
     }
 
-    
     public static function descSetor($idSetor) {
 
         try {
 
             //$sql = 'SELECT USUARIO_LOGIN, SENHA_LOGIN FROM login where ID_USUARIO_LOGIN = "' . $idUsuario . '" AND SENHA_LOGIN = "' . $senha . '"';
-            $sql = 'SELECT DESC_SETOR from setor WHERE ID_SETOR = "'.$idSetor.'"';
+            $sql = 'SELECT DESC_SETOR from setor WHERE ID_SETOR = "' . $idSetor . '"';
             $lqs = Conexao::getInstance()->prepare($sql);
 
             if ($lqs->execute()) {
@@ -1884,7 +1903,6 @@ class Search {
                     foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
 
                         return $dados->DESC_SETOR;
-                       
                     }
                 }
             }
@@ -1893,7 +1911,7 @@ class Search {
             echo 'Falha ao obter nome do setor';
         }
     }
-    
+
     public static function descSetorJson() {
 
         try {
@@ -1908,17 +1926,40 @@ class Search {
 
                     foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
 
-                        $inf[]= array(
-                          'NOME'=>  $dados->DESC_SETOR
+                        $inf[] = array(
+                            'NOME' => $dados->DESC_SETOR
                         );
                     }
                     $json = json_encode($inf);
-                        return $json;
+                    return $json;
                 }
             }
         } catch (Exception $ex) {
             echo $ex->getMessage();
             echo 'Falha ao obter nome do setor';
+        }
+    }
+
+    public static function verificarObjeto($id_contrato) {
+
+        try {
+
+            $sql = 'SELECT * from OBJETO WHERE ID_CONTRATO_OBJETO = "' . $id_contrato . '"';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        return $dados->DESC_OBJETO;
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao listar objeto';
         }
     }
 
