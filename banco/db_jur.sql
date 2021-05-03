@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 03-Maio-2021 às 15:10
+-- Generation Time: 11-Nov-2020 às 14:35
 -- Versão do servidor: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -519,21 +519,7 @@ INSERT INTO `log` (`ID_LOG`, `ID_TIPO_LOG`, `DATA_LOG`, `HORA_LOG`, `ID_LOGIN_LO
 (58, 14, '2020-11-11', '10:09:18', 4, '192.168.0.15', NULL, NULL),
 (59, 15, '2020-11-11', '10:29:16', 4, '192.168.0.15', NULL, NULL),
 (60, 14, '2020-11-11', '10:33:43', 6, '192.168.0.15', NULL, NULL),
-(61, 15, '2020-11-11', '10:34:12', 6, '192.168.0.15', NULL, NULL),
-(62, 14, '2020-11-11', '13:11:02', 4, '192.168.0.15', NULL, NULL),
-(63, 15, '2020-11-11', '13:11:19', 4, '192.168.0.15', NULL, NULL),
-(64, 14, '2020-11-16', '14:18:33', 6, '192.168.0.15', NULL, NULL),
-(65, 15, '2020-11-16', '14:18:37', 6, '192.168.0.15', NULL, NULL),
-(66, 14, '2020-11-16', '14:18:57', 4, '192.168.0.15', NULL, NULL),
-(67, 15, '2020-11-16', '14:19:12', 4, '192.168.0.15', NULL, NULL),
-(68, 14, '2021-01-15', '13:32:54', 4, '192.168.0.69', NULL, NULL),
-(69, 14, '2021-02-17', '10:38:07', 6, '192.168.0.15', NULL, NULL),
-(70, 15, '2021-02-17', '10:38:16', 6, '192.168.0.15', NULL, NULL),
-(71, 14, '2021-02-17', '10:38:36', 4, '192.168.0.15', NULL, NULL),
-(72, 15, '2021-02-17', '11:01:24', 4, '192.168.0.15', NULL, NULL),
-(73, 14, '2021-04-26', '14:58:43', 4, '192.168.0.253', NULL, NULL),
-(74, 14, '2021-05-03', '09:53:26', 4, '192.168.0.15', NULL, NULL),
-(75, 15, '2021-05-03', '10:05:23', 4, '192.168.0.15', NULL, NULL);
+(61, 15, '2020-11-11', '10:34:12', 6, '192.168.0.15', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -559,7 +545,7 @@ INSERT INTO `login` (`ID_LOGIN`, `ID_USUARIO_LOGIN`, `USUARIO_LOGIN`, `SENHA_LOG
 (2, 2, 'jonathan', '123456', 1, NULL),
 (3, 3, 'edson', '654321', 1, NULL),
 (4, 4, 'virginiajur19', '654882j', 1, NULL),
-(6, 7, 'danijur20', 'dani3221@@', 3, 1);
+(6, 7, 'danijur20', 'cCLwA', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -860,8 +846,7 @@ INSERT INTO `recuperar_senha` (`ID_RECUPERAR_SENHA`, `ID_USUARIO`, `PRIVATE_TOKE
 (11, 1, 'd82777e4c36ad0aec7868c90e7a563dabc5f2bd1', 2),
 (12, 1, 'd47eb1e76ba7177a136118a3baecf9f01a7a8b5d', 2),
 (13, 1, '49ed4d57b6c30dd9787cb25bd294be8fd1239aad', 2),
-(14, 1, 'c80dbd77b221828f181a845e810c261827350c0a', 2),
-(15, 7, '388834ab18c56fd58d266f6c6e1ef1677431261a', 2);
+(14, 1, 'c80dbd77b221828f181a845e810c261827350c0a', 2);
 
 -- --------------------------------------------------------
 
@@ -1302,7 +1287,7 @@ ALTER TABLE `garantia`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `ID_LOG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `ID_LOG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT for table `login`
 --
@@ -1327,7 +1312,7 @@ ALTER TABLE `possui_parcela`
 -- AUTO_INCREMENT for table `recuperar_senha`
 --
 ALTER TABLE `recuperar_senha`
-  MODIFY `ID_RECUPERAR_SENHA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID_RECUPERAR_SENHA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `setor`
 --
