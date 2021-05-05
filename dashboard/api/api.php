@@ -129,10 +129,25 @@ if ($request == 'info_contrato') {
     echo Search::infoContrato($contrato);
 }
 if ($request == 'proximos_vencimentos') {
+    
     $vencimento = (null !== (filter_input(INPUT_POST, 'vencimento'))) ? filter_input(INPUT_POST, 'vencimento') : 0;
     $busca = (null !== (filter_input(INPUT_POST, 'busca'))) ? filter_input(INPUT_POST, 'busca') : 0;
     echo Search::proximosVencimentos($vencimento, $busca);
 }
+
+if ($request == 'proximos_vencimentos_por_dia') {
+    
+    $dias = (null !== (filter_input(INPUT_POST, 'dias'))) ? filter_input(INPUT_POST, 'dias') : 0;
+    echo Search::proximos_vencimentos_por_dia($dias);
+}
+
+if ($request == 'contratos_por_periodo') {
+    
+    $dataIni = (null !== (filter_input(INPUT_POST, 'DataIni'))) ? filter_input(INPUT_POST, 'DataIni') : 0;
+    $dataFim = (null !== (filter_input(INPUT_POST, 'DataFim'))) ? filter_input(INPUT_POST, 'DataFim') : 0;
+    echo Search::contratos_por_periodo($dataIni, $dataFim);
+}
+
 if ($request == 'anexo') {
     if (isset($_FILES["image_contract"])) {
         if ($_FILES["image_contract"]["error"] == UPLOAD_ERR_OK) {

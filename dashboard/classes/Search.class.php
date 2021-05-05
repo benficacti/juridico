@@ -21,7 +21,7 @@ class Search {
      * @param type $idLog  (parâmetros utilizados para a consulta sql na tabela TIPO_LOG)
      * @return type DESC_TIPO_LOG  (retorno do método; retorna o nome do LOG)
      */
-    public function TiposLog($idLog) {
+    public static function TiposLog($idLog) {
         try {
             $sql = 'SELECT DESC_TIPO_LOG FROM TIPO_LOG WHERE ID_TIPO_LOG = "' . $idLog . '"';
             // $sql = 'CALL buscaLog('.$idLog.')'; // Existe uma Procedure cadastrada
@@ -40,7 +40,7 @@ class Search {
         }
     }
 
-    public function loginAuth($login, $senha) {
+    public static function loginAuth($login, $senha) {
 
         try {
             if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -109,7 +109,7 @@ class Search {
         }
     }
 
-    public function BuscaUsuario($idusuario) {
+    public static function BuscaUsuario($idusuario) {
         try {
             $sql = 'SELECT * USUARIO WHERE ID_USUARIO = "' . $idusuario . '"';
             $ssql = Conexao::getInstance()->prepare($sql);
@@ -127,7 +127,7 @@ class Search {
         }
     }
 
-    public function TipoAcesso($idTipoAcesso) {
+    public static function TipoAcesso($idTipoAcesso) {
         try {
             $sql = 'SELECT DESC_TIPO_ACESSO FROM TIPO_ACESSO WHERE ID_TIPO_ACESSO =' . $idTipoAcesso . ' ';
             //$sql = 'CALL buscaTipoAcesso('.$idTipoAcesso.')'; //Existe uma Procedure cadastrada
@@ -145,7 +145,7 @@ class Search {
         }
     }
 
-    public function setor($idSetor) {
+    public static function setor($idSetor) {
         try {
             $sql = 'SELECT DESC_SETOR FROM SETOR WHERE ID_SETOR = ' . $idSetor . '';
             //$sql = 'CALL buscaDescSetor('.$idSetor.')'; // Existe uma Procedure cadastrada
@@ -163,7 +163,7 @@ class Search {
         }
     }
 
-    public function login($start_login) {
+    public static function login($start_login) {
 
         $login = $start_login->getUsuarioLogin();
         $senhas = $start_login->getSenhaLogin();
@@ -223,7 +223,7 @@ class Search {
         }
     }
 
-    public function BuscaContrato($contratante) {
+    public static function BuscaContrato($contratante) {
 
         try {
 
@@ -243,7 +243,7 @@ class Search {
         }
     }
 
-    public function BuscaUltimoId($idLogin) {
+    public static function BuscaUltimoId($idLogin) {
 
         try {
             $sql = 'SELECT ID_CONTRATO FROM CONTRATO WHERE ID_LOGIN_CONTRATO = "' . $idLogin . '" ORDER BY ID_CONTRATO DESC LIMIT 1 ';
@@ -269,8 +269,214 @@ class Search {
             echo $exc->getTraceAsString();
         }
     }
+    
+    public static function contratos_por_periodo($dataIni, $dataFim) {
 
-    public function proximosVencimentos($vencimento, $busca) {
+        $sql = "SELECT * FROM CONTRATO  
+                INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO 
+                WHERE VENCIMENTO_CONTRATO  
+                BETWEEN '".$dataIni."' AND '".$dataFim."' AND ID_STATUS_CONTRATO = 1 ORDER BY VENCIMENTO_CONTRATO";
+        $sqll = Conexao::getInstance()->prepare($sql);
+
+
+        try {
+            $mes = 1;
+            $numero = "";
+
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $idContrato = $dados->ID_CONTRATO;
+                        $vencimento = $dados->VENCIMENTO_CONTRATO;
+                        $numero = $dados->NUMERO_CONTRATO;
+                        $contratado = $dados->CONTRATADO_CONTRATO;
+                        $contratante = $dados->CONTRATANTE_CONTRATO;
+                        $idSetor = $dados->ID_SETOR_CONTRATO;
+                        $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
+
+                        $setor = Search::descSetor($idSetor);
+                        if ($numero == NULL) {
+                            $numero = '<strong style="color:gray">***</strong>';
+                        }
+
+                        echo ' <div class="line-contract-panel">
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . $numero . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <div class = "desc-contratante-panel">
+                                        ' . $contratante . '
+                                        </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <div class = "desc-contratante-panel">
+                                        ' . $contratado . '
+                                        </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . Search::formateDateBR($vencimento) . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . $setor . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <a href="ver_contrato.php?c=' . $idContrato . '&d=2"> VER CONTRATO </a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>';
+                    }
+                } else {
+
+                    echo '
+                    <div class="line-contract-panel">
+                        <div class="info-contract-panel merge-panel">
+                            <div class="title-info-contract-panel merge-panel" >
+                                <label class="lbl-info-line-panel merge-panel">
+                                    VOCÊ NÃO TEM CONTRATOS PROXIMOS DE VENCIMENTO
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    ';
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function proximos_vencimentos_por_dia($dias) {
+
+        $sql = "SELECT * FROM CONTRATO  
+                INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO 
+                WHERE VENCIMENTO_CONTRATO  
+                BETWEEN CURDATE() AND (CURDATE() + INTERVAL '".$dias."' DAY) "
+                . "AND ID_STATUS_CONTRATO = 1 "
+                . "ORDER BY VENCIMENTO_CONTRATO";
+        $sqll = Conexao::getInstance()->prepare($sql);
+
+
+        try {
+            $mes = 1;
+            $numero = "";
+
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $idContrato = $dados->ID_CONTRATO;
+                        $vencimento = $dados->VENCIMENTO_CONTRATO;
+                        $numero = $dados->NUMERO_CONTRATO;
+                        $contratado = $dados->CONTRATADO_CONTRATO;
+                        $contratante = $dados->CONTRATANTE_CONTRATO;
+                        $idSetor = $dados->ID_SETOR_CONTRATO;
+                        $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
+
+                        $setor = Search::descSetor($idSetor);
+                        if ($numero == NULL) {
+                            $numero = '<strong style="color:gray">***</strong>';
+                        }
+
+                        echo ' <div class="line-contract-panel">
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . $numero . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <div class = "desc-contratante-panel">
+                                        ' . $contratante . '
+                                        </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <div class = "desc-contratante-panel">
+                                        ' . $contratado . '
+                                        </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . Search::formateDateBR($vencimento) . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . $setor . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <a href="ver_contrato.php?c=' . $idContrato . '&d=2"> VER CONTRATO </a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>';
+                    }
+                } else {
+
+                    echo '
+                    <div class="line-contract-panel">
+                        <div class="info-contract-panel merge-panel">
+                            <div class="title-info-contract-panel merge-panel" >
+                                <label class="lbl-info-line-panel merge-panel">
+                                    VOCÊ NÃO TEM CONTRATOS PROXIMOS DE VENCIMENTO
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    ';
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function proximosVencimentos($vencimento, $busca) {
         $data = date('Y-m-d');
         switch ($vencimento) {
             case 0:
@@ -405,7 +611,7 @@ class Search {
         }
     }
 
-    public function filtroMeusContratos($tipos, $status_vencimento, $nContrato, $nContratado, $nContratante) {
+    public static function filtroMeusContratos($tipos, $status_vencimento, $nContrato, $nContratado, $nContratante) {
         try {
             $date = date('Y-m-d');
             $mes = 1;
@@ -798,7 +1004,7 @@ class Search {
         }
     }
 
-    public function infoContrato($contrato) {
+    public static function infoContrato($contrato) {
         try {
             $mes = 1;
             $idContratoView = "";
@@ -1059,13 +1265,13 @@ class Search {
                                </label>
                            </div>
                         </div>';
-                        
+
                         if (strlen($descObjeto) > 0) {
                             echo '<div class="line-finally-contract">
                                 <div class="form-contract-fim">
                                     <label class="title-info-contract">
                                         OBJETO:
-                                           <span>'. $descObjeto .'</span>
+                                           <span>' . $descObjeto . '</span>
                                     </label>
                                 </div>                 
                              </div>
@@ -1079,18 +1285,18 @@ class Search {
         }
     }
 
-    public function formateDateBR($i) {
+    public static function formateDateBR($i) {
         $l = explode('-', $i);
         return $l[2] . "/" . $l[1] . "/" . $l[0];
     }
 
-    public function otherFormateDateBR($e) {
+    public static function otherFormateDateBR($e) {
         $t = explode('-', $e);
         return $t[2] . "-" . $t[1] . "-" . $t[0];
     }
 
     /*
-      public function contratosProximoVencimento() {
+      public static function contratosProximoVencimento() {
       try {
       $mes = 1;
 
@@ -1144,7 +1350,7 @@ class Search {
       }
      */
 
-    public function buscaIdGarantia($numeroContrato) {
+    public static function buscaIdGarantia($numeroContrato) {
 
         //$numero = $contrato->getNumeroContratoGarantia();
         try {
@@ -1163,7 +1369,7 @@ class Search {
         }
     }
 
-    public function buscaIdObservacoesExigencias($numeroContrato) {
+    public static function buscaIdObservacoesExigencias($numeroContrato) {
         try {
             $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
                     . 'OBSERVACOES_EXIGENCIAS WHERE NUMERO_DESC_OBSER_EXIGEN = ' . $numeroContrato . ' ';
@@ -1181,7 +1387,7 @@ class Search {
         }
     }
 
-    public function BuscaGarantia($_idContratoGarantia) {
+    public static function BuscaGarantia($_idContratoGarantia) {
         try {
             $sql = 'SELECT ID_GARANTIA FROM '
                     . 'GARANTIA WHERE ID_CONTRATO_GARANTIA = ' . $_idContratoGarantia . '';
@@ -1201,7 +1407,7 @@ class Search {
         }
     }
 
-    public function BuscaObjeto($idContratoObjeto) {
+    public static function BuscaObjeto($idContratoObjeto) {
         try {
 
             $sql = 'SELECT ID_OBJETO FROM '
@@ -1220,7 +1426,7 @@ class Search {
         }
     }
 
-    public function BuscaTipoContrato($idContrato) {
+    public static function BuscaTipoContrato($idContrato) {
         try {
             $sql = 'SELECT ID_TIPO_CONTRATO FROM '
                     . 'CONTRATO WHERE ID_CONTRATO = ' . $idContrato . '';
@@ -1238,7 +1444,7 @@ class Search {
         }
     }
 
-    public function BuscaObs($idContratoObs) {
+    public static function BuscaObs($idContratoObs) {
         try {
             $sql = 'SELECT ID_OBSERVACOES_EXIGENCIAS FROM '
                     . 'OBSERVACOES_EXIGENCIAS WHERE ID_CONTRATO_OBSERVACOES = ' . $idContratoObs . '';
@@ -1256,7 +1462,7 @@ class Search {
         }
     }
 
-    public function BuscaGarantiaUpdate($id) {
+    public static function BuscaGarantiaUpdate($id) {
         try {
 
             $sql = 'SELECT * FROM GARANTIA WHERE ID_CONTRATO_GARANTIA = ' . $id;
@@ -1278,7 +1484,7 @@ class Search {
         }
     }
 
-    public function BuscaObjetoUpdate($id) {
+    public static function BuscaObjetoUpdate($id) {
         try {
 
             $sql = 'SELECT * FROM OBJETO WHERE ID_CONTRATO_OBJETO = ' . $id;
@@ -1301,7 +1507,7 @@ class Search {
         }
     }
 
-    public function BuscaObservacaoUpdate($id) {
+    public static function BuscaObservacaoUpdate($id) {
         try {
 
             $sql = 'SELECT * FROM OBSERVACOES_EXIGENCIAS WHERE ID_CONTRATO_OBSERVACOES = ' . $id;
@@ -1324,7 +1530,7 @@ class Search {
         }
     }
 
-    public function buscaEmailUsuario($email) {
+    public static function buscaEmailUsuario($email) {
         try {
             $random = substr(str_shuffle(str_repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 5)), 0, 15);
             $sql = 'SELECT * FROM USUARIO WHERE EMAIL_USUARIO = "' . $email . '"';
@@ -1349,7 +1555,7 @@ class Search {
         }
     }
 
-    public function buscaPrivateToken($token) {
+    public static function buscaPrivateToken($token) {
         try {
             $sql = 'SELECT * FROM RECUPERAR_SENHA WHERE PRIVATE_TOKEN = "' . $token . '" AND ID_STATUS_ALTERAR = 1';
             $ssql = Conexao::getInstance()->prepare($sql);

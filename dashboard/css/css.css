@@ -286,15 +286,30 @@ body{
 }
 
 .pesquisar_painel{  
-    border-radius:10px;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
+    border-radius:8px;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
     box-shadow: 1px 1px 2px #333333;    
     -moz-box-shadow: 1px 1px 2px #333333;
     -webkit-box-shadow: 1px 1px 2px #333333;
     background: #fff; 
     border:1px solid #000000;
     width:200px;
+    height: 24.1px;
+    text-align: center;
+    outline: none;
+}
+.data_painel{  
+    border-radius:8px;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    box-shadow: 1px 1px 2px #333333;    
+    -moz-box-shadow: 1px 1px 2px #333333;
+    -webkit-box-shadow: 1px 1px 2px #333333;
+    background: #fff; 
+    border:1px solid #000000;
+    width:200px;
+    height: 24px;
     text-align: center;
     outline: none;
 }
@@ -338,6 +353,24 @@ body{
 
     height:6vh;   
     margin:0 auto;
+}
+.btn-download{
+    width: 10vw;
+    height: 25px;
+    margin: 0 auto;
+    border-radius: 8px;
+    background: red;
+    color: #fff
+    
+}
+.btn-email{
+    width: 10vw;
+    height: 25px;
+    margin: 0 auto;
+    border-radius: 8px;
+    background: #0399D4;
+    color: #fff
+    
 }
 .bt-login{
     width:20vw;
@@ -1362,7 +1395,7 @@ body{
 .desc-contratante-panel{
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 15vw;
+    width: 10vw;
     display: block;
     overflow: hidden;    
 }
