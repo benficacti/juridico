@@ -404,4 +404,24 @@ class Insert {
         }
     }
 
+    public static function cadastrarAlert($emailAlert, $diaAlert, $diaQtdAlert) {
+        
+        try {
+
+            $ins = "INSERT INTO `alertas`(`EMAILDESTINATARIO`,`DIASPARAVENCER`,`DIARECEBEREMAIL`)"
+                    . "VALUES(:EMAILDESTINATARIO,:DIASPARAVENCER,:DIARECEBEREMAIL)";
+            $inss = Conexao::getInstance()->prepare($ins);
+            $inss->bindParam(":EMAILDESTINATARIO", $emailAlert);
+            $inss->bindParam(":DIASPARAVENCER", $diaQtdAlert);
+            $inss->bindParam(":DIARECEBEREMAIL", $diaAlert);
+            if ($inss->execute()) {
+
+                return true;
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao cadastrarAlert';
+        }
+    }
+
 }

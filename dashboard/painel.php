@@ -21,7 +21,7 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
         <script type="text/javascript" src="js/jquery-1.6.4.js"></script>        
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
         <script src="js/jquery.min.js"></script>
-        
+
         <style>
             h1{
                 text-align: center;
@@ -46,8 +46,6 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
             <nav>
                 <div class="barra-lateral-nav">
                     <?php include('includes/menu.php'); ?>
-
-
                 </div>
             </nav>
         </div>
@@ -57,14 +55,14 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
             <article class="article-contract-fim" data-aos="zoom-in" >
 
                 <div class="panels ">
-                    <input type="text" class="pesquisar_painel" placeholder="FILTRAR" id="busca" onkeyup="callApi();" style="margin: 3px">
+                    <input type="text" class="pesquisar_painel" placeholder="FILTRAR" id="busca" onkeyup="callApi();" style="margin: 3px">              
                     <div class="line-contract-panel"> 
-                        <div class="title-contract-panel">
+                        <div class="title-contract-panel" style="width: 62%">
                             <label class="lbl-title-panel">
                                 PRÓXIMOS VENCIMENTOS
                             </label>
-
                         </div>
+                        <span class="alert_painel" id="id_do_elemento" style="background: #ff0000; padding: 3px; font-weight: bold; color: #FFF"></span>
                     </div>
                     <div class="line-contract-panel">
                         <input type="number" class="pesquisar_painel" placeholder="Dias à vencer" id="idBuscaPorDia" onkeyup="buscaPorDia()" style="margin: 3px">
@@ -222,6 +220,21 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                 }
             }
 
+            function contratosAlerta() {
+                
+                $.ajax({
+                    url: "api/api.php",
+                    method: "post",
+
+                    data: {request: "contratosAlerta"
+
+                    },
+                    success: function (data) {
+                        document.getElementById("id_do_elemento").innerHTML = data;
+                    }
+                });
+            }
+
 
             function imprimir() {
                 //pega o Html da DIV
@@ -242,6 +255,16 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
 
                 window.close();
             }
+
+
+            var piscando = document.getElementById('id_do_elemento');
+            var interval = window.setInterval(function () {
+                if (piscando.style.visibility === 'hidden') {
+                    piscando.style.visibility = 'visible';
+                } else {
+                    piscando.style.visibility = 'hidden';
+                }
+            }, 900);
 
 
         </script>

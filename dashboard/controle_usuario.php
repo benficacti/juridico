@@ -54,7 +54,7 @@ include './classes/Search.class.php';
             <article class="article-contrato" data-aos="zoom-in" id="result">
 
                 <header class="header-article-contrato">
-                    <label class="title-contrato">CADASTRO CONTRATO</label>
+                    <label class="title-contrato">CADASTRAR NOVO USUÁRIO</label>
 
                 </header>
                 <span style="margin-left: 2vw;">

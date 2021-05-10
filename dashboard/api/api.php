@@ -135,6 +135,20 @@ if ($request == 'proximos_vencimentos') {
     echo Search::proximosVencimentos($vencimento, $busca);
 }
 
+if ($request == 'callApiRegisterAlert') {
+    
+    $emailAlert = (null !== (filter_input(INPUT_POST, 'emailAlert'))) ? filter_input(INPUT_POST, 'emailAlert') : 0;
+    $diaAlert = (null !== (filter_input(INPUT_POST, 'diaAlert'))) ? filter_input(INPUT_POST, 'diaAlert') : 0;
+    $diaQtdAlert = (null !== (filter_input(INPUT_POST, 'diaQtdAlert'))) ? filter_input(INPUT_POST, 'diaQtdAlert') : 0;
+    //echo Search::cadastrarAlerta($emailAlert, $diaAlert, $diaQtdAlert);
+    echo Insert::cadastrarAlert($emailAlert, $diaAlert, $diaQtdAlert);
+}
+
+if ($request == 'contratosAlerta') {
+    
+    echo Search::cadastrarAlerta();
+}
+
 if ($request == 'proximos_vencimentos_por_dia') {
     
     $dias = (null !== (filter_input(INPUT_POST, 'dias'))) ? filter_input(INPUT_POST, 'dias') : 0;
