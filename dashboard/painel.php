@@ -21,6 +21,12 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
         <script type="text/javascript" src="js/jquery-1.6.4.js"></script>        
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
         <script src="js/jquery.min.js"></script>
+        
+        <style>
+            h1{
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
         <!-- Conteúdo -->
@@ -126,7 +132,7 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                         <div id="result">
 
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -216,13 +222,25 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                 }
             }
 
+
             function imprimir() {
-                var conteudo = document.getElementById('idImpressao').innerHTML;
-                tela_impressao = window.open('about:blank');
-                
-                tela_impressao.document.write(conteudo);
-                tela_impressao.window.print();
-                tela_impressao.window.close();
+                //pega o Html da DIV
+                var divElements = document.getElementById('idImpressao').innerHTML;
+                //pega o HTML de toda tag Body
+                var oldPage = document.body.innerHTML;
+
+                //Alterna o body 
+                document.body.innerHTML =
+                        "<html><head><title></title></head><body><h1>Listagem de Contratos</h1>" +
+                        divElements + "</body>";
+
+                //Imprime o body atual
+                window.print();
+
+                //Retorna o conteudo original da página. 
+                document.body.innerHTML = oldPage;
+
+                window.close();
             }
 
 
