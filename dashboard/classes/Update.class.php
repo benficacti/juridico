@@ -206,7 +206,7 @@ class Update {
                         $setor = Search::descSetor($idSetor);
                         $nome = Search::descSetorJson();
                         $json = json_decode($nome);
-                        
+
                         //VERIFICAR SE POSSUI ADITAMENTO
                         $possuiAditamento = Search::possuiAditamento($id_contrato);
 
@@ -482,7 +482,7 @@ class Update {
                             <label class="title-info-contract">
                                 SETOR:
                             </label>
-                            <input type="hidden" id="setorAtual" value="'.$setor.'">
+                            <input type="hidden" id="setorAtual" value="' . $setor . '">
                             <input type="hidden" id="change_fimvigencia" name="" value="true">
                             <div class="span-group-img">
                                 <div class="figure-pencil">
@@ -491,14 +491,14 @@ class Update {
                                 
                             </div>
                             <div class="span-group-input" id="span-fimvigencia">
-                                <input type="text" list="list_setor" id="id_setor" value="'.$setor.'" class="input-update" name="valorContrato">
+                                <input type="text" list="list_setor" id="id_setor" value="' . $setor . '" class="input-update" name="valorContrato">
                                  <datalist id="list_setor">';
-                                   
-                                        foreach ($json as $registro):
-                                            echo '<option>'.$registro->NOME.'</option>';
-                                        endforeach;
-                                    
-                                 '</datalist>
+
+                        foreach ($json as $registro):
+                            echo '<option>' . $registro->NOME . '</option>';
+                        endforeach;
+
+                        '</datalist>
                             </div>
                             
                         </div>
@@ -789,15 +789,30 @@ class Update {
     }
 
     public static function updatesetor($idcontrato, $descSetor) {
-        
+
         try {
             $idSetor = Search::idSetor($descSetor);
-            
+
             $upd = 'UPDATE `contrato` SET `ID_SETOR_CONTRATO` = "' . $idSetor . '"'
                     . 'WHERE ID_CONTRATO = ' . $idcontrato;
             $updd = Conexao::getInstance()->prepare($upd);
             if ($updd->execute()) {
                 return '00';
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function updateAlert($emailAlert, $diaAlert, $diaQtdAlert) {
+
+
+        try {
+
+            $upd = 'UPDATE `alertas` SET `emailDestinatario`= "'.$emailAlert.'" ,`diasParaVencer`= "'.$diaQtdAlert.'",`diaReceberEmail`= "'.$diaAlert.'" WHERE 1';
+            $updd = Conexao::getInstance()->prepare($upd);
+            if ($updd->execute()) {
+                return true;
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();

@@ -269,13 +269,13 @@ class Search {
             echo $exc->getTraceAsString();
         }
     }
-    
+
     public static function contratos_por_periodo($dataIni, $dataFim) {
 
         $sql = "SELECT * FROM CONTRATO  
                 INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO 
                 WHERE VENCIMENTO_CONTRATO  
-                BETWEEN '".$dataIni."' AND '".$dataFim."' AND ID_STATUS_CONTRATO = 1 ORDER BY VENCIMENTO_CONTRATO";
+                BETWEEN '" . $dataIni . "' AND '" . $dataFim . "' AND ID_STATUS_CONTRATO = 1 ORDER BY VENCIMENTO_CONTRATO";
         $sqll = Conexao::getInstance()->prepare($sql);
 
 
@@ -377,7 +377,7 @@ class Search {
         $sql = "SELECT * FROM CONTRATO  
                 INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO 
                 WHERE VENCIMENTO_CONTRATO  
-                BETWEEN CURDATE() AND (CURDATE() + INTERVAL '".$dias."' DAY) "
+                BETWEEN CURDATE() AND (CURDATE() + INTERVAL '" . $dias . "' DAY) "
                 . "AND ID_STATUS_CONTRATO = 1 "
                 . "ORDER BY VENCIMENTO_CONTRATO";
         $sqll = Conexao::getInstance()->prepare($sql);
@@ -2169,20 +2169,25 @@ class Search {
         }
     }
 
+    public static function panelAlert() {
 
-    public static function cadastrarAlerta() {
-        
         try {
             $diaQtdAlert = Search::diasAlerta();
 
-            $sql = 'SELECT  *, (
-                                SELECT COUNT(c.ID_CONTRATO) FROM contrato c 
-                                WHERE c.VENCIMENTO_CONTRATO  
-                                BETWEEN CURDATE() AND (CURDATE() + INTERVAL "'.$diaQtdAlert.'" DAY) AND c.ID_STATUS_CONTRATO = 1
-                                        )QTD FROM CONTRATO 				
+            $sql = 'SELECT  
+                                ID_CONTRATO,
+                                (
+                                SELECT a.diasParaVencer FROM alertas a
+                                )DIASPARAVENCER,
+    						   (
+                                    SELECT COUNT(cs.ID_CONTRATO) FROM contrato cs 
+                                    WHERE cs.VENCIMENTO_CONTRATO  
+                                    BETWEEN CURDATE() AND (CURDATE() + INTERVAL "' . $diaQtdAlert . '" DAY) AND cs.ID_STATUS_CONTRATO = 1
+                                )QTD 
+                                FROM CONTRATO 				
                                 INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO 
                                 WHERE VENCIMENTO_CONTRATO  
-                                BETWEEN CURDATE() AND (CURDATE() + INTERVAL "'.$diaQtdAlert.'" DAY) AND ID_STATUS_CONTRATO = 1 
+                                BETWEEN CURDATE() AND (CURDATE() + INTERVAL "' . $diaQtdAlert . '" DAY) AND ID_STATUS_CONTRATO = 1 
                                 ORDER BY VENCIMENTO_CONTRATO';
             $lqs = Conexao::getInstance()->prepare($sql);
 
@@ -2193,9 +2198,11 @@ class Search {
                     foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
 
                         $inf [] = array(
-                            "IDCONTRATO"=>$dados->ID_CONTRATO,
-                            "QTDCONTRATO"=>$dados->QTD
+                            "IDCONTRATO" => $dados->ID_CONTRATO,
+                            "QTDCONTRATO" => $dados->QTD,
+                            "DIASPARAVENCER" => $dados->DIASPARAVENCER
                         );
+                        return $json = json_encode($inf);
                     }
                 }
             }
@@ -2206,9 +2213,8 @@ class Search {
     }
 
     public static function diasAlerta() {
-        
+
         try {
-            $diaQtdAlert = Search::diasAlerta();
 
             $sql = 'SELECT diasParaVencer FROM ALERTAS ';
             $lqs = Conexao::getInstance()->prepare($sql);
@@ -2226,6 +2232,52 @@ class Search {
         } catch (Exception $ex) {
             echo $ex->getMessage();
             echo 'Falha ao listar diasAlerta';
+        }
+    }
+
+    public static function verificarAlert() {
+
+        try {
+
+            $sql = 'SELECT * FROM ALERTAS ';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    return true;
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao verificarAlert';
+        }
+    }
+
+    public static function listarAlertas() {
+
+
+        try {
+
+            $sql = 'SELECT * FROM ALERTAS ';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $inf [] = array(
+                        'EMAIL' =>$dados->emailDestinatario,
+                        'DIAPARAVENCER' =>$dados->diasParaVencer,
+                        'DIARECEBEREMAIL' =>$dados->diaReceberEmail
+                        );
+                    }
+                    return $json = json_encode($inf);
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao listarAlertas';
         }
     }
 

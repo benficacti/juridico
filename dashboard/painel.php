@@ -62,7 +62,8 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                                 PRÓXIMOS VENCIMENTOS
                             </label>
                         </div>
-                        <span class="alert_painel" id="id_do_elemento" style="background: #ff0000; padding: 3px; font-weight: bold; color: #FFF"></span>
+                        <span class="alert_painel" id="id_do_elemento" value="" onclick="buscaPorDiaAlerta()" style="background: #ff0000; padding: 3px; font-weight: bold; color: #FFF"></span>
+                        <input type="hidden" value="" id="idQtdDiasParaVencer">
                     </div>
                     <div class="line-contract-panel">
                         <input type="number" class="pesquisar_painel" placeholder="Dias à vencer" id="idBuscaPorDia" onkeyup="buscaPorDia()" style="margin: 3px">
@@ -219,7 +220,8 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                     alert('Verifica as datas');
                 }
             }
-
+            
+            contratosAlerta();
             function contratosAlerta() {
                 
                 $.ajax({
@@ -230,9 +232,38 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
 
                     },
                     success: function (data) {
-                        document.getElementById("id_do_elemento").innerHTML = data;
+                        //document.getElementById("id_do_elemento").innerHTML = data;
+                        var qtd = '';
+                        var dias_para_vencer = '';
+                        var obj = JSON.parse(data);
+                        obj.forEach(function( name, value){
+                            qtd = name.QTDCONTRATO;
+                            dias_para_vencer = name.DIASPARAVENCER;
+                        });
+                        document.getElementById('id_do_elemento').innerHTML = 'Exitem '+ qtd +' Contratos à vencer nos próximos '+ dias_para_vencer + ' dias!';
+                        document.getElementById('idQtdDiasParaVencer').value = dias_para_vencer;
                     }
                 });
+            }
+            
+            function buscaPorDiaAlerta() {
+                var idBuscaPorDia = document.getElementById('idQtdDiasParaVencer').value;
+                if (idBuscaPorDia.length > 0) {
+                    $.ajax({
+                        url: "api/api.php",
+                        method: "post",
+
+                        data: {request: "proximos_vencimentos_por_dia",
+                            dias: idBuscaPorDia
+
+                        },
+                        success: function (data) {
+                            document.getElementById("result").innerHTML = data;
+                        }
+                    });
+                } else {
+                    callApi();
+                }
             }
 
 

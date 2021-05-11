@@ -135,6 +135,19 @@ if ($request == 'proximos_vencimentos') {
     echo Search::proximosVencimentos($vencimento, $busca);
 }
 
+if ($request == 'listarAlert') {
+    
+    echo Search::listarAlertas();
+}
+
+if ($request == 'callApiEditAlert') {
+    
+    $emailAlert = (null !== (filter_input(INPUT_POST, 'emailAlert'))) ? filter_input(INPUT_POST, 'emailAlert') : 0;
+    $diaAlert = (null !== (filter_input(INPUT_POST, 'diaAlert'))) ? filter_input(INPUT_POST, 'diaAlert') : 0;
+    $diaQtdAlert = (null !== (filter_input(INPUT_POST, 'diaQtdAlert'))) ? filter_input(INPUT_POST, 'diaQtdAlert') : 0;
+    echo Update::updateAlert($emailAlert, $diaAlert, $diaQtdAlert);
+}
+
 if ($request == 'callApiRegisterAlert') {
     
     $emailAlert = (null !== (filter_input(INPUT_POST, 'emailAlert'))) ? filter_input(INPUT_POST, 'emailAlert') : 0;
@@ -146,7 +159,7 @@ if ($request == 'callApiRegisterAlert') {
 
 if ($request == 'contratosAlerta') {
     
-    echo Search::cadastrarAlerta();
+    echo Search::panelAlert();
 }
 
 if ($request == 'proximos_vencimentos_por_dia') {
