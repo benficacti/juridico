@@ -2212,6 +2212,42 @@ class Search {
         }
     }
 
+    public static function emailAlert() {
+
+        try {
+            $info ='';
+            $sql = 'SELECT 
+                        NUMERO_CONTRATO, 
+                    ( 
+                        SELECT 
+                        a.diasParaVencer FROM alertas a 
+                    )DIASPARAVENCER 
+                    FROM CONTRATO 
+                    INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO
+                    WHERE VENCIMENTO_CONTRATO BETWEEN CURDATE() AND (CURDATE() + INTERVAL 90 DAY) 
+                    AND ID_STATUS_CONTRATO = 1 
+                    AND (SELECT Al.diaReceberEmail FROM alertas AL) = ( SELECT WEEKDAY(CURDATE()) ) 
+                    ORDER BY VENCIMENTO_CONTRATO';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+
+                        $info = array('NUMERO_CONTRATO' => $dados->NUMERO_CONTRATO);
+                    }
+                    return $json = json_encode($info);
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao listar emailAlert';
+        }
+    }
+
     public static function diasAlerta() {
 
         try {
@@ -2267,9 +2303,9 @@ class Search {
                 if ($row > 0) {
                     foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
                         $inf [] = array(
-                        'EMAIL' =>$dados->emailDestinatario,
-                        'DIAPARAVENCER' =>$dados->diasParaVencer,
-                        'DIARECEBEREMAIL' =>$dados->diaReceberEmail
+                            'EMAIL' => $dados->emailDestinatario,
+                            'DIAPARAVENCER' => $dados->diasParaVencer,
+                            'DIARECEBEREMAIL' => $dados->diaReceberEmail
                         );
                     }
                     return $json = json_encode($inf);
