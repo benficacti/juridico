@@ -62,7 +62,10 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                                 PRÓXIMOS VENCIMENTOS
                             </label>
                         </div>
-                        <span class="alert_painel" id="id_do_elemento" value="" onclick="buscaPorDiaAlerta()" style="background: #ff0000; padding: 3px; font-weight: bold; color: #FFF"></span>
+                        <div id="class_ocultar">
+                            <span class="alert_painel" id="id_do_elemento" value="" onclick="buscaPorDiaAlerta()" style="background: #ff0000; padding: 3px; font-weight: bold; color: #FFF"></span>
+                        </div>
+
                         <input type="hidden" value="" id="idQtdDiasParaVencer">
                     </div>
                     <div class="line-contract-panel">
@@ -72,7 +75,7 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                         <label>Fim:</label>
                         <input type="date" class="data_painel" id="idDataFim" onblur="buscaPorData()">
                         <button class="btn-download" onclick="imprimir()">Download pdf</button>
-                        <button class="btn-email">Enviar Email</button>
+                        <!--<button class="btn-email">Enviar Email</button>-->
                     </div>
 
                     <div id="idImpressao">
@@ -147,9 +150,13 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
                                         AOS.init();
+
+
         </script>
 
         <script  type="text/javascript">
+
+
             $("#cadastrar").click(function () {
                 location.href = 'cadastro_contrato.php';
             });
@@ -220,10 +227,10 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                     alert('Verifica as datas');
                 }
             }
-            
+
             contratosAlerta();
             function contratosAlerta() {
-                
+
                 $.ajax({
                     url: "api/api.php",
                     method: "post",
@@ -236,16 +243,18 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                         var qtd = '';
                         var dias_para_vencer = '';
                         var obj = JSON.parse(data);
-                        obj.forEach(function( name, value){
+
+                        obj.forEach(function (name, value) {
                             qtd = name.QTDCONTRATO;
                             dias_para_vencer = name.DIASPARAVENCER;
                         });
-                        document.getElementById('id_do_elemento').innerHTML = 'Exitem '+ qtd +' Contratos à vencer nos próximos '+ dias_para_vencer + ' dias!';
+                        document.getElementById('id_do_elemento').innerHTML = 'Exitem ' + qtd + ' Contratos à vencer nos próximos ' + dias_para_vencer + ' dias!';
                         document.getElementById('idQtdDiasParaVencer').value = dias_para_vencer;
+                        ocultarAlert(qtd);
                     }
                 });
             }
-            
+
             function buscaPorDiaAlerta() {
                 var idBuscaPorDia = document.getElementById('idQtdDiasParaVencer').value;
                 if (idBuscaPorDia.length > 0) {
@@ -288,6 +297,7 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
             }
 
 
+            //EFEITO DE ALERTA 
             var piscando = document.getElementById('id_do_elemento');
             var interval = window.setInterval(function () {
                 if (piscando.style.visibility === 'hidden') {
@@ -296,6 +306,16 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                     piscando.style.visibility = 'hidden';
                 }
             }, 900);
+
+
+            $("#class_ocultar").fadeOut();
+            function ocultarAlert(qtd) {
+                if (qtd.length > 0) {
+                    $("#class_ocultar").fadeIn();
+                }
+
+            }
+
 
 
         </script>
