@@ -2179,7 +2179,7 @@ class Search {
                                 (
                                 SELECT a.diasParaVencer FROM alertas a
                                 )DIASPARAVENCER,
-    						   (
+                                (
                                     SELECT COUNT(cs.ID_CONTRATO) FROM contrato cs 
                                     WHERE cs.VENCIMENTO_CONTRATO  
                                     BETWEEN CURDATE() AND (CURDATE() + INTERVAL "' . $diaQtdAlert . '" DAY) AND cs.ID_STATUS_CONTRATO = 1
@@ -2215,16 +2215,22 @@ class Search {
     public static function emailAlert() {
 
         try {
-            $info ='';
+            $diaQtdAlert = Search::diasAlerta();
             $sql = 'SELECT 
                         NUMERO_CONTRATO, 
                     ( 
                         SELECT 
                         a.diasParaVencer FROM alertas a 
-                    )DIASPARAVENCER 
+                    )DIASPARAVENCER,
+                    (
+                      SELECT COUNT(cs.ID_CONTRATO) FROM contrato cs 
+                        WHERE cs.VENCIMENTO_CONTRATO  
+                        BETWEEN CURDATE() AND (CURDATE() + INTERVAL "' . $diaQtdAlert . '" DAY) 
+                        AND cs.ID_STATUS_CONTRATO = 1
+                     )QTD_CONTRATOS
                     FROM CONTRATO 
                     INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO
-                    WHERE VENCIMENTO_CONTRATO BETWEEN CURDATE() AND (CURDATE() + INTERVAL 90 DAY) 
+                    WHERE VENCIMENTO_CONTRATO BETWEEN CURDATE() AND (CURDATE() + INTERVAL "' . $diaQtdAlert . '" DAY) 
                     AND ID_STATUS_CONTRATO = 1 
                     AND (SELECT Al.diaReceberEmail FROM alertas AL) = ( SELECT WEEKDAY(CURDATE()) ) 
                     ORDER BY VENCIMENTO_CONTRATO';
@@ -2237,9 +2243,15 @@ class Search {
                     foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
 
 
-                        $info = array('NUMERO_CONTRATO' => $dados->NUMERO_CONTRATO);
+                        $info = array(
+                            'NUMERO_CONTRATO' => $dados->NUMERO_CONTRATO,
+                            'DIAS_PARA_VENCER' => $dados->DIASPARAVENCER,
+                            'DIAS_PARA_VENCER' => $dados->DIASPARAVENCER
+                        );
                     }
-                    return $json = json_encode($info);
+                    $json = json_encode($info);
+
+                    header("Location: emailAlerta.php?dataJson=".$json);
                 }
             }
         } catch (Exception $ex) {

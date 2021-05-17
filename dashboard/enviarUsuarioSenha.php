@@ -15,7 +15,7 @@
 $user = filter_input(INPUT_GET, 'usuario');
 $password = filter_input(INPUT_GET, 'senha');
 $emailGet = filter_input(INPUT_GET, 'email');
-$smtp = "smtp.benficabbtt.com.br";
+$smtp = "email-ssl.com.br";
 $usuario = "jose.rubens@benficabbtt.com.br";
 $senha = "System2020";
 require_once 'smtp/smtp.php';
