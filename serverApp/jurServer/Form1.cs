@@ -27,7 +27,7 @@ namespace jurServer
             try
             {
                 
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://192.168.0.15/juridico/dashboard/apiServer/api.php");
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://192.168.0.185:8080/juridico/dashboard/apiServer/api.php");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
