@@ -2275,7 +2275,7 @@ class Search {
                     }
                 }
             } else if ($diaDoAlerta == $diaSemana and $statusAlert == '2') {
-                $info = array('RESULT' => 'TRUE');
+                $info = array('RESULT' => 'ESPERA');
                 echo json_encode($info);
             } else {
                 Update::alterarStatusEmail_2();
