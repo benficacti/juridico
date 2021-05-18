@@ -46,7 +46,8 @@ namespace jurServer
                 {
                     var result = streamReader.ReadToEnd();
                     dynamic json = JsonConvert.DeserializeObject(result);
-                    lblResposta.Text = json.NUMERO_CONTRATO;
+
+                    lblResposta.Text = json.RESULT;
                 }
 
             }

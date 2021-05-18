@@ -809,7 +809,36 @@ class Update {
 
         try {
 
-            $upd = 'UPDATE `alertas` SET `emailDestinatario`= "'.$emailAlert.'" ,`diasParaVencer`= "'.$diaQtdAlert.'",`diaReceberEmail`= "'.$diaAlert.'" WHERE 1';
+            $upd = 'UPDATE `alertas` SET `emailDestinatario`= "' . $emailAlert . '" ,`diasParaVencer`= "' . $diaQtdAlert . '",`diaReceberEmail`= "' . $diaAlert . '" WHERE 1';
+            $updd = Conexao::getInstance()->prepare($upd);
+            if ($updd->execute()) {
+                return true;
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function alterarStatusEmail() {
+
+        try {
+
+            $upd = 'UPDATE `alertas` SET `idStatus`= "2"';
+            $updd = Conexao::getInstance()->prepare($upd);
+            if ($updd->execute()) {
+                return true;
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+    
+    
+     public static function alterarStatusEmail_2() {
+
+        try {
+
+            $upd = 'UPDATE `alertas` SET `idStatus`= "1"';
             $updd = Conexao::getInstance()->prepare($upd);
             if ($updd->execute()) {
                 return true;

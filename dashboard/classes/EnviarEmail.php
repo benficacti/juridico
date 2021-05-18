@@ -1,45 +1,66 @@
 <?php
 
-date_default_timezone_set('America/Fortaleza');
-require './PHPMailer/PHPMailer.php';
-require './PHPMailer/SMTP.php';
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of EnviarEmail
+ *
+ * @author USUARIO
+ */
+class EnviarEmail {
+
+    //put your code here
+
+    public static function sendMailm($infoJson, $emailCadastro) {
 
 
-$mail = new PHPMailer\PHPMailer();
-$mail->isSMTP();
+        try {
+
+
+
+            date_default_timezone_set('America/Fortaleza');
+            require '../PHPMailer/PHPMailer.php';
+            require '../PHPMailer/SMTP.php';
+
+
+            $mail = new PHPMailer\PHPMailer();
+            $mail->isSMTP();
 
 //$mail->Port = "465";
 //$mail->Host = "smtp.gmail.com";
-$mail->Port = "465";
-$mail->Host = "email-ssl.com.br";
-$mail->isHTML(true);
-$mail->SMTPSecure = "ssl";
-$mail->Mailer = "smtp";
-$mail->CharSet = "UTF-8";
+            $mail->Port = "465";
+            $mail->Host = "email-ssl.com.br";
+            $mail->isHTML(true);
+            $mail->SMTPSecure = "ssl";
+            $mail->Mailer = "smtp";
+            $mail->CharSet = "UTF-8";
 
-$mail->SMTPAuth = true;
-$mail->Username = 'jose.rubens@benficabbtt.com.br';
-$mail->Password = 'System2020';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'jose.rubens@benficabbtt.com.br';
+            $mail->Password = 'System2020';
 
 
-$mail->SingleTo = true;
+            $mail->SingleTo = true;
 
 
 //INICIO
-//$dataJson = filter_input(INPUT_GET, 'dataJson');
-$contrato = '115';
+            $contrato = '';
 
-/*
-  foreach (json_decode($dataJson) as $dados){
-  $contrato.= '<br>'.$dados->NUMERO_CONTRATO.'<br>';
-  }
- */
 
-$dias = '90'; //filter_input(INPUT_GET, 'nome');
-$emailGet = 'jose.rubens@benficabbtt.com.br'; //filter_input(INPUT_GET, 'email');
-$nameEmployee = '000'; //filter_input(INPUT_GET, 'func');
-$img = 'https://urbano.benficabbtt.com.br/wp-content/uploads/2015/11/logo-benfica.png';
-$hora = date('d/m/Y - H:i:s');
+            foreach (json_decode(json_encode($infoJson)) as $dados) {
+                $contrato .= $dados->NUMERO_CONTRATO . '<br>';
+            }
+
+
+            $dias = '90'; //filter_input(INPUT_GET, 'nome');
+            $emailGet = $emailCadastro;
+            $nameEmployee = '000'; //filter_input(INPUT_GET, 'func');
+            $img = 'https://urbano.benficabbtt.com.br/wp-content/uploads/2015/11/logo-benfica.png';
+            $hora = date('d/m/Y - H:i:s');
 
 
 //FIM
@@ -47,10 +68,10 @@ $hora = date('d/m/Y - H:i:s');
 
 
 
-$mail->From = 'jose.rubens@benficabbtt.com.br';
-$mail->FromName = "Contros Juridico Benfica BBTT";
-$mail->addAddress($emailGet);
-$mail->Subject = "Sistema Gerenciador de Contratos Juridico Benfica BBTT";
+            $mail->From = 'jur@benficabbtt.com.br';
+            $mail->FromName = "Contratos Juridico Benfica BBTT";
+            $mail->addAddress($emailGet);
+            $mail->Subject = "Sistema Gerenciador de Contratos Juridico Benfica BBTT";
 
 
 
@@ -59,7 +80,7 @@ $mail->Subject = "Sistema Gerenciador de Contratos Juridico Benfica BBTT";
 
 
 
-$mail->Body = '<div class="es-wrapper-color">
+            $mail->Body = '<div class="es-wrapper-color">
         <!--[if gte mso 9]>
 			<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
 				<v:fill type="tile" color="#f6f6f6"></v:fill>
@@ -131,7 +152,7 @@ $mail->Body = '<div class="es-wrapper-color">
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td align="left" class="esd-block-text">
-                                                                                        <p style="color: #0570a4;">Olá, esse é um aviso automático para contratos com vencimento dentro de: ' . $dias . ' dias</p>
+                                                                                        <p style="color: #0570a4;">Esse é um aviso automático para contratos com vencimento dentro de: ' . $dias . ' dias</p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -144,7 +165,7 @@ $mail->Body = '<div class="es-wrapper-color">
                                                                             <tbody>
                                                                                 <tr width="600">
                                                                                     <td align="left" class="esd-block-text" bgcolor="#efefef" width="600">
-                                                                                        <p style="color: #232728; font-size: 11px;"><br><strong>Contratos N°:</strong>&nbsp; ' . $contrato . '&nbsp; &nbsp; &nbsp;<br><strong>DATA AVISO:</strong>&nbsp; ' . $hora . '<br><br><br></p>
+                                                                                        <p style="color: #232728; font-size: 11px;"><br><strong>Contratos N°:</strong>&nbsp; <br>' . $contrato . '&nbsp; &nbsp; &nbsp;<br><strong>DATA AVISO:</strong>&nbsp; ' . $hora . '<br><br><br></p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -318,9 +339,17 @@ $mail->Body = '<div class="es-wrapper-color">
 
 
 
-if (!$mail->send()) {
-    echo $mail->ErrorInfo;
-} else {
-    echo '<script type="text/javascript">window.history.back();</script>';
-}
+            if (!$mail->send()) {
+                $info = array('RESULT' => $mail->ErrorInfo);
+                echo json_encode($info);
+            } else {
+                $info = array('RESULT' => "true");
+                Update::alterarStatusEmail();
+                echo json_encode($info);
+            }
+        } catch (Exception $ex) {
+            
+        }
+    }
 
+}

@@ -5,6 +5,10 @@
 /* CLASS CONNECTION */
 include ('../persistencia/Conexao.php');
 include ('../classes/Search.class.php');
+include ('../classes/EnviarEmail.php');
+include ('../classes/Update.class.php');
+
+
 
 if (isset($_SERVER["HTTP_ORIGIN"])) {
     // You can decide if the origin in $_SERVER['HTTP_ORIGIN'] is something you want to allow, or as we do here, just allow all
@@ -46,10 +50,9 @@ if (strlen($json_params) > 0 && isValidJSON($json_params)) {
 
                 $info = Search::emailAlert();
                 echo $info;
-                /*
-                  $info = array('RESULT' => "true");
-                  echo json_encode($info);
-                 */
+                //$info = array('RESULT' => "true");
+                //echo json_encode($info);
+
                 break;
 
             default:
