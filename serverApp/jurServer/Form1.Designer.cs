@@ -41,7 +41,7 @@ namespace jurServer
             // 
             // request
             // 
-            this.request.Interval = 120000;
+            this.request.Interval = 2000;
             this.request.Tick += new System.EventHandler(this.request_Tick);
             // 
             // lblResposta
