@@ -2224,8 +2224,12 @@ class Search {
             if ($diaDoAlerta == $diaSemana and $statusAlert == '1') {
 
 
-                $sql = 'SELECT 
+                $sql = '
+                    SELECT
+                        DISTINCT
                         NUMERO_CONTRATO,
+                        CONTRATANTE_CONTRATO,
+                        CONTRATADO_CONTRATO,
                     ( 
                         SELECT 
                         a.emailDestinatario FROM alertas a 
@@ -2262,7 +2266,8 @@ class Search {
                             $info[] = array(
                                 'NUMERO_CONTRATO' => $dados->NUMERO_CONTRATO,
                                 'DIAS_PARA_VENCER' => $dados->DIASPARAVENCER,
-                                'DIAS_PARA_VENCER' => $dados->DIASPARAVENCER
+                                'CONTRATANTE_CONTRATO' => $dados->CONTRATANTE_CONTRATO,
+                                'CONTRATADO_CONTRATO' => $dados->CONTRATADO_CONTRATO,
                             );
                         }
 

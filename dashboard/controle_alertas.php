@@ -75,11 +75,11 @@ include './classes/Search.class.php';
                             <select class="input-contract" id="idDiaAlerta">
                                 <option value="0">SEGUNDA-FEIRA</option>
                                 <option value="1">TERÇA-FEIRA</option> 
-                                <option value="3">QUARTA-FEIRA</option>
-                                <option value="4">QUINTA-FEIRA</option>
-                                <option value="5">SEXTA-FEIRA</option>
-                                <option value="6">SABADO-FEIRA</option>
-                                <option value="7">DOMINGO-FEIRA</option>
+                                <option value="2">QUARTA-FEIRA</option>
+                                <option value="3">QUINTA-FEIRA</option>
+                                <option value="4">SEXTA-FEIRA</option>
+                                <option value="5">SABADO-FEIRA</option>
+                                <option value="6">DOMINGO-FEIRA</option>
                             </select>
                         </div>
                     </div>

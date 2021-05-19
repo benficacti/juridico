@@ -49,10 +49,14 @@ class EnviarEmail {
 
 //INICIO
             $contrato = '';
+            $contrante = '';
+            $contratado = '';
 
 
             foreach (json_decode(json_encode($infoJson)) as $dados) {
                 $contrato .= $dados->NUMERO_CONTRATO . '<br>';
+                $contrante .= $dados->CONTRATANTE_CONTRATO . '<br>';
+                $contratado .= $dados->CONTRATADO_CONTRATO . '<br>';
             }
 
 
@@ -162,10 +166,23 @@ class EnviarEmail {
                                                                 <tr>
                                                                     <td class="esd-container-frame" width="600" valign="top" align="center">
                                                                         <table width="100%" cellspacing="0" cellpadding="0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <td align="left" class="esd-block-text" bgcolor="#efefef" width="600"><p style="color: #232728; font-size: 11px;"><br><strong>Contratos N°:</strong></p></td>
+                                                                                    <td align="left" class="esd-block-text" bgcolor="#efefef" width="600"><p style="color: #232728; font-size: 11px;"><br><strong>Contrante:</strong></p></td>
+                                                                                    <td align="left" class="esd-block-text" bgcolor="#efefef" width="600"><p style="color: #232728; font-size: 11px;"><br><strong>Contratado:</strong></p></td>
+                                                                                </tr>
+                                                                            </thead>
                                                                             <tbody>
                                                                                 <tr width="600">
                                                                                     <td align="left" class="esd-block-text" bgcolor="#efefef" width="600">
-                                                                                        <p style="color: #232728; font-size: 11px;"><br><strong>Contratos N°:</strong>&nbsp; <br>' . $contrato . '&nbsp; &nbsp; &nbsp;<br><strong>DATA AVISO:</strong>&nbsp; ' . $hora . '<br><br><br></p>
+                                                                                        <p style="color: #232728; font-size: 11px;">' . $contrato . '<br><strong>DATA AVISO:</strong>&nbsp; ' . $hora . '<br><br><br></p>
+                                                                                    </td>
+                                                                                    <td align="left" class="esd-block-text" bgcolor="#efefef" width="600">
+                                                                                        <p style="color: #232728; font-size: 11px;">' . $contrante . '<br><strong></strong>&nbsp;<br><br><br></p>
+                                                                                    </td>
+                                                                                    <td align="left" class="esd-block-text" bgcolor="#efefef" width="600">
+                                                                                        <p style="color: #232728; font-size: 11px;">' . $contratado . '<br><strong></strong>&nbsp;<br><br><br></p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
