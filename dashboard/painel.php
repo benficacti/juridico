@@ -57,7 +57,7 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                 <div class="panels ">
                     <input type="text" class="pesquisar_painel" placeholder="FILTRAR" id="busca" onkeyup="callApi();" style="margin: 3px">              
                     <div class="line-contract-panel"> 
-                        <div class="title-contract-panel" style="width: 58%">
+                        <div class="title-contract-panel" style="width: 55%">
                             <label class="lbl-title-panel">
                                 PRÓXIMOS VENCIMENTOS
                             </label>
