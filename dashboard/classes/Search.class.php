@@ -926,7 +926,6 @@ class Search {
                         $contratado = $dados->CONTRATADO_CONTRATO;
                         $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
                         $anexo = $dados->URL_IMAGEM_CONTRATO;
-                        $aditamento = $dados->ID_ADITAMENTO_CONTRATO;
                         $idSetor = $dados->ID_SETOR_CONTRATO;
 
                         $descSetor = Search::descSetor($idSetor);
@@ -935,8 +934,9 @@ class Search {
                         $possuiObjeto = Search::verificarObjeto($id_contrato);
 
                         //VERIFICAR SE POSSUI ADITAMENTO
-                        $possuiAditamento = Search::buscarContrato($aditamento);
+                        $possuiAditamento = Search::buscarContrato($id_contrato);
 
+                        //VERIFICAR SE POSSUI ADITAMENTO
                         //VERIFICAR QUAL CONTRATO FOI CRIADO APARTIR DE ADITAMENTO
                         $feito_de_um_aditamento = Search::verificarOrigem($id_contrato);
 
@@ -945,27 +945,22 @@ class Search {
 
                         $ContranteContratoPai = Search::ContratanteContratoPai($feito_de_um_aditamento);
 
-                        $NumerocontratoFilho = Search::NumeroContratoFilho($possuiAditamento);
+                        $NumerocontratoFilho = Search::NumeroContratoFilho($id_contrato);
 
-                        $ContranteContratoFilho = Search::ContratanteContratoFilho($possuiAditamento);
 
                         echo '<tr>';
                         if (strlen($anexo) > 0 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) > 0) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_aditamentos.php?c=' . $id_contrato . '&d=1&n=' . $numero . '"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' "></a></th>';
                         } elseif (strlen($anexo) > 0 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) < 1) {
-                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_aditamentos.php?c=' . $id_contrato . '&d=1&n=' . $numero . '"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . '"></a></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) > 0) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="ver_aditamentos.php?c=' . $id_contrato . '&d=1&n=' . $numero . '"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . '"></a></th>';
                         } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) > 0) {
                             echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
-                        } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) > 0) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
-                        } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) < 1) {
-                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
                         } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) < 1) {
                             echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) < 1) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="ver_aditamentos.php?c=' . $id_contrato . '&d=1&n=' . $numero . '"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: "' . $NumerocontratoFilho . '"></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) > 0) {
                             echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a></th>';
                         } else {
@@ -998,6 +993,59 @@ class Search {
                 }
                 echo '     </table>
                     </div>';
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function infoAditados($contrato, $nContrato) {
+        try {
+
+
+            echo ' 
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract" style="color: #f00;">
+                            CONTRATO PRINCIPAL: '.$nContrato.'
+                        </label>
+                    </div>                    
+                </div>';
+
+
+
+
+            $sql = 'SELECT result.IDCONTRATO IDCONT, ct.NUMERO_CONTRATO FROM contrato ct,  
+                    (
+
+                    SELECT a.ID_CONTRATO_SUBMETIDO IDCONTRATO FROM aditamentos a 
+                    INNER JOIN contrato c ON c.ID_CONTRATO = a.ID_CONTRATO_ADITADO_ADITAMENTO
+                    WHERE a.ID_CONTRATO_ADITADO_ADITAMENTO = ' . $contrato . '
+
+                    )result
+
+
+                    WHERE ct.ID_CONTRATO IN(result.IDCONTRATO)';
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $numeroC = $dados->NUMERO_CONTRATO;
+                        $idCont = $dados->IDCONT;
+
+
+                        echo ' 
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            CONTRATO:
+                                <a href="ver_contrato.php?c=' . $idCont . '&d=1">' . $numeroC . '</a>
+                        </label>
+                    </div>                    
+                </div>';
+                    }
+                }
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -1618,36 +1666,21 @@ class Search {
         }
     }
 
-    public static function buscarContrato($aditamento) {
+    public static function buscarContrato($id_contrato) {
 
         try {
-            $sql = 'SELECT ID_CONTRATO_SUBMETIDO FROM `aditamentos` WHERE ID_ADITAMENTO = "' . $aditamento . '"';
+            $sql = 'SELECT ID_CONTRATO FROM `contrato` '
+                    . 'WHERE ID_STATUS_CONTRATO = 1 '
+                    . 'AND ID_CONTRATO = "' . $id_contrato . '" '
+                    . 'AND ID_ADITAMENTO_CONTRATO > 0';
             $lqs = Conexao::getInstance()->prepare($sql);
-            if ($lqs->execute()) {
-                $row = $lqs->rowCount();
-                if ($row > 0) {
-                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
-                        $idContrato = $dados->ID_CONTRATO_SUBMETIDO;
 
-                        $sql = 'SELECT ID_CONTRATO FROM `contrato` WHERE ID_STATUS_CONTRATO = 1 AND ID_CONTRATO = "' . $idContrato . '"';
-                        $lqs = Conexao::getInstance()->prepare($sql);
-
-                        $lqs->execute();
-                        $row = $lqs->rowCount();
-                        if ($row > 0) {
-                            foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
-
-                                return $dados->ID_CONTRATO;
-                            }
-                        }
-
-                        return $row;
-                    }
-                }
-            }
+            $lqs->execute();
+            $row = $lqs->rowCount();
+            return $row;
         } catch (Exception $ex) {
             echo $ex->getMessage();
-            echo 'Falha ao listar Contrato';
+            echo 'Falha ao listar buscarContrato';
         }
     }
 
@@ -1766,20 +1799,23 @@ class Search {
         }
     }
 
-    public static function NumeroContratoFilho($possuiAditamento) {
+    public static function NumeroContratoFilho($id_contrato) {
 
         try {
-            $sql = 'SELECT NUMERO_CONTRATO FROM contrato  '
-                    . 'WHERE ID_CONTRATO = "' . $possuiAditamento . '" '
-                    . 'AND ID_STATUS_CONTRATO = 1 ';
+            $contratosList = '';
+            $sql = 'SELECT c.NUMERO_CONTRATO NUMERO_CONTRATO
+                    FROM aditamentos a 
+                    INNER JOIN contrato c ON c.ID_CONTRATO = a.ID_CONTRATO_SUBMETIDO
+                    WHERE a.ID_CONTRATO_ADITADO_ADITAMENTO = ' . $id_contrato;
             $lqs = Conexao::getInstance()->prepare($sql);
             if ($lqs->execute()) {
                 $row = $lqs->rowCount();
                 if ($row > 0) {
                     foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
 
-                        return $dados->NUMERO_CONTRATO;
+                        $contratosList .= 'N°: ' . $dados->NUMERO_CONTRATO . '  ';
                     }
+                    return $contratosList;
                 }
             }
         } catch (Exception $ex) {
@@ -1807,29 +1843,6 @@ class Search {
         } catch (Exception $ex) {
             echo $ex->getMessage();
             echo 'Falha ao buscar contratante';
-        }
-    }
-
-    public static function ContratanteContratoFilho($possuiAditamento) {
-
-
-        try {
-            $sql = 'SELECT CONTRATANTE_CONTRATO FROM contrato  '
-                    . 'WHERE ID_CONTRATO = "' . $possuiAditamento . '" '
-                    . 'AND ID_STATUS_CONTRATO = 1 ';
-            $lqs = Conexao::getInstance()->prepare($sql);
-            if ($lqs->execute()) {
-                $row = $lqs->rowCount();
-                if ($row > 0) {
-                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
-
-                        return $dados->CONTRATANTE_CONTRATO;
-                    }
-                }
-            }
-        } catch (Exception $ex) {
-            echo $ex->getMessage();
-            echo 'Falha ao buscar contrante';
         }
     }
 
