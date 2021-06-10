@@ -135,6 +135,10 @@ if ($request == 'info_aditados') {
     echo Search::infoAditados($contrato, $nContrato);
 }
 
+if ($request == 'info_contrato_principal') {
+    echo Search::infoContratoPrincipal();
+}
+
 if ($request == 'proximos_vencimentos') {
 
     $vencimento = (null !== (filter_input(INPUT_POST, 'vencimento'))) ? filter_input(INPUT_POST, 'vencimento') : 0;

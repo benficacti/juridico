@@ -1007,7 +1007,7 @@ class Search {
                 <div class="line-finally-contract">
                     <div class="form-contract-fim">
                         <label class="title-info-contract" style="color: #f00;">
-                            CONTRATO PRINCIPAL: '.$nContrato.'
+                            CONTRATO PRINCIPAL: ' . $nContrato . '
                         </label>
                     </div>                    
                 </div>';
@@ -1042,6 +1042,46 @@ class Search {
                             CONTRATO:
                                 <a href="ver_contrato.php?c=' . $idCont . '&d=1">' . $numeroC . '</a>
                         </label>
+                    </div>                    
+                </div>';
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function infoContratoPrincipal() {
+        try {
+
+            $sql = 'SELECT 
+                        c.NUMERO_CONTRATO CONTRATO_MAIN, 
+                        GROUP_CONCAT( 
+                            ( 
+                                SELECT sc.NUMERO_CONTRATO FROM contrato sc 
+                                WHERE sc.ID_CONTRATO = a.ID_CONTRATO_SUBMETIDO 
+                            ) 
+                        ) CONTRATO_SIMPLE
+                    FROM contrato c 
+                    INNER JOIN aditamentos a ON a.ID_CONTRATO_ADITADO_ADITAMENTO = c.ID_CONTRATO 
+                    GROUP BY CONTRATO_MAIN';
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $nControtoMain = $dados->CONTRATO_MAIN;
+                        $nContratoSimple = $dados->CONTRATO_SIMPLE;
+                        $nContratoSimple = str_replace(',', ' N°:', $nContratoSimple);
+
+                        echo ' 
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                           CONTRATO PRINCIPAL: <span style="color: #0e1a35; font-weight: bold">' . $nControtoMain . '</span>
+                        </label>
+                        <p class="title-info-contract-main">N°:' . $nContratoSimple . '</p>
                     </div>                    
                 </div>';
                     }

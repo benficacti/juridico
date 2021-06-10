@@ -75,7 +75,7 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                         <label>Fim:</label>
                         <input type="date" class="data_painel" id="idDataFim" onblur="buscaPorData()">
                         <button class="btn-download" onclick="imprimir()">Download pdf</button>
-                        <!--<button class="btn-email">Enviar Email</button>-->
+                        <button class="btn-email" onclick="redirect_contratos()">Contratos com Aditamentos</button>
                     </div>
 
                     <div id="idImpressao">
@@ -294,6 +294,10 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                 document.body.innerHTML = oldPage;
 
                 window.close();
+            }
+
+            function redirect_contratos() {
+                location.href = 'ver_contrato_principal.php';
             }
 
 
