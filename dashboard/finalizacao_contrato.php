@@ -70,7 +70,7 @@ if (!isset($_SESSION['login'])) {
                         url: "api/api.php",
                         method: "post",
                         data: {request: "info_contrato",
-                            contrato: $("#idcontrato").val(),
+                            contrato: $("#idcontrato").val()
                         },
                         success: function (data)
                         {

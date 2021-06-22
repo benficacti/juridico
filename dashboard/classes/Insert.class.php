@@ -39,7 +39,7 @@ class Insert {
         }
     }
 
-    public function CadastraContrato(contrato $contrato) {
+    public static function  CadastraContrato(contrato $contrato) {
 
         try {
 
@@ -197,15 +197,16 @@ class Insert {
         }
     }
 
-    public function CadastraGarantia($garantia, $_idContratoGarantia) {
+    public static function CadastraGarantia($garantia, $_idContratoGarantia, $data_garantia) {
 
         try {
             $descGarantia = $garantia->getDescGarantia();
-            $ins = "INSERT INTO `garantia`(`DESC_GARANTIA`, `ID_CONTRATO_GARANTIA`) "
-                    . "VALUES (:DESC_GARANTIA, :ID_CONTRATO_GARANTIA)";
+            $ins = "INSERT INTO `garantia`(`DESC_GARANTIA`, `ID_CONTRATO_GARANTIA`, `DATA_VENCIMENTO`) "
+                    . "VALUES (:DESC_GARANTIA, :ID_CONTRATO_GARANTIA, :DATA_VENCIMENTO)";
             $i_ins = Conexao::getInstance()->prepare($ins);
             $i_ins->bindParam(":DESC_GARANTIA", $descGarantia);
             $i_ins->bindParam(":ID_CONTRATO_GARANTIA", $_idContratoGarantia);
+            $i_ins->bindParam(":DATA_VENCIMENTO", $data_garantia);
             if ($i_ins->execute()) {
                 return Search::BuscaGarantia($_idContratoGarantia);
             }
@@ -215,7 +216,7 @@ class Insert {
         }
     }
 
-    public function CadastraObjeto($objeto) {
+    public static function CadastraObjeto($objeto) {
         try {
             $idContratoObjeto = $objeto->getIdContratoObjeto();
             $descObejeto = $objeto->getDescObjeto();
@@ -233,7 +234,7 @@ class Insert {
         }
     }
 
-    public function CadastraObs($obs) {
+    public static function CadastraObs($obs) {
         try {
             $idContratoObs = $obs->getIdContratoObservacoes();
             $descObs = $obs->getDescObserExigen();

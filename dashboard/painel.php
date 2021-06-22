@@ -54,18 +54,18 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
         <div class="box-conteudo">
             <article class="article-contract-fim" data-aos="zoom-in" >
 
-                <div class="panels ">
+                <div class="panels">
                     <input type="text" class="pesquisar_painel" placeholder="FILTRAR" id="busca" onkeyup="callApi();" style="margin: 3px">              
                     <div class="line-contract-panel"> 
-                        <div class="title-contract-panel" style="width: 54%">
+                        <div class="title-contract-panel" style="width: 35%">
                             <label class="lbl-title-panel">
                                 PRÓXIMOS VENCIMENTOS
                             </label>
                         </div>
                         <div id="class_ocultar">
                             <span class="alert_painel" id="id_do_elemento" value="" onclick="buscaPorDiaAlerta()" style="background: #ff0000; padding: 3px; font-weight: bold; color: #FFF"></span>
+                            <span class="alert_painel" id="id_do_elemento_2" value="" onclick="buscaPorDiaAlertaGarantia()" style="background: #ffae00; padding: 3px; font-weight: bold; color: #FFF">Garantias à vencer</span>
                         </div>
-
                         <input type="hidden" value="" id="idQtdDiasParaVencer">
                     </div>
                     <div class="line-contract-panel">
@@ -248,9 +248,34 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                             qtd = name.QTDCONTRATO;
                             dias_para_vencer = name.DIASPARAVENCER;
                         });
-                        document.getElementById('id_do_elemento').innerHTML = 'Exitem ' + qtd + ' Contratos à vencer nos próximos ' + dias_para_vencer + ' dias!';
+                        document.getElementById('id_do_elemento').innerHTML = 'Existem ' + qtd + ' Contratos à vencer nos próximos ' + dias_para_vencer + ' dias!';
                         document.getElementById('idQtdDiasParaVencer').value = dias_para_vencer;
                         ocultarAlert(qtd);
+                    }
+                });
+            }
+            
+            garantiaAlerta();
+            function garantiaAlerta() {
+
+                $.ajax({
+                    url: "api/api.php",
+                    method: "post",
+
+                    data: {request: "garantiaAlerta"
+
+                    },
+                    success: function (data) {
+                        //document.getElementById("id_do_elemento").innerHTML = data;
+                        var qtd = '';
+                        var dias_para_vencer = '';
+                        var obj = JSON.parse(data);
+
+                        obj.forEach(function (name, value) {
+                            qtd = name.TOTAL_VENCER;
+                        });
+                        document.getElementById('id_do_elemento_2').innerHTML = 'Existem ' + qtd + ' Garantias à vencer!';
+                       
                     }
                 });
             }
@@ -263,6 +288,26 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                         method: "post",
 
                         data: {request: "proximos_vencimentos_por_dia",
+                            dias: idBuscaPorDia
+
+                        },
+                        success: function (data) {
+                            document.getElementById("result").innerHTML = data;
+                        }
+                    });
+                } else {
+                    callApi();
+                }
+            }
+            
+            function buscaPorDiaAlertaGarantia() {
+                var idBuscaPorDia = document.getElementById('idQtdDiasParaVencer').value;
+                if (idBuscaPorDia.length > 0) {
+                    $.ajax({
+                        url: "api/api.php",
+                        method: "post",
+
+                        data: {request: "proximos_vencimentos_garantia_por_dia",
                             dias: idBuscaPorDia
 
                         },
@@ -319,6 +364,20 @@ if (($_SESSION['tipo_acesso_login']) != 1) {
                 }
 
             }
+            
+            
+            
+            //EFEITO DE ALERTA 
+            var piscando2 = document.getElementById('id_do_elemento_2');
+            var interval = window.setInterval(function () {
+                if (piscando2.style.visibility === 'hidden') {
+                    piscando2.style.visibility = 'visible';
+                } else {
+                    piscando2.style.visibility = 'hidden';
+                }
+            }, 1000);
+
+
 
 
 

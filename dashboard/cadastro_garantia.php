@@ -52,17 +52,19 @@ if (!isset($_SESSION['login'])) {
                 </header>
                 <input type="hidden" id="idcontrato" value="<?php echo $_SESSION['contrato'] ?>">
                 <input type="hidden" id="status">
-                <div class="line-contract">
+                <div class="line-contract-garantia">
                     <div class="form-contract tipo_contrato">
                         <label class="title-option-contract"> ADICIONAR GARANTIA? </label>
-                        <label class="input-radio-contract">
+                        <label class="input-radio-contract-garantia">
                             <input type="radio" id="rd-sim" name="radio-group">
-                            <label for="rd-sim" class="rd-label-contract">Sim</label>
+                            <label for="rd-sim" class="rd-label-contract-garantia">Sim</label>
                         </label>
-                        <label class="input-radio-contract">
+                        <label class="input-radio-contract-garantia">
                             <input type="radio" id="rd-nao" name="radio-group">
-                            <label for="rd-nao" class="rd-label-contract">Não</label>
-
+                            <label for="rd-nao" class="rd-label-contract-garantia">Não</label>
+                        </label>
+                        <label class="input-radio-contract-garantia">
+                            <input type="date" id="id_data_venc_gar" name="radio-group" style="border-radius: 8px">
                         </label>
                     </div>
                 </div>      
@@ -139,6 +141,7 @@ if (!isset($_SESSION['login'])) {
                 var idcontrato = $("#idcontrato").val();
                 var status_garantia = $("#status").val();
                 var garantia = '';
+                var data_garantia = $("#id_data_venc_gar").val();
                 if (status_garantia === '1') {
                     garantia = $("#garantia").val();
                 }
@@ -162,7 +165,8 @@ if (!isset($_SESSION['login'])) {
                         data: {request: "adicionar_garantia",
                             status_garantia: status_garantia,
                             garantia: garantia,
-                            idcontrato: idcontrato
+                            idcontrato: idcontrato,
+                            data_garantia: data_garantia
                         },
                         success: function (data)
                         {

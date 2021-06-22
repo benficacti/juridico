@@ -70,8 +70,9 @@ if ($request == "adicionar_garantia") {
     $_idContratoGarantia = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $_statusGarantia = (null !== (filter_input(INPUT_POST, 'status_garantia'))) ? filter_input(INPUT_POST, 'status_garantia') : null;
     $descGarantia = (null !== (filter_input(INPUT_POST, 'garantia'))) ? filter_input(INPUT_POST, 'garantia') : null;
+    $data_garantia = (null !== (filter_input(INPUT_POST, 'data_garantia'))) ? filter_input(INPUT_POST, 'data_garantia') : null;
     $garantia = new garantia($descGarantia);
-    $idGarantia = Insert::CadastraGarantia($garantia, $_idContratoGarantia);
+    $idGarantia = Insert::CadastraGarantia($garantia, $_idContratoGarantia, $data_garantia);
     if ($idGarantia != null) {
         echo Update::adicionaGarantia($_idContratoGarantia, $_statusGarantia, $idGarantia);
     }
@@ -173,10 +174,21 @@ if ($request == 'contratosAlerta') {
     echo Search::panelAlert();
 }
 
+if ($request == 'garantiaAlerta') {
+
+    echo Search::panelAlertGarantia();
+}
+
 if ($request == 'proximos_vencimentos_por_dia') {
 
     $dias = (null !== (filter_input(INPUT_POST, 'dias'))) ? filter_input(INPUT_POST, 'dias') : 0;
     echo Search::proximos_vencimentos_por_dia($dias);
+}
+
+if ($request == 'proximos_vencimentos_garantia_por_dia') {
+
+    $dias = (null !== (filter_input(INPUT_POST, 'dias'))) ? filter_input(INPUT_POST, 'dias') : 0;
+    echo Search::proximos_vencimentos_garantia_por_dia($dias);
 }
 
 if ($request == 'contratos_por_periodo') {
