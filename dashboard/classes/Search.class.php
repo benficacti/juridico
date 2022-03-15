@@ -269,13 +269,13 @@ class Search {
             echo $exc->getTraceAsString();
         }
     }
-    
+
     public static function contratos_por_periodo($dataIni, $dataFim) {
 
         $sql = "SELECT * FROM CONTRATO  
                 INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO 
                 WHERE VENCIMENTO_CONTRATO  
-                BETWEEN '".$dataIni."' AND '".$dataFim."' AND ID_STATUS_CONTRATO = 1 ORDER BY VENCIMENTO_CONTRATO";
+                BETWEEN '" . $dataIni . "' AND '" . $dataFim . "' AND ID_STATUS_CONTRATO = 1 ORDER BY VENCIMENTO_CONTRATO";
         $sqll = Conexao::getInstance()->prepare($sql);
 
 
@@ -377,7 +377,7 @@ class Search {
         $sql = "SELECT * FROM CONTRATO  
                 INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO 
                 WHERE VENCIMENTO_CONTRATO  
-                BETWEEN CURDATE() AND (CURDATE() + INTERVAL '".$dias."' DAY) "
+                BETWEEN CURDATE() AND (CURDATE() + INTERVAL '" . $dias . "' DAY) "
                 . "AND ID_STATUS_CONTRATO = 1 "
                 . "ORDER BY VENCIMENTO_CONTRATO";
         $sqll = Conexao::getInstance()->prepare($sql);
@@ -926,7 +926,6 @@ class Search {
                         $contratado = $dados->CONTRATADO_CONTRATO;
                         $descTipoContrato = $dados->DESC_TIPO_CONTRATO;
                         $anexo = $dados->URL_IMAGEM_CONTRATO;
-                        $aditamento = $dados->ID_ADITAMENTO_CONTRATO;
                         $idSetor = $dados->ID_SETOR_CONTRATO;
 
                         $descSetor = Search::descSetor($idSetor);
@@ -935,8 +934,9 @@ class Search {
                         $possuiObjeto = Search::verificarObjeto($id_contrato);
 
                         //VERIFICAR SE POSSUI ADITAMENTO
-                        $possuiAditamento = Search::buscarContrato($aditamento);
+                        $possuiAditamento = Search::buscarContrato($id_contrato);
 
+                        //VERIFICAR SE POSSUI ADITAMENTO
                         //VERIFICAR QUAL CONTRATO FOI CRIADO APARTIR DE ADITAMENTO
                         $feito_de_um_aditamento = Search::verificarOrigem($id_contrato);
 
@@ -945,27 +945,22 @@ class Search {
 
                         $ContranteContratoPai = Search::ContratanteContratoPai($feito_de_um_aditamento);
 
-                        $NumerocontratoFilho = Search::NumeroContratoFilho($possuiAditamento);
+                        $NumerocontratoFilho = Search::NumeroContratoFilho($id_contrato);
 
-                        $ContranteContratoFilho = Search::ContratanteContratoFilho($possuiAditamento);
 
                         echo '<tr>';
                         if (strlen($anexo) > 0 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) > 0) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_aditamentos.php?c=' . $id_contrato . '&d=1&n=' . $numero . '"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' "></a></th>';
                         } elseif (strlen($anexo) > 0 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) < 1) {
-                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a>&nbsp<a href="ver_aditamentos.php?c=' . $id_contrato . '&d=1&n=' . $numero . '"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . '"></a></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) > 0) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="ver_aditamentos.php?c=' . $id_contrato . '&d=1&n=' . $numero . '"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . '"></a></th>';
                         } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) > 0) {
                             echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
-                        } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) > 0) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a>&nbsp<a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
-                        } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) < 1) {
-                            echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
                         } elseif (strlen($anexo) > 0 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) < 1) {
                             echo '<td class = "td-icon-contract"><a href="view_anexo.php?a=' . $anexo . '&d=1"><img src = "img/anexo.png" class = "img-icon-list" alt = "contrato-list" title="anexo"></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento > 0 and strlen($feito_de_um_aditamento) < 1) {
-                            echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $possuiAditamento . '&d=1"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: ' . $NumerocontratoFilho . ' da ' . $ContranteContratoFilho . '"></a></th>';
+                            echo '<td class = "td-icon-contract"><a href="ver_aditamentos.php?c=' . $id_contrato . '&d=1&n=' . $numero . '"><img src = "img/aditamento.png" class = "img-icon-list" alt = "contrato-list" title="Possui o aditamento Contrato: "' . $NumerocontratoFilho . '"></a></th>';
                         } elseif (strlen($anexo) < 1 and $possuiAditamento < 1 and strlen($feito_de_um_aditamento) > 0) {
                             echo '<td class = "td-icon-contract"><a href="ver_contrato.php?c=' . $feito_de_um_aditamento . '&d=1"><img src = "img/pert_contr.png" class = "img-icon-list" alt = "contrato-list" title="restrito ao contrato: ' . $NumerocontratoPai . ' da ' . $ContranteContratoPai . ' "></a></th>';
                         } else {
@@ -998,6 +993,99 @@ class Search {
                 }
                 echo '     </table>
                     </div>';
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function infoAditados($contrato, $nContrato) {
+        try {
+
+
+            echo ' 
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract" style="color: #f00;">
+                            CONTRATO PRINCIPAL: ' . $nContrato . '
+                        </label>
+                    </div>                    
+                </div>';
+
+
+
+
+            $sql = 'SELECT result.IDCONTRATO IDCONT, ct.NUMERO_CONTRATO FROM contrato ct,  
+                    (
+
+                    SELECT a.ID_CONTRATO_SUBMETIDO IDCONTRATO FROM aditamentos a 
+                    INNER JOIN contrato c ON c.ID_CONTRATO = a.ID_CONTRATO_ADITADO_ADITAMENTO
+                    WHERE a.ID_CONTRATO_ADITADO_ADITAMENTO = ' . $contrato . '
+
+                    )result
+
+
+                    WHERE ct.ID_CONTRATO IN(result.IDCONTRATO)';
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $numeroC = $dados->NUMERO_CONTRATO;
+                        $idCont = $dados->IDCONT;
+
+
+                        echo ' 
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                            CONTRATO:
+                                <a href="ver_contrato.php?c=' . $idCont . '&d=1">' . $numeroC . '</a>
+                        </label>
+                    </div>                    
+                </div>';
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function infoContratoPrincipal() {
+        try {
+
+            $sql = 'SELECT 
+                        c.NUMERO_CONTRATO CONTRATO_MAIN, 
+                        GROUP_CONCAT( 
+                            ( 
+                                SELECT sc.NUMERO_CONTRATO FROM contrato sc 
+                                WHERE sc.ID_CONTRATO = a.ID_CONTRATO_SUBMETIDO 
+                            ) 
+                        ) CONTRATO_SIMPLE
+                    FROM contrato c 
+                    INNER JOIN aditamentos a ON a.ID_CONTRATO_ADITADO_ADITAMENTO = c.ID_CONTRATO 
+                    GROUP BY CONTRATO_MAIN';
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $nControtoMain = $dados->CONTRATO_MAIN;
+                        $nContratoSimple = $dados->CONTRATO_SIMPLE;
+                        $nContratoSimple = str_replace(',', ' N°:', $nContratoSimple);
+
+                        echo ' 
+                <div class="line-finally-contract">
+                    <div class="form-contract-fim">
+                        <label class="title-info-contract">
+                           CONTRATO PRINCIPAL: <span style="color: #0e1a35; font-weight: bold">' . $nControtoMain . '</span>
+                        </label>
+                        <p class="title-info-contract-main">N°:' . $nContratoSimple . '</p>
+                    </div>                    
+                </div>';
+                    }
+                }
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -1618,36 +1706,21 @@ class Search {
         }
     }
 
-    public static function buscarContrato($aditamento) {
+    public static function buscarContrato($id_contrato) {
 
         try {
-            $sql = 'SELECT ID_CONTRATO_SUBMETIDO FROM `aditamentos` WHERE ID_ADITAMENTO = "' . $aditamento . '"';
+            $sql = 'SELECT ID_CONTRATO FROM `contrato` '
+                    . 'WHERE ID_STATUS_CONTRATO = 1 '
+                    . 'AND ID_CONTRATO = "' . $id_contrato . '" '
+                    . 'AND ID_ADITAMENTO_CONTRATO > 0';
             $lqs = Conexao::getInstance()->prepare($sql);
-            if ($lqs->execute()) {
-                $row = $lqs->rowCount();
-                if ($row > 0) {
-                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
-                        $idContrato = $dados->ID_CONTRATO_SUBMETIDO;
 
-                        $sql = 'SELECT ID_CONTRATO FROM `contrato` WHERE ID_STATUS_CONTRATO = 1 AND ID_CONTRATO = "' . $idContrato . '"';
-                        $lqs = Conexao::getInstance()->prepare($sql);
-
-                        $lqs->execute();
-                        $row = $lqs->rowCount();
-                        if ($row > 0) {
-                            foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
-
-                                return $dados->ID_CONTRATO;
-                            }
-                        }
-
-                        return $row;
-                    }
-                }
-            }
+            $lqs->execute();
+            $row = $lqs->rowCount();
+            return $row;
         } catch (Exception $ex) {
             echo $ex->getMessage();
-            echo 'Falha ao listar Contrato';
+            echo 'Falha ao listar buscarContrato';
         }
     }
 
@@ -1766,20 +1839,23 @@ class Search {
         }
     }
 
-    public static function NumeroContratoFilho($possuiAditamento) {
+    public static function NumeroContratoFilho($id_contrato) {
 
         try {
-            $sql = 'SELECT NUMERO_CONTRATO FROM contrato  '
-                    . 'WHERE ID_CONTRATO = "' . $possuiAditamento . '" '
-                    . 'AND ID_STATUS_CONTRATO = 1 ';
+            $contratosList = '';
+            $sql = 'SELECT c.NUMERO_CONTRATO NUMERO_CONTRATO
+                    FROM aditamentos a 
+                    INNER JOIN contrato c ON c.ID_CONTRATO = a.ID_CONTRATO_SUBMETIDO
+                    WHERE a.ID_CONTRATO_ADITADO_ADITAMENTO = ' . $id_contrato;
             $lqs = Conexao::getInstance()->prepare($sql);
             if ($lqs->execute()) {
                 $row = $lqs->rowCount();
                 if ($row > 0) {
                     foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
 
-                        return $dados->NUMERO_CONTRATO;
+                        $contratosList .= 'N°: ' . $dados->NUMERO_CONTRATO . '  ';
                     }
+                    return $contratosList;
                 }
             }
         } catch (Exception $ex) {
@@ -1807,29 +1883,6 @@ class Search {
         } catch (Exception $ex) {
             echo $ex->getMessage();
             echo 'Falha ao buscar contratante';
-        }
-    }
-
-    public static function ContratanteContratoFilho($possuiAditamento) {
-
-
-        try {
-            $sql = 'SELECT CONTRATANTE_CONTRATO FROM contrato  '
-                    . 'WHERE ID_CONTRATO = "' . $possuiAditamento . '" '
-                    . 'AND ID_STATUS_CONTRATO = 1 ';
-            $lqs = Conexao::getInstance()->prepare($sql);
-            if ($lqs->execute()) {
-                $row = $lqs->rowCount();
-                if ($row > 0) {
-                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
-
-                        return $dados->CONTRATANTE_CONTRATO;
-                    }
-                }
-            }
-        } catch (Exception $ex) {
-            echo $ex->getMessage();
-            echo 'Falha ao buscar contrante';
         }
     }
 
@@ -2166,6 +2219,266 @@ class Search {
         } catch (Exception $ex) {
             echo $ex->getMessage();
             echo 'Falha ao listar objeto';
+        }
+    }
+
+    public static function panelAlert() {
+
+        try {
+            $diaQtdAlert = Search::diasAlerta();
+
+            $sql = 'SELECT  
+                                ID_CONTRATO,
+                                (
+                                SELECT a.diasParaVencer FROM alertas a
+                                )DIASPARAVENCER,
+                                (
+                                    SELECT COUNT(cs.ID_CONTRATO) FROM contrato cs 
+                                    WHERE cs.VENCIMENTO_CONTRATO  
+                                    BETWEEN CURDATE() AND (CURDATE() + INTERVAL "' . $diaQtdAlert . '" DAY) AND cs.ID_STATUS_CONTRATO = 1
+                                )QTD 
+                                FROM CONTRATO 				
+                                INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO 
+                                WHERE VENCIMENTO_CONTRATO  
+                                BETWEEN CURDATE() AND (CURDATE() + INTERVAL "' . $diaQtdAlert . '" DAY) AND ID_STATUS_CONTRATO = 1 
+                                ORDER BY VENCIMENTO_CONTRATO';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        $inf [] = array(
+                            "IDCONTRATO" => $dados->ID_CONTRATO,
+                            "QTDCONTRATO" => $dados->QTD,
+                            "DIASPARAVENCER" => $dados->DIASPARAVENCER
+                        );
+                        return $json = json_encode($inf);
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao listar objeto';
+        }
+    }
+
+    public static function emailAlert() {
+
+        try {
+            $emailCadastro = '';
+            $diaQtdAlert = Search::diasAlerta();
+            $statusAlert = Search::statusAlerta();
+            $diaSemana = Search::diaDaSemana();
+            $diaDoAlerta = Search::diaDoAlerta();
+
+            if ($diaDoAlerta == $diaSemana and $statusAlert == '1') {
+
+
+                $sql = '
+                    SELECT
+                        DISTINCT
+                        NUMERO_CONTRATO,
+                        CONTRATANTE_CONTRATO,
+                        CONTRATADO_CONTRATO,
+                    ( 
+                        SELECT 
+                        a.emailDestinatario FROM alertas a 
+                    )EMAILCADASTRO, 
+                    ( 
+                        SELECT 
+                        a.diasParaVencer FROM alertas a 
+                    )DIASPARAVENCER,
+                    ( 
+                        SELECT 
+                        a.idStatus FROM alertas a 
+                    )STATUSEMAIL,
+                    (
+                      SELECT COUNT(cs.ID_CONTRATO) FROM contrato cs 
+                        WHERE cs.VENCIMENTO_CONTRATO  
+                        BETWEEN CURDATE() AND (CURDATE() + INTERVAL "' . $diaQtdAlert . '" DAY) 
+                        AND cs.ID_STATUS_CONTRATO = 1
+                     )QTD_CONTRATOS
+                    FROM CONTRATO 
+                    INNER JOIN TIPO_CONTRATO ON contrato.ID_TIPO_CONTRATO = TIPO_CONTRATO.ID_TIPO_CONTRATO
+                    WHERE VENCIMENTO_CONTRATO BETWEEN CURDATE() AND (CURDATE() + INTERVAL "' . $diaQtdAlert . '" DAY) 
+                    AND ID_STATUS_CONTRATO = 1
+                    AND (SELECT Al.diaReceberEmail FROM alertas AL) = ( SELECT WEEKDAY(CURDATE()) ) 
+                    ORDER BY VENCIMENTO_CONTRATO';
+                $lqs = Conexao::getInstance()->prepare($sql);
+
+                if ($lqs->execute()) {
+                    $row = $lqs->rowCount();
+                    if ($row > 0) {
+
+                        foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                            $emailCadastro = $dados->EMAILCADASTRO;
+                            $info[] = array(
+                                'NUMERO_CONTRATO' => $dados->NUMERO_CONTRATO,
+                                'DIAS_PARA_VENCER' => $dados->DIASPARAVENCER,
+                                'CONTRATANTE_CONTRATO' => $dados->CONTRATANTE_CONTRATO,
+                                'CONTRATADO_CONTRATO' => $dados->CONTRATADO_CONTRATO,
+                            );
+                        }
+
+
+
+                        return $json = EnviarEmail::sendMailm($info, $emailCadastro);
+                        //echo '<script type="text/javascript">location.href =emailAlerta.php;</script>';
+                        // header("Location: emailAlerta.php");
+                        // return $json = json_encode($info);
+                    }
+                }
+            } else if ($diaDoAlerta == $diaSemana and $statusAlert == '2') {
+                $info = array('RESULT' => 'TRUE');
+                echo json_encode($info);
+            } else {
+                Update::alterarStatusEmail_2();
+                $info = array('RESULT' => 'TRUE');
+                echo json_encode($info);
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao listar emailAlert';
+        }
+    }
+
+    public static function diasAlerta() {
+
+        try {
+
+            $sql = 'SELECT diasParaVencer FROM ALERTAS ';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        return $dados->diasParaVencer;
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao listar diasAlerta';
+        }
+    }
+
+    public static function verificarAlert() {
+
+        try {
+
+            $sql = 'SELECT * FROM ALERTAS ';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    return true;
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao verificarAlert';
+        }
+    }
+
+    public static function listarAlertas() {
+
+
+        try {
+
+            $sql = 'SELECT * FROM ALERTAS ';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $inf [] = array(
+                            'EMAIL' => $dados->emailDestinatario,
+                            'DIAPARAVENCER' => $dados->diasParaVencer,
+                            'DIARECEBEREMAIL' => $dados->diaReceberEmail
+                        );
+                    }
+                    return $json = json_encode($inf);
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao listarAlertas';
+        }
+    }
+
+    public static function statusAlerta() {
+
+        try {
+
+            $sql = 'SELECT a.idStatus FROM ALERTAS a';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        
+                    }
+                    return $dados->idStatus;
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao statusAlerta';
+        }
+    }
+
+    public static function diaDaSemana() {
+
+
+        try {
+
+            $sql = 'SELECT WEEKDAY(CURDATE()) DIA ';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        
+                    }
+                    return $dados->DIA;
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao diaDaSemana';
+        }
+    }
+
+    public static function diaDoAlerta() {
+
+        try {
+
+            $sql = 'SELECT a.diaReceberEmail DIA_DO_ALERTA FROM alertas a';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        
+                    }
+                    return $dados->DIA_DO_ALERTA;
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao diaDoAlerta';
         }
     }
 

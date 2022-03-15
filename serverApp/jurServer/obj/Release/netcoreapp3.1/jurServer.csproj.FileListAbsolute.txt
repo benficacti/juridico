@@ -1,0 +1,17 @@
+C:\xampp\htdocs\juridico\serverApp\jurServer\bin\Release\netcoreapp3.1\jurServer.exe
+C:\xampp\htdocs\juridico\serverApp\jurServer\bin\Release\netcoreapp3.1\jurServer.deps.json
+C:\xampp\htdocs\juridico\serverApp\jurServer\bin\Release\netcoreapp3.1\jurServer.runtimeconfig.json
+C:\xampp\htdocs\juridico\serverApp\jurServer\bin\Release\netcoreapp3.1\jurServer.runtimeconfig.dev.json
+C:\xampp\htdocs\juridico\serverApp\jurServer\bin\Release\netcoreapp3.1\jurServer.dll
+C:\xampp\htdocs\juridico\serverApp\jurServer\bin\Release\netcoreapp3.1\jurServer.pdb
+C:\xampp\htdocs\juridico\serverApp\jurServer\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
+C:\xampp\htdocs\juridico\serverApp\jurServer\obj\Release\netcoreapp3.1\jurServer.csprojAssemblyReference.cache
+C:\xampp\htdocs\juridico\serverApp\jurServer\obj\Release\netcoreapp3.1\jurServer.Form1.resources
+C:\xampp\htdocs\juridico\serverApp\jurServer\obj\Release\netcoreapp3.1\jurServer.csproj.GenerateResource.cache
+C:\xampp\htdocs\juridico\serverApp\jurServer\obj\Release\netcoreapp3.1\jurServer.AssemblyInfoInputs.cache
+C:\xampp\htdocs\juridico\serverApp\jurServer\obj\Release\netcoreapp3.1\jurServer.AssemblyInfo.cs
+C:\xampp\htdocs\juridico\serverApp\jurServer\obj\Release\netcoreapp3.1\jurServer.csproj.CoreCompileInputs.cache
+C:\xampp\htdocs\juridico\serverApp\jurServer\obj\Release\netcoreapp3.1\jurServer.csproj.CopyComplete
+C:\xampp\htdocs\juridico\serverApp\jurServer\obj\Release\netcoreapp3.1\jurServer.dll
+C:\xampp\htdocs\juridico\serverApp\jurServer\obj\Release\netcoreapp3.1\jurServer.pdb
+C:\xampp\htdocs\juridico\serverApp\jurServer\obj\Release\netcoreapp3.1\jurServer.genruntimeconfig.cache

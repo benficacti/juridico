@@ -32,7 +32,7 @@ if ($request == "cadastro_contrato") {
     $_idAditamentoContrato = (null !== (filter_input(INPUT_POST, 'id_contr_aditado'))) ? filter_input(INPUT_POST, 'id_contr_aditado') : null;
     $_idSetorContrato = (null !== (filter_input(INPUT_POST, 'id_setor'))) ? filter_input(INPUT_POST, 'id_setor') : null;
 
-    
+
     if ($_possuiParcela == 1) {
         $_quantidadeParcelasContrato = (null !== (filter_input(INPUT_POST, 'parcela'))) ? filter_input(INPUT_POST, 'parcela') : null;
         $_valorDasParcelasContrato = (null !== (filter_input(INPUT_POST, 'valor_parcela'))) ? filter_input(INPUT_POST, 'valor_parcela') : null;
@@ -128,21 +128,59 @@ if ($request == 'info_contrato') {
     $contrato = (null !== (filter_input(INPUT_POST, 'contrato'))) ? filter_input(INPUT_POST, 'contrato') : 0;
     echo Search::infoContrato($contrato);
 }
+
+if ($request == 'info_aditados') {
+    $contrato = (null !== (filter_input(INPUT_POST, 'contrato'))) ? filter_input(INPUT_POST, 'contrato') : 0;
+    $nContrato = (null !== (filter_input(INPUT_POST, 'nContrato'))) ? filter_input(INPUT_POST, 'nContrato') : 0;
+    echo Search::infoAditados($contrato, $nContrato);
+}
+
+if ($request == 'info_contrato_principal') {
+    echo Search::infoContratoPrincipal();
+}
+
 if ($request == 'proximos_vencimentos') {
-    
+
     $vencimento = (null !== (filter_input(INPUT_POST, 'vencimento'))) ? filter_input(INPUT_POST, 'vencimento') : 0;
     $busca = (null !== (filter_input(INPUT_POST, 'busca'))) ? filter_input(INPUT_POST, 'busca') : 0;
     echo Search::proximosVencimentos($vencimento, $busca);
 }
 
+if ($request == 'listarAlert') {
+
+    echo Search::listarAlertas();
+}
+
+if ($request == 'callApiEditAlert') {
+
+    $emailAlert = (null !== (filter_input(INPUT_POST, 'emailAlert'))) ? filter_input(INPUT_POST, 'emailAlert') : 0;
+    $diaAlert = (null !== (filter_input(INPUT_POST, 'diaAlert'))) ? filter_input(INPUT_POST, 'diaAlert') : 0;
+    $diaQtdAlert = (null !== (filter_input(INPUT_POST, 'diaQtdAlert'))) ? filter_input(INPUT_POST, 'diaQtdAlert') : 0;
+    echo Update::updateAlert($emailAlert, $diaAlert, $diaQtdAlert);
+}
+
+if ($request == 'callApiRegisterAlert') {
+
+    $emailAlert = (null !== (filter_input(INPUT_POST, 'emailAlert'))) ? filter_input(INPUT_POST, 'emailAlert') : 0;
+    $diaAlert = (null !== (filter_input(INPUT_POST, 'diaAlert'))) ? filter_input(INPUT_POST, 'diaAlert') : 0;
+    $diaQtdAlert = (null !== (filter_input(INPUT_POST, 'diaQtdAlert'))) ? filter_input(INPUT_POST, 'diaQtdAlert') : 0;
+    //echo Search::cadastrarAlerta($emailAlert, $diaAlert, $diaQtdAlert);
+    echo Insert::cadastrarAlert($emailAlert, $diaAlert, $diaQtdAlert);
+}
+
+if ($request == 'contratosAlerta') {
+
+    echo Search::panelAlert();
+}
+
 if ($request == 'proximos_vencimentos_por_dia') {
-    
+
     $dias = (null !== (filter_input(INPUT_POST, 'dias'))) ? filter_input(INPUT_POST, 'dias') : 0;
     echo Search::proximos_vencimentos_por_dia($dias);
 }
 
 if ($request == 'contratos_por_periodo') {
-    
+
     $dataIni = (null !== (filter_input(INPUT_POST, 'DataIni'))) ? filter_input(INPUT_POST, 'DataIni') : 0;
     $dataFim = (null !== (filter_input(INPUT_POST, 'DataFim'))) ? filter_input(INPUT_POST, 'DataFim') : 0;
     echo Search::contratos_por_periodo($dataIni, $dataFim);
@@ -274,7 +312,7 @@ if ($request == 'excluir_contrato') {
 }
 
 if ($request == 'alter_setor') {
-    
+
     $idcontrato = (null !== (filter_input(INPUT_POST, 'idcontrato'))) ? filter_input(INPUT_POST, 'idcontrato') : null;
     $descSetor = (null !== (filter_input(INPUT_POST, 'descSetor'))) ? filter_input(INPUT_POST, 'descSetor') : null;
     if (!empty($idcontrato)) {

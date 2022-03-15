@@ -294,7 +294,22 @@ body{
     -webkit-box-shadow: 1px 1px 2px #333333;
     background: #fff; 
     border:1px solid #000000;
-    width:200px;
+    width:20vw;
+    height: 24.1px;
+    text-align: center;
+    outline: none;
+}
+
+.alert_painel{  
+    border-radius:8px;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    box-shadow: 1px 1px 2px #333333;    
+    -moz-box-shadow: 1px 1px 2px #333333;
+    -webkit-box-shadow: 1px 1px 2px #333333;
+    background: #fff; 
+    border:1px solid #000000;
+    width:100px;
     height: 24.1px;
     text-align: center;
     outline: none;
@@ -308,7 +323,7 @@ body{
     -webkit-box-shadow: 1px 1px 2px #333333;
     background: #fff; 
     border:1px solid #000000;
-    width:200px;
+    width:10vw;
     height: 24px;
     text-align: center;
     outline: none;
@@ -364,7 +379,7 @@ body{
     
 }
 .btn-email{
-    width: 10vw;
+    width: 20vw;
     height: 25px;
     margin: 0 auto;
     border-radius: 8px;
@@ -1297,6 +1312,17 @@ body{
     font-size:1em;
     font-family: 'Gilroy';
     margin-left:2vw;
+
+}
+.title-info-contract-main{
+    min-height: 5vh;
+    max-height: 60vh;
+    line-height: 7vh;
+    float:left;
+    letter-spacing: 1.2px;
+    font-size:1em;
+    margin-left:2vw;
+    color: blue
 
 }
 .title-info-contract span{

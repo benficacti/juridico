@@ -8,7 +8,8 @@ if ($_SESSION['tipo_acesso_login'] == 1) {
 <!--<a href="###" class="barra-latera-item" id="item_cadastro_contrato">Controle de usuario</a>-->
 <?php
 if ($_SESSION['tipo_acesso_login'] == 1) {
-    echo '<a href="controle_usuario.php" class="barra-latera-item" id="item_cadastro_contrato">Controle de usuario</a>';
+    echo '<a href="controle_usuario.php" class="barra-latera-item" id="item_cadastro_contrato">Controle Usuario</a>';
+    echo '<a href="controle_alertas.php" class="barra-latera-item" id="item_cadastro_contrato">Cadastro Alertas</a>';
 }
 ?>
 <a href="sair.php" class="barra-latera-item">Logout</a>

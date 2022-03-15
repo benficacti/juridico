@@ -69,7 +69,7 @@ class Insert {
             $descSetor = $contrato->get_idSetorContrato();
             $idSetor = Search::idSetor($descSetor);
 
-            if ($idSetor < 1) {               
+            if ($idSetor < 1) {
                 $idSetor = Insert::idSetorcadastrarSetor($descSetor);
             }
 
@@ -401,6 +401,31 @@ class Insert {
         } catch (Exception $ex) {
             echo $ex->getMessage();
             echo 'Falha ao cadastrar setor';
+        }
+    }
+
+    public static function cadastrarAlert($emailAlert, $diaAlert, $diaQtdAlert) {
+
+        try {
+
+            $verificar = Search::verificarAlert();
+            if ($verificar) {
+                return false;
+            } else {
+                $ins = "INSERT INTO `alertas`(`EMAILDESTINATARIO`,`DIASPARAVENCER`,`DIARECEBEREMAIL`)"
+                        . "VALUES(:EMAILDESTINATARIO,:DIASPARAVENCER,:DIARECEBEREMAIL)";
+                $inss = Conexao::getInstance()->prepare($ins);
+                $inss->bindParam(":EMAILDESTINATARIO", $emailAlert);
+                $inss->bindParam(":DIASPARAVENCER", $diaQtdAlert);
+                $inss->bindParam(":DIARECEBEREMAIL", $diaAlert);
+                if ($inss->execute()) {
+
+                    return true;
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao cadastrarAlert';
         }
     }
 
