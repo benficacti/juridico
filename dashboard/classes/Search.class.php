@@ -475,6 +475,120 @@ class Search {
             echo $exc->getTraceAsString();
         }
     }
+    
+    public static function proximos_vencimentos_garantia_por_dia($dias) {
+
+        $sql = "SELECT 
+                    C.NUMERO_CONTRATO,
+                    C.CONTRATANTE_CONTRATO,
+                    C.CONTRATADO_CONTRATO,
+                    C.ID_SETOR_CONTRATO,
+                    C.VENCIMENTO_CONTRATO,
+                    C.ID_CONTRATO,
+                    g.ID_GARANTIA,
+                    (
+                      SELECT COUNT(GS.ID_GARANTIA) TOT FROM garantia GS WHERE GS.DATA_VENCIMENTO
+                        BETWEEN CURDATE() AND (CURDATE() + INTERVAL '".$dias."' DAY)
+                    )TOTAL_PARA_VENCER
+                    FROM contrato C 
+                    INNER JOIN garantia G ON G.ID_CONTRATO_GARANTIA = C.ID_CONTRATO
+                    WHERE G.DATA_VENCIMENTO
+                    BETWEEN CURDATE() AND (CURDATE() + INTERVAL '".$dias."' DAY)
+                    ORDER BY G.DATA_VENCIMENTO";
+        $sqll = Conexao::getInstance()->prepare($sql);
+
+
+        try {
+            $mes = 1;
+            $numero = "";
+
+            $sqll = Conexao::getInstance()->prepare($sql);
+            if ($sqll->execute()) {
+                $count = $sqll->rowCount();
+                if ($count > 0) {
+
+                    foreach ($sqll->fetchAll(PDO::FETCH_OBJ) as $dados) {
+                        $idContrato = $dados->ID_CONTRATO;
+                        $vencimento = $dados->VENCIMENTO_CONTRATO;
+                        $numero = $dados->NUMERO_CONTRATO;
+                        $contratado = $dados->CONTRATADO_CONTRATO;
+                        $contratante = $dados->CONTRATANTE_CONTRATO;
+                        $idSetor = $dados->ID_SETOR_CONTRATO;
+
+                        $setor = Search::descSetor($idSetor);
+                        if ($numero == NULL) {
+                            $numero = '<strong style="color:gray">***</strong>';
+                        }
+
+                        echo ' <div class="line-contract-panel">
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . $numero . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <div class = "desc-contratante-panel">
+                                        ' . $contratante . '
+                                        </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <div class = "desc-contratante-panel">
+                                        ' . $contratado . '
+                                        </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . Search::formateDateBR($vencimento) . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    ' . $setor . '
+                                </label>
+                            </div>
+                        </div>
+                        <div class="info-contract-panel">
+                            <div class="title-info-contract-panel">
+                                <label class="lbl-info-line-panel">
+                                    <a href="ver_contrato.php?c=' . $idContrato . '&d=2"> VER CONTRATO </a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>';
+                    }
+                } else {
+
+                    echo '
+                    <div class="line-contract-panel">
+                        <div class="info-contract-panel merge-panel">
+                            <div class="title-info-contract-panel merge-panel" >
+                                <label class="lbl-info-line-panel merge-panel">
+                                    VOCÊ NÃO TEM CONTRATOS PROXIMOS DE VENCIMENTO
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    ';
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
 
     public static function proximosVencimentos($vencimento, $busca) {
         $data = date('Y-m-d');
@@ -1126,6 +1240,7 @@ class Search {
                         $dataPagamentoParcela = $dados->DATA_PAGAMENTO_DAS_PARCELAS_CONTRATO;
                         $descObjeto = $dados->DESC_OBJETO;
                         $descGarantia = $dados->DESC_GARANTIA;
+                        $data_garantia = $dados->DATA_VENCIMENTO;
                         $descObservacao = $dados->DESC_OBSER_EXIGEN;
                         $possui_parcelas = $dados->ID_POSSUI_PARCELA_CONTRATO;
                         $idAditamentoContrato = $dados->ID_ADITAMENTO_CONTRATO;
@@ -1291,6 +1406,12 @@ class Search {
                         <p class="title-info-contract">
                             GARANTIA:
                             <span>' . $descGarantia . '</span>
+                        </p>
+                    </div>
+                    <div class="form-contract-fim">
+                        <p class="title-info-contract">
+                            Data Vencimento:
+                            <span>' . $data_garantia . '</span>
                         </p>
                     </div>
                 </div>';
@@ -2262,6 +2383,46 @@ class Search {
         } catch (Exception $ex) {
             echo $ex->getMessage();
             echo 'Falha ao listar objeto';
+        }
+    }
+    
+    
+    public static function panelAlertGarantia() {
+
+        try {
+            $diaQtdAlert = Search::diasAlerta();
+
+            $sql = 'SELECT 
+                        g.ID_GARANTIA IDGARANTIA,
+                        (
+                          SELECT COUNT(GS.ID_GARANTIA) TOT FROM garantia GS WHERE GS.DATA_VENCIMENTO
+                            BETWEEN CURDATE() AND (CURDATE() + INTERVAL "'.$diaQtdAlert.'" DAY)
+
+                        )TOTAL_VENCER
+                        FROM contrato C 
+                        INNER JOIN garantia G ON G.ID_CONTRATO_GARANTIA = C.ID_CONTRATO
+                        WHERE G.DATA_VENCIMENTO
+                        BETWEEN CURDATE() AND (CURDATE() + INTERVAL "'.$diaQtdAlert.'" DAY)
+                        ORDER BY G.DATA_VENCIMENTO';
+            $lqs = Conexao::getInstance()->prepare($sql);
+
+            if ($lqs->execute()) {
+                $row = $lqs->rowCount();
+                if ($row > 0) {
+
+                    foreach ($lqs->fetchAll(PDO::FETCH_OBJ) as $dados) {
+
+                        $inf [] = array(
+                            "IDGARANTIA" => $dados->IDGARANTIA,
+                            "TOTAL_VENCER" => $dados->TOTAL_VENCER
+                        );
+                        return $json = json_encode($inf);
+                    }
+                }
+            }
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo 'Falha ao listar garantias para vencer';
         }
     }
 

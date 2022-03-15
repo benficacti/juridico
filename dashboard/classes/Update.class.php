@@ -13,7 +13,7 @@
  */
 class Update {
 
-    public function adicionaGarantia($_idContratoGarantia, $idStatusGarantia, $idGarantia) {
+    public static function adicionaGarantia($_idContratoGarantia, $idStatusGarantia, $idGarantia) {
         try {
 
             $sql = 'UPDATE `contrato` SET `ID_STATUS_GARANTIA_CONTRATO`=' . $idStatusGarantia . ',`ID_GARANTIA_CONTRATO`=' . $idGarantia . ' '
@@ -29,7 +29,7 @@ class Update {
         }
     }
 
-    public function adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto) {
+    public static function adicionaObjeto($idContratoObjeto, $_status_objeto, $idObjeto) {
         try {
             $sql = 'UPDATE `contrato` SET `ID_OBJETO_CONTRATO`=' . $idObjeto . ' '
                     . 'WHERE ID_CONTRATO = ' . $idContratoObjeto;
@@ -44,7 +44,7 @@ class Update {
         }
     }
 
-    public function adicionaObs($idContratoObservacoes, $_status_obs, $idObservacoes) {
+    public static function adicionaObs($idContratoObservacoes, $_status_obs, $idObservacoes) {
         try {
             $sql = 'UPDATE `contrato` SET `ID_OBSERVACOES_EXIGENCIAS_CONTRATO`=' . $idObservacoes . ' '
                     . 'WHERE ID_CONTRATO = ' . $idContratoObservacoes;
@@ -149,7 +149,7 @@ class Update {
           } */
     }
 
-    public function adicionarAnexo($nomeUrl) {
+    public static function adicionarAnexo($nomeUrl) {
         try {
             $id = $_SESSION['contrato'];
             $sql = 'UPDATE `contrato` SET `URL_IMAGEM_CONTRATO`= "' . $nomeUrl . '" WHERE ID_CONTRATO = ' . $id;
